@@ -363,7 +363,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     console.log("message from bot  n")
 
   } else {
-    /* console.log("Ip:" + IP)
+     console.log("Ip:" + IP)
      request({
        url: "http://" + IP + "/api/v1/employee/login", //URL to hitDs
        method: 'POST',
@@ -377,7 +377,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
        console.log(error)
        console.log(response)
      });
- */
+ 
     request({
       url: "https://beepboophq.com/proxy/47003ae5c33c4305a844f5503ee1c036/",
       json: true
