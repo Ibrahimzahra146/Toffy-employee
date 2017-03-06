@@ -166,7 +166,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "newVacationRequestWithoutDates") {
       msg.say("Sick or personal vacation ?")
     }
-    //determine the type of vacation if its sick or personal vacation
+    //determine the type of vacation if its sick or personal vacations
     else if ((responseText) == "typeOfVacation") {
       if ((fromDate != "") && (toDate != "")) {
         typeOfVacation = response.result.parameters.vacationType;
