@@ -22,7 +22,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
-var IP = process.env.APIAI_ACCESS_KEY;
+var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
 var SLACK_HR_TOKEN = process.env.SLACK_HR_ACCESS_KEY;
@@ -363,7 +363,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     console.log("message from bot  n")
 
   } else {
-    console.log("Ip:"+IP)
+    console.log("Ip:" + IP)
     request({
       url: "http://" + IP + "/api/v1/employee/login", //URL to hitDs
       method: 'POST',

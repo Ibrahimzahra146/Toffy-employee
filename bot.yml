@@ -9,7 +9,7 @@ config:
   type: secret
   global: true
 - name: SLACK_BOT_ACCESS_KEY
-  friendly_name: SLACK bot access token
+  friendly_name: SLACK  manager bot access token
   type: secret
   global: true
 - name: SLACK_HR_ACCESS_KEY
