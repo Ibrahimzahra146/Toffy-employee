@@ -66,7 +66,7 @@ function SendWelcomeResponse(msg, responseText) {
   console.log("the user"+msg.body.event.user)
   // get the name from databasesss
   request({
-    url: "https://slack.com/api/users.info?token=" + msg.meta.app_token + "&user=" + msg.body.event.user,
+    url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
     json: true
   }, function (error, response, body) {
     msg.say(responseText + "! How can I help you " + body.user.name + "?")
