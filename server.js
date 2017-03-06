@@ -363,35 +363,13 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     console.log("message from bot  n")
 
   } else {
-     console.log("Ip:" + IP)
-     request({
-       url: "http://" + IP + "/api/v1/employee/login", //URL to hitDs
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: "brhoom200904@hotmail.com"
-       //Set the body as a stringcc
-     }, function (error, response, body) {
-       console.log("arrive2")
-       console.log(error)
-       console.log(response)
-     });
- 
-    request({
-      url: "https://beepboophq.com/proxy/47003ae5c33c4305a844f5503ee1c036/",
-      json: true
-    }, function (error, response, body) {
-      console.log("ok i sent the request")
-      console.log(body);
-    });
-    msg.say("Ibrahim");
-    /*   console.log("I am not the bot")
-       var stringfy = JSON.stringify(msg);
-       console.log("the message");
-       console.log(stringfy);
-       getMembersList(msg.body.event.user, msg)IP_Address
-       */
+
+    console.log("I am not the bot")
+    var stringfy = JSON.stringify(msg);
+    console.log("the message");
+    console.log(stringfy);
+    getMembersList(msg.body.event.user, msg)
+
   }
 
 })
