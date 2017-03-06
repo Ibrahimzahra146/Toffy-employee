@@ -1,4 +1,4 @@
-name: slack demo
+name: toffy employee
 config:
 - name: APIAI_ACCESS_KEY
   friendly_name: API Ai access token
