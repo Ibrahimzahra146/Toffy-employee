@@ -378,7 +378,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
       console.log(response)
     });
 
-    msg.say("ok");
+    msg.say("Ibrahim");
     /*   console.log("I am not the bot")
        var stringfy = JSON.stringify(msg);
        console.log("the message");
