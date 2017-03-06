@@ -62,6 +62,8 @@ var hRbot = controller.spawn({
 exports.hRbot = hRbot;
 
 function SendWelcomeResponse(msg, responseText) {
+  console.log("the aoo token "+msg.meta.app_token);
+  console.log("the user"+msg.body.event.user)
   // get the name from databasesss
   request({
     url: "https://slack.com/api/users.info?token=" + msg.meta.app_token + "&user=" + msg.body.event.user,
