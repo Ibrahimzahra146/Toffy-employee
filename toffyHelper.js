@@ -113,6 +113,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
 }
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
+    console.log("===============>store user information")
     request({
         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
