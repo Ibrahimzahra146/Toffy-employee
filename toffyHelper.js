@@ -126,6 +126,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     }, function (error, response, body) {
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
+            console.log("response:403");
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
                 request({
@@ -138,6 +139,8 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     body: email
                     //Set the body as a stringcc
                 }, function (error, response, body) {
+                    console.log("response:404");
+
                     if (response.statusCode == 404) {
                         console.log("the employee not found ")
 
@@ -510,6 +513,7 @@ module.exports.showHolidays = function showHolidays(msg, date, date1) {
 get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
+    console.log("========>Getting new sessio ID")
     request({
         url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',
