@@ -1,7 +1,8 @@
 var requestify = require('requestify');
 const request = require('request');
 var server = require('./server')
-var generalCookies = "" 
+var generalCookies = ""
+var IP = process.env.SLACK_IP
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(msg) {
     request({
@@ -113,7 +114,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
     request({
-        url: 'http://4436e503.ngrok.io/api/v1/toffy/get-record', //URL to hitDs
+        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
                 request({
-                    url: 'http://4436e503.ngrok.io/api/v1/toffy/get-record', //URL to hitDs
+                    url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -139,7 +140,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     if (response.statusCode == 404) {
                         console.log("the employee not found ")
 
-                        requestify.post('http://4436e503.ngrok.io/api/v1/toffy', {
+                        requestify.post('http://' + IP + '/api/v1/toffy', {
                             "email": email,
                             "hrChannelId": "",
                             "managerChannelId": "",
@@ -162,7 +163,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             var managerChId = JSON.parse(body).managerChannelId;
                             var hrChId = JSON.parse(body).hrChannelId;
                             request({
-                                url: "http://4436e503.ngrok.io/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
+                                url: "http://'+IP+'/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -175,7 +176,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
                             });
                             console.log("=====>arrive3")
-                            requestify.post('http://4436e503.ngrok.io/api/v1/toffy', {
+                            requestify.post('http://' + IP + '/api/v1/toffy', {
                                 "email": email,
                                 "hrChannelId": hrChId,
                                 "managerChannelId": managerChId,
@@ -297,7 +298,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 //Send sick vacation request to Hr to confirm or reject
 module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, userEmail, type) {
     request({
-        url: 'http://4436e503.ngrok.io/api/v1/toffy/get-record', //URL to hitDs
+        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -306,8 +307,8 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
         body: userEmail
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if(response.stat)
-        var jsonResponse = JSON.parse(body);
+        if (response.stat)
+            var jsonResponse = JSON.parse(body);
         var hRmessage = {
             'type': 'message',
             'channel': jsonResponse.hrChannelId,
@@ -390,7 +391,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
     console.log("arrive tosend coonfirmation");
     request({
-        url: 'http://4436e503.ngrok.io/api/v1/toffy/get-record', //URL to hitDs
+        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -484,7 +485,7 @@ module.exports.showHolidays = function showHolidays(msg, date, date1) {
     console.log("===========>I am in show holidays  ")
 
     request({
-        url: "http://4436e503.ngrok.io/api/v1/holidays/range?from=" + date + "&to=" + date1,
+        url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -509,7 +510,7 @@ get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
     request({
-        url: 'http://4436e503.ngrok.io/api/v1/employee/login', //URL to hitDs
+        url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
