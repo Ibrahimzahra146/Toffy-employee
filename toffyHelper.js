@@ -114,7 +114,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
 }
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
-    getUserId(email);
+
 
     console.log("===============>store user information")
     request({
@@ -135,6 +135,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
             console.log("response:403");
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
+                getUserId(email);
 
 
             })
