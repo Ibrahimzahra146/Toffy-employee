@@ -363,7 +363,7 @@ function getTodayDate(callback) {
 //*********************************************
 var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
-  console.log("the Ip ====>" + IP)
+  console.log("the Ip  ====>" + IP)
   if (msg.body.event
     .user == "U3NP5LM6Z") {
     console.log("=============>message from bot")
