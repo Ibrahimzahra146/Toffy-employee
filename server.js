@@ -382,7 +382,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: email
+      body: "brhoom200904@hotmail.com"
       //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("arrive from hr system");
