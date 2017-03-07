@@ -538,6 +538,8 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Cookie': generalCookies
+
         },
         body: email
         //Set the body as a stringcc
