@@ -143,6 +143,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         }
         //if the user exist but may be added or not at toffy record
         else {
+            console.log("the session ID:"+generalCookies)
              getUserId(email);
             request({
                 url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
