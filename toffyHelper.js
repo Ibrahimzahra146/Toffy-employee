@@ -124,6 +124,9 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("========>error" + error);
+        console.log("========>Response" + response);
+        console.log("========>body"+body);
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
             console.log("response:403");
