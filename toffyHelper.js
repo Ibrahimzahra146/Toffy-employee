@@ -4,6 +4,7 @@ var server = require('./server')
 var generalCookies = "initial"
 var IP = process.env.SLACK_IP
 var userIdInHr = "";
+var toffyHelper = require('./toffyHelper')
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(msg) {
     request({
@@ -136,7 +137,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
             console.log("response:403");
-            getNewSession(email, function (cookies) {
+            toffyHelper.getNewSession(email, function (cookies) {
 
                 generalCookies = cookies
 
@@ -548,10 +549,10 @@ module.exports.getNewSession = function getNewSession(email, callback) {
     });
 }
 function getUserId(email) {
-    getNewSession(email, function (cookies) {
+    toffyHelper.getNewSession(email, function (cookies) {
 
         generalCookies = cookies
-        console.log("generalCookies=======> "+generalCookies)
+        console.log("generalCookies=======> " + generalCookies)
 
     });
     console.log("==========>Getting user id from Hr")
