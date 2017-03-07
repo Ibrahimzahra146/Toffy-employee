@@ -1,7 +1,7 @@
 var requestify = require('requestify');
 const request = require('request');
 var server = require('./server')
-var generalCookies = ""
+var generalCookies = "initial"
 var IP = process.env.SLACK_IP
 var userIdInHr = "";
 //first we start we basic cases that doesnt need Api Ai like help
@@ -130,12 +130,14 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         console.log("========>error" + error);
         console.log("========>Response" + response);
         console.log("========>body" + body);
+        console.log("========>Session" + generalCookies);
+
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
             console.log("response:403");
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
-               
+
 
 
             })
@@ -143,8 +145,8 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         }
         //if the user exist but may be added or not at toffy record
         else {
-            console.log("the session ID:"+generalCookies)
-             getUserId(email);
+            console.log("the session ID:" + generalCookies)
+            getUserId(email);
             request({
                 url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
                 method: 'POST',
