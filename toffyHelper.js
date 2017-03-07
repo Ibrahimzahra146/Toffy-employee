@@ -115,7 +115,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
     console.log("===============>store user information")
     request({
-        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+        url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
                 request({
-                    url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+                    url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     if (response.statusCode == 404) {
                         console.log("the employee not found ")
 
-                        requestify.post('http://' + IP + '/api/v1/toffy', {
+                        requestify.post("http://" + IP + "/api/v1/toffy", {
                             "email": email,
                             "hrChannelId": "",
                             "managerChannelId": "",
@@ -164,7 +164,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             var managerChId = JSON.parse(body).managerChannelId;
                             var hrChId = JSON.parse(body).hrChannelId;
                             request({
-                                url: "http://'+IP+'/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
+                                url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -177,7 +177,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
                             });
                             console.log("=====>arrive3")
-                            requestify.post('http://' + IP + '/api/v1/toffy', {
+                            requestify.post("http://" + IP + "/api/v1/toffy", {
                                 "email": email,
                                 "hrChannelId": hrChId,
                                 "managerChannelId": managerChId,
