@@ -129,14 +129,15 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     }, function (error, response, body) {
         console.log("========>error " + error);
         console.log("========>Response " + response);
-        console.log("========>body "  + body);
+        console.log("========>body " + body);
         console.log("========>Session " + generalCookies);
-        console.log("==========>response.statusCode :"+response.statusCode)
+        console.log("==========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
             console.log("response:403");
             getNewSession(email, function (cookies) {
+
                 generalCookies = cookies
 
 
@@ -547,6 +548,12 @@ module.exports.getNewSession = function getNewSession(email, callback) {
     });
 }
 function getUserId(email) {
+    getNewSession(email, function (cookies) {
+
+        generalCookies = cookies
+        console.log("generalCookies=======> "+generalCookies)
+
+    });
     console.log("==========>Getting user id from Hr")
     request({
         url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
