@@ -3,6 +3,7 @@ const request = require('request');
 var server = require('./server')
 var generalCookies = ""
 var IP = process.env.SLACK_IP
+var userIdInHr = "";
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(msg) {
     request({
@@ -113,6 +114,8 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
 }
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
+    getUserId(email);
+
     console.log("===============>store user information")
     request({
         url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
@@ -536,4 +539,23 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         arr = arr[1].toString().split(";")
         callback(arr[0]);
     });
+}
+function getUserId(email) {
+    console.log("==========>Getting user id from Hr")
+    request({
+        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
+        },
+        body: email
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        console.log("=======>body: " + body)
+        userIdInHr = JSON.parse(body);
+        console.log("====>user id:" + userIdInHr)
+
+    })
+
 }
