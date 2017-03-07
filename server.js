@@ -366,7 +366,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
 
   if (msg.body.event
     .user == "U3NP5LM6Z") {
-    console.log("message from bot  n")
+    console.log("message from bot ssssn")
 
   } else {
     request({
