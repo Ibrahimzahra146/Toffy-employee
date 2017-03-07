@@ -553,23 +553,23 @@ function getUserId(email) {
 
         generalCookies = cookies
         console.log("generalCookies=======> " + generalCookies)
+        console.log("==========>Getting user id from Hr")
+        request({
+            url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': generalCookies
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            console.log("=======>body: " + body)
+            userIdInHr = JSON.parse(body);
+            console.log("====>user id:" + userIdInHr)
 
+        })
     });
-    console.log("==========>Getting user id from Hr")
-    request({
-        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': generalCookies
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        console.log("=======>body: " + body)
-        userIdInHr = JSON.parse(body);
-        console.log("====>user id:" + userIdInHr)
 
-    })
 
 }
