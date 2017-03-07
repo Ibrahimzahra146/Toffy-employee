@@ -22,7 +22,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
-var IP = process.env.APIAI_ACCESS_KEY;
+var IP = process.env.SLACK_IP;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
@@ -363,40 +363,20 @@ function getTodayDate(callback) {
 //*********************************************
 var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
-console.log("the Ip ====>"+IP)
+  console.log("the Ip ====>" + IP)
   if (msg.body.event
     .user == "U3NP5LM6Z") {
-    console.log("message from bot ssssn    ")
+    console.log("=============>message from bot")
 
   } else {
-    request({
-      url: "https://beepboophq.com/proxy/47003ae5c33c4305a844f5503ee1c036/",
-      json: true
-    }, function (error, response, body) {
-      console.log("send to hr system")
-    });
-    request({
-      url: "http://" + IP + "/api/v1/employee/login", //URL to hitDs
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: "brhoom200904@hotmail.com"
-      //Set the body as a stringcc
-    }, function (error, response, body) {
-      console.log("arrive from hr system");
-      console.log("body=========>" + body);
-      console.log("response" + response)
-      console.log("thre error ====>" + error)
-    })
-    msg.say("ok ibrahim");
 
-    /* console.log("I am not the bot")
-     var stringfy = JSON.stringify(msg);
-     console.log("the message");
-     console.log(stringfy);
-     getMembersList(msg.body.event.user, msg)
-     */
+
+    console.log("I am not the bot")
+    var stringfy = JSON.stringify(msg);
+    console.log("the message");
+    console.log(stringfy);
+    getMembersList(msg.body.event.user, msg)
+
 
   }
 
