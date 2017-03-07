@@ -126,84 +126,89 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     }, function (error, response, body) {
         console.log("========>error" + error);
         console.log("========>Response" + response);
-        console.log("========>body"+body);
+        console.log("========>body" + body);
         //check if the session is expired  so we request a new session 
         if (response.statusCode == 403) {
             console.log("response:403");
             getNewSession(email, function (cookies) {
                 generalCookies = cookies
-                request({
-                    url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Cookie': generalCookies
-                    },
-                    body: email
-                    //Set the body as a stringcc
-                }, function (error, response, body) {
-                    console.log("response:404");
 
-                    if (response.statusCode == 404) {
-                        console.log("the employee not found ")
 
+            })
+
+        }
+        //if the user exist but may be added or not at toffy record
+        else {
+            request({
+                url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': generalCookies
+                },
+                body: email
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                console.log("response:404");
+
+                if (response.statusCode == 404) {
+                    console.log("the employee not found ")
+
+                    requestify.post("http://" + IP + "/api/v1/toffy", {
+                        "email": email,
+                        "hrChannelId": "",
+                        "managerChannelId": "",
+                        "slackUserId": msg.body.event.user,
+                        "teamId": msg.body.team_id,
+                        "userChannelId": msg.body.event.channel
+                    })
+                        .then(function (response) {
+                            // Get the response body
+                            response.getBody();
+                        });
+                }
+                else if (response.statusCode == 200) {
+                    console.log("=====>arrive5 ")
+                    console.log((JSON.parse(body)).managerChannelId)
+                    console.log(msg.body.event.channel)
+                    if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
+                        console.log("=====>arrive6")
+
+                        var managerChId = JSON.parse(body).managerChannelId;
+                        var hrChId = JSON.parse(body).hrChannelId;
+                        request({
+                            url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Cookie': generalCookies
+                            },
+                            body: email
+                            //Set the body as a stringcc
+                        }, function (error, response, body) {
+                            console.log("DELETEd");
+
+                        });
+                        console.log("=====>arrive3")
                         requestify.post("http://" + IP + "/api/v1/toffy", {
                             "email": email,
-                            "hrChannelId": "",
-                            "managerChannelId": "",
+                            "hrChannelId": hrChId,
+                            "managerChannelId": managerChId,
                             "slackUserId": msg.body.event.user,
                             "teamId": msg.body.team_id,
                             "userChannelId": msg.body.event.channel
                         })
                             .then(function (response) {
+                                console.log("=====>arrive4")
+
                                 // Get the response body
                                 response.getBody();
                             });
                     }
-                    else if (response.statusCode == 200) {
-                        console.log("=====>arrive5 ")
-                        console.log((JSON.parse(body)).managerChannelId)
-                        console.log(msg.body.event.channel)
-                        if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
-                            console.log("=====>arrive6")
-
-                            var managerChId = JSON.parse(body).managerChannelId;
-                            var hrChId = JSON.parse(body).hrChannelId;
-                            request({
-                                url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Cookie': generalCookies
-                                },
-                                body: email
-                                //Set the body as a stringcc
-                            }, function (error, response, body) {
-                                console.log("DELETEd");
-
-                            });
-                            console.log("=====>arrive3")
-                            requestify.post("http://" + IP + "/api/v1/toffy", {
-                                "email": email,
-                                "hrChannelId": hrChId,
-                                "managerChannelId": managerChId,
-                                "slackUserId": msg.body.event.user,
-                                "teamId": msg.body.team_id,
-                                "userChannelId": msg.body.event.channel
-                            })
-                                .then(function (response) {
-                                    console.log("=====>arrive4")
-
-                                    // Get the response body
-                                    response.getBody();
-                                });
-                        }
-                    }
-                });
-
-            })
-
+                }
+            });
         }
+
     });
 
 }
