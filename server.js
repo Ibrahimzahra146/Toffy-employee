@@ -22,6 +22,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
+var IP = process.env.APIAI_ACCESS_KEY;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
@@ -50,20 +51,23 @@ var Botkit = require('./lib/Botkit.js');
 var controller = Botkit.slackbot({
   debug: true,
 });
+var controller1 = Botkit.slackbot({
+  debug: true,
+});
 var bot = controller.spawn({
   token: SLACK_BOT_TOKEN
 
 }).startRTM();
 exports.bot = bot
-var hRbot = controller.spawn({
+var hRbot = controller1.spawn({
   token: SLACK_HR_TOKEN
 
 }).startRTM();
 exports.hRbot = hRbot;
 
 function SendWelcomeResponse(msg, responseText) {
-  console.log("the aoo token "+msg.meta.app_token);
-  console.log("the user"+msg.body.event.user)
+  console.log("the aoo token " + msg.meta.app_token);
+  console.log("the user" + msg.body.event.user)
   // get the name from databasesss
   request({
     url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
@@ -365,12 +369,35 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     console.log("message from bot  n")
 
   } else {
+    request({
+      url: "https://beepboophq.com/proxy/47003ae5c33c4305a844f5503ee1c036/",
+      json: true
+    }, function (error, response, body) {
+      console.log("send to hr system")
+      console.log(response)
+    });
+    request({
+      url: "http://" + IP + "/api/v1/employee/login", //URL to hitDs
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: email
+      //Set the body as a stringcc
+    }, function (error, response, body) {
+      console.log("arrive from hr system");
+      console.log("body=========>" + body);
+      console.log("response" + response)
+      console.log("thre error ====>" + error)
+    })
+    msg.say("ok ibrahim");
 
-    console.log("I am not the bot")
-    var stringfy = JSON.stringify(msg);
-    console.log("the message");
-    console.log(stringfy);
-    getMembersList(msg.body.event.user, msg)
+    /* console.log("I am not the bot")
+     var stringfy = JSON.stringify(msg);
+     console.log("the message");
+     console.log(stringfy);
+     getMembersList(msg.body.event.user, msg)
+     */
 
   }
 
