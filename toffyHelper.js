@@ -414,7 +414,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
-    toffyHelper.getUserManagers(userIdInHr, function (body) {
+    toffyHelper.getUserManagers(userIdInHr, userEmail, function (body) {
 
     })
     /*    console.log("arrive tosend coonfirmation");
@@ -614,7 +614,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
                         'Cookie': generalCookies
                     },
                 }, function (error, response, body) {
-                    console.log("JSON.stringify(body)------------>>>>>"+JSON.stringify(body))
+                    console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
                 })
 
             })
