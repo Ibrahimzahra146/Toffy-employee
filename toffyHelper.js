@@ -638,6 +638,10 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
 
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
+console.log("from"+from);
+console.log("to======>"+to);
+console.log("employee_id======>"+employee_id);
+console.log("type======>"+type);
 
     request({
         url: "http://" + IP + "/api/v1/vacation", //URL to hitDs
@@ -656,7 +660,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         }
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log(response.statusCode)
+     
 
     })
 }
