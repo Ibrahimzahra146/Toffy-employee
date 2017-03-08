@@ -544,12 +544,15 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("user id ====>>>" + body.id);
+        console.log("user id ====>>>" + (JSON.parse(body)).id);
         var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
         var arr = cookies.toString().split("=")
         arr = arr[1].toString().split(";")
         callback(arr[0]);
     });
 }
+/*
 function getUserId(email) {
     toffyHelper.getNewSession(email, function (cookies) {
 
@@ -575,3 +578,4 @@ function getUserId(email) {
 
 
 }
+*/
