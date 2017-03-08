@@ -554,9 +554,10 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         console.log("userIdInHr ====>>>" + userIdInHr);
 
         var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-        //var arr = cookies.toString().split("=")
+
         var arr = cookies.toString().split(";")
-        callback(arr[0]);
+         arr = arr[0].toString().split("\*")
+        callback(arr[1]);
     });
 }
 /*
