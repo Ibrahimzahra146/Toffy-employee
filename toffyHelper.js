@@ -593,11 +593,15 @@ module.exports.getUserManagers = function getUserManagers(userId, callback) {
 
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
-        json: true
+        json: true,
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
+        },
     }, function (error, response, body) {
-        console.log("body "+body)
+        console.log("body " + body)
         console.log("JSON.stringify(body)" + JSON.stringify(body))
-       // console.log("JSON.parse(body)====>" + JSON.parse(body));
+        // console.log("JSON.parse(body)====>" + JSON.parse(body));
 
     });
 
