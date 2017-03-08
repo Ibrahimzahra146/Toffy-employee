@@ -412,99 +412,99 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
-    toffyHelper.getUserManagers(toffyHelper.userIdInHr,function(body){
+    toffyHelper.getUserManagers(toffyHelper.userIdInHr, function (body) {
 
     })
-/*    console.log("arrive tosend coonfirmation");
-    request({
-        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
-        },
-        body: userEmail
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        var jsonResponse = JSON.parse(body);
-        var message = {
-            'type': 'message',
-
-            'channel': jsonResponse.managerChannelId,
-            user: jsonResponse.slackUserId,
-            text: 'what is my name',
-            ts: '1482920918.000057',
-            team: jsonResponse.teamId,
-            event: 'direct_message'
-        };
-        var messageBody = {
-            "text": "This folk has pending time off request:",
-            "attachments": [
-                {
-                    "attachment_type": "default",
-                    "callback_id": "manager_confirm_reject",
-                    "text": "@ibrahim",
-                    "fallback": "ReferenceError",
-                    "fields": [
-                        {
-                            "title": "From",
-                            "value": startDate,
-                            "short": true
-                        },
-                        {
-                            "title": "Days/Time ",
-                            "value": "()",
-                            "short": true
-                        },
-                        {
-                            "title": "to",
-                            "value": endDate,
-                            "short": true
-                        },
-                        {
-                            "title": "Type",
-                            "value": type,
-                            "short": true
-                        }
-                    ],
-                    "actions": [
-                        {
-                            "name": "confirm",
-                            "text": "Accept",
-                            "style": "primary",
-                            "type": "button",
-                            "value": userEmail
-                        },
-                        {
-                            "name": "reject",
-                            "text": "Reject",
-                            "style": "danger",
-                            "type": "button",
-                            "value": userEmail
-                        }, {
-                            "name": "dontDetuct",
-                            "text": "Don’t Deduct ",
-                            "type": "button",
-                            "value": userEmail
-                        }
-                    ],
-                    "color": "#F35A00"
-                }
-            ]
-        }
-        server.bot.startConversation(message, function (err, convo) {
-
-
-            if (!err) {
-
-                var stringfy = JSON.stringify(messageBody);
-                var obj1 = JSON.parse(stringfy);
-                server.bot.reply(message, obj1);
-
+    /*    console.log("arrive tosend coonfirmation");
+        request({
+            url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
+            },
+            body: userEmail
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            var jsonResponse = JSON.parse(body);
+            var message = {
+                'type': 'message',
+    
+                'channel': jsonResponse.managerChannelId,
+                user: jsonResponse.slackUserId,
+                text: 'what is my name',
+                ts: '1482920918.000057',
+                team: jsonResponse.teamId,
+                event: 'direct_message'
+            };
+            var messageBody = {
+                "text": "This folk has pending time off request:",
+                "attachments": [
+                    {
+                        "attachment_type": "default",
+                        "callback_id": "manager_confirm_reject",
+                        "text": "@ibrahim",
+                        "fallback": "ReferenceError",
+                        "fields": [
+                            {
+                                "title": "From",
+                                "value": startDate,
+                                "short": true
+                            },
+                            {
+                                "title": "Days/Time ",
+                                "value": "()",
+                                "short": true
+                            },
+                            {
+                                "title": "to",
+                                "value": endDate,
+                                "short": true
+                            },
+                            {
+                                "title": "Type",
+                                "value": type,
+                                "short": true
+                            }
+                        ],
+                        "actions": [
+                            {
+                                "name": "confirm",
+                                "text": "Accept",
+                                "style": "primary",
+                                "type": "button",
+                                "value": userEmail
+                            },
+                            {
+                                "name": "reject",
+                                "text": "Reject",
+                                "style": "danger",
+                                "type": "button",
+                                "value": userEmail
+                            }, {
+                                "name": "dontDetuct",
+                                "text": "Don’t Deduct ",
+                                "type": "button",
+                                "value": userEmail
+                            }
+                        ],
+                        "color": "#F35A00"
+                    }
+                ]
             }
+            server.bot.startConversation(message, function (err, convo) {
+    
+    
+                if (!err) {
+    
+                    var stringfy = JSON.stringify(messageBody);
+                    var obj1 = JSON.parse(stringfy);
+                    server.bot.reply(message, obj1);
+    
+                }
+            });
         });
-    });
-    */
+        */
 
 }
 //list all holidays with range period
@@ -585,11 +585,15 @@ function getUserId(email) {
 }
 */
 module.exports.getUserManagers = function getUserManagers(userId, callback) {
+    console.log("info:=======>Getting user manager")
+    console.log("info:=======>User ID"+ userId)
+
+
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
         json: true
     }, function (error, response, body) {
-        console.log("JSON.parse(body)====>"+JSON.parse(body));
+        console.log("JSON.parse(body)====>" + JSON.parse(body));
 
     });
 
