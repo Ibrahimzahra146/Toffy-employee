@@ -413,6 +413,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
+    console.log("toffyHelper.userIdInHr===========>" + toffyHelper.userIdInHr)
     toffyHelper.getUserManagers(toffyHelper.userIdInHr, function (body) {
 
     })
