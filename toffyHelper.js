@@ -651,7 +651,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             'Cookie': generalCookies
         },
         body: {
-            "employee_id": userIdInHr,
+            "employee_id": ""+userIdInHr,
             "from": from,
             "to": to,
             "type": 0,
