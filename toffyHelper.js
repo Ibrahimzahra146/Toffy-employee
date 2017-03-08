@@ -554,8 +554,8 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         console.log("userIdInHr ====>>>" + userIdInHr);
 
         var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-        var arr = cookies.toString().split("=")
-        arr = arr[1].toString().split(";")
+        //var arr = cookies.toString().split("=")
+        var arr = cookies.toString().split(";")
         callback(arr[0]);
     });
 }
@@ -604,7 +604,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
             toffyHelper.getNewSession(email, function (cookies) {
 
                 generalCookies = cookies
-                userId = "8"
+
                 request({
                     url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
                     json: true,
