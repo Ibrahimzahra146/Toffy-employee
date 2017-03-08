@@ -415,7 +415,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     toffyHelper.getUserManagers(toffyHelper.userIdInHr,function(body){
 
     })
-    console.log("arrive tosend coonfirmation");
+/*    console.log("arrive tosend coonfirmation");
     request({
         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
@@ -504,6 +504,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             }
         });
     });
+    */
 
 }
 //list all holidays with range period
