@@ -130,7 +130,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         //Set the body as a stringcc
     }, function (error, response, body) {
         console.log("========>error " + error);
-        console.log("========>Response " + response);
+        console.log("========>Response  " + response);
         console.log("========>body " + body);
         console.log("========>Session " + generalCookies);
         console.log("========>userIdInHr " + userIdInHr);
