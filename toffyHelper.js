@@ -604,7 +604,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
             toffyHelper.getNewSession(email, function (cookies) {
 
                 generalCookies = cookies
-
+                userId = "8"
                 request({
                     url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
                     json: true,
