@@ -642,25 +642,27 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("to======>" + to);
     console.log("employee_id======>" + userIdInHr);
     console.log("type======>" + type);
-    userIdInHr = parseInt(userIdInHr)
-
-    requestify.request('http://" + IP + "/api/v1/vacation', {
+     userIdInHr = parseInt(userIdInHr)
+    request({
+        url: "http://" + IP + "/api/v1/vacation", //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Cookie': generalCookies
         },
         body: {
-            "employee_id": userIdInHr,
+            "employee_id": userIdInHr.toString(),
             "from": from,
             "to": to,
             "type": "0",
             "comments": "From ibrahim"
 
         }
-    }).then(function (response) {
-        // get the response body
-        response.getBody();
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+
+
     })
+    
 }
 
