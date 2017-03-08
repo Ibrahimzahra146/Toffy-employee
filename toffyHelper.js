@@ -554,11 +554,11 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         console.log("userIdInHr ====>>>" + userIdInHr);
 
         var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-        console.log("cookies==================>"+cookies)
+        console.log("cookies==================>" + cookies)
         var arr = cookies.toString().split(";")
-        console.log("trim based on ;==========>"+arr[0])
-         arr = arr[0].toString().split("\*")
-         console.log("final session is =========>"+arr[1])
+        console.log("trim based on ;==========>" + arr[0])
+        arr[0].replace('\"', '');
+        console.log("final session is =========>" + arr[0])
         callback(arr[1]);
     });
 }
