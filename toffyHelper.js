@@ -415,7 +415,8 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
     toffyHelper.getUserManagers(userIdInHr, userEmail, function (body) {
-        console.log("the managers of ibrahim"+JSON.stringify(body));
+        console.log("the managers "+body[0].email);
+        
 
     })
     /*    console.log("arrive tosend coonfirmation");
