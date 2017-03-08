@@ -638,11 +638,11 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
 
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
-console.log("from"+from);
-console.log("to======>"+to);
-console.log("employee_id======>"+userIdInHr);
-console.log("type======>"+type);
-
+    console.log("from" + from);
+    console.log("to======>" + to);
+    console.log("employee_id======>" + userIdInHr);
+    console.log("type======>" + type);
+     userIdInHr = parseInt(userIdInHr)
     request({
         url: "http://" + IP + "/api/v1/vacation", //URL to hitDs
         method: 'POST',
@@ -651,7 +651,7 @@ console.log("type======>"+type);
             'Cookie': generalCookies
         },
         body: {
-            "employee_id":userIdInHr,
+            "employee_id": userIdInHr,
             "from": from,
             "to": to,
             "type": 0,
@@ -660,7 +660,7 @@ console.log("type======>"+type);
         }
         //Set the body as a stringcc
     }, function (error, response, body) {
-     
+
 
     })
 }
