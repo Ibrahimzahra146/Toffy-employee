@@ -622,6 +622,11 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
 
             })
         }
+        else {
+            console.log("correct"+response.statusCode)
+            console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
+
+        }
 
         // console.log("JSON.parse(body)====>" + JSON.parse(body));
 
