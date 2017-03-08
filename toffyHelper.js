@@ -586,10 +586,10 @@ function getUserId(email) {
 
 }
 */
-module.exports.getUserManagers = function getUserManagers(userId, callback) {
+module.exports.getUserManagers = function getUserManagers(userId, email, callback) {
     console.log("info:=======>Getting user manager")
     console.log("info:=======>User ID" + userId)
-    console.log("generalCookies=========>"+generalCookies)
+    console.log("generalCookies=========>" + generalCookies)
 
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
@@ -600,8 +600,26 @@ module.exports.getUserManagers = function getUserManagers(userId, callback) {
             'Cookie': generalCookies
         },
     }, function (error, response, body) {
-        console.log("body " + body)
-        console.log("JSON.stringify(body)" + JSON.stringify(body))
+        if (response.statusCode == 403) {
+            toffyHelper.getNewSession(email, function (cookies) {
+
+                generalCookies = cookies
+
+                request({
+                    url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
+                    json: true,
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': generalCookies
+                    },
+                }, function (error, response, body) {
+                    console.log("JSON.stringify(body)------------>>>>>"+JSON.stringify(body))
+                })
+
+            })
+        }
+
         // console.log("JSON.parse(body)====>" + JSON.parse(body));
 
     });
