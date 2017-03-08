@@ -135,7 +135,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         console.log("==========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
-        if (response.statusCode == 403) {
+        if (response.statusCode == 403||generalCookies=="initial") {
             console.log("response:403");
             toffyHelper.getNewSession(email, function (cookies) {
 
