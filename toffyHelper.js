@@ -637,3 +637,16 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
     });
 
 }
+module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
+    requestify.post("http://" + IP + "/api/v1/vacation", {
+        "employee_id": employee_id,
+        "from": from,
+        "to": to,
+        "type": 0,
+        "comments": "google it"
+    })
+        .then(function (response) {
+            // Get the response body
+            response.getBody();
+        });
+}

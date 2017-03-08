@@ -396,6 +396,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
 
   }
   else {
+    toffyHelper.sendVacationPostRequest(arr[0],arr[1],toffyHelper.userIdInHr,arr[3])
     toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3])
     msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
 
