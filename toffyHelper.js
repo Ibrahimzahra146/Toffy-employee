@@ -638,15 +638,26 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
 
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
-    requestify.post("http://" + IP + "/api/v1/vacation", {
-        "employee_id": employee_id,
-        "from": from,
-        "to": to,
-        "type": 0,
-        "comments": "google it"
+
+    request({
+        url: "http://" + IP + "/api/v1/vacation", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
+        },
+        body: {
+            "employee_id": employee_id,
+            "from": from,
+            "to": to,
+            "type": 0,
+            "comments": "From ibrahim"
+
+        }
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        console.log(response.statusCode)
+
     })
-        .then(function (response) {
-            // Get the response body
-            response.getBody();
-        });
 }
+
