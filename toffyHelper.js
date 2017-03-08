@@ -589,7 +589,7 @@ function getUserId(email) {
 module.exports.getUserManagers = function getUserManagers(userId, callback) {
     console.log("info:=======>Getting user manager")
     console.log("info:=======>User ID" + userId)
-
+    console.log("generalCookies=========>"+generalCookies)
 
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
