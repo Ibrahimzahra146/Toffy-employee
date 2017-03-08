@@ -595,7 +595,9 @@ module.exports.getUserManagers = function getUserManagers(userId, callback) {
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
         json: true
     }, function (error, response, body) {
-        console.log("JSON.parse(body)====>" + JSON.parse(body));
+        console.log("body "+body)
+        console.log("JSON.stringify(body)" + JSON.stringify(body))
+       // console.log("JSON.parse(body)====>" + JSON.parse(body));
 
     });
 
