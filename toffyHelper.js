@@ -415,11 +415,9 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
     toffyHelper.getUserManagers(userIdInHr, userEmail, function (body) {
-     userEmail= body[0].email;
-        
+        userEmail = body[0].email;
 
-    })
-    /   console.log("arrive tosend coonfirmation");
+        console.log("arrive tosend coonfirmation");
         request({
             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
             method: 'POST',
@@ -433,7 +431,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             var jsonResponse = JSON.parse(body);
             var message = {
                 'type': 'message',
-    
+
                 'channel': jsonResponse.managerChannelId,
                 user: jsonResponse.slackUserId,
                 text: 'what is my name',
@@ -497,18 +495,20 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 ]
             }
             server.bot.startConversation(message, function (err, convo) {
-    
-    
+
+
                 if (!err) {
-    
+
                     var stringfy = JSON.stringify(messageBody);
                     var obj1 = JSON.parse(stringfy);
                     server.bot.reply(message, obj1);
-    
+
                 }
             });
         });
-        
+    })
+
+
 
 }
 //list all holidays with range period
@@ -626,7 +626,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
             callback(body)
         }
         else {
-            console.log("correct"+response.statusCode)
+            console.log("correct" + response.statusCode)
             console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
             callback(body);
 
