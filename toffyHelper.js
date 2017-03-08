@@ -559,7 +559,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         console.log("trim based on ;==========>" + arr[0])
         var res = arr[0].replace(/['"]+/g, '');
         console.log("final session is =========>" + res)
-        callback(arr[1]);
+        callback(res);
     });
 }
 /*
