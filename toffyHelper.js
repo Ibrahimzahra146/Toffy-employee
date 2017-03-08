@@ -3,7 +3,8 @@ const request = require('request');
 var server = require('./server')
 var generalCookies = "initial"
 var IP = process.env.SLACK_IP
-var userIdInHr = "";
+var userIdInHr = "initial";
+exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(msg) {
@@ -135,7 +136,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         console.log("==========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
-        if (response.statusCode == 403||generalCookies=="initial") {
+        if (response.statusCode == 403 || generalCookies == "initial") {
             console.log("response:403");
             toffyHelper.getNewSession(email, function (cookies) {
 
@@ -411,6 +412,9 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
+    toffyHelper.getUserManagers(toffyHelper.userIdInHr,function(body){
+
+    })
     console.log("arrive tosend coonfirmation");
     request({
         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -543,8 +547,9 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("user id ====>>>" + body.id);
-        console.log("user id ====>>>" + (JSON.parse(body)).id);
+        userIdInHr = (JSON.parse(body)).id;
+        console.log("userIdInHr ====>>>" + userIdInHr);
+
         var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
         var arr = cookies.toString().split("=")
         arr = arr[1].toString().split(";")
@@ -578,3 +583,13 @@ function getUserId(email) {
 
 }
 */
+module.exports.getUserManagers = function getUserManagers(userId, callback) {
+    request({
+        url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
+        json: true
+    }, function (error, response, body) {
+        console.log("JSON.parse(body)====>"+JSON.parse(body));
+
+    });
+
+}
