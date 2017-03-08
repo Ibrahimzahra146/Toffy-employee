@@ -133,10 +133,11 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         console.log("========>Response " + response);
         console.log("========>body " + body);
         console.log("========>Session " + generalCookies);
-        console.log("==========>response.statusCode :" + response.statusCode)
+        console.log("========>userIdInHr " + userIdInHr);
+        console.log("========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
-        if ((response.statusCode == 403) || (generalCookies == "initial")||(userIdInHr=="initial")) {
+        if ((response.statusCode == 403) || (generalCookies == "initial") || (userIdInHr == "initial")) {
             console.log("response:403");
             toffyHelper.getNewSession(email, function (cookies) {
 
