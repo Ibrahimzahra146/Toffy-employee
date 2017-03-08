@@ -654,7 +654,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             "employee_id": userIdInHr.toString(),
             "from": from,
             "to": to,
-            "type": 0,
+            "type": "0",
             "comments": "From ibrahim"
 
         }
