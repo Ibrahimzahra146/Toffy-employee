@@ -594,6 +594,7 @@ module.exports.getUserManagers = function getUserManagers(userId, callback) {
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
         json: true,
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Cookie': generalCookies
