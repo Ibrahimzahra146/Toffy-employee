@@ -670,7 +670,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         var managerApproval = (JSON.parse(body)).managerApproval
         console.log("Vacaction ID---->" + (JSON.parse(body)).id)
         console.log("managerApproval --->" + managerApproval)
-        callback(vacationId, managesApproval);
+        callback(vacationId, managerApproval);
 
 
 
