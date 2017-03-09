@@ -638,6 +638,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
 
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
+    console.log("arrive at va")
     console.log("from" + from);
     console.log("to======>" + to);
     console.log("employee_id======>" + userIdInHr);
