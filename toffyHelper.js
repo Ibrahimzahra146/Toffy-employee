@@ -415,15 +415,18 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
     toffyHelper.getUserManagers(userIdInHr, userEmail, managerApproval, function (body) {
+        var  approvalId=""
         //get the email of manager approval from user managers  ,the priority fro manager approval
         var i = 0
         var j = 0
         while (managerApproval[i]) {
             while (body[j]) {//body is the managers for the user
                 console.log("i----->" + i)
-
+                
                 if (body[j].id == managerApproval[i].manager) {
                     userEmail = body[i].email;
+                    console.log("managerApproval[i].id------>"+managerApproval[i].id)
+                     approvalId=managerApproval[i].id
                     console.log("userEmail--------=======>>>>" + userEmail)
                     console.log("arrive to send coonfirmation");
                     request({
@@ -447,8 +450,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             team: jsonResponse.teamId,
                             event: 'direct_message'
                         };
-                        console.log("managerApproval[i].id------>" + managerApproval[i].id)
-
+                        console.log("approval id"+approvalId)
                         var messageBody = {
                             "text": "This folk has pending time off request:",
                             "attachments": [
@@ -485,19 +487,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" +approvalId
                                         }, {
                                             "name": "dontDetuct",
                                             "text": "Don’t Deduct ",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId
                                         }
                                     ],
                                     "color": "#F35A00"
