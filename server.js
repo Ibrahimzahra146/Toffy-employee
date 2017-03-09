@@ -397,7 +397,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
   else {
     toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, arr[3], function (vacationId, managerApproval) {
       console.log("vacationId--------->" + vacationId);
-      console.log("managersApproval--------->" + managerApproval);
+      console.log("managersApproval--------->" + managerApproval[0].manager);
       console.log("managersApproval--------->" + JSON.stringify(managerApproval));
 
       toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId)
