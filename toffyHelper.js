@@ -637,14 +637,14 @@ module.exports.getUserManagers = function getUserManagers(userId, email, callbac
     });
 
 }
-module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type) {
+module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type, callback) {
     console.log("arrive at va")
     console.log("from" + from);
     console.log("to======>" + to);
     console.log("employee_id======>" + userIdInHr);
     console.log("type======>" + type);
     userIdInHr = parseInt(userIdInHr)
-    
+
     var vacationBody = {
         "employee_id": userIdInHr,
         "from": from,
@@ -653,7 +653,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         "comments": "From ibrahim"
 
     }
-     vacationBody = JSON.stringify(vacationBody)
+    vacationBody = JSON.stringify(vacationBody)
     request({
         url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
         method: 'POST',
@@ -666,11 +666,13 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         //Set the body as a stringcc
     }, function (error, response, body) {
         console.log("the vacation have been posted")
-        console.log(error)
-        console.log(response.statusCode)
-        console.log(".."+(JSON.parse(body)).id)
-        console.log((JSON.stringify(body)).id)
-        console.log("Body .id"+body.id)
+        var vacationId = (JSON.parse(body)).id;
+        var managerApproval = (JSON.parse(body)).managerApproval
+        console.log("Vacaction ID---->" + (JSON.parse(body)).id)
+        console.log("managerApproval --->" + managerApproval)
+        callback(vacationId, managesApproval);
+
+
 
 
 
