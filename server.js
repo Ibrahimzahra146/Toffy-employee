@@ -462,7 +462,7 @@ slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => 
         fromDate = todayDate + " T " + formattedTime + " " + midday
         toDate = todayDate + " T " + formattedTime1 + " " + midday1
 
-        toffyhelper.sendVacationToManager(fromDate, toDate, arr[2], "leave");
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave");
       });
 
     });
@@ -485,7 +485,7 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
         fromDate = arr[2] + " T " + formattedTime + " " + midday
         toDate = arr[2] + " T " + formattedTime1 + " " + midday1
 
-        toffyhelper.sendVacationToManager(fromDate, toDate, arr[3], "leave");
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[3], "leave");
       });
 
     });
