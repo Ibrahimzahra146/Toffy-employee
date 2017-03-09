@@ -642,27 +642,36 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("to======>" + to);
     console.log("employee_id======>" + userIdInHr);
     console.log("type======>" + type);
-     userIdInHr = parseInt(userIdInHr)
+    userIdInHr = parseInt(userIdInHr)
+    var vacationBody = {
+        "employee_id": employee_id,
+        "from": from,
+        "to": to,
+        "type": "0",
+        "comments": "From ibrahim"
+
+    }
+    var vacationBody = JSON.stringify(vacationBody)
     request({
-        url: "http://" + IP + "/api/v1/vacation", //URL to hitDs
+        url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Cookie': generalCookies
         },
-        body: {
-            "employee_id": userIdInHr.toString(),
-            "from": from,
-            "to": to,
-            "type": "0",
-            "comments": "From ibrahim"
 
-        }
+        body: vacationBody
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("the vacation have been posted")
+        console.log(error)
+        console.log(response.statusCode)
+        console.log(JSON.stringify(body))
 
 
-    })
-    
+
+
+
+    });
 }
 
