@@ -421,10 +421,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         while (managerApproval[i]) {
             while (body[j]) {//body is the managers for the user
                 console.log("i----->" + i)
-                
+
                 if (body[j].id == managerApproval[i].manager) {
                     userEmail = body[i].email;
-                    console.log("managerApproval[i].id------>"+managerApproval[i].id)
                     console.log("userEmail--------=======>>>>" + userEmail)
                     console.log("arrive to send coonfirmation");
                     request({
@@ -448,6 +447,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             team: jsonResponse.teamId,
                             event: 'direct_message'
                         };
+                        console.log("managerApproval[i].id------>" + managerApproval[i].id)
+
                         var messageBody = {
                             "text": "This folk has pending time off request:",
                             "attachments": [
@@ -491,7 +492,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" +managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
                                         }, {
                                             "name": "dontDetuct",
                                             "text": "Don’t Deduct ",
