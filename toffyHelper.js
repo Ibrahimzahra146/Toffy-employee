@@ -482,19 +482,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
                                         }, {
                                             "name": "dontDetuct",
                                             "text": "Don’t Deduct ",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
+                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
                                         }
                                     ],
                                     "color": "#F35A00"
