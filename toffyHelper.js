@@ -415,104 +415,112 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
     toffyHelper.getUserManagers(userIdInHr, userEmail, managerApproval, function (body) {
+        //get the email of manager approval from user managers  ,the priority fro manager approval
         var i = 0
-        while (body[i]) {
-            console.log("i----->"+i)
-            if (body[0].id == managerApproval[0].manager)
-                userEmail = body[0].email;
-            i++;
+        var j = 0
+        while (managerApproval[i]) {
+            while (body[j]) {//body is the managers for the user
+                console.log("i----->" + i)
+                if (body[j].id == managerApproval[i].manager) {
+                    userEmail = body[i].email;
+                    console.log("userEmail--------=======>>>>" + userEmail)
+                    console.log("arrive to send coonfirmation");
+                    request({
+                        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
+                        },
+                        body: userEmail
+                        //Set the body as a stringcc
+                    }, function (error, response, body) {
+                        var jsonResponse = JSON.parse(body);
+                        var message = {
+                            'type': 'message',
 
-        }
-        console.log("userEmail--------=======>>>>"+userEmail)
-        console.log("arrive to send coonfirmation");
-        request({
-            url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
-            },
-            body: userEmail
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            var jsonResponse = JSON.parse(body);
-            var message = {
-                'type': 'message',
+                            'channel': jsonResponse.managerChannelId,
+                            user: jsonResponse.slackUserId,
+                            text: 'what is my name',
+                            ts: '1482920918.000057',
+                            team: jsonResponse.teamId,
+                            event: 'direct_message'
+                        };
+                        var messageBody = {
+                            "text": "This folk has pending time off request:",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "callback_id": "manager_confirm_reject",
+                                    "text": "@ibrahim",
+                                    "fallback": "ReferenceError",
+                                    "fields": [
+                                        {
+                                            "title": "From",
+                                            "value": startDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Days/Time ",
+                                            "value": "()",
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "to",
+                                            "value": endDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Type",
+                                            "value": type,
+                                            "short": true
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "name": "confirm",
+                                            "text": "Accept",
+                                            "style": "primary",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";"
+                                        },
+                                        {
+                                            "name": "reject",
+                                            "text": "Reject",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";"
+                                        }, {
+                                            "name": "dontDetuct",
+                                            "text": "Don’t Deduct ",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";"
+                                        }
+                                    ],
+                                    "color": "#F35A00"
+                                }
+                            ]
+                        }
+                        server.bot.startConversation(message, function (err, convo) {
 
-                'channel': jsonResponse.managerChannelId,
-                user: jsonResponse.slackUserId,
-                text: 'what is my name',
-                ts: '1482920918.000057',
-                team: jsonResponse.teamId,
-                event: 'direct_message'
-            };
-            var messageBody = {
-                "text": "This folk has pending time off request:",
-                "attachments": [
-                    {
-                        "attachment_type": "default",
-                        "callback_id": "manager_confirm_reject",
-                        "text": "@ibrahim",
-                        "fallback": "ReferenceError",
-                        "fields": [
-                            {
-                                "title": "From",
-                                "value": startDate,
-                                "short": true
-                            },
-                            {
-                                "title": "Days/Time ",
-                                "value": "()",
-                                "short": true
-                            },
-                            {
-                                "title": "to",
-                                "value": endDate,
-                                "short": true
-                            },
-                            {
-                                "title": "Type",
-                                "value": type,
-                                "short": true
+
+                            if (!err) {
+
+                                var stringfy = JSON.stringify(messageBody);
+                                var obj1 = JSON.parse(stringfy);
+                                server.bot.reply(message, obj1);
+
                             }
-                        ],
-                        "actions": [
-                            {
-                                "name": "confirm",
-                                "text": "Accept",
-                                "style": "primary",
-                                "type": "button",
-                                "value": userEmail + ";" + vacationId + ";"
-                            },
-                            {
-                                "name": "reject",
-                                "text": "Reject",
-                                "style": "danger",
-                                "type": "button",
-                                "value": userEmail + ";" + vacationId + ";"
-                            }, {
-                                "name": "dontDetuct",
-                                "text": "Don’t Deduct ",
-                                "type": "button",
-                                "value": userEmail + ";" + vacationId + ";"
-                            }
-                        ],
-                        "color": "#F35A00"
-                    }
-                ]
-            }
-            server.bot.startConversation(message, function (err, convo) {
-
-
-                if (!err) {
-
-                    var stringfy = JSON.stringify(messageBody);
-                    var obj1 = JSON.parse(stringfy);
-                    server.bot.reply(message, obj1);
-
+                        });
+                    });
                 }
-            });
-        });
+
+                j++;
+            }
+
+            i++;
+        }
+
     })
 
 
