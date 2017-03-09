@@ -668,7 +668,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         console.log("the vacation have been posted")
         console.log(error)
         console.log(response.statusCode)
-        console.log(JSON.stringify(body))
+        console.log((JSON.stringify(body)).id)
         console.log("Body .id"+body.id)
 
 
