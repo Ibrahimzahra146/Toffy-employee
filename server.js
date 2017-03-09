@@ -400,7 +400,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
       console.log("managersApproval--------->" + managerApproval[0].manager);
       console.log("managersApproval--------->" + JSON.stringify(managerApproval));
 
-      toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId)
+      toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval)
 
     })
     msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")

@@ -412,12 +412,19 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 }
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
-module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type) {
+module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
-    toffyHelper.getUserManagers(userIdInHr, userEmail, function (body) {
-        userEmail = body[0].email;
+    toffyHelper.getUserManagers(userIdInHr, userEmail, managerApproval, function (body) {
+        var i = 0
+        while (body[i]) {
+            console.log("i----->"+i)
+            if (body[0].email == managerApproval)
+                userEmail = body[0].email;
+            i++;
 
-        console.log("arrive tosend coonfirmation");
+        }
+        console.log("userEmail--------=======>>>>"+userEmail)
+        console.log("arrive to send coonfirmation");
         request({
             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
             method: 'POST',
@@ -475,19 +482,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 "text": "Accept",
                                 "style": "primary",
                                 "type": "button",
-                                "value": userEmail
+                                "value": userEmail + ";" + vacationId + ";"
                             },
                             {
                                 "name": "reject",
                                 "text": "Reject",
                                 "style": "danger",
                                 "type": "button",
-                                "value": userEmail
+                                "value": userEmail + ";" + vacationId + ";"
                             }, {
                                 "name": "dontDetuct",
                                 "text": "Don’t Deduct ",
                                 "type": "button",
-                                "value": userEmail
+                                "value": userEmail + ";" + vacationId + ";"
                             }
                         ],
                         "color": "#F35A00"
@@ -591,7 +598,7 @@ function getUserId(email) {
 
 }
 */
-module.exports.getUserManagers = function getUserManagers(userId, email, callback) {
+module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
     console.log("info:=======>Getting user manager")
     console.log("info:=======>User ID" + userId)
     console.log("generalCookies=========>" + generalCookies)
