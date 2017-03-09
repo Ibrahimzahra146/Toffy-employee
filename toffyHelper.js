@@ -419,7 +419,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         //get the email of manager approval from user managers  ,the priority fro manager approval
         var i = 0
         var j = 0
-        console.log("managerApproval[i].id------>" + managerApproval[i].id)
         approvalId = managerApproval[i].id
         while (managerApproval[i]) {
             while (body[j]) {//body is the managers for the user
