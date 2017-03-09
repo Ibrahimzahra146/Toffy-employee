@@ -421,8 +421,10 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         while (managerApproval[i]) {
             while (body[j]) {//body is the managers for the user
                 console.log("i----->" + i)
+                man
                 if (body[j].id == managerApproval[i].manager) {
                     userEmail = body[i].email;
+                    console.log("managerApproval[i].id------>"+managerApproval[i].id)
                     console.log("userEmail--------=======>>>>" + userEmail)
                     console.log("arrive to send coonfirmation");
                     request({
@@ -482,19 +484,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
+                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
+                                            "value": userEmail + ";" + vacationId + ";" +managerApproval[i].id
                                         }, {
                                             "name": "dontDetuct",
                                             "text": "Don’t Deduct ",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + (JSON.parse(managerApproval[i])).id
+                                            "value": userEmail + ";" + vacationId + ";" + managerApproval[i].id
                                         }
                                     ],
                                     "color": "#F35A00"
