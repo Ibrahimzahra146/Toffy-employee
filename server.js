@@ -483,8 +483,8 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
     toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
       toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
-        fromDate = arr[2] + " T " + formattedTime + " " + midday
-        toDate = arr[2] + " T " + formattedTime1 + " " + midday1
+        fromDate = arr[2] + "T" + formattedTime + " " + midday
+        toDate = arr[2] + "T" + formattedTime1 + " " + midday1
         console.log("fromDate-------->>>>> " + fromDate)
         console.log("toDate---------->>>>> " + toDate)
         console.log("arr[3]---------->>>>>"+arr[3])
