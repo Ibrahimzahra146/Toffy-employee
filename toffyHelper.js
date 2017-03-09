@@ -643,6 +643,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("employee_id======>" + userIdInHr);
     console.log("type======>" + type);
     userIdInHr = parseInt(userIdInHr)
+    
     var vacationBody = {
         "employee_id": employee_id,
         "from": from,
@@ -651,7 +652,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         "comments": "From ibrahim"
 
     }
-    var vacationBody = JSON.stringify(vacationBody)
+     vacationBody = JSON.stringify(vacationBody)
     request({
         url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
         method: 'POST',
