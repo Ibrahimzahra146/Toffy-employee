@@ -8,7 +8,7 @@ exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
-    getNewSession(email, function (cookie) {
+    toffyHelper.getNewSession(email, function (cookie) {
         generalCookies = cookie
         console.log("+ toffyHelper.userIdInHr + " + toffyHelper.userIdInHr)
         request({
