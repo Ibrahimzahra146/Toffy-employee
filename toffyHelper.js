@@ -11,7 +11,7 @@ var sessionFlag = 0;
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
     toffyHelper.getNewSession(email, function (cookie) {
         generalCookies = cookie
-        console.log("+ toffyHelper.userIdInHr + " + toffyHelper.userIdInHr)
+        console.log("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
         request({
             url: "http://" + IP + "/api/v1/employee/259/balance",
             json: true,
