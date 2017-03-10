@@ -416,6 +416,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
     toffyHelper.getUserManagers(userIdInHr, userEmail, managerApproval, function (body) {
         var approvalId = ""
+        var managerEmail = ""
         //get the email of manager approval from user managers  ,the priority fro manager approval
         var i = 0
         var j = 0
@@ -425,7 +426,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 console.log("i----->" + i)
 
                 if (body[j].id == managerApproval[i].manager) {
-                    userEmail = body[i].email;
+                    managerEmail = body[i].email;
 
                     console.log("userEmail--------=======>>>>" + userEmail)
                     console.log("arrive to send coonfirmation");
@@ -436,7 +437,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             'Content-Type': 'application/json',
                             'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
                         },
-                        body: userEmail
+                        body: managerEmail
                         //Set the body as a stringcc
                     }, function (error, response, body) {
                         var jsonResponse = JSON.parse(body);
@@ -487,19 +488,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
                                         }, {
                                             "name": "dontDetuct",
                                             "text": "Don’t Deduct ",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
                                         }
                                     ],
                                     "color": "#F35A00"
