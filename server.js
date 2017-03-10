@@ -366,7 +366,7 @@ var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   console.log("the Ip  ====>" + IP)
   if (msg.body.event
-    .user == "U3NP5LM6Z") {
+    .user == "U4EN9UDHV") {
     console.log("=============>message from bot")
 
   } else {
