@@ -262,7 +262,7 @@ function sendRequestToApiAi(emailValue, msg) {
       toffyHelper.showHistory(msg);
     }
     else if ((responseText) == "showStats") {
-      toffyHelper.showEmployeeStats(msg);
+      toffyHelper.showEmployeeStats(emailValue,msg);
     }
     else if ((responseText) == "showProfile") {
       toffyHelper.showEmployeeProfile(msg);
