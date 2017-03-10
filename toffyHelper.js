@@ -18,6 +18,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(msg) {
             'Cookie': generalCookies
         }
     }, function (error, response, body) {
+        console.log("arrivvee--->")
         console.log(body)
         var messageBody = {
             "text": "Your stats and anuual time off details",
