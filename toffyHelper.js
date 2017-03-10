@@ -11,8 +11,14 @@ module.exports.showEmployeeStats = function showEmployeeStats(msg) {
     console.log("+ toffyHelper.userIdInHr + " + toffyHelper.userIdInHr)
     request({
         url: "http://" + IP + "/api/v1/employee/259/balance",
-        json: true
+        json: true,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
+        }
     }, function (error, response, body) {
+        console.log(body)
         var messageBody = {
             "text": "Your stats and anuual time off details",
             "attachments": [
