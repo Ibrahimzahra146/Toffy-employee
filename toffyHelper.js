@@ -21,50 +21,50 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                 'Cookie': generalCookies
             }
         }, function (error, response, body) {
-            console.log("arrivvee--->" + (JSON.parse(body)).left_over).toFixed(1) 
-    console.log(body)
-    var messageBody = {
-        "text": "Your stats and anuual time off details",
-        "attachments": [
-            {
-                "attachment_type": "default",
-                "text": " ",
-                "fallback": "ReferenceError",
-                "fields": [
+            console.log("arrivvee--->" + (JSON.parse(body)).left_over).toFixed(1)
+            console.log(body)
+            var messageBody = {
+                "text": "Your stats and anuual time off details",
+                "attachments": [
                     {
-                        "title": "Rolled over",
-                        "value": parseFloat((JSON.parse(body)).left_over).toFixed(1) + " weeks ",
-                        "short": true
-                    },
-                    {
-                        "title": "Available time off  ",
-                        "value": parseFloat((JSON.parse(body)).balance).toFixed(1) + " weeks ",
-                        "short": true
-                    },
-                    {
-                        "title": "Annual time offf ",
-                        "value": parseFloat((JSON.parse(body)).static_balance).toFixed(1) + " weeks ",
-                        "short": false
-                    },
-                    {
-                        "title": "Additional time off  ",
-                        "value": parseFloat((JSON.parse(body)).compensation_balance).toFixed(1) + " weeks ",
-                        "short": true
-                    },
-                    {
-                        "title": "Total",
-                        "value": parseFloat((JSON.parse(body)).left_over + (JSON.parse(body)).compensation_balance + (JSON.parse(body)).balance).toFixed(1) + " weeks ",
-                        "short": false
+                        "attachment_type": "default",
+                        "text": " ",
+                        "fallback": "ReferenceError",
+                        "fields": [
+                            {
+                                "title": "Rolled over",
+                                "value": parseFloat((JSON.parse(body)).left_over).toFixed(1) + " weeks ",
+                                "short": true
+                            },
+                            {
+                                "title": "Available time off  ",
+                                "value": parseFloat((JSON.parse(body)).balance).toFixed(1) + " weeks ",
+                                "short": true
+                            },
+                            {
+                                "title": "Annual time offf ",
+                                "value": parseFloat((JSON.parse(body)).static_balance).toFixed(1) + " weeks ",
+                                "short": false
+                            },
+                            {
+                                "title": "Additional time off  ",
+                                "value": parseFloat((JSON.parse(body)).compensation_balance).toFixed(1) + " weeks ",
+                                "short": true
+                            },
+                            {
+                                "title": "Total",
+                                "value": parseFloat((JSON.parse(body)).left_over + (JSON.parse(body)).compensation_balance + (JSON.parse(body)).balance).toFixed(1) + " weeks ",
+                                "short": false
+                            }
+                        ],
+                        "color": "#F35A00"
                     }
-                ],
-                "color": "#F35A00"
+                ]
             }
-        ]
-    }
-    var stringfy = JSON.stringify(messageBody);
-    var obj1 = JSON.parse(stringfy);
-    msg.say(obj1);
-});
+            var stringfy = JSON.stringify(messageBody);
+            var obj1 = JSON.parse(stringfy);
+            msg.say(obj1);
+        });
     })
 
 }
@@ -601,6 +601,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             console.log("trim based on ;==========>" + arr[0])
             res = arr[0].replace(/['"]+/g, '');
             console.log("final session is =========>" + res)
+            sessionFlag=1
             callback(res);
         });
     }
