@@ -575,7 +575,7 @@ get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
     var res = generalCookies
-    if (getNewSession == 0) {
+    if (sessionFlag == 0) {
         res = generalCookies
         callback(res)
 
@@ -601,7 +601,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             console.log("trim based on ;==========>" + arr[0])
             res = arr[0].replace(/['"]+/g, '');
             console.log("final session is =========>" + res)
-            sessionFlag=1
+            sessionFlag=1;
             callback(res);
         });
     }
