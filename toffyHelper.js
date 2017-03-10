@@ -33,27 +33,27 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                         "fields": [
                             {
                                 "title": "Rolled over",
-                                "value": parseFloat((JSON.parse(body)).left_over).toFixed(1) + " weeks ",
+                                "value": parseFloat((body).left_over).toFixed(1) + " weeks ",
                                 "short": true
                             },
                             {
                                 "title": "Available time off  ",
-                                "value": parseFloat((JSON.parse(body)).balance).toFixed(1) + " weeks ",
+                                "value": parseFloat(body.balance).toFixed(1) + " weeks ",
                                 "short": true
                             },
                             {
                                 "title": "Annual time offf ",
-                                "value": parseFloat((JSON.parse(body)).static_balance).toFixed(1) + " weeks ",
+                                "value": parseFloat(body.static_balance).toFixed(1) + " weeks ",
                                 "short": false
                             },
                             {
                                 "title": "Additional time off  ",
-                                "value": parseFloat((JSON.parse(body)).compensation_balance).toFixed(1) + " weeks ",
+                                "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
                                 "short": true
                             },
                             {
                                 "title": "Total",
-                                "value": parseFloat((JSON.parse(body)).left_over + (JSON.parse(body)).compensation_balance + (JSON.parse(body)).balance).toFixed(1) + " weeks ",
+                                "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
                                 "short": false
                             }
                         ],
