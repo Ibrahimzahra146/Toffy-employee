@@ -10,7 +10,7 @@ var toffyHelper = require('./toffyHelper')
 module.exports.showEmployeeStats = function showEmployeeStats(msg) {
     console.log("+ toffyHelper.userIdInHr + " + toffyHelper.userIdInHr)
     request({
-        url: "https://" + IP + "/api/v1/employee/1" + toffyHelper.userIdInHr + "/balance",
+        url: "https://" + IP + "/api/v1/employee/259/balance",
         json: true
     }, function (error, response, body) {
         var messageBody = {
