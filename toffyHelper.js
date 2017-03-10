@@ -6,6 +6,7 @@ var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
+var sessionFlag = 0;
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
     toffyHelper.getNewSession(email, function (cookie) {
@@ -573,29 +574,36 @@ module.exports.showHolidays = function showHolidays(msg, date, date1) {
 get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
-    console.log("========>Getting new sessio ID")
-    request({
-        url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': generalCookies
+    var res = generalCookies
+    if (getNewSession == 0) {
+        res = generalCookies
+        callback(res)
 
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        userIdInHr = (JSON.parse(body)).id;
-        console.log("userIdInHr ====>>>" + userIdInHr);
+    } else {
+        console.log("========>Getting new sessio ID")
+        request({
+            url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': generalCookies
 
-        var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-        console.log("cookies==================>" + cookies)
-        var arr = cookies.toString().split(";")
-        console.log("trim based on ;==========>" + arr[0])
-        var res = arr[0].replace(/['"]+/g, '');
-        console.log("final session is =========>" + res)
-        callback(res);
-    });
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            userIdInHr = (JSON.parse(body)).id;
+            console.log("userIdInHr ====>>>" + userIdInHr);
+
+            var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
+            console.log("cookies==================>" + cookies)
+            var arr = cookies.toString().split(";")
+            console.log("trim based on ;==========>" + arr[0])
+            res = arr[0].replace(/['"]+/g, '');
+            console.log("final session is =========>" + res)
+            callback(res);
+        });
+    }
 }
 /*
 function getUserId(email) {
