@@ -122,7 +122,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                             "fields": [
                                 {
                                     "title": "Full name ",
-                                    "value": body.name,
+                                    "value": (JSON.parse(body)).name,
                                     "short": true
                                 },
                                 {
@@ -132,7 +132,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 },
                                 {
                                     "title": "Email ",
-                                    "value": body.email,
+                                    "value": (JSON.parse(body)).email,
                                     "short": true
                                 },
                                 {
@@ -153,7 +153,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 },
                                 {
                                     "title": "Employment date",
-                                    "value": body.hireDate,
+                                    "value": (JSON.parse(body)).hireDate,
                                     "short": true
                                 }
                             ],
