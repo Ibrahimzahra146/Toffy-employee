@@ -28,7 +28,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
             generalCookies = cookie
             console.log("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
             request({
-                url: "http://" + IP + "/api/v1/employee/259/balance",
+                url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
                 json: true,
                 method: 'GET',
                 headers: {
