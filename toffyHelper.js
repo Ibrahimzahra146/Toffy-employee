@@ -106,7 +106,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
             generalCookies = cookie
             request({
-                url: "https://" + IP + "/api/v1/employee/259",
+                url: "http://" + IP + "/api/v1/employee/259",
                 json: true,
                 method: 'GET',
                 headers: {
