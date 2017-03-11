@@ -9,68 +9,83 @@ var toffyHelper = require('./toffyHelper')
 var sessionFlag = 0;
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
-    toffyHelper.getNewSession(email, function (cookie) {
-        generalCookies = cookie
-        console.log("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
-        request({
-            url: "http://" + IP + "/api/v1/employee/259/balance",
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': generalCookies
-            }
-        }, function (error, response, body) {
-            console.log("arrivvee--->" + body.left_over)
-            console.log(body)
-            var messageBody = {
-                "text": "Your stats and anuual time off details",
-                "attachments": [
-                    {
-                        "attachment_type": "default",
-                        "text": " ",
-                        "fallback": "ReferenceError",
-                        "fields": [
-                            {
-                                "title": "Rolled over",
-                                "value": parseFloat((body).left_over).toFixed(1) + " weeks ",
-                                "short": true
-                            },
-                            {
-                                "title": "Available time off  ",
-                                "value": parseFloat(body.balance).toFixed(1) + " weeks ",
-                                "short": true
-                            },
-                            {
-                                "title": "Annual time offf ",
-                                "value": parseFloat(body.static_balance).toFixed(1) + " weeks ",
-                                "short": false
-                            },
-                            {
-                                "title": "Additional time off  ",
-                                "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
-                                "short": true
-                            },
-                            {
-                                "title": "Total",
-                                "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
-                                "short": false
-                            }
-                        ],
-                        "color": "#F35A00"
+    request({
+        url: "http://" + IP + "/api/v1/employee/259/balance",
+        json: true,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
+        }
+    }, function (error, response, body) {
+        if (response.statusCode == 403) {
+            sessionFlag = 0;
+            toffyHelper.getNewSession(email, function (cookie) {
+                generalCookies = cookie
+                console.log("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
+                request({
+                    url: "http://" + IP + "/api/v1/employee/259/balance",
+                    json: true,
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': generalCookies
                     }
-                ]
-            }
-            var stringfy = JSON.stringify(messageBody);
-            var obj1 = JSON.parse(stringfy);
-            msg.say(obj1);
-        });
+                }, function (error, response, body) {
+                    console.log("arrivvee--->" + body.left_over)
+                    console.log(body)
+                    var messageBody = {
+                        "text": "Your stats and anuual time off details",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": [
+                                    {
+                                        "title": "Rolled over",
+                                        "value": parseFloat((body).left_over).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Available time off  ",
+                                        "value": parseFloat(body.balance).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Annual time offf ",
+                                        "value": parseFloat(body.static_balance).toFixed(1) + " weeks ",
+                                        "short": false
+                                    },
+                                    {
+                                        "title": "Additional time off  ",
+                                        "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Total",
+                                        "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
+                                        "short": false
+                                    }
+                                ],
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    var stringfy = JSON.stringify(messageBody);
+                    var obj1 = JSON.parse(stringfy);
+                    msg.say(obj1);
+                });
+            })
+
+        }
     })
+
 
 }
 module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
     request({
-        url: "https://hrexalt.herokuapp.com/api/v1/employee/1",
+        url: "https://" + IP + "/api/v1/employee/259",
         json: true
     }, function (error, response, body) {
         var messageBody = {
@@ -601,7 +616,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             console.log("trim based on ;==========>" + arr[0])
             res = arr[0].replace(/['"]+/g, '');
             console.log("final session is =========>" + res)
-            sessionFlag=1;
+            sessionFlag = 1;
             callback(res);
         });
     }
