@@ -102,9 +102,11 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
         }
 
         toffyHelper.getNewSession(email, function (cookie) {
+            console.log("show profile bod" + toffyHelper.userIdInHr)
+
             generalCookies = cookie
             request({
-                url: "https://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr,
+                url: "https://" + IP + "/api/v1/employee/259",
                 json: true,
                 method: 'GET',
                 headers: {
@@ -112,7 +114,8 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     'Cookie': generalCookies
                 },
             }, function (error, response, body) {
-                console.log("show profile bod"+ body)
+                console.log("show profile bod" + body)
+                console.log("show profile bod" + response.statusCode)
                 var messageBody = {
                     "text": "Your profile details",
                     "attachments": [
