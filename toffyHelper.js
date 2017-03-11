@@ -112,6 +112,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     'Cookie': generalCookies
                 },
             }, function (error, response, body) {
+                console.log("show profile bod"+ body)
                 var messageBody = {
                     "text": "Your profile details",
                     "attachments": [
@@ -122,7 +123,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                             "fields": [
                                 {
                                     "title": "Full name ",
-                                    "value": (JSON.parse(body)).name,
+                                    "value": body.name,
                                     "short": true
                                 },
                                 {
@@ -132,7 +133,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 },
                                 {
                                     "title": "Email ",
-                                    "value": (JSON.parse(body)).email,
+                                    "value": body.email,
                                     "short": true
                                 },
                                 {
@@ -153,7 +154,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 },
                                 {
                                     "title": "Employment date",
-                                    "value": (JSON.parse(body)).hireDate,
+                                    "value": body.hireDate,
                                     "short": true
                                 }
                             ],
