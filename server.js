@@ -262,10 +262,10 @@ function sendRequestToApiAi(emailValue, msg) {
       toffyHelper.showHistory(msg);
     }
     else if ((responseText) == "showStats") {
-      toffyHelper.showEmployeeStats(emailValue,msg);
+      toffyHelper.showEmployeeStats(emailValue, msg);
     }
     else if ((responseText) == "showProfile") {
-      toffyHelper.showEmployeeProfile(msg);
+      toffyHelper.showEmployeeProfile(emailValue, msg);
     }
     else if ((responseText) == "showHolidays") {
       var date = response.result.parameters.date;

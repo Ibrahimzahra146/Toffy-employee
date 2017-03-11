@@ -87,7 +87,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
 
 }
-module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
+module.exports.showEmployeeProfile = function showEmployeeProfile(email,msg) {
     request({
         url: "http://" + IP + "/api/v1/employee/259",
         json: true,
