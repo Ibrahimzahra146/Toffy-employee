@@ -734,7 +734,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     userIdInHr = parseInt(userIdInHr)
 
     var vacationBody = {
-        "employee_id": userIdInHr,
+        "employee_id": toffyHelper.userIdInHr,
         "from": from,
         "to": to,
         "type": "0",
