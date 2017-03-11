@@ -611,7 +611,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
-            userIdInHr = (JSON.parse(body)).id;
+            toffyHelper.userIdInHr = (JSON.parse(body)).id;
             console.log("userIdInHr ====>>>" + userIdInHr);
 
             var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
