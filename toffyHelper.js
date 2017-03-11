@@ -87,7 +87,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
 
 }
-module.exports.showEmployeeProfile = function showEmployeeProfile(email,msg) {
+module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     request({
         url: "http://" + IP + "/api/v1/employee/259",
         json: true,
@@ -102,6 +102,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email,msg) {
         }
 
         toffyHelper.getNewSession(email, function (cookie) {
+            generalCookies = cookie
             request({
                 url: "https://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr,
                 json: true,
