@@ -473,7 +473,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval) {
     console.log("toffyHelper.userIdInHr===========>" + userIdInHr)
-    toffyHelper.getUserManagers(userIdInHr, userEmail, managerApproval, function (body) {
+    toffyHelper.getUserManagers(toffyHelper.userIdInHr, userEmail, managerApproval, function (body) {
         var approvalId = ""
         var managerEmail = ""
         //get the email of manager approval from user managers  ,the priority fro manager approval
