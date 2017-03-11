@@ -114,7 +114,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     'Cookie': generalCookies
                 },
             }, function (error, response, body) {
-                console.log("show profile bod" + body)
+                console.log("show profile bod" + JSON.stringify(body))
                 console.log("show profile bod" + response.statusCode)
                 var messageBody = {
                     "text": "Your profile details",
