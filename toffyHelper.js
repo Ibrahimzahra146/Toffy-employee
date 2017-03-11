@@ -89,62 +89,84 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 }
 module.exports.showEmployeeProfile = function showEmployeeProfile(msg) {
     request({
-        url: "https://" + IP + "/api/v1/employee/259",
-        json: true
-    }, function (error, response, body) {
-        var messageBody = {
-            "text": "Your profile details",
-            "attachments": [
-                {
-                    "attachment_type": "default",
-                    "text": " ",
-                    "fallback": "ReferenceError",
-                    "fields": [
-                        {
-                            "title": "Full name ",
-                            "value": body.name,
-                            "short": true
-                        },
-                        {
-                            "title": "Working days  ",
-                            "value": "Sun to Thu",
-                            "short": true
-                        },
-                        {
-                            "title": "Email ",
-                            "value": body.email,
-                            "short": true
-                        },
-                        {
-                            "title": "Manager 1",
-                            "value": "tareq",
-                            "short": true
-                        },
-
-                        {
-                            "title": "Emp.type ",
-                            "value": "Full time",
-                            "short": true
-                        },
-                        {
-                            "title": "Manager 2",
-                            "value": "Sari",
-                            "short": true
-                        },
-                        {
-                            "title": "Employment date",
-                            "value": body.hireDate,
-                            "short": true
-                        }
-                    ],
-                    "color": "#F35A00"
-                }
-            ]
+        url: "http://" + IP + "/api/v1/employee/259",
+        json: true,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': generalCookies
         }
-        var stringfy = JSON.stringify(messageBody);
-        var obj1 = JSON.parse(stringfy);
-        msg.say(obj1)
-    });
+    }, function (error, response, body) {
+        if (response.statusCode == 403) {
+            sessionFlag = 0;
+        }
+
+        toffyHelper.getNewSession(email, function (cookie) {
+            request({
+                url: "https://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr,
+                json: true,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': generalCookies
+                },
+            }, function (error, response, body) {
+                var messageBody = {
+                    "text": "Your profile details",
+                    "attachments": [
+                        {
+                            "attachment_type": "default",
+                            "text": " ",
+                            "fallback": "ReferenceError",
+                            "fields": [
+                                {
+                                    "title": "Full name ",
+                                    "value": body.name,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Working days  ",
+                                    "value": "Sun to Thu",
+                                    "short": true
+                                },
+                                {
+                                    "title": "Email ",
+                                    "value": body.email,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Manager 1",
+                                    "value": "tareq",
+                                    "short": true
+                                },
+
+                                {
+                                    "title": "Emp.type ",
+                                    "value": "Full time",
+                                    "short": true
+                                },
+                                {
+                                    "title": "Manager 2",
+                                    "value": "Sari",
+                                    "short": true
+                                },
+                                {
+                                    "title": "Employment date",
+                                    "value": body.hireDate,
+                                    "short": true
+                                }
+                            ],
+                            "color": "#F35A00"
+                        }
+                    ]
+                }
+                var stringfy = JSON.stringify(messageBody);
+                var obj1 = JSON.parse(stringfy);
+                msg.say(obj1)
+            });
+        })
+    })
+
 }
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
