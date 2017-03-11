@@ -22,7 +22,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
         if (response.statusCode == 403) {
             sessionFlag = 0;
         }
-        console.log("------------------>" + toffyHelper.userIdInHr)
+        console.log("------------------>" + userIdInHr)
 
         toffyHelper.getNewSession(email, function (cookie) {
             generalCookies = cookie
