@@ -217,6 +217,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     else if ((responseText) == "newLeaveRequestSpecTimeToday") {
       leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue);
+      console.log("response.result.parameters.time " + response.result.parameters.time)
     }
     else if ((responseText) == "newLeaveRequestSpecTimeSpecDay") {
       var arr = (response.result.parameters.date_time).toString().split("T")//split the date from time since the response return both as one variable
