@@ -593,7 +593,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 }
 //list all holidays with range period
-module.exports.showHolidays = function showHolidays(msg, date, date1) {
+module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
     console.log("===========>I am in show holidays  ")
 
     request({
@@ -601,20 +601,37 @@ module.exports.showHolidays = function showHolidays(msg, date, date1) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': 'JSESSIONID=E3026F9CE1E0FA1705F7808D7CC76F04'
+            'Cookie': generalCookies
         },
     }, function (error, response, body) {
-
-        console.log("========>" + response.statusCode);
-        console.log("Response========>" + JSON.stringify(body));
-        var i = 0;
-
-        if (!error && response.statusCode === 200) {
-            while ((JSON.parse(body)[i])) {
-                msg.sayg((JSON.parse(body))[i].fromDate)
-                i++;
-            }
+        if (response.statusCode == 403) {
+            sessionFlag = 0
         }
+        toffyHelper.getNewSession(email, function (cookie) {
+            generalCookies = cookie;
+            request({
+                url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': generalCookies
+                },
+            }, function (error, response, body) {
+                console.log("========>" + response.statusCode);
+                console.log("Response========>" + JSON.stringify(body));
+                var i = 0;
+
+                if (!error && response.statusCode === 200) {
+                    while ((JSON.parse(body)[i])) {
+                        msg.sayg((JSON.parse(body))[i].fromDate)
+                        i++;
+                    }
+                }
+            })
+
+        })
+
+
     });
 }
 /*
