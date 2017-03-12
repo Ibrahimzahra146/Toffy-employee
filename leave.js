@@ -1,6 +1,6 @@
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email) {
     convertTimeFormat(time, function (formattedTime, midday) {
-        console.log("Converted Time---->" +formattedTime)
+        console.log("Converted Time---->" + time)
         var text12 = {
             "text": "",
             "attachments": [
@@ -177,4 +177,24 @@ function convertTimeFormat(time, callback) {
     }
 
     callback(formattedTime, midday)
+}
+function converDateToMilliseconds() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    today + " " + "8:00:00"
+    y = new Date(today)
+    y.getTime()
 }
