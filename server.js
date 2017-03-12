@@ -433,7 +433,8 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
         fromDate = todayDate + " T " + formattedTime + " " + midday
         toDate = todayDate + " T 5:00 pm "
-        toffyHelper.sendVacationToManager(fromDate, toDate, arr[1], "leave");
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval)
+
       });
 
     })
