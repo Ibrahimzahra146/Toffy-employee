@@ -625,7 +625,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 var stringMessage = ""
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
-                        if (i >= 1)
+                        if (i > 0)
                             stringMessage = "," + stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
                         else stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
 
