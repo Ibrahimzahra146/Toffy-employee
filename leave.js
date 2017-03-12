@@ -1,40 +1,45 @@
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email) {
-    convertTimeFormat(time, function (formattedTime, midday) {
-        console.log("Converted Time---->" + time)
-        var text12 = {
-            "text": "",
-            "attachments": [
-                {
-                    "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm   . Should I go ahead ?",
-                    "callback_id": 'leave_confirm_reject',
-                    "color": "#3AA3E3",
-                    "attachment_type": "default",
-                    "actions": [
-                        {
-                            "name": 'confirm',
-                            "text": "Yes",
-                            "style": "primary",
-                            "type": "button",
-                            "value": time + "," + email
-                        },
-                        {
-                            "name": 'reject',
-                            "text": "No",
-                            "style": "danger",
-                            "type": "button",
-                            "value": time + "," + email
-                        }
-                    ]
-                }
-            ]
-        }
-        msg.say(text12)
+    convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
+        converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
+            console.log("Converted Time---->" + time)
+            console.log("Converted Time---->" + TimeforMilliseconds)
+            console.log("Converted Time---->" + milliSeconds)
+            var text12 = {
+                "text": "",
+                "attachments": [
+                    {
+                        "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm   . Should I go ahead ?",
+                        "callback_id": 'leave_confirm_reject',
+                        "color": "#3AA3E3",
+                        "attachment_type": "default",
+                        "actions": [
+                            {
+                                "name": 'confirm',
+                                "text": "Yes",
+                                "style": "primary",
+                                "type": "button",
+                                "value": time + "," + email + "," + milliSeconds
+                            },
+                            {
+                                "name": 'reject',
+                                "text": "No",
+                                "style": "danger",
+                                "type": "button",
+                                "value": time + "," + email + "," + milliSeconds
+                            }
+                        ]
+                    }
+                ]
+            }
+            msg.say(text12)
+        })
+
     });
 
 
 }//-------------------------------------
 module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email) {
-    convertTimeFormat(time, function (formattedTime, midday) {
+    convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         var text12 = {
             "text": "",
             "attachments": [
@@ -67,8 +72,8 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
 }
 module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email) {
     console.log("RangeTimeToday")
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom) {
-        convertTimeFormat(toTime, function (formattedTime, midday) {
+    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds) {
             var text12 = {
                 "text": "",
                 "attachments": [
@@ -104,8 +109,8 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
 
 }
 module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email) {
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom) {
-        convertTimeFormat(toTime, function (formattedTime, midday) {
+    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds) {
             var text12 = {
                 "text": "",
                 "attachments": [
@@ -141,44 +146,62 @@ function convertTimeFormat(time, callback) {
     var arr = time.toString().split(":")
     var formattedTime = ""
     var midday = "pm";
-    if (arr[0] == "13" || arr[0] == "01")
+    var TimeforMilliseconds = ""
+    if (arr[0] == "13" || arr[0] == "01") {
         formattedTime = "01:" + arr[1];
-    else if (arr[0] == "14" || arr[0] == "02")
+        TimeforMilliseconds = "13"
+    }
+    else if (arr[0] == "14" || arr[0] == "02") {
         formattedTime = "02:" + arr[1];
-    else if (arr[0] == "15" || arr[0] == "03")
+        TimeforMilliseconds = "14:00:00"
+    }
+    else if (arr[0] == "15" || arr[0] == "03") {
         formattedTime = "03:" + arr[1];
-    else if (arr[0] == "16" || arr[0] == "04")
+        TimeforMilliseconds = "15:00:00"
+    }
+    else if (arr[0] == "16" || arr[0] == "04") {
         formattedTime = "04:" + arr[1];
-    else if (arr[0] == "17" || arr[0] == "05")
+        TimeforMilliseconds = "16:00:00"
+    }
+    else if (arr[0] == "17" || arr[0] == "05") {
         formattedTime = "05:" + arr[1];
+        TimeforMilliseconds = "17:00:00"
+    }
     else if (arr[0] == "20") {
         formattedTime = "08:" + arr[1];
         midday = "am"
+        TimeforMilliseconds = "8:00:00"
+
     }
     else if (arr[0] == "21" || arr[0] == "09") {
         formattedTime = "09:" + arr[1];
         midday = "am"
+        TimeforMilliseconds = "9:00:00"
     }
     else if (arr[0] == "22" || arr[0] == "10") {
         formattedTime = "10:" + arr[1];
         midday = "am"
+        TimeforMilliseconds = "10:00:00"
     }
     else if (arr[0] == "23" || arr[0] == "11") {
         formattedTime = "11:" + arr[1];
         midday = "am"
+        TimeforMilliseconds = "11:00:00"
     }
     else if (arr[0] == "00" || arr[0] == "12") {
         formattedTime = "12:" + arr[1];
         midday = "am"
+        TimeforMilliseconds = "12:00:00"
     }
+
     else {
         formattedTime = arr[0] + ":" + arr[1];
         midday = "am";
     }
 
-    callback(formattedTime, midday)
+    callback(formattedTime, midday, TimeforMilliseconds)
 }
-function converDateToMilliseconds() {
+function converDateToMilliseconds(TimeforMilliseconds, callback) {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -194,7 +217,8 @@ function converDateToMilliseconds() {
 
     today = yyyy + '-' + mm + '-' + dd;
 
-    today + " " + "8:00:00"
+    today + " " + TimeforMilliseconds
     y = new Date(today)
-    y.getTime()
+    var milliSeconds = y.getTime()
+    callback(milliSeconds)
 }
