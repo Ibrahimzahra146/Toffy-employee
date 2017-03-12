@@ -1,37 +1,41 @@
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email) {
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
-            console.log("Converted Time---->" + time)
-            console.log("Converted Time---->" + TimeforMilliseconds)
-            console.log("Converted Time---->" + milliSeconds)
-            var text12 = {
-                "text": "",
-                "attachments": [
-                    {
-                        "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm   . Should I go ahead ?",
-                        "callback_id": 'leave_confirm_reject',
-                        "color": "#3AA3E3",
-                        "attachment_type": "default",
-                        "actions": [
-                            {
-                                "name": 'confirm',
-                                "text": "Yes",
-                                "style": "primary",
-                                "type": "button",
-                                "value": time + "," + email + "," + milliSeconds
-                            },
-                            {
-                                "name": 'reject',
-                                "text": "No",
-                                "style": "danger",
-                                "type": "button",
-                                "value": time + "," + email + "," + milliSeconds
-                            }
-                        ]
-                    }
-                ]
-            }
-            msg.say(text12)
+            converDateToMilliseconds("17:00:00", function (milliSeconds1) {
+                console.log("Converted Time---->" + time)
+                console.log("Converted Time---->" + TimeforMilliseconds)
+                console.log("Converted Time---->" + milliSeconds)
+                console.log("Converted Time---->" + milliSeconds1)
+                var text12 = {
+                    "text": "",
+                    "attachments": [
+                        {
+                            "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm   . Should I go ahead ?",
+                            "callback_id": 'leave_confirm_reject',
+                            "color": "#3AA3E3",
+                            "attachment_type": "default",
+                            "actions": [
+                                {
+                                    "name": 'confirm',
+                                    "text": "Yes",
+                                    "style": "primary",
+                                    "type": "button",
+                                    "value": time + "," + email + "," + milliSeconds+ "," + milliSeconds1
+                                },
+                                {
+                                    "name": 'reject',
+                                    "text": "No",
+                                    "style": "danger",
+                                    "type": "button",
+                                    "value": time + "," + email + "," + milliSeconds+ "," + milliSeconds1
+                                }
+                            ]
+                        }
+                    ]
+                }
+                msg.say(text12)
+            })
+
         })
 
     });
