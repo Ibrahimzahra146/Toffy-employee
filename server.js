@@ -422,6 +422,7 @@ slapp.action('confirm_reject', 'reject', (msg, value) => {
 slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
+    console.log("arrrrrrrr--------->  " + arr[2])
     toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
       fromDate = todayDate + " T " + formattedTime + " " + midday
       toDate = todayDate + " T 5:00 pm "
