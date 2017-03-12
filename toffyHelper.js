@@ -742,6 +742,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
     }
     vacationBody = JSON.stringify(vacationBody)
+
     request({
         url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
         method: 'POST',
@@ -753,13 +754,33 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         body: vacationBody
         //Set the body as a stringcc
     }, function (error, response, body) {
+        if (response.statusCode == 403) {
+            sessionFlag = 0
+        }
 
-        console.log("the vacation have been posted" + response.statusCode)
-        var vacationId = (JSON.parse(body)).id;
-        var managerApproval = (JSON.parse(body)).managerApproval
-        console.log("Vacaction ID---->" + (JSON.parse(body)).id)
-        console.log("managerApproval --->" + managerApproval)
-        callback(vacationId, managerApproval);
+        toffyHelper.getNewSession("brhoom200904@hotmail.com", function (cookie) {
+            generalCookies = cookie
+            request({
+                url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': generalCookies
+                },
+
+                body: vacationBody
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                console.log("the vacation have been posted" + response.statusCode)
+                var vacationId = (JSON.parse(body)).id;
+                var managerApproval = (JSON.parse(body)).managerApproval
+                console.log("Vacaction ID---->" + (JSON.parse(body)).id)
+                console.log("managerApproval --->" + managerApproval)
+                callback(vacationId, managerApproval);
+
+            })
+        })
+
 
 
 
