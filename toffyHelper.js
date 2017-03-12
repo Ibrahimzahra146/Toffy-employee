@@ -9,6 +9,7 @@ var toffyHelper = require('./toffyHelper')
 var sessionFlag = 0;
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
+    console.log("show emoloyee stats -0")
 
     request({
         url: "http://" + IP + "/api/v1/employee/259/balance",
