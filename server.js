@@ -191,7 +191,7 @@ function sendRequestToApiAi(emailValue, msg) {
       if (typeOfVacation != "") {
         vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, typeOfVacation)
         fromDate = ""
-        toDate=""
+        toDate = ""
       }
     }
     // the user ask for vacation in conversation scenario
@@ -210,6 +210,8 @@ function sendRequestToApiAi(emailValue, msg) {
         vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
 
       else msg.say("Sick or personal vacation?")
+      fromDate = ""
+      toDate = ""
 
     }
 
