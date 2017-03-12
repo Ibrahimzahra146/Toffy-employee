@@ -748,14 +748,12 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     vacationBody = JSON.stringify(vacationBody)
 
     request({
-        url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
-        method: 'POST',
+        url: 'http://46.43.71.50:19090/api/v1/employee/profile', //URL to hitDs
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Cookie': generalCookies
-        },
-
-        body: vacationBody
+        }
         //Set the body as a stringcc
     }, function (error, response, body) {
         if (response.statusCode == 403) {
