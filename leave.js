@@ -20,14 +20,14 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds+ "," + milliSeconds1
+                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds+ "," + milliSeconds1
+                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1
                                 }
                             ]
                         }
@@ -206,6 +206,7 @@ function convertTimeFormat(time, callback) {
     callback(formattedTime, midday, TimeforMilliseconds)
 }
 function converDateToMilliseconds(TimeforMilliseconds, callback) {
+    console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
