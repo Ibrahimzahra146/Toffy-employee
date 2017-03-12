@@ -147,6 +147,7 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
     });
 }
 function convertTimeFormat(time, callback) {
+    console.log("The Time is ="+time)
     var arr = time.toString().split(":")
     var formattedTime = ""
     var midday = "pm";
