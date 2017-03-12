@@ -424,7 +424,7 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
     var arr = value.toString().split(",");
     console.log("arrrrrrrr--------->  " + arr[2])
     console.log("arrrrrrrr--------->  " + arr[3])
-    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, arr[3], function (vacationId, managerApproval) {
+    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr,"personal", function (vacationId, managerApproval) {
     })
     console.log("vacationId--------->" + vacationId);
     console.log("managersApproval--------->" + managerApproval[0].id);

@@ -729,9 +729,9 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("arrive at va")
     console.log("from" + from);
     console.log("to======>" + to);
-    console.log("employee_id======>" + userIdInHr);
+    console.log("employee_id======>" + toffyHelper.userIdInHr);
     console.log("type======>" + type);
-    userIdInHr = parseInt(userIdInHr)
+
 
     var vacationBody = {
         "employee_id": toffyHelper.userIdInHr,
