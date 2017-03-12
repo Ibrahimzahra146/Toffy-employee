@@ -747,7 +747,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': "JSESSIONID=30DEB58EBB7F9E27FA1CADF3ACB638C2"
+            'Cookie': generalCookies
         },
 
         body: vacationBody
