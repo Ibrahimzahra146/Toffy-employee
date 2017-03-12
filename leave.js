@@ -1,5 +1,6 @@
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email) {
     convertTimeFormat(time, function (formattedTime, midday) {
+        console.log("Converted Time---->" +formattedTime)
         var text12 = {
             "text": "",
             "attachments": [
