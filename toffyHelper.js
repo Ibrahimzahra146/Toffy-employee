@@ -622,12 +622,14 @@ get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
     var res = generalCookies
+    console.log("email ------->" + email)
+
     if (sessionFlag == 1) {
         res = generalCookies
         callback(res)
 
     } else {
-        console.log("========>Getting new sessio ID")
+        console.log("========>Getting new sessio IDaaa")
         request({
             url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
             method: 'POST',
@@ -639,6 +641,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
+            console.log("Arrive 2334")
             toffyHelper.userIdInHr = (JSON.parse(body)).id;
             console.log("userIdInHr ====>>>" + userIdInHr);
 
