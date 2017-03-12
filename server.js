@@ -273,7 +273,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "showHolidays") {
       var date = response.result.parameters.date;
       console.log("response.result.parameters.date"+response.result.parameters.date)
-      console.log("response.result.parameters.date1"+response.result.parameters.dat1)
+      console.log("response.result.parameters.date1"+response.result.parameters.date1)
       var date1 = response.result.parameters.date1;
       //toffyHelper.showHolidays(msg, date, date1);
     }
