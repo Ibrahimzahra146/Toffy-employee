@@ -747,13 +747,14 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': "JSESSIONID=30DEB58EBB7F9E27FA1CADF3ACB638C2"
         },
 
         body: vacationBody
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("the vacation have been posted")
+
+        console.log("the vacation have been posted" + response.statusCode)
         var vacationId = (JSON.parse(body)).id;
         var managerApproval = (JSON.parse(body)).managerApproval
         console.log("Vacaction ID---->" + (JSON.parse(body)).id)
