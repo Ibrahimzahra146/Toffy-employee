@@ -424,17 +424,19 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
     var arr = value.toString().split(",");
     console.log("arrrrrrrr--------->  " + arr[2])
     console.log("arrrrrrrr--------->  " + arr[3])
-    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr,"personal", function (vacationId, managerApproval) {
-    })
-    console.log("vacationId--------->" + vacationId);
-    console.log("managersApproval--------->" + managerApproval[0].id);
-    console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
+      console.log("vacationId--------->" + vacationId);
+      console.log("managersApproval--------->" + managerApproval[0].id);
+      console.log("managersApproval--------->" + JSON.stringify(managerApproval));
 
-    toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
-      fromDate = todayDate + " T " + formattedTime + " " + midday
-      toDate = todayDate + " T 5:00 pm "
-      toffyHelper.sendVacationToManager(fromDate, toDate, arr[1], "leave");
-    });
+      toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+        fromDate = todayDate + " T " + formattedTime + " " + midday
+        toDate = todayDate + " T 5:00 pm "
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[1], "leave");
+      });
+
+    })
+
 
   });
   msg.say("Your leave request have been submitted to your managers.");
