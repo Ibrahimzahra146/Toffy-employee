@@ -625,7 +625,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
-                        msg.sayg((JSON.parse(body))[i].fromDate)
+                        msg.say((JSON.parse(body))[i].fromDate)
                         i++;
                     }
                 }
