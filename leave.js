@@ -226,7 +226,7 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
 
     today + " " + TimeforMilliseconds
     y = new Date(today)
-    y.setHours(arr[0])
+    y.setHours((arr[0]-2))
     y.setMinutes(arr[1])
     var milliSeconds = y.getTime()
     callback(milliSeconds)
