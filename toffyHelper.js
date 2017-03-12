@@ -608,8 +608,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
             sessionFlag = 0
         }
         toffyHelper.getNewSession(email, function (cookie) {
-            var uri='http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
-            console.log("URI"+uri)
+            var uri = 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
+            console.log("URI" + uri)
             generalCookies = cookie;
             request({
                 url: uri,
@@ -622,12 +622,33 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 console.log("========>" + response.statusCode);
                 console.log("Response========>" + JSON.stringify(body));
                 var i = 0;
-
+                var stringMessage = ""
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
-                        msg.say((JSON.parse(body))[i].fromDate)
+                        stringMessage = stringMessage + "{" + "title:" + (JSON.parse(body))[i].comments + ",value:" + (JSON.parse(body))[i].fromDate + ",short:true},"
                         i++;
+
                     }
+                    var messageBody = {
+                        "text": "Your profile details",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": [stringMessage
+
+
+
+
+                                ],
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    var stringfy = JSON.stringify(messageBody);
+                    var obj1 = JSON.parse(stringfy);
+                    msg.say(obj1)
                 }
             })
 
