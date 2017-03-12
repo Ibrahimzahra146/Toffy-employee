@@ -190,6 +190,8 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "oneDayVacationConversation") {
       if (typeOfVacation != "") {
         vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, typeOfVacation)
+        fromDate = ""
+        toDate=""
       }
     }
     // the user ask for vacation in conversation scenario
@@ -206,6 +208,7 @@ function sendRequestToApiAi(emailValue, msg) {
       if (typeOfVacation != "")
         //send Post request
         vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
+
       else msg.say("Sick or personal vacation?")
 
     }
@@ -273,7 +276,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "showHolidays") {
       var date = response.result.parameters.date;
       var date1 = response.result.parameters.date1;
-      toffyHelper.showHolidays(msg,emailValue, date, date1);
+      toffyHelper.showHolidays(msg, emailValue, date, date1);
     }
     else if ((responseText) == "sickInfo") {
       msg.say("Sorry to hear that. What dayss were you sick?")
