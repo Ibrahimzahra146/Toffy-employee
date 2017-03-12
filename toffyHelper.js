@@ -608,9 +608,11 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
             sessionFlag = 0
         }
         toffyHelper.getNewSession(email, function (cookie) {
+            var uri='http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
+            console.log("URI"+uri)
             generalCookies = cookie;
             request({
-                url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
+                url: uri,
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
