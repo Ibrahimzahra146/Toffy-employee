@@ -426,8 +426,9 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
     console.log("arrrrrrrr--------->  " + arr[3])
     toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
       console.log("vacationId--------->" + vacationId);
-      console.log("managersApproval--------->" + managerApproval[0].id);
+
       console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+      console.log("managersApproval--------->" + managerApproval[0].id);
 
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
         fromDate = todayDate + " T " + formattedTime + " " + midday
