@@ -216,6 +216,8 @@ function sendRequestToApiAi(emailValue, msg) {
     */
 
     else if ((responseText) == "newLeaveRequestSpecTimeToday") {
+      console.log(JSON.stringify(response))
+      console.log(response)
       leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue);
       console.log("response.result.parameters.time " + response.result.parameters.time)
     }
