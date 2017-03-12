@@ -153,49 +153,49 @@ function convertTimeFormat(time, callback) {
     var TimeforMilliseconds = ""
     if (arr[0] == "13" || arr[0] == "01") {
         formattedTime = "01:" + arr[1];
-        TimeforMilliseconds = "13"
+        TimeforMilliseconds = "13:"+arr[1]
     }
     else if (arr[0] == "14" || arr[0] == "02") {
         formattedTime = "02:" + arr[1];
-        TimeforMilliseconds = "14:00:00"
+        TimeforMilliseconds = "14:"+arr[1]
     }
     else if (arr[0] == "15" || arr[0] == "03") {
         formattedTime = "03:" + arr[1];
-        TimeforMilliseconds = "15:00:00"
+        TimeforMilliseconds = "15:"+arr[1]
     }
     else if (arr[0] == "16" || arr[0] == "04") {
         formattedTime = "04:" + arr[1];
-        TimeforMilliseconds = "16:00:00"
+        TimeforMilliseconds = "16:"+arr[1]
     }
     else if (arr[0] == "17" || arr[0] == "05") {
         formattedTime = "05:" + arr[1];
-        TimeforMilliseconds = "17:00:00"
+        TimeforMilliseconds = "17:"+arr[1]
     }
     else if (arr[0] == "20") {
         formattedTime = "08:" + arr[1];
         midday = "am"
-        TimeforMilliseconds = "8:00:00"
+        TimeforMilliseconds = "8:"+arr[1]
 
     }
     else if (arr[0] == "21" || arr[0] == "09") {
         formattedTime = "09:" + arr[1];
         midday = "am"
-        TimeforMilliseconds = "9:00:00"
+        TimeforMilliseconds = "9:"+arr[1]
     }
     else if (arr[0] == "22" || arr[0] == "10") {
         formattedTime = "10:" + arr[1];
         midday = "am"
-        TimeforMilliseconds = "10:00:00"
+        TimeforMilliseconds = "10:"+arr[1]
     }
     else if (arr[0] == "23" || arr[0] == "11") {
         formattedTime = "11:" + arr[1];
         midday = "am"
-        TimeforMilliseconds = "11:00:00"
+        TimeforMilliseconds = "11:"+arr[1]
     }
     else if (arr[0] == "00" || arr[0] == "12") {
         formattedTime = "12:" + arr[1];
         midday = "am"
-        TimeforMilliseconds = "12:00:00"
+        TimeforMilliseconds = "12:"+arr[1]
     }
 
     else {
@@ -207,6 +207,8 @@ function convertTimeFormat(time, callback) {
 }
 function converDateToMilliseconds(TimeforMilliseconds, callback) {
     console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
+    var arr=TimeforMilliseconds.toString().split(":")
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -224,6 +226,8 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
 
     today + " " + TimeforMilliseconds
     y = new Date(today)
+    y.setHours(arr[0])
+    y.setMinutes(arr[1])
     var milliSeconds = y.getTime()
     callback(milliSeconds)
 }
