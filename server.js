@@ -216,7 +216,7 @@ function sendRequestToApiAi(emailValue, msg) {
     */
 
     else if ((responseText) == "newLeaveRequestSpecTimeToday") {
-      console.log(JSON.stringify(response))
+      console.log(JSON.stringify(response ))
       console.log(response)
       leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue);
       console.log("response.result.parameters.time " + response.result.parameters.time)
@@ -272,8 +272,10 @@ function sendRequestToApiAi(emailValue, msg) {
     }
     else if ((responseText) == "showHolidays") {
       var date = response.result.parameters.date;
+      console.log("response.result.parameters.date"+response.result.parameters.date)
+      console.log("response.result.parameters.date1"+response.result.parameters.dat1)
       var date1 = response.result.parameters.date1;
-      toffyHelper.showHolidays(msg, date, date1);
+      //toffyHelper.showHolidays(msg, date, date1);
     }
     else if ((responseText) == "sickInfo") {
       msg.say("Sorry to hear that. What dayss were you sick?")
