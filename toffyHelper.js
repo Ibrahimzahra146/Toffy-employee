@@ -625,11 +625,14 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 var stringMessage = ""
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
-                        stringMessage = stringMessage + "{" + "title:" + (JSON.parse(body))[i].comments + ",value:" + (JSON.parse(body))[i].fromDate + ",short:true},"
+                        if (i >= 1)
+                            stringMessage = "," + stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+                        else stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+
                         i++;
 
                     }
-                    console.log("stringMessage"+stringMessage)
+                    console.log("stringMessage" + stringMessage)
                     var messageBody = {
                         "text": "Your profile details",
                         "attachments": [
