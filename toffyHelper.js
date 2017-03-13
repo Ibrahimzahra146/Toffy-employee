@@ -644,6 +644,9 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     stringMessage = stringMessage + "]"
                     console.log("stringMessage---> " + stringMessage)
                     stringMessage = JSON.stringify(stringMessage)
+                    console.log("stringMessage---> " + stringMessage)
+
+
 
                     var messageBody = {
                         "text": "Your profile details",
