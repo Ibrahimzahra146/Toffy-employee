@@ -46,34 +46,42 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
     console.log("The time is " + time)
     console.log("The date is " + date)
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
-        var text12 = {
-            "text": "",
-            "attachments": [
-                {
-                    "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm . Should I go ahead ?",
-                    "callback_id": 'leave_spectime_specDay_confirm_reject',
-                    "color": "#3AA3E3",
-                    "attachment_type": "default",
-                    "actions": [
+        converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
+            converDateToMilliseconds("17:00:00", date, function (milliSeconds1) {
+                console.log("milliSeconds--->" + milliSeconds)
+                console.log("milliSeconds1--->" + milliSeconds1)
+
+                var text12 = {
+                    "text": "",
+                    "attachments": [
                         {
-                            "name": 'confirm',
-                            "text": "Yes",
-                            "style": "primary",
-                            "type": "button",
-                            "value": time + "," + date + "," + email
-                        },
-                        {
-                            "name": 'reject',
-                            "text": "No",
-                            "style": "danger",
-                            "type": "button",
-                            "value": time + "," + date + "," + email
+                            "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm . Should I go ahead ?",
+                            "callback_id": 'leave_spectime_specDay_confirm_reject',
+                            "color": "#3AA3E3",
+                            "attachment_type": "default",
+                            "actions": [
+                                {
+                                    "name": 'confirm',
+                                    "text": "Yes",
+                                    "style": "primary",
+                                    "type": "button",
+                                    "value": time + "," + date + "," + email
+                                },
+                                {
+                                    "name": 'reject',
+                                    "text": "No",
+                                    "style": "danger",
+                                    "type": "button",
+                                    "value": time + "," + date + "," + email
+                                }
+                            ]
                         }
                     ]
                 }
-            ]
-        }
-        msg.say(text12)
+                msg.say(text12)
+
+            });
+        });
     });
 }
 module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email) {
@@ -232,5 +240,20 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
     y.setHours((arr[0] - 2))
     y.setMinutes(arr[1])
     var milliSeconds = y.getTime()
+    callback(milliSeconds)
+}
+function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callback) {
+    console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
+    var arr = TimeforMilliseconds.toString().split(":")
+
+    var today = new Date();
+    today = date + " " + TimeforMilliseconds
+
+
+    y = new Date(today)
+    y.setHours((arr[0] - 2))
+    y.setMinutes(arr[1])
+    var milliSeconds = y.getTime()
+    console.log("milliSeconds===>" + milliSeconds)
     callback(milliSeconds)
 }
