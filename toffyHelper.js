@@ -650,12 +650,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                                 "attachment_type": "default",
                                 "text": " ",
                                 "fallback": "ReferenceError",
-                                "fields": [stringMessage
-
-
-
-
-                                ],
+                                "fields": stringMessage,
                                 "color": "#F35A00"
                             }
                         ]
