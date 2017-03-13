@@ -664,7 +664,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
                     console.log("stringfy" + stringfy)
                     stringfy = stringfy.replace(/\\/g, "")
-
+                    stringfy=stringfy.replace(/\"\[/,"")
                     console.log("stringfy------------->" + stringfy)
 
 
