@@ -65,14 +65,14 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": time + "," + date + "," + email
+                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": time + "," + date + "," + email
+                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
                                 }
                             ]
                         }

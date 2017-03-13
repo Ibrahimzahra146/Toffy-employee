@@ -460,12 +460,24 @@ slapp.action('leave_confirm_reject', 'reject', (msg, value) => {
 slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) => {
 
   var arr = value.toString().split(",");
-  toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
-    fromDate = arr[1] + " T " + formattedTime + " " + midday
-    toDate = arr[1] + " T 5:00 pm "
+  console.log("arrrrrrrr--------->  " + arr[2])
+  console.log("arrrrrrrr--------->  " + arr[3])
+  toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
+    console.log("vacationId--------->" + vacationId);
 
-    toffyHelper.sendVacationToManager(fromDate, toDate, arr[1], "leave");
-  });
+    console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+    console.log("managersApproval--------->" + managerApproval[0].id);
+
+    toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+      fromDate = arr[1] + " T " + formattedTime + " " + midday
+      toDate = arr[1] + " T 5:00 pm "
+      toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval)
+
+    });
+
+  })
+
+
   msg.say("Your leave request have been submitted to your managers.");
 
 
