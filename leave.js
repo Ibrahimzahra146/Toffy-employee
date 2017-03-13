@@ -126,7 +126,7 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
 }
 module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email) {
     convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds) {
+        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
                 converDateToMillisecondsWithSpecDate(TimeforMilliseconds1, date, function (milliSeconds1) {
                     var text12 = {
