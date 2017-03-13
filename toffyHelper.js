@@ -620,35 +620,21 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 },
             }, function (error, response, body) {
                 console.log("========>" + response.statusCode);
-                console.log("Response========>" + JSON.stringify(body));
                 var i = 0;
                 var stringMessage = "["
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
 
                         if (i > 0) {
-                            console.log("yes true")
                             stringMessage = stringMessage + ","
-                            console.log("i inside if" + i)
-                            console.log("i inside if" + stringMessage)
-
                         }
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
-
-                        console.log("string" + i)
-
                         i++;
-
 
                     }
                     stringMessage = stringMessage + "]"
-                    console.log("stringMessage---> " + stringMessage)
-                    console.log("stringMessage------------> " + stringMessage)
-
-
-
                     var messageBody = {
-                        "text": "Your profile details",
+                        "text": "The holidays are:",
                         "attachments": [
                             {
                                 "attachment_type": "default",
@@ -666,11 +652,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     stringfy = stringfy.replace(/\\/g, "")
                     stringfy = stringfy.replace(/]\"/, "]")
                     stringfy = stringfy.replace(/\"\[/, "[")
-
-                    console.log("stringfy------------->" + stringfy)
-
-                    stringfy=JSON.parse(stringfy)
-                    //  var parsedMessage = JSON.parse(stringfy)
+                    stringfy = JSON.parse(stringfy)
 
                     msg.say(stringfy)
                 }
