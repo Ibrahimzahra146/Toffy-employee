@@ -127,36 +127,40 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
 module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email) {
     convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds) {
-            var text12 = {
-                "text": "",
-                "attachments": [
-                    {
-                        "text": "Okay, you asked for a leave  on " + date + " from " + formattedFromTime + " " + middayFrom + "" + "  to  " + formattedTime + " " + midday + ". Should I go ahead ?",
-                        "callback_id": 'leave_rangeTime_specDay_confirm_reject',
-                        "color": "#3AA3E3",
-                        "attachment_type": "default",
-                        "actions": [
+            converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
+                converDateToMillisecondsWithSpecDate(TimeforMilliseconds1, date, function (milliSeconds1) {
+                    var text12 = {
+                        "text": "",
+                        "attachments": [
                             {
-                                "name": 'confirm',
-                                "text": "Yes",
-                                "style": "primary",
-                                "type": "button",
-                                "value": fromTime + "," + toTime + "," + date + "," + email
-                            },
-                            {
-                                "name": 'reject',
-                                "text": "No",
-                                "style": "danger",
-                                "type": "button",
-                                "value": fromTime + "," + toTime + "," + date + "," + email
+                                "text": "Okay, you asked for a leave  on " + date + " from " + formattedFromTime + " " + middayFrom + "" + "  to  " + formattedTime + " " + midday + ". Should I go ahead ?",
+                                "callback_id": 'leave_rangeTime_specDay_confirm_reject',
+                                "color": "#3AA3E3",
+                                "attachment_type": "default",
+                                "actions": [
+                                    {
+                                        "name": 'confirm',
+                                        "text": "Yes",
+                                        "style": "primary",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    },
+                                    {
+                                        "name": 'reject',
+                                        "text": "No",
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    }
+                                ]
                             }
                         ]
                     }
-                ]
-            }
-            msg.say(text12)
+                    msg.say(text12)
+                });
+            });
         });
-    });
+    })
 }
 function convertTimeFormat(time, callback) {
     console.log("The Time is =" + time)
