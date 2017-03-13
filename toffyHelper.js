@@ -759,10 +759,11 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
                     },
                 }, function (error, response, body) {
                     console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
+                    callback(body)
+
                 })
 
             })
-            callback(body)
         }
         else {
             console.log("correct" + response.statusCode)
