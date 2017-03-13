@@ -629,8 +629,9 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
                         if (i > 0) {
                             console.log("yes true")
-                            stringMessage = "," + stringMessage
+                            stringMessage = stringMessage + ","
                             console.log("i inside if" + i)
+                            console.log("i inside if" + stringMessage)
 
                         }
                         console.log("i" + i)
