@@ -492,20 +492,22 @@ slapp.event('file_share', (msg) => {
 slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
+    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
 
-    toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+      toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
-      toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
+        toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
 
-        fromDate = todayDate + " T " + formattedTime + " " + midday
-        toDate = todayDate + " T " + formattedTime1 + " " + midday1
+          fromDate = todayDate + " T " + formattedTime + " " + midday
+          toDate = todayDate + " T " + formattedTime1 + " " + midday1
 
-        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave");
+          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval)
+        });
+
       });
 
     });
-
-  });
+  })
   msg.say("Your leave request have been submitted to your managers.");
 
 })
