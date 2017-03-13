@@ -633,7 +633,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                             console.log("i inside if" + stringMessage)
 
                         }
-                        stringMessage = stringMessage + "{" + "'title:'" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + "{" + "'title':" + "'" + (JSON.parse(body))[i].comments + "'" + ",'value':" + "'" + (JSON.parse(body))[i].fromDate + "'"; + ",'short':true}"
 
                         console.log("string" + i)
 
@@ -661,9 +661,9 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     }
                     console.log("messageBody" + messageBody)
                     var stringfy = JSON.stringify(messageBody);
-                    console.log("stringfy  " + stringfy)
+                    var parsedMessage = JSON.parse(stringfy)
 
-                    msg.say(messageBody)
+                    msg.say(parsedMessage)
                 }
             })
 
