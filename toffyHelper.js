@@ -643,7 +643,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     }
                     stringMessage = stringMessage + "]"
                     console.log("stringMessage---> " + stringMessage)
-                    console.log("stringMessage---> " + stringMessage)
+                    stringfy=stringfy.replace('\\','' )
+                    console.log("stringMessage------------> " + stringMessage)
 
 
 
