@@ -47,7 +47,7 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
     console.log("The date is " + date)
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
-            converDateToMilliseconds("17:00:00", date, function (milliSeconds1) {
+            converDateToMillisecondsWithSpecDate("17:00:00", date, function (milliSeconds1) {
                 console.log("milliSeconds--->" + milliSeconds)
                 console.log("milliSeconds1--->" + milliSeconds1)
 
