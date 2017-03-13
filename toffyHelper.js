@@ -663,7 +663,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     var stringfy = JSON.stringify(messageBody);
 
                     console.log("stringfy" + stringfy)
-                    stringfy = stringfy.replace('\\', '')
+                    stringfy = stringfy.replace(/\\/g, "")
 
                     console.log("stringfy------------->" + stringfy)
 
