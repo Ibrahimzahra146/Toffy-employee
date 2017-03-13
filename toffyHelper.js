@@ -643,7 +643,6 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     }
                     stringMessage = stringMessage + "]"
                     console.log("stringMessage---> " + stringMessage)
-                    stringMessage = JSON.stringify(stringMessage)
                     console.log("stringMessage---> " + stringMessage)
 
 
@@ -662,6 +661,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     }
                     console.log("messageBody" + messageBody)
                     var stringfy = JSON.stringify(messageBody);
+                    console.log("stringfy" + stringfy)
+
                     var obj1 = JSON.parse(stringfy);
                     msg.say(obj1)
                 }
