@@ -622,7 +622,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 console.log("========>" + response.statusCode);
                 console.log("Response========>" + JSON.stringify(body));
                 var i = 0;
-                var stringMessage = ""
+                var stringMessage = "["
                 if (!error && response.statusCode === 200) {
                     while ((JSON.parse(body)[i])) {
 
@@ -635,12 +635,13 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                         }
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
 
-                        console.log("i" + i)
+                        console.log("string" + i)
 
                         i++;
 
 
                     }
+                    stringMessage = stringMessage + "]"
                     console.log("stringMessage---> " + stringMessage)
                     var messageBody = {
                         "text": "Your profile details",
