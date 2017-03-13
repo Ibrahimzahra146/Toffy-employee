@@ -663,11 +663,11 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     var stringfy = JSON.stringify(messageBody);
 
                     console.log("stringfy" + stringfy)
-                    stringfy = stringfy.replace('\"', '')
+                    
                     console.log("stringfy" + stringfy)
 
 
-                    //var parsedMessage = JSON.parse(stringfy)
+                    //  var parsedMessage = JSON.parse(stringfy)
 
                     msg.say(stringfy)
                 }
