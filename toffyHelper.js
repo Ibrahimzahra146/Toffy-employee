@@ -655,21 +655,12 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                                 "attachment_type": "default",
                                 "text": " ",
                                 "fallback": "ReferenceError",
-                                "fields": [
-                                    {
-                                        "title": "Earth Day",
-                                        "value": "2017-03-30",
-                                        "short": true
-                                    },
-                                    {
-                                        "title": "Workers Day",
-                                        "value": "2017-04-11",
-                                        "short": true
-                                    }],
+                                "fields": stringMessage,
                                 "color": "#F35A00"
                             }
                         ]
                     }
+                    console.log("messageBody" + messageBody)
                     var stringfy = JSON.stringify(messageBody);
                     var obj1 = JSON.parse(stringfy);
                     msg.say(obj1)
