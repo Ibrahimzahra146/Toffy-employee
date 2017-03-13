@@ -669,7 +669,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
                     console.log("stringfy------------->" + stringfy)
 
-
+                    stringfy=JSON.parse(stringfy)
                     //  var parsedMessage = JSON.parse(stringfy)
 
                     msg.say(stringfy)
