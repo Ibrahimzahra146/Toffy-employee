@@ -414,7 +414,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         console.log("leave manager approval" + JSON.stringify(managerApproval))
 
                         var jsonResponse = JSON.parse(body);
-                        managerApproval = JSON.parse(managerApproval)
+                        console.log("managerApproval[i].id" + managerApproval[i].id)
+                        console.log("managerApproval[i].type" + managerApproval[i].type)
                         if (managerApproval[i].type == "Manager") {
                             message = {
                                 'type': 'message',
