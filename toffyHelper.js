@@ -717,7 +717,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("type======>" + type);
     var vacationType = "0"
     if (type == "sick") {
-        vacationType = "1"
+        vacationType = "4"
     }
 
     var vacationBody = {
