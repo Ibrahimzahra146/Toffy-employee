@@ -381,6 +381,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 }
 //Send sick vacation request to Hr to confirm or reject
 module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, userEmail, type) {
+    console.log("User email in HR section" + userEmail)
     request({
         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
