@@ -786,13 +786,16 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     console.log("to======>" + to);
     console.log("employee_id======>" + toffyHelper.userIdInHr);
     console.log("type======>" + type);
-
+    var vacationType = "0"
+    if (type == "sick") {
+        vacationType = "1"
+    }
 
     var vacationBody = {
         "employee_id": toffyHelper.userIdInHr,
         "from": from,
         "to": to,
-        "type": "0",
+        "type": vacationType,
         "comments": "From ibrahim"
 
     }
