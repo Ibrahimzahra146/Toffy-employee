@@ -384,6 +384,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho) {
     var message = ""
+    var approvarType = ""
     toffyHelper.getUserManagers(toffyHelper.userIdInHr, userEmail, managerApproval, function (body) {
         var approvalId = ""
         var managerEmail = ""
@@ -401,6 +402,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     console.log("managerApproval[i].type" + managerApproval[i].type)
                     managerEmail = body[i].email;
                     approvalId = managerApproval[i].id
+                    approvarType = managerApproval[i].type
                     console.log("userEmail" + userEmail)
                     console.log("arrive to send coonfirmation");
                     request({
@@ -413,8 +415,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         body: managerEmail
                         //Set the body as a stringcc
                     }, function (error, response, body) {
-                        console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
-
+                        console.log("approvalId" + approvalId)
+                        console.log("approvarType" + approvarType)
+                        managerEmail = body[i].email;
                         var jsonResponse = JSON.parse(body);
 
                         if (managerApproval[i].type == "Manager") {
