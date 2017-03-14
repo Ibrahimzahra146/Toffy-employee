@@ -396,8 +396,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             while (body[j]) {//body is the managers for the user
                 console.log("i----->" + i)
 
-                if (body[j].id ==
-                    [i].manager) {
+                if (body[j].id ==managerApproval[i].manager) {
                     managerEmail = body[i].email;
                     approvalId = managerApproval[i].id
                     console.log("userEmail--------=======>>>>" + userEmail)
