@@ -392,10 +392,10 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
         body: userEmail
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 200)
-            var jsonResponse = JSON.parse(body);
-        console.log("jsonResponse in HR section" + jsonResponse.hrChannelId)
 
+        var jsonResponse = JSON.parse(body);
+        console.log("jsonResponse in HR section" + jsonResponse.hrChannelId)
+        console.log("jsonResponse in HR section" + body.hrChannelId)
         var hRmessage = {
             'type': 'message',
             'channel': jsonResponse.hrChannelId,
