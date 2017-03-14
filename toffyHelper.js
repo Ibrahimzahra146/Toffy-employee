@@ -395,7 +395,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
 
         var jsonResponse = JSON.parse(body);
         console.log("jsonResponse in HR section" + jsonResponse.hrChannelId)
-        console.log("jsonResponse in HR section" + body.hrChannelId)
+        console.log("jsonResponse in HR section" + JSON.stringify(body))
         var hRmessage = {
             'type': 'message',
             'channel': jsonResponse.hrChannelId,
