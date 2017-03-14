@@ -53,7 +53,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                     "short": true
                                 },
                                 {
-                                    "title": "Available time off  ",
+                                    "title": "Used time off  ",
                                     "value": parseFloat(body.balance).toFixed(1) + " weeks ",
                                     "short": true
                                 },
@@ -387,18 +387,17 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     toffyHelper.getUserManagers(toffyHelper.userIdInHr, userEmail, managerApproval, function (body) {
         var approvalId = ""
         var managerEmail = ""
-        console.log("managerApproval-======> " + managerApproval)
         //get the email of manager approval from user managers  ,the priority fro manager approval
         var i = 0
         var j = 0
-        console.log("leave manager approval" + JSON.stringify(managerApproval))
 
 
         while (managerApproval[i]) {
             while (body[j]) {//body is the managers for the user
                 console.log("i----->" + i)
 
-                if (body[j].id == managerApproval[i].manager) {
+                if (body[j].id ==
+                    [i].manager) {
                     managerEmail = body[i].email;
                     approvalId = managerApproval[i].id
                     console.log("userEmail--------=======>>>>" + userEmail)
@@ -413,6 +412,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         body: managerEmail
                         //Set the body as a stringcc
                     }, function (error, response, body) {
+                        console.log("leave manager approval" + JSON.stringify(managerApproval))
+
                         var jsonResponse = JSON.parse(body);
                         if (managerApproval[i].type == "Manager") {
                             message = {

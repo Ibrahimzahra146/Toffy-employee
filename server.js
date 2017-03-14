@@ -73,7 +73,7 @@ function SendWelcomeResponse(msg, responseText) {
     url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
     json: true
   }, function (error, response, body) {
-    msg.say(responseText + "! How can I help you " + body.user.name + "?")
+    msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
 
   });
 }
@@ -504,7 +504,7 @@ slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => 
           fromDate = todayDate + " T " + formattedTime + " " + midday
           toDate = todayDate + " T " + formattedTime1 + " " + midday1
 
-          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval,"Manager")
+          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager")
         });
 
       });
@@ -531,7 +531,7 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
           fromDate = todayDate + " T " + formattedTime + " " + midday
           toDate = todayDate + " T " + formattedTime1 + " " + midday1
 
-          toffyHelper.sendVacationToManager(fromDate, toDate, arr[3], "leave", vacationId, managerApproval,"Manager")
+          toffyHelper.sendVacationToManager(fromDate, toDate, arr[3], "leave", vacationId, managerApproval, "Manager")
 
         });
       })
