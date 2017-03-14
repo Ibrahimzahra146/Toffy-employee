@@ -392,7 +392,7 @@ module.exports.sendVacationToHr = function sendVacationToHr(startDate, endDate, 
         body: userEmail
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.stat)
+        if (response.statusCode == 200)
             var jsonResponse = JSON.parse(body);
         var hRmessage = {
             'type': 'message',
