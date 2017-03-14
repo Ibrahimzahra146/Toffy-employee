@@ -397,9 +397,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 console.log("i----->" + i)
 
                 if (body[j].id == managerApproval[i].manager) {
+                    console.log("managerApproval[i].id" + managerApproval[i].id)
+                    console.log("managerApproval[i].type" + managerApproval[i].type)
                     managerEmail = body[i].email;
                     approvalId = managerApproval[i].id
-                    console.log("userEmail--------=======>>>>" + userEmail)
+                    console.log("userEmail" + userEmail)
                     console.log("arrive to send coonfirmation");
                     request({
                         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -411,11 +413,10 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         body: managerEmail
                         //Set the body as a stringcc
                     }, function (error, response, body) {
-                        console.log("leave manager approval" + JSON.stringify(managerApproval))
+                        console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
 
                         var jsonResponse = JSON.parse(body);
-                        console.log("managerApproval[i].id" + managerApproval[i].id)
-                        console.log("managerApproval[i].type" + managerApproval[i].type)
+
                         if (managerApproval[i].type == "Manager") {
                             message = {
                                 'type': 'message',
