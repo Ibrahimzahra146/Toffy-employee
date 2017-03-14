@@ -420,7 +420,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         managerEmail = body[i].email;
                         var jsonResponse = JSON.parse(body);
 
-                        if (managerApproval[i].type == "Manager") {
+                        if (approvarType == "Manager") {
                             message = {
                                 'type': 'message',
 
