@@ -396,24 +396,24 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
   var arr = value.toString().split(",");
   var userEmail = arr[2];
 
+  toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, arr[3], function (vacationId, managerApproval) {
+    console.log("vacationId--------->" + vacationId);
+    console.log("managersApproval--------->" + managerApproval[0].id);
+    console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+
+    toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval)
+
+  })
+
   if (arr[3] == "sick") {
-    toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3])
     toffyHelper.sendVacationToHr(arr[0], arr[1], arr[2], arr[3])
     msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR Rep. You might asked to provide a sick report. I’ll inform you about this.  ")
 
   }
-  else {
-    toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, arr[3], function (vacationId, managerApproval) {
-      console.log("vacationId--------->" + vacationId);
-      console.log("managersApproval--------->" + managerApproval[0].id);
-      console.log("managersApproval--------->" + JSON.stringify(managerApproval));
-
-      toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval)
-
-    })
+  else
     msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
 
-  }
+
 })
 
 slapp.action('confirm_reject', 'reject', (msg, value) => {
