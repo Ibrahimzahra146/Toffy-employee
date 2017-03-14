@@ -437,74 +437,75 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 team: jsonResponse.teamId,
                                 event: 'direct_message'
                             }
-                            console.log("approval id" + approvalId)
-                            var messageBody = {
-                                "text": "This folk has pending time off request:",
-                                "attachments": [
-                                    {
-                                        "attachment_type": "default",
-                                        "callback_id": "manager_confirm_reject",
-                                        "text": "@ibrahim",
-                                        "fallback": "ReferenceError",
-                                        "fields": [
-                                            {
-                                                "title": "From",
-                                                "value": startDate,
-                                                "short": true
-                                            },
-                                            {
-                                                "title": "Days/Time ",
-                                                "value": "()",
-                                                "short": true
-                                            },
-                                            {
-                                                "title": "to",
-                                                "value": endDate,
-                                                "short": true
-                                            },
-                                            {
-                                                "title": "Type",
-                                                "value": type,
-                                                "short": true
-                                            }
-                                        ],
-                                        "actions": [
-                                            {
-                                                "name": "confirm",
-                                                "text": "Accept",
-                                                "style": "primary",
-                                                "type": "button",
-                                                "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
-                                            },
-                                            {
-                                                "name": "reject",
-                                                "text": "Reject",
-                                                "style": "danger",
-                                                "type": "button",
-                                                "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
-                                            }, {
-                                                "name": "dontDetuct",
-                                                "text": "Don’t Deduct ",
-                                                "type": "button",
-                                                "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
-                                            }
-                                        ],
-                                        "color": "#F35A00"
-                                    }
-                                ]
-                            }
-                            server.bot.startConversation(message, function (err, convo) {
-
-
-                                if (!err) {
-
-                                    var stringfy = JSON.stringify(messageBody);
-                                    var obj1 = JSON.parse(stringfy);
-                                    server.bot.reply(message, obj1);
-
+                        }
+                        console.log("approval id" + approvalId)
+                        var messageBody = {
+                            "text": "This folk has pending time off request:",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "callback_id": "manager_confirm_reject",
+                                    "text": "@ibrahim",
+                                    "fallback": "ReferenceError",
+                                    "fields": [
+                                        {
+                                            "title": "From",
+                                            "value": startDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Days/Time ",
+                                            "value": "()",
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "to",
+                                            "value": endDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Type",
+                                            "value": type,
+                                            "short": true
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "name": "confirm",
+                                            "text": "Accept",
+                                            "style": "primary",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        },
+                                        {
+                                            "name": "reject",
+                                            "text": "Reject",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        }, {
+                                            "name": "dontDetuct",
+                                            "text": "Don’t Deduct ",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        }
+                                    ],
+                                    "color": "#F35A00"
                                 }
-                            });
+                            ]
+                        }
+                        server.bot.startConversation(message, function (err, convo) {
+
+
+                            if (!err) {
+
+                                var stringfy = JSON.stringify(messageBody);
+                                var obj1 = JSON.parse(stringfy);
+                                server.bot.reply(message, obj1);
+
+                            }
                         });
+                    });
                 }
 
                 j++;
