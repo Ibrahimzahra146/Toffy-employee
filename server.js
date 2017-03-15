@@ -489,7 +489,7 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'reject', (msg, value) => 
 
 })
 slapp.event('file_shared', (msg) => {
-  msg.say("ok")
+  console.log("msg  " + msg);
   console.log('===========>Uploaded file');
 })
 slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => {
