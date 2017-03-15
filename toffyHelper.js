@@ -387,7 +387,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
-    var x=getEmailById('employee/email/8')
+    var x=getEmailById('employee/email/8',function(body){
+        
+    })
     //get the email of manager approval from user managers  ,the priority fro manager approval
     var i = 0
     var j = 0
@@ -767,7 +769,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     });
 }
 function getEmailById(Path, callback) {
-
+console.log("arrive11")
     makeGetRequest(Path, function (response, body) {
 
         callback(body)
@@ -775,6 +777,8 @@ function getEmailById(Path, callback) {
 
 }
 function makeGetRequest(path, callback) {
+    console.log("arrive11")
+
     var uri = 'http://' + IP + '/api/v1/' + path
     console.log("uri " + uri)
 
@@ -788,6 +792,8 @@ function makeGetRequest(path, callback) {
         }
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("arrive13")
+
         printLogs("bodyyy:" + body)
         callback(response, body)
     })
