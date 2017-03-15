@@ -488,7 +488,7 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'reject', (msg, value) => 
   msg.say("Ok,request aborted");
 
 })
-slapp.message('file_share', (msg) => {
+slapp.event('file_shared', (msg) => {
   msg.say("ok")
   console.log('===========>Uploaded file');
 })
