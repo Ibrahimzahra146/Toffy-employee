@@ -502,6 +502,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
                     ]
                 }
+                printLogs("message info "+message)
                 server.bot.startConversation(message, function (err, convo) {
 
 
