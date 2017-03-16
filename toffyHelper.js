@@ -418,13 +418,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 printLogs("approvalId" + approvalId)
                 printLogs("approvarType" + approvarType)
                 printLogs("managerEmail: " + managerEmail)
+                printLogs("Get recore body:"+JSON.stringify(body))
                 var jsonResponse = JSON.parse(body);
 
                 if (approvarType == "Manager") {
-                    printLogs("Manager Role " + jsonResponse.managerChannelId)
+                    printLogs("Manager Role ")
                     message12 = {
                         'type': 'message',
-                        'channel': "jsonResponse.managerChannelId",
+                        'channel': jsonResponse.managerChannelId,
                         user: jsonResponse.slackUserId,
                         text: 'what is my name',
                         ts: '1482920918.000057',
