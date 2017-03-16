@@ -417,9 +417,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             }, function (error, response, body) {
                 printLogs("approvalId" + approvalId)
                 printLogs("approvarType" + approvarType)
+                printLogs("managerEmail: " + managerEmail)
                 var jsonResponse = JSON.parse(body);
 
                 if (approvarType == "Manager") {
+                    printLogs("Manager Role ")
                     message = {
                         'type': 'message',
 
@@ -432,6 +434,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     }
 
                 } else {
+                    printLogs("HR Role")
                     message = {
                         'type': 'message',
 
