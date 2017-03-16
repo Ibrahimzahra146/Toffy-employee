@@ -397,7 +397,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         printLogs("i----->" + i)
         approvalId = managerApproval[i].id
         approvarType = managerApproval[i].type
-        var x = getEmailById('employee/email/' + managerApproval[i].id, function (emailFromId) {
+        var x = getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
             printLogs("BODDYYY" + emailFromId)
             printLogs("managerApproval[i].id" + approvalId)
             printLogs("managerApproval[i].type" + approvarType)
