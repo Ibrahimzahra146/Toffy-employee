@@ -421,16 +421,16 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 var jsonResponse = JSON.parse(body);
 
                 if (approvarType == "Manager") {
-                    printLogs("Manager Role ")
+                    printLogs("Manager Role " + jsonResponse.managerChannelId)
                     message12 = {
                         'type': 'message',
-
-                        'channel': jsonResponse.managerChannelId,
-                        'user': jsonResponse.slackUserId,
-                        'text': 'what is my name',
+                        'channel': "jsonResponse.managerChannelId",
+                        user: jsonResponse.slackUserId,
+                        text: 'what is my name',
                         ts: '1482920918.000057',
                         team: jsonResponse.teamId,
                         event: 'direct_message'
+
                     }
 
                 } else {
