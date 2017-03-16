@@ -383,7 +383,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho) {
-    var message = ""
+    var message12 = ""
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
@@ -422,12 +422,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                 if (approvarType == "Manager") {
                     printLogs("Manager Role ")
-                    message = {
+                    message12 = {
                         'type': 'message',
 
                         'channel': jsonResponse.managerChannelId,
-                        user: jsonResponse.slackUserId,
-                        text: 'what is my name',
+                        'user': jsonResponse.slackUserId,
+                        'text': 'what is my name',
                         ts: '1482920918.000057',
                         team: jsonResponse.teamId,
                         event: 'direct_message'
@@ -435,7 +435,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                 } else {
                     printLogs("HR Role")
-                    message = {
+                    message12 = {
                         'type': 'message',
 
                         'channel': jsonResponse.hrChannelId,
@@ -502,7 +502,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
                     ]
                 }
-                printLogs("message info "+JSON.stringify(message))
+                printLogs("message info " + JSON.stringify(message12))
                 server.bot.startConversation(message, function (err, convo) {
 
 
