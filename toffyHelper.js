@@ -403,6 +403,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             printLogs("managerApproval[i].type" + approvarType)
 
             managerEmail = emailFromId.replace(/\"/, "")
+            managerEmail = managerEmail.replace(/\"/, "")
 
             printLogs("arrive to send coonfirmation");
             request({
