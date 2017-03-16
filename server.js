@@ -404,7 +404,6 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
     toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval, "Manager")
 
     if (arr[3] == "sick") {
-      toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval, "Hr")
 
 
       msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR Rep. You might asked to provide a sick report. I’ll inform you about this.  ")
