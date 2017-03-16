@@ -417,7 +417,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             }, function (error, response, body) {
                 printLogs("approvalId" + approvalId)
                 printLogs("approvarType" + approvarType)
-                printLogs("managerEmail: " + managerEmail)
+                printLogs("managerEmail:" + managerEmail)
                 printLogs("Get recore body:"+JSON.stringify(body))
                 var jsonResponse = JSON.parse(body);
 
