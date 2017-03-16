@@ -403,6 +403,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
             managerEmail = emailFromId
+            i = i + 1
             printLogs("arrive to send coonfirmation");
             request({
                 url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -514,7 +515,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
 
-            i++;
+
         })
 
     }
