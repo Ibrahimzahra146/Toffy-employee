@@ -802,5 +802,5 @@ function makeGetRequest(path, callback) {
 }
 
 function printLogs(msg) {
-    printLogs("msg:========>:" + msg)
+    console.log("msg:========>:" + msg)
 }
