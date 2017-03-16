@@ -510,7 +510,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                         var stringfy = JSON.stringify(messageBody);
                         var obj1 = JSON.parse(stringfy);
-                        server.bot.reply(message, obj1);
+                        server.bot.reply(message12, obj1);
 
                     }
                 });
