@@ -402,7 +402,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             printLogs("managerApproval[i].id" + approvalId)
             printLogs("managerApproval[i].type" + approvarType)
 
-            managerEmail = emailFromId
+            managerEmail = emailFromId.toString()
 
             printLogs("arrive to send coonfirmation");
             request({
