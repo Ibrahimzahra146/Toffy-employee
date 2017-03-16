@@ -402,7 +402,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             printLogs("managerApproval[i].id" + approvalId)
             printLogs("managerApproval[i].type" + approvarType)
 
-            managerEmail = emailFromId.toString()
+            managerEmail = emailFromId.replace(/\"/, "")
 
             printLogs("arrive to send coonfirmation");
             request({
@@ -418,7 +418,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 printLogs("approvalId" + approvalId)
                 printLogs("approvarType" + approvarType)
                 printLogs("managerEmail:" + managerEmail)
-                printLogs("Get recore body:"+JSON.stringify(body))
+                printLogs("Get recore body:" + JSON.stringify(body))
                 var jsonResponse = JSON.parse(body);
 
                 if (approvarType == "Manager") {
