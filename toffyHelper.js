@@ -387,23 +387,22 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
-    var x = getEmailById('employee/email/8', function (body) {
-        printLogs("BODDYYY" + body)
-        var i = 0
-        var j = 0
-        printLogs("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
 
-        while (managerApproval[i]) {
-            //body is the managers for the user
-            printLogs("i----->" + i)
+    var i = 0
+    var j = 0
+    printLogs("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
 
+    while (managerApproval[i]) {
+        //body is the managers for the user
+        printLogs("i----->" + i)
 
+        var x = getEmailById('employee/email/' + managerApproval[i].id, function (emailFromId) {
+            printLogs("BODDYYY" + emailFromId)
             printLogs("managerApproval[i].id" + managerApproval[i].id)
             printLogs("managerApproval[i].type" + managerApproval[i].type)
-            managerEmail = body[i].email;
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
-            printLogs("userEmail" + userEmail)
+            managerEmail = emailFromId
             printLogs("arrive to send coonfirmation");
             request({
                 url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -417,7 +416,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             }, function (error, response, body) {
                 printLogs("approvalId" + approvalId)
                 printLogs("approvarType" + approvarType)
-                managerEmail = body[i].email;
                 var jsonResponse = JSON.parse(body);
 
                 if (approvarType == "Manager") {
@@ -517,9 +515,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
             i++;
-        }
+        })
 
-    })
+    }
     //get the email of manager approval from user managers  ,the priority fro manager approval
 
 
