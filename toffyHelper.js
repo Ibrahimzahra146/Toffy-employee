@@ -9,7 +9,7 @@ var toffyHelper = require('./toffyHelper')
 var sessionFlag = 0;
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
-    console.log("show emoloyee stats -0")
+    printLogs("show emoloyee stats -0")
 
     request({
         url: "http://" + IP + "/api/v1/employee/259/balance",
@@ -23,11 +23,11 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
         if (response.statusCode == 403) {
             sessionFlag = 0;
         }
-        console.log("------------------>" + userIdInHr)
+        printLogs("------------------>" + userIdInHr)
 
         toffyHelper.getNewSession(email, function (cookie) {
             generalCookies = cookie
-            console.log("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
+            printLogs("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
             request({
                 url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
                 json: true,
@@ -37,8 +37,8 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                     'Cookie': generalCookies
                 }
             }, function (error, response, body) {
-                console.log("arrivvee--->" + body.left_over)
-                console.log(body)
+                printLogs("arrivvee--->" + body.left_over)
+                printLogs(body)
                 var messageBody = {
                     "text": "Your stats and anuual time off details",
                     "attachments": [
@@ -103,7 +103,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
         }
 
         toffyHelper.getNewSession(email, function (cookie) {
-            console.log("show profile bod" + toffyHelper.userIdInHr)
+            printLogs("show profile bod" + toffyHelper.userIdInHr)
 
             generalCookies = cookie
             request({
@@ -115,8 +115,8 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     'Cookie': generalCookies
                 },
             }, function (error, response, body) {
-                console.log("show profile bod" + JSON.stringify(body))
-                console.log("show profile bod" + response.statusCode)
+                printLogs("show profile bod" + JSON.stringify(body))
+                printLogs("show profile bod" + response.statusCode)
                 var messageBody = {
                     "text": "Your profile details",
                     "attachments": [
@@ -178,7 +178,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
 
-    console.log("===============>store user information")
+    printLogs("===============>store user information")
     request({
         url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
         method: 'POST',
@@ -189,16 +189,16 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("========>error " + error);
-        console.log("========>Response  " + response);
-        console.log("========>body " + body);
-        console.log("========>Session " + generalCookies);
-        console.log("========>userIdInHr " + userIdInHr);
-        console.log("========>response.statusCode :" + response.statusCode)
+        printLogs("========>error " + error);
+        printLogs("========>Response  " + response);
+        printLogs("========>body " + body);
+        printLogs("========>Session " + generalCookies);
+        printLogs("========>userIdInHr " + userIdInHr);
+        printLogs("========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
         if ((response.statusCode == 403) || (generalCookies == "initial") || (userIdInHr == "initial")) {
-            console.log("response:403");
+            printLogs("response:403");
             toffyHelper.getNewSession(email, function (cookies) {
 
                 generalCookies = cookies
@@ -210,7 +210,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         }
         //if the user exist but may be added or not at toffy record
         else {
-            console.log("the session ID:" + generalCookies)
+            printLogs("the session ID:" + generalCookies)
             request({
                 url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
                 method: 'POST',
@@ -221,10 +221,10 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                 body: email
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("response:404");
+                printLogs("response:404");
 
                 if (response.statusCode == 404) {
-                    console.log("the employee not found ")
+                    printLogs("the employee not found ")
 
                     requestify.post("http://" + IP + "/api/v1/toffy", {
                         "email": email,
@@ -240,11 +240,11 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                         });
                 }
                 else if (response.statusCode == 200) {
-                    console.log("=====>arrive5 ")
-                    console.log((JSON.parse(body)).managerChannelId)
-                    console.log(msg.body.event.channel)
+                    printLogs("=====>arrive5 ")
+                    printLogs((JSON.parse(body)).managerChannelId)
+                    printLogs(msg.body.event.channel)
                     if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
-                        console.log("=====>arrive6")
+                        printLogs("=====>arrive6")
 
                         var managerChId = JSON.parse(body).managerChannelId;
                         var hrChId = JSON.parse(body).hrChannelId;
@@ -258,10 +258,10 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             body: email
                             //Set the body as a stringcc
                         }, function (error, response, body) {
-                            console.log("DELETEd");
+                            printLogs("DELETEd");
 
                         });
-                        console.log("=====>arrive3")
+                        printLogs("=====>arrive3")
                         requestify.post("http://" + IP + "/api/v1/toffy", {
                             "email": email,
                             "hrChannelId": hrChId,
@@ -271,7 +271,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             "userChannelId": msg.body.event.channel
                         })
                             .then(function (response) {
-                                console.log("=====>arrive4")
+                                printLogs("=====>arrive4")
 
                                 // Get the response body
                                 response.getBody();
@@ -388,23 +388,23 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var approvalId = ""
     var managerEmail = ""
     var x = getEmailById('employee/email/8', function (body) {
-        console.log("BODDYYY" + body)
+        printLogs("BODDYYY" + body)
         var i = 0
         var j = 0
-        console.log("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
+        printLogs("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
 
         while (managerApproval[i]) {
             //body is the managers for the user
-            console.log("i----->" + i)
+            printLogs("i----->" + i)
 
 
-            console.log("managerApproval[i].id" + managerApproval[i].id)
-            console.log("managerApproval[i].type" + managerApproval[i].type)
+            printLogs("managerApproval[i].id" + managerApproval[i].id)
+            printLogs("managerApproval[i].type" + managerApproval[i].type)
             managerEmail = body[i].email;
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
-            console.log("userEmail" + userEmail)
-            console.log("arrive to send coonfirmation");
+            printLogs("userEmail" + userEmail)
+            printLogs("arrive to send coonfirmation");
             request({
                 url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                 method: 'POST',
@@ -415,8 +415,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 body: managerEmail
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("approvalId" + approvalId)
-                console.log("approvarType" + approvarType)
+                printLogs("approvalId" + approvalId)
+                printLogs("approvarType" + approvarType)
                 managerEmail = body[i].email;
                 var jsonResponse = JSON.parse(body);
 
@@ -444,7 +444,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         event: 'direct_message'
                     }
                 }
-                console.log("approval id" + approvalId)
+                printLogs("approval id" + approvalId)
                 var messageBody = {
                     "text": "This folk has pending time off request:",
                     "attachments": [
@@ -530,7 +530,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
-    console.log("===========>I am in show holidays  ")
+    printLogs("===========>I am in show holidays  ")
 
     request({
         url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
@@ -545,7 +545,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
         }
         toffyHelper.getNewSession(email, function (cookie) {
             var uri = 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
-            console.log("URI" + uri)
+            printLogs("URI" + uri)
             generalCookies = cookie;
             request({
                 url: uri,
@@ -555,7 +555,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     'Cookie': generalCookies
                 },
             }, function (error, response, body) {
-                console.log("========>" + response.statusCode);
+                printLogs("========>" + response.statusCode);
                 var i = 0;
                 var stringMessage = "["
                 if (!error && response.statusCode === 200) {
@@ -581,10 +581,10 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                             }
                         ]
                     }
-                    console.log("messageBody" + messageBody)
+                    printLogs("messageBody" + messageBody)
                     var stringfy = JSON.stringify(messageBody);
 
-                    console.log("stringfy" + stringfy)
+                    printLogs("stringfy" + stringfy)
                     stringfy = stringfy.replace(/\\/g, "")
                     stringfy = stringfy.replace(/]\"/, "]")
                     stringfy = stringfy.replace(/\"\[/, "[")
@@ -604,14 +604,14 @@ get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
     var res = generalCookies
-    console.log("email ------->" + email)
+    printLogs("email ------->" + email)
 
     if (sessionFlag == 1) {
         res = generalCookies
         callback(res)
 
     } else {
-        console.log("========>Getting new sessio IDaaa")
+        printLogs("========>Getting new sessio IDaaa")
         request({
             url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
             method: 'POST',
@@ -623,16 +623,16 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
-            console.log("Arrive 2334")
+            printLogs("Arrive 2334")
             toffyHelper.userIdInHr = (JSON.parse(body)).id;
-            console.log("userIdInHr ====>>>" + userIdInHr);
+            printLogs("userIdInHr ====>>>" + userIdInHr);
 
             var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-            console.log("cookies==================>" + cookies)
+            printLogs("cookies==================>" + cookies)
             var arr = cookies.toString().split(";")
-            console.log("trim based on ;==========>" + arr[0])
+            printLogs("trim based on ;==========>" + arr[0])
             res = arr[0].replace(/['"]+/g, '');
-            console.log("final session is =========>" + res)
+            printLogs("final session is =========>" + res)
             sessionFlag = 1;
             callback(res);
         });
@@ -643,8 +643,8 @@ function getUserId(email) {
     toffyHelper.getNewSession(email, function (cookies) {
 
         generalCookies = cookies
-        console.log("generalCookies=======> " + generalCookies)
-        console.log("==========>Getting user id from Hr")
+        printLogs("generalCookies=======> " + generalCookies)
+        printLogs("==========>Getting user id from Hr")
         request({
             url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
@@ -655,9 +655,9 @@ function getUserId(email) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
-            console.log("=======>body: " + body)
+            printLogs("=======>body: " + body)
             userIdInHr = JSON.parse(body);
-            console.log("====>user id:" + userIdInHr)
+            printLogs("====>user id:" + userIdInHr)
 
         })
     });
@@ -666,9 +666,9 @@ function getUserId(email) {
 }
 */
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
-    console.log("info:=======>Getting user manager")
-    console.log("info:=======>User ID" + userId)
-    console.log("generalCookies=========>" + generalCookies)
+    printLogs("info:=======>Getting user manager")
+    printLogs("info:=======>User ID" + userId)
+    printLogs("generalCookies=========>" + generalCookies)
 
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
@@ -693,7 +693,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
                         'Cookie': generalCookies
                     },
                 }, function (error, response, body) {
-                    console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
+                    printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
                     callback(body)
 
                 })
@@ -701,23 +701,23 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
             })
         }
         else {
-            console.log("correct" + response.statusCode)
-            console.log("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
+            printLogs("correct" + response.statusCode)
+            printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
             callback(body);
 
         }
 
-        // console.log("JSON.parse(body)====>" + JSON.parse(body));
+        // printLogs("JSON.parse(body)====>" + JSON.parse(body));
 
     });
 
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type, callback) {
-    console.log("arrive at va")
-    console.log("from" + from);
-    console.log("to======>" + to);
-    console.log("employee_id======>" + toffyHelper.userIdInHr);
-    console.log("type======>" + type);
+    printLogs("arrive at va")
+    printLogs("from" + from);
+    printLogs("to======>" + to);
+    printLogs("employee_id======>" + toffyHelper.userIdInHr);
+    printLogs("type======>" + type);
     var vacationType = "0"
     if (type == "sick") {
         vacationType = "4"
@@ -759,11 +759,11 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("the vacation have been posted" + response.statusCode)
+                printLogs("the vacation have been posted" + response.statusCode)
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
-                console.log("Vacaction ID---->" + (JSON.parse(body)).id)
-                console.log("managerApproval --->" + managerApproval)
+                printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
+                printLogs("managerApproval --->" + managerApproval)
                 callback(vacationId, managerApproval);
 
             })
@@ -771,7 +771,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     });
 }
 function getEmailById(Path, callback) {
-    console.log("arrive11")
+    printLogs("arrive11")
     makeGetRequest(Path, function (response, body) {
 
         callback(body)
@@ -779,10 +779,10 @@ function getEmailById(Path, callback) {
 
 }
 function makeGetRequest(path, callback) {
-    console.log("arrive11")
+    printLogs("arrive11")
 
     var uri = 'http://' + IP + '/api/v1/' + path
-    console.log("uri " + uri)
+    printLogs("uri " + uri)
 
     request({
         url: uri, //URL to hitDs
@@ -794,9 +794,13 @@ function makeGetRequest(path, callback) {
         }
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("arrive13")
+        printLogs("arrive13")
 
         printLogs("bodyyy:" + body)
         callback(response, body)
     })
+}
+
+function printLogs(msg) {
+    printLogs("msg:========>:" + msg)
 }
