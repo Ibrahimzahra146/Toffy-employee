@@ -521,6 +521,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     } else {
                         currentBot = server.bot
                     }
+                    printLogs("HR Role " + hrRole)
                     currentBot.startConversation(message12, function (err, convo) {
 
 
