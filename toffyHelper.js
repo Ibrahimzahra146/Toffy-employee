@@ -403,12 +403,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
             var x = getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
-                flagForWhileCallbacks = 0
-
-                printLogs("BODDYYY" + emailFromId)
-                printLogs("managerApproval[i].id" + approvalId)
-                printLogs("managerApproval[i].type" + approvarType)
-
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
 
@@ -448,7 +442,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         message12 = {
                             'type': 'message',
 
-                            'channel': jsonResponse.hrChannelId,
+                            'channel': "D3VPAFL0N",
                             user: jsonResponse.slackUserId,
                             text: 'what is my name',
                             ts: '1482920918.000057',
