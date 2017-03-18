@@ -403,6 +403,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
             var x = getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
+
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
 
@@ -442,7 +443,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         message12 = {
                             'type': 'message',
 
-                            'channel': "D3VPAFL0N",
+                            'channel': jsonResponse.hrChannelId,
                             user: jsonResponse.slackUserId,
                             text: 'what is my name',
                             ts: '1482920918.000057',
@@ -516,14 +517,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                         currentBot = server.hRbot
                     }
-                    server.hRbot.startConversation(message12, function (err, convo) {
+                    currentBot.startConversation(message12, function (err, convo) {
 
 
                         if (!err) {
 
                             var stringfy = JSON.stringify(messageBody);
                             var obj1 = JSON.parse(stringfy);
-                            server.bot.reply(message12, obj1);
+                            currentBot.reply(message12, obj1);
 
                         }
                     });
