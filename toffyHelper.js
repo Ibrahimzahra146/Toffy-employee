@@ -644,7 +644,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         callback(res)
 
     } else {
-        printLogs("========>Getting new sessio IDaaa")
+        printLogs("Getting new session")
         request({
             url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
             method: 'POST',
