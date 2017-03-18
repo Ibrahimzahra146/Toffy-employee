@@ -514,14 +514,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         ]
                     }
                     printLogs("message info " + JSON.stringify(message12))
-                    if (hrRole == 1) {
-                        currentBot = server.hRbot;
-                        hrRole = 0
+                    if (approvarType == "Manager") {
+                        currentBot = server.bot;
 
                     } else {
-                        currentBot = server.bot
+                        printLogs("HR Role ")
+
+                        currentBot = server.hRbot
                     }
-                    printLogs("HR Role " + hrRole)
                     currentBot.startConversation(message12, function (err, convo) {
 
 
