@@ -8,6 +8,8 @@ exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
 var sessionFlag = 0;
 var async = require('async');
+var currentBot = server.bot;
+var hrRole = 0;
 
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
@@ -442,16 +444,18 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                     } else {
                         printLogs("HR Role")
+                        hrRole = 1
                         message12 = {
                             'type': 'message',
 
-                            'channel': "D4JFYNC1E",
-                            user: "U4FAPUPKP",
+                            'channel': jsonResponse.hrChannelId,
+                            user: jsonResponse.slackUserId,
                             text: 'what is my name',
                             ts: '1482920918.000057',
                             team: jsonResponse.teamId,
                             event: 'direct_message'
                         }
+
                     }
                     printLogs("approval id" + approvalId)
                     var messageBody = {
@@ -510,7 +514,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         ]
                     }
                     printLogs("message info " + JSON.stringify(message12))
-                    server.bot.startConversation(message12, function (err, convo) {
+                    if (hrRole == 1) {
+                        currentBot = server.hRbot;
+                        hrRole = 0
+
+                    } else {
+                        currentBot = server.bot
+                    }
+                    currentBot.startConversation(message12, function (err, convo) {
 
 
                         if (!err) {
