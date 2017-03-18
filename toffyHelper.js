@@ -522,7 +522,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                         currentBot = server.hRbot
                     }
-                    currentBot.startConversation(message12, function (err, convo) {
+                    server.hRbot.startConversation(message12, function (err, convo) {
 
 
                         if (!err) {
