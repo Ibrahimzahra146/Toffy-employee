@@ -446,7 +446,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             'type': 'message',
 
                             'channel': "D3VPAFL0N",
-                            user: jsonResponse.slackUserId,
+                            user: "U3FNW74JD",
                             text: 'what is my name',
                             ts: '1482920918.000057',
                             team: jsonResponse.teamId,
