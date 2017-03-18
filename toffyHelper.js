@@ -445,7 +445,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         message12 = {
                             'type': 'message',
 
-                            'channel': "D3VPAFL0N",
+                            'channel': jsonResponse.managerChannelId,
                             user: "U3FNW74JD",
                             text: 'what is my name',
                             ts: '1482920918.000057',
