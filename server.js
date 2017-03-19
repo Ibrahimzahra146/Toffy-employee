@@ -271,7 +271,7 @@ function sendRequestToApiAi(emailValue, msg) {
       employee.showEmployeeHistory(emailValue, msg);
     }
     else if ((responseText) == "showStats") {
-      toffyHelper.showEmployeeStats(emailValue, msg);
+      employee.showEmployeeStats(emailValue, msg);
     }
     else if ((responseText) == "showProfile") {
       toffyHelper.showEmployeeProfile(emailValue, msg);

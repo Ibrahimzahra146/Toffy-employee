@@ -19,18 +19,18 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
     toffyHelper.getIdFromEmail(email, function (Id) {
         printLogs("Id in employee history function" + Id);
         request({
-            url: 'http://' + IP + '/api/v1/employee/'+Id+'/vacations/2017',
+            url: 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017',
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Cookie': generalCookies
-            }, 
+            },
         }, function (error, response, body) {
             if (response.statusCode == 403) {
                 sessionFlag = 0
             }
             toffyHelper.getNewSession(email, function (cookie) {
-                var uri = 'http://' + IP + '/api/v1/employee/'+Id+'/vacations/2017'
+                var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
                 printLogs("URI" + uri)
                 generalCookies = cookie;
                 request({
@@ -98,6 +98,91 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
         });
     })
+
+}
+/*
+Show Employee stats like annual vacation and etc..
+*/
+module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
+    printLogs("show emoloyee stats -0")
+    toffyHelper.getIdFromEmail(email, function (Id) {
+        request({
+            url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': generalCookies
+            }
+        }, function (error, response, body) {
+            if (response.statusCode == 403) {
+                sessionFlag = 0;
+            }
+            printLogs("------------------>" + userIdInHr)
+
+            toffyHelper.getNewSession(email, function (cookie) {
+                generalCookies = cookie
+                printLogs("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
+                request({
+                    url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
+                    json: true,
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': generalCookies
+                    }
+                }, function (error, response, body) {
+                    printLogs("arrivvee--->" + body.left_over)
+                    printLogs(body)
+                    var messageBody = {
+                        "text": "Your stats and anuual time off details",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": [
+                                    {
+                                        "title": "Rolled over",
+                                        "value": parseFloat((body).left_over).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Used time off  ",
+                                        "value": parseFloat(body.balance).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Annual time offf ",
+                                        "value": parseFloat(body.static_balance).toFixed(1) + " weeks ",
+                                        "short": false
+                                    },
+                                    {
+                                        "title": "Additional time off  ",
+                                        "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Total",
+                                        "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
+                                        "short": false
+                                    }
+                                ],
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    var stringfy = JSON.stringify(messageBody);
+                    var obj1 = JSON.parse(stringfy);
+                    msg.say(obj1);
+                });
+            })
+
+
+        })
+
+    })
+
 
 }
 function printLogs(msg) {
