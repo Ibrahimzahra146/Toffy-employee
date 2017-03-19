@@ -16,8 +16,10 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
     printLogs("Show employee history")
     printLogs("email::" + email)
-
-    request({
+    toffyHelper.getIdFromEmail(email, function (Id) {
+        printLogs("Id in employee history function"+Id);
+    })
+    /*request({
         url: 'http://' + IP + '/api/v1/employee/8/vacations/2017',
         method: 'GET',
         headers: {
@@ -95,7 +97,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
         })
 
 
-    });
+    });*/
 }
 function printLogs(msg) {
     console.log("msg:========>:" + msg)

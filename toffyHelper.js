@@ -592,7 +592,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                         msg.say("There are no holidays, sorry!");
                     }
                     else {
-                        
+
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
 
@@ -676,10 +676,10 @@ module.exports.getNewSession = function getNewSession(email, callback) {
         });
     }
 }
-/*
-function getUserId(email) {
+
+module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
     toffyHelper.getNewSession(email, function (cookies) {
- 
+
         generalCookies = cookies
         printLogs("generalCookies=======> " + generalCookies)
         printLogs("==========>Getting user id from Hr")
@@ -696,13 +696,15 @@ function getUserId(email) {
             printLogs("=======>body: " + body)
             userIdInHr = JSON.parse(body);
             printLogs("====>user id:" + userIdInHr)
- 
+            printLogs(JSON.stringify(body))
+            callback(body)
+
         })
     });
- 
- 
+
+
 }
-*/
+
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
     printLogs("info:=======>Getting user manager")
     printLogs("info:=======>User ID" + userId)
@@ -808,7 +810,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         })
     });
 }
-function getEmailById(Path, callback) {
+module.exports.getEmailById = function getEmailById(Path, callback) {
     printLogs("arrive11")
     makeGetRequest(Path, function (response, body) {
 
