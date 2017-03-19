@@ -52,11 +52,11 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
                             var stringMessage = "["
-                            if (i > 0) {
-                                stringMessage = stringMessage + ","
-                            }
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + ","
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].toDate + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + ","
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
 
                             printLogs("stringMessage::" + stringMessage);
