@@ -42,7 +42,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
             }, function (error, response, body) {
                 printLogs("========>" + response.statusCode);
                 var i = 0;
-
+                printLogs("history::" + JSON.stringify(body))
                 //check if no holidays ,so empty response
                 if (!error && response.statusCode === 200) {
                     if (!(JSON.parse(body)[i])) {
