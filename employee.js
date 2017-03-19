@@ -24,7 +24,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
             headers: {
                 'Content-Type': 'application/json',
                 'Cookie': generalCookies
-            }, sj
+            }, 
         }, function (error, response, body) {
             if (response.statusCode == 403) {
                 sessionFlag = 0
