@@ -30,7 +30,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                 sessionFlag = 0
             }
             toffyHelper.getNewSession(email, function (cookie) {
-                var uri = 'http://' + IP + '/api/v1/employee/8/vacations/2017'
+                var uri = 'http://' + IP + '/api/v1/employee/'+Id+'/vacations/2017'
                 printLogs("URI" + uri)
                 generalCookies = cookie;
                 request({
