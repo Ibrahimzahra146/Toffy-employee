@@ -21,6 +21,7 @@ var fs = require('fs');
 var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
+var employee=require('./employee.js');
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
@@ -267,7 +268,7 @@ function sendRequestToApiAi(emailValue, msg) {
     }
     //show enployee vacation history 
     else if ((responseText) == "showHistory") {
-      toffyHelper.showEmployeeHistory(emailValue, msg);
+      employee.showEmployeeHistory(emailValue, msg);
     }
     else if ((responseText) == "showStats") {
       toffyHelper.showEmployeeStats(emailValue, msg);

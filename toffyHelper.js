@@ -592,6 +592,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                         msg.say("There are no holidays, sorry!");
                     }
                     else {
+                        
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
 
