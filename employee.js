@@ -52,10 +52,11 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
                             var stringMessage = "["
-
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+                            var fromDate=new Date((JSON.parse(body))[i].fromDate);
+                            var toDate =new Date((JSON.parse(body))[i].toDate )
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
                             stringMessage = stringMessage + ","
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].toDate + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
                             stringMessage = stringMessage + ","
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
 
