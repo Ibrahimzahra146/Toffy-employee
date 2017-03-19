@@ -52,8 +52,8 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
                             var stringMessage = "["
-                            var fromDate=new Date((JSON.parse(body))[i].fromDate);
-                            var toDate =new Date((JSON.parse(body))[i].toDate )
+                            var fromDate = new Date((JSON.parse(body))[i].fromDate);
+                            var toDate = new Date((JSON.parse(body))[i].toDate)
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
                             stringMessage = stringMessage + ","
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
@@ -63,7 +63,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                             printLogs("stringMessage::" + stringMessage);
                             stringMessage = stringMessage + "]"
                             var messageBody = {
-                                "text": "The holidays are:",
+                                "text": "Vacation number" + i + ":",
                                 "attachments": [
                                     {
                                         "attachment_type": "default",
