@@ -602,6 +602,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                             i++;
 
                         }
+                        printLogs("stringMessage::" + stringMessage);
+
                         stringMessage = stringMessage + "]"
                         var messageBody = {
                             "text": "The holidays are:",
