@@ -14,8 +14,8 @@ var hrRole = 0;
 
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
-    toffyHelper.printLogs("Show employee history")
-    toffyHelper.printLogs("email::" + email)
+    printLogs("Show employee history")
+    printLogs("email::" + email)
 
     request({
         url: 'http://' + IP + '/api/v1/employee/8/vacations/2017',
@@ -95,4 +95,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
 
     });
+}
+function printLogs(msg) {
+    console.log("msg:========>:" + msg)
 }
