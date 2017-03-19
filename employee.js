@@ -63,7 +63,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                             printLogs("stringMessage::" + stringMessage);
                             stringMessage = stringMessage + "]"
                             var messageBody = {
-                                "text": "Vacation number " + i + ":",
+                                "text": "Vacation number (" + i + "):",
                                 "attachments": [
                                     {
                                         "attachment_type": "default",
