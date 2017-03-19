@@ -21,7 +21,7 @@ var fs = require('fs');
 var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
-var employee=require('./employee.js');
+var employee = require('./employee.js');
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
@@ -274,7 +274,7 @@ function sendRequestToApiAi(emailValue, msg) {
       employee.showEmployeeStats(emailValue, msg);
     }
     else if ((responseText) == "showProfile") {
-      toffyHelper.showEmployeeProfile(emailValue, msg);
+      employee.showEmployeeProfile(emailValue, msg);
     }
     else if ((responseText) == "showHolidays") {
       var date = response.result.parameters.date;

@@ -11,7 +11,9 @@ var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
 
-
+/****** 
+Show employee vacation history
+******/
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
     printLogs("Show employee history")
@@ -100,9 +102,9 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
     })
 
 }
-/*
+/***** 
 Show Employee stats like annual vacation and etc..
-*/
+*****/
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
     printLogs("show emoloyee stats -0")
     toffyHelper.getIdFromEmail(email, function (Id) {
@@ -183,6 +185,98 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
     })
 
+
+}
+/***** 
+Show employee profile (employee basic employee)
+*****/
+module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
+    toffyHelper.getIdFromEmail(email, function (Id) {
+        request({
+            url: "http://" + IP + "/api/v1/employee/"+Id,
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': generalCookies
+            }
+        }, function (error, response, body) {
+            if (response.statusCode == 403) {
+                sessionFlag = 0;
+            }
+
+            toffyHelper.getNewSession(email, function (cookie) {
+                printLogs("show profile bod" + toffyHelper.userIdInHr)
+
+                generalCookies = cookie
+                request({
+                    url: "http://" + IP + "/api/v1/employee/"+Id,
+                    json: true,
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': generalCookies
+                    },
+                }, function (error, response, body) {
+                    printLogs("show profile bod" + JSON.stringify(body))
+                    printLogs("show profile bod" + response.statusCode)
+                    var messageBody = {
+                        "text": "Your profile details",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": [
+                                    {
+                                        "title": "Full name ",
+                                        "value": body.name,
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Working days  ",
+                                        "value": "Sun to Thu",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Email ",
+                                        "value": body.email,
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Manager 1",
+                                        "value": "tareq",
+                                        "short": true
+                                    },
+
+                                    {
+                                        "title": "Emp.type ",
+                                        "value": "Full time",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Manager 2",
+                                        "value": "Sari",
+                                        "short": true
+                                    },
+                                    {
+                                        "title": "Employment date",
+                                        "value": body.hireDate,
+                                        "short": true
+                                    }
+                                ],
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    var stringfy = JSON.stringify(messageBody);
+                    var obj1 = JSON.parse(stringfy);
+                    msg.say(obj1)
+                });
+            })
+        })
+
+    })
 
 }
 function printLogs(msg) {
