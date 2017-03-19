@@ -46,7 +46,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                 //check if no holidays ,so empty response
                 if (!error && response.statusCode === 200) {
                     if (!(JSON.parse(body)[i])) {
-                        msg.say("There are no holidays, sorry!");
+                        msg.say("There are no requested vacations for you");
                     }
                     else {
                         //build message Json result to send it to slack
@@ -63,7 +63,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                             printLogs("stringMessage::" + stringMessage);
                             stringMessage = stringMessage + "]"
                             var messageBody = {
-                                "text": "Vacation number" + i + ":",
+                                "text": "Vacation number " + i + ":",
                                 "attachments": [
                                     {
                                         "attachment_type": "default",
