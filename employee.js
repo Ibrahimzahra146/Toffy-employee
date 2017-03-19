@@ -107,7 +107,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
     printLogs("show emoloyee stats -0")
     toffyHelper.getIdFromEmail(email, function (Id) {
         request({
-            url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
+            url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
             json: true,
             method: 'GET',
             headers: {
@@ -124,7 +124,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                 generalCookies = cookie
                 printLogs("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
                 request({
-                    url: "http://" + IP + "/api/v1/employee/" + toffyHelper.userIdInHr + "/balance",
+                    url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
                     json: true,
                     method: 'GET',
                     headers: {
