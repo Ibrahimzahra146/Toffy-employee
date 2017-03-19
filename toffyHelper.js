@@ -586,39 +586,46 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                 printLogs("========>" + response.statusCode);
                 var i = 0;
                 var stringMessage = "["
+                //check if no holidays ,so empty response
                 if (!error && response.statusCode === 200) {
-                    while ((JSON.parse(body)[i])) {
-
-                        if (i > 0) {
-                            stringMessage = stringMessage + ","
-                        }
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
-                        i++;
-
+                    if (!(JSON.parse(body)[i])) {
+                        msg.say("There are no holidays, sorry!");
                     }
-                    stringMessage = stringMessage + "]"
-                    var messageBody = {
-                        "text": "The holidays are:",
-                        "attachments": [
-                            {
-                                "attachment_type": "default",
-                                "text": " ",
-                                "fallback": "ReferenceError",
-                                "fields": stringMessage,
-                                "color": "#F35A00"
+                    else {
+                        //build message Json result to send it to slack
+                        while ((JSON.parse(body)[i])) {
+
+                            if (i > 0) {
+                                stringMessage = stringMessage + ","
                             }
-                        ]
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
+                            i++;
+
+                        }
+                        stringMessage = stringMessage + "]"
+                        var messageBody = {
+                            "text": "The holidays are:",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "text": " ",
+                                    "fallback": "ReferenceError",
+                                    "fields": stringMessage,
+                                    "color": "#F35A00"
+                                }
+                            ]
+                        }
+                        printLogs("messageBody" + messageBody)
+                        var stringfy = JSON.stringify(messageBody);
+
+                        printLogs("stringfy" + stringfy)
+                        stringfy = stringfy.replace(/\\/g, "")
+                        stringfy = stringfy.replace(/]\"/, "]")
+                        stringfy = stringfy.replace(/\"\[/, "[")
+                        stringfy = JSON.parse(stringfy)
+
+                        msg.say(stringfy)
                     }
-                    printLogs("messageBody" + messageBody)
-                    var stringfy = JSON.stringify(messageBody);
-
-                    printLogs("stringfy" + stringfy)
-                    stringfy = stringfy.replace(/\\/g, "")
-                    stringfy = stringfy.replace(/]\"/, "]")
-                    stringfy = stringfy.replace(/\"\[/, "[")
-                    stringfy = JSON.parse(stringfy)
-
-                    msg.say(stringfy)
                 }
             })
 
