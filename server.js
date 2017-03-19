@@ -280,6 +280,11 @@ function sendRequestToApiAi(emailValue, msg) {
       var date1 = response.result.parameters.date1;
       toffyHelper.showHolidays(msg, emailValue, date, date1);
     }
+    else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
+      var date = "2017-01-01";
+      var date1 = "	2017-12-30";
+      toffyHelper.showHolidays(msg, emailValue, date, date1);
+    }
     else if ((responseText) == "sickInfo") {
       msg.say("Sorry to hear that. What dayss were you sick?")
       sickFlag = "true";

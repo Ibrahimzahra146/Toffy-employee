@@ -1,5 +1,5 @@
 //send confirmation to emp when he request one day vacation 
-module.exports.sendOneDaySickVacationConfirmationtoEmp=function sendOneDaySickVacationConfirmationtoEmp(msg, startDate, endDate, email, type) {
+  module.exports.sendOneDaySickVacationConfirmationtoEmp=function sendOneDaySickVacationConfirmationtoEmp(msg, startDate, endDate, email, type) {
   msg.say("Sorry to hear that :( ")
   var text12 = {
     "text": "",
