@@ -267,7 +267,7 @@ function sendRequestToApiAi(emailValue, msg) {
     }
     //show enployee vacation history 
     else if ((responseText) == "showHistory") {
-      toffyHelper.showHistory(msg);
+      toffyHelper.showEmployeeHistory(emailValue, msg);
     }
     else if ((responseText) == "showStats") {
       toffyHelper.showEmployeeStats(emailValue, msg);
