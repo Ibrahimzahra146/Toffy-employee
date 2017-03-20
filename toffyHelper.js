@@ -30,20 +30,13 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     }, function (error, response, body) {
 
         //check if the session is expired  so we request a new session 
-        if ((response.statusCode == 403) || (toffyHelper.generalCookies == "initial") || (userIdInHr == "initial")) {
-            printLogs("response:403");
-            toffyHelper.getNewSession(email, function (cookies) {
-
-                toffyHelper.generalCookies = cookies
-
-
-
-            })
-
+        if ((response.statusCode == 403)) {
+            toffyHelper.sessionFlag = 0
         }
-        //if the user exist but may be added or not at toffy record
-        else {
-            printLogs("the session ID:" + toffyHelper.generalCookies)
+
+        toffyHelper.getNewSession(email, function (cookies) {
+
+            toffyHelper.generalCookies = cookies
             request({
                 url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
                 method: 'POST',
@@ -107,17 +100,20 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
                                 // Get the response body
                                 response.getBody();
-                                F
-                            });
 
+                            });
                     }
                 }
-            });
-        }
+            })
+        })
 
     });
-
 }
+//if the user exist but may be added or not at toffy record
+
+
+
+
 //first we start we basic cases that doesnt need Api Ai like help
 module.exports.sendHelpOptions = function sendHelpOptions(msg) {
     var messageBody = {
