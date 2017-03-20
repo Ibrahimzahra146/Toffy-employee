@@ -73,14 +73,14 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                         });
                 }
                 else if (response.statusCode == 200) {
-                    printLogs("=====>arrive5 ")
                     printLogs((JSON.parse(body)).managerChannelId)
                     printLogs(msg.body.event.channel)
                     if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
-                        printLogs("=====>arrive6")
 
                         var managerChId = JSON.parse(body).managerChannelId;
                         var hrChId = JSON.parse(body).hrChannelId;
+
+
                         request({
                             url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                             method: 'DELETE',
@@ -91,10 +91,9 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             body: email
                             //Set the body as a stringcc
                         }, function (error, response, body) {
-                            printLogs("DELETEd");
+                            printLogs("DELETED");
 
                         });
-                        printLogs("=====>arrive3")
                         requestify.post("http://" + IP + "/api/v1/toffy", {
                             "email": email,
                             "hrChannelId": hrChId,
@@ -108,7 +107,9 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
                                 // Get the response body
                                 response.getBody();
+                                F
                             });
+
                     }
                 }
             });
@@ -327,7 +328,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         "type": "button",
                                         "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
                                     }, {
-                                        "name": "dontDetuct",
+                                        "name": "dont_detuct",
                                         "text": "Don’t Deduct ",
                                         "type": "button",
                                         "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
