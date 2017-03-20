@@ -1,4 +1,5 @@
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email, type) {
+    console.log("sendLeaveSpecTimeTodayConfirmation::")
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
             converDateToMilliseconds("17:00:00", function (milliSeconds1) {
