@@ -1,4 +1,4 @@
-module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email) {
+module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email, type) {
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
             converDateToMilliseconds("17:00:00", function (milliSeconds1) {
@@ -20,14 +20,14 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                 }
                             ]
                         }
@@ -42,7 +42,7 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
 
 
 }//-------------------------------------
-module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email) {
+module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email, type) {
     console.log("The time is " + time)
     console.log("The date is " + date)
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
@@ -65,14 +65,15 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
+
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                 }
                             ]
                         }
@@ -84,7 +85,7 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
         });
     });
 }
-module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email) {
+module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email, type) {
     console.log("RangeTimeToday")
     convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
@@ -104,14 +105,14 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
                                         "text": "Yes",
                                         "style": "primary",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                     },
                                     {
                                         "name": 'reject',
                                         "text": "No",
                                         "style": "danger",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                     }
                                 ]
                             }
@@ -124,7 +125,7 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
     });
 
 }
-module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email) {
+module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email, type) {
     convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
@@ -143,14 +144,14 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
                                         "text": "Yes",
                                         "style": "primary",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                     },
                                     {
                                         "name": 'reject',
                                         "text": "No",
                                         "style": "danger",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1
+                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
                                     }
                                 ]
                             }
