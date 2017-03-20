@@ -478,7 +478,7 @@ get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
     var res = generalCookies
-    printLogs("email ------->" + email)
+    printLogs("sessionFlag" + sessionFlag)
 
     if (toffyHelper.sessionFlag == 1) {
         res = generalCookies
