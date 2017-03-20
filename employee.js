@@ -6,7 +6,7 @@ var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
-var sessionFlag = 0;
+
 var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
@@ -29,7 +29,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
             },
         }, function (error, response, body) {
             if (response.statusCode == 403) {
-                sessionFlag = 0
+                toffyHelper.sessionFlag = 0
             }
             toffyHelper.getNewSession(email, function (cookie) {
                 var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
@@ -118,7 +118,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
             }
         }, function (error, response, body) {
             if (response.statusCode == 403) {
-                sessionFlag = 0;
+                toffyHelper.sessionFlag = 0;
             }
             printLogs("------------------>" + userIdInHr)
 
@@ -202,7 +202,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
             }
         }, function (error, response, body) {
             if (response.statusCode == 403) {
-                sessionFlag = 0;
+                toffyHelper.sessionFlag = 0;
             }
 
             toffyHelper.getNewSession(email, function (cookie) {

@@ -7,6 +7,7 @@ var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
 var toffyHelper = require('./toffyHelper')
 var sessionFlag = 0;
+exports.sessionFlag = sessionFlag;
 var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
@@ -404,7 +405,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
         },
     }, function (error, response, body) {
         if (response.statusCode == 403) {
-            sessionFlag = 0
+            toffyHelper.sessionFlag = 0
         }
         toffyHelper.getNewSession(email, function (cookie) {
             var uri = 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
@@ -479,7 +480,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
     var res = generalCookies
     printLogs("email ------->" + email)
 
-    if (sessionFlag == 1) {
+    if (toffyHelper.sessionFlag == 1) {
         res = generalCookies
         callback(res)
 
@@ -506,7 +507,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             printLogs("trim based on ;==========>" + arr[0])
             res = arr[0].replace(/['"]+/g, '');
             printLogs("final session is =========>" + res)
-            sessionFlag = 1;
+            toffyHelper.sessionFlag = 1;
             callback(res);
         });
     }
@@ -618,7 +619,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         //Set the body as a stringcc
     }, function (error, response, body) {
         if (response.statusCode == 403) {
-            sessionFlag = 0
+            toffyHelper.sessionFlag = 0
         }
 
         toffyHelper.getNewSession("brhoom200904@hotmail.com", function (cookie) {
