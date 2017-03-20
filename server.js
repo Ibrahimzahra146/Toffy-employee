@@ -227,8 +227,8 @@ function sendRequestToApiAi(emailValue, msg) {
       leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "personal");
       console.log("response.result.parameters.time " + response.result.parameters.time)
     }
-    else if ((responseText) == "newSickLeaverequestSpecTimeToday") {
-      console.log(JSON.stringify(response))
+    else if ((responseText) == "SickLeave") {
+      console.log("Sick leave")
       console.log(response)
       leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "sick");
       console.log("response.result.parameters.time " + response.result.parameters.time)
