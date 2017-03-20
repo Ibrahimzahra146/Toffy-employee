@@ -232,7 +232,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
-            var x = getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
+            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
 
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
