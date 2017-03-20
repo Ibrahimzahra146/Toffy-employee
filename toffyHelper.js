@@ -1,7 +1,6 @@
 var requestify = require('requestify');
 const request = require('request');
 var server = require('./server')
-var generalCookies = "initial"
 var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
@@ -18,30 +17,24 @@ var hrRole = 0;
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
 
-    printLogs("===============>store user information")
+    printLogs("Store user slack information")
     request({
         url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': toffyHelper.generalCookies
         },
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        printLogs("========>error " + error);
-        printLogs("========>Response  " + response);
-        printLogs("========>body " + body);
-        printLogs("========>Session " + generalCookies);
-        printLogs("========>userIdInHr " + userIdInHr);
-        printLogs("========>response.statusCode :" + response.statusCode)
 
         //check if the session is expired  so we request a new session 
-        if ((response.statusCode == 403) || (generalCookies == "initial") || (userIdInHr == "initial")) {
+        if ((response.statusCode == 403) || (toffyHelper.generalCookies == "initial") || (userIdInHr == "initial")) {
             printLogs("response:403");
             toffyHelper.getNewSession(email, function (cookies) {
 
-                generalCookies = cookies
+                toffyHelper.generalCookies = cookies
 
 
 
@@ -50,13 +43,13 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         }
         //if the user exist but may be added or not at toffy record
         else {
-            printLogs("the session ID:" + generalCookies)
+            printLogs("the session ID:" + toffyHelper.generalCookies)
             request({
                 url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': generalCookies
+                    'Cookie': toffyHelper.generalCookies
                 },
                 body: email
                 //Set the body as a stringcc
@@ -93,7 +86,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Cookie': generalCookies
+                                'Cookie': toffyHelper.generalCookies
                             },
                             body: email
                             //Set the body as a stringcc
@@ -401,7 +394,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': toffyHelper.generalCookies
         },
     }, function (error, response, body) {
         if (response.statusCode == 403) {
@@ -410,13 +403,13 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
         toffyHelper.getNewSession(email, function (cookie) {
             var uri = 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1
             printLogs("URI" + uri)
-            generalCookies = cookie;
+            toffyHelper.generalCookies = cookie;
             request({
                 url: uri,
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': generalCookies
+                    'Cookie': toffyHelper.generalCookies
                 },
             }, function (error, response, body) {
                 printLogs("========>" + response.statusCode);
@@ -477,11 +470,11 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
-    var res = generalCookies
+    var res = toffyHelper.generalCookies
     printLogs("sessionFlag" + sessionFlag)
 
     if (toffyHelper.sessionFlag == 1) {
-        res = generalCookies
+        res = toffyHelper.generalCookies
         callback(res)
 
     } else {
@@ -491,7 +484,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': generalCookies
+                'Cookie': toffyHelper.generalCookies
 
             },
             body: email
@@ -516,15 +509,15 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
     toffyHelper.getNewSession(email, function (cookies) {
 
-        generalCookies = cookies
-        printLogs("generalCookies=======> " + generalCookies)
+        toffyHelper.generalCookies = cookies
+        printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
         printLogs("==========>Getting user id from Hr")
         request({
             url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': generalCookies
+                'Cookie': toffyHelper.generalCookies
             },
             body: email
             //Set the body as a stringcc
@@ -544,7 +537,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
     printLogs("info:=======>Getting user manager")
     printLogs("info:=======>User ID" + userId)
-    printLogs("generalCookies=========>" + generalCookies)
+    printLogs("toffyHelper.generalCookies=========>" + toffyHelper.generalCookies)
 
     request({
         url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
@@ -552,13 +545,13 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': toffyHelper.generalCookies
         },
     }, function (error, response, body) {
         if (response.statusCode == 403) {
             toffyHelper.getNewSession(email, function (cookies) {
 
-                generalCookies = cookies
+                toffyHelper.generalCookies = cookies
 
                 request({
                     url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
@@ -566,7 +559,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': generalCookies
+                        'Cookie': toffyHelper.generalCookies
                     },
                 }, function (error, response, body) {
                     printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
@@ -614,7 +607,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': toffyHelper.generalCookies
         }
         //Set the body as a stringcc
     }, function (error, response, body) {
@@ -623,13 +616,13 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         }
 
         toffyHelper.getNewSession("brhoom200904@hotmail.com", function (cookie) {
-            generalCookies = cookie
+            toffyHelper.generalCookies = cookie
             request({
                 url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': generalCookies
+                    'Cookie': toffyHelper.generalCookies
                 },
 
                 body: vacationBody
@@ -665,7 +658,7 @@ function makeGetRequest(path, callback) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': generalCookies
+            'Cookie': toffyHelper.generalCookies
 
         }
         //Set the body as a stringcc

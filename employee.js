@@ -2,6 +2,7 @@ var requestify = require('requestify');
 const request = require('request');
 var server = require('./server')
 var generalCookies = "initial"
+exports.generalCookies = generalCookies;
 var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
@@ -25,7 +26,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': generalCookies
+                'Cookie': toffyHelper.generalCookies
             },
         }, function (error, response, body) {
             if (response.statusCode == 403) {
@@ -34,13 +35,13 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
             toffyHelper.getNewSession(email, function (cookie) {
                 var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
                 printLogs("URI" + uri)
-                generalCookies = cookie;
+                toffyHelper.generalCookies = cookie;
                 request({
                     url: uri,
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': generalCookies
+                        'Cookie': toffyHelper.generalCookies
                     },
                 }, function (error, response, body) {
                     printLogs("========>" + response.statusCode);
@@ -114,7 +115,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': generalCookies
+                'Cookie': toffyHelper.generalCookies
             }
         }, function (error, response, body) {
             if (response.statusCode == 403) {
@@ -123,7 +124,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
             printLogs("------------------>" + userIdInHr)
 
             toffyHelper.getNewSession(email, function (cookie) {
-                generalCookies = cookie
+                toffyHelper.generalCookies = cookie
                 printLogs("+ toffyHelper.user IdInHr + " + toffyHelper.userIdInHr)
                 request({
                     url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
@@ -131,7 +132,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': generalCookies
+                        'Cookie': toffyHelper.generalCookies
                     }
                 }, function (error, response, body) {
                     printLogs("arrivvee--->" + body.left_over)
@@ -193,12 +194,12 @@ Show employee profile (employee basic employee)
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     toffyHelper.getIdFromEmail(email, function (Id) {
         request({
-            url: "http://" + IP + "/api/v1/employee/"+Id,
+            url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': generalCookies
+                'Cookie': toffyHelper.generalCookies
             }
         }, function (error, response, body) {
             if (response.statusCode == 403) {
@@ -208,14 +209,14 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
             toffyHelper.getNewSession(email, function (cookie) {
                 printLogs("show profile bod" + toffyHelper.userIdInHr)
 
-                generalCookies = cookie
+                toffyHelper.generalCookies = cookie
                 request({
-                    url: "http://" + IP + "/api/v1/employee/"+Id,
+                    url: "http://" + IP + "/api/v1/employee/" + Id,
                     json: true,
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': generalCookies
+                        'Cookie': toffyHelper.generalCookies
                     },
                 }, function (error, response, body) {
                     printLogs("show profile bod" + JSON.stringify(body))
