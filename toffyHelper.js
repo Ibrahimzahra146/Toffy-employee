@@ -17,7 +17,7 @@ var hrRole = 0;
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
 
-    printLogs("Store user slack information")
+    printLogs("Store user slack information ")
     request({
         url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
         method: 'POST',
