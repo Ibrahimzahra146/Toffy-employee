@@ -426,7 +426,8 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
       msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
   })
 
-
+  fromDate = "";
+  toDate = "";
 
 })
 
@@ -463,15 +464,19 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
       });
 
     })
-
+    fromDate = "";
+    toDate = "";
 
   });
   msg.say("Your leave request have been submitted to your managers.");
-
+  fromDate = "";
+  toDate = "";
 })
 //------------------------------
 slapp.action('leave_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok,request aborted");
+  fromDate = "";
+  toDate = "";
 })
 
 slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) => {
@@ -491,21 +496,26 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) =>
       toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
 
     });
-
+    fromDate = "";
+    toDate = "";
   })
 
 
   msg.say("Your leave request have been submitted to your managers.");
-
+  fromDate = "";
+  toDate = "";
 
 })
 slapp.action('leave_spectime_specDay_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok,request aborted");
-
+  fromDate = "";
+  toDate = "";
 })
 slapp.event('file_shared', (msg) => {
   console.log("msg  " + JSON.stringify(msg));
   console.log('===========>Uploaded file');
+  fromDate = "";
+  toDate = "";
 })
 slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
@@ -527,10 +537,14 @@ slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => 
     });
   })
   msg.say("Your leave request have been submitted to your managers.");
+  fromDate = "";
+  toDate = "";
 
 })
 slapp.action('leave_rangeTime_today_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok,request aborted");
+  fromDate = "";
+  toDate = "";
 
 })
 slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) => {
@@ -553,10 +567,13 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
     })
   });
   msg.say("Your leave request have been submitted to your managers.");
-
+  fromDate = "";
+  toDate = "";
 })
 slapp.action('leave_rangeTime_specDay_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok,request aborted");
+  fromDate = "";
+  toDate = "";
 })
 
 /*--------------___________________________________________________----------------------
