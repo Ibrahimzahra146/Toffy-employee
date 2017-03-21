@@ -623,8 +623,10 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         toffyHelper.getNewSession(email, function (cookie) {
             toffyHelper.generalCookies = cookie
+            var uri = 'http://' + IP + '/api/v1/vacation'
+            printLogs("Uri " + uri)
             request({
-                url: 'http://'+IP+'/api/v1/vacation', //URL to hitDs
+                url: uri, //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -636,6 +638,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             }, function (error, response, body) {
                 printLogs("the vacation have been posted" + response.statusCode)
                 printLogs(error)
+                printLogs(response.message)
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
                 printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
