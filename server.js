@@ -159,6 +159,7 @@ function sendRequestToApiAi(emailValue, msg) {
     if (responseText == "newVacationRequest") {
       vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "personal")
 
+
     }
     //user ask for one day personal vacation
     else if (responseText == "oneDayPersonalVacation") {
@@ -328,6 +329,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
     else msg.say(responseText)
   });
+  fromDate = ""
+  toDate = ""
   apiaiRequest.on('error', (error) => console.error(error));
   apiaiRequest.end();
 }
