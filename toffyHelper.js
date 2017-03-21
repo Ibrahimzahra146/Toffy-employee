@@ -430,7 +430,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                                 if (i > 0) {
                                     stringMessage = stringMessage + ","
                                 }
-                                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName +" )" + "\"" + ",\"short\":true}"
+                                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
                                 i++;
 
                             })
@@ -585,7 +585,9 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
     });
 
 }
-module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, type, callback) {
+module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, callback) {
+    printLogs("Sending vacation post request")
+    printLogs("Email:" + email)
     printLogs("arrive at va")
     printLogs("from" + from);
     printLogs("to======>" + to);
@@ -607,7 +609,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     vacationBody = JSON.stringify(vacationBody)
 
     request({
-        url: 'http://46.43.71.50:19090/api/v1/employee/profile', //URL to hitDs
+        url: 'http://' + IP + '/api/v1/employee/profile', //URL to hitDs
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

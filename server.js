@@ -412,7 +412,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
   var arr = value.toString().split(",");
   var userEmail = arr[2];
 
-  toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, arr[3], function (vacationId, managerApproval) {
+  toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, email, arr[3], function (vacationId, managerApproval) {
     console.log("vacationId--------->" + vacationId);
     console.log("managersApproval--------->" + managerApproval[0].id);
     console.log("managersApproval--------->" + JSON.stringify(managerApproval));
@@ -448,12 +448,14 @@ slapp.action('confirm_reject', 'reject', (msg, value) => {
 slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
+    console.log("arrrrrrrr--------->  " + arr[1])
     console.log("arrrrrrrr--------->  " + arr[2])
     console.log("arrrrrrrr--------->  " + arr[3])
     console.log("arrrrrrrr--------->  " + arr[4])
+    var email = arr[1];
 
     var vacationType = arr[4]
-    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, vacationType, function (vacationId, managerApproval) {
+    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, email, vacationType, function (vacationId, managerApproval) {
       console.log("vacationId--------->" + vacationId);
 
       console.log("managersApproval--------->" + JSON.stringify(managerApproval));
@@ -487,7 +489,8 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) =>
   var arr = value.toString().split(",");
   console.log("arrrrrrrr--------->  " + arr[2])
   console.log("arrrrrrrr--------->  " + arr[3])
-  toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
+  var email = arr[2];
+  toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, "personal", function (vacationId, managerApproval) {
     console.log("vacationId--------->" + vacationId);
 
     console.log("managersApproval--------->" + JSON.stringify(managerApproval));
@@ -523,7 +526,8 @@ slapp.event('file_shared', (msg) => {
 slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
-    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
+    var email = arr[2]
+    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, "personal", function (vacationId, managerApproval) {
 
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
@@ -554,7 +558,8 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
   getTodayDate(function (todayDate) {
 
     var arr = value.toString().split(",");
-    toffyHelper.sendVacationPostRequest(/*from  */arr[4], arr[5], toffyHelper.userIdInHr, "personal", function (vacationId, managerApproval) {
+    var email = arr[3];
+    toffyHelper.sendVacationPostRequest(/*from  */arr[4], arr[5], toffyHelper.userIdInHr, email, "personal", function (vacationId, managerApproval) {
       console.log("leave manager approval" + JSON.stringify(managerApproval))
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
