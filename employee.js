@@ -152,7 +152,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                     },
                                     {
                                         "title": "Used time off  ",
-                                        "value": parseFloat(body.balance).toFixed(1) + " weeks ",
+                                        "value": parseFloat(body.vacation_balance).toFixed(1) + " weeks ",
                                         "short": true
                                     },
                                     {
