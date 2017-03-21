@@ -246,7 +246,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                     },
                                     {
                                         "title": "Approver 1",
-                                        "value": "tareq",
+                                        "value": body.manager[0].name,
                                         "short": true
                                     },
 
