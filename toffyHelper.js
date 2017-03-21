@@ -430,7 +430,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                                 if (i > 0) {
                                     stringMessage = stringMessage + ","
                                 }
-                                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "" + dayName  + "\"" + ",\"short\":true}"
+                                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName +" )" + "\"" + ",\"short\":true}"
                                 i++;
 
                             })
