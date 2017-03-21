@@ -252,7 +252,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
                                     {
                                         "title": "Emp.type ",
-                                        "value": "Full time",
+                                        "value": body.type,
                                         "short": true
                                     },
                                     {
