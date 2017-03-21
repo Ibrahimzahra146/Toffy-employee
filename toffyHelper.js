@@ -621,10 +621,10 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             toffyHelper.sessionFlag = 0
         }
 
-        toffyHelper.getNewSession("brhoom200904@hotmail.com", function (cookie) {
+        toffyHelper.getNewSession(email, function (cookie) {
             toffyHelper.generalCookies = cookie
             request({
-                url: 'http://46.43.71.50:19090/api/v1/vacation', //URL to hitDs
+                url: 'http://'+IP+'/api/v1/vacation', //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

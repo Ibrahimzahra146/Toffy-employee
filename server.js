@@ -126,23 +126,7 @@ function sendUserProfile(msg) {
 //**************************************************************************************
 
 //send vacation request to back-end
-function sendVacationPostrequest(email, fromDate1, toDate1, type) {
-  requestify.post('https://hrexalt.herokuapp.com/api/v1/vacation', {
-    "employee_id": 1,
-    "from": fromDate1,
-    "to": toDate1,
-    "type": 0,
-    "comments": "vacation form ibrahim"
-  })
-    .then(function (response) {
-      // Get the response body
-      response.getBody();
-    });
-  //clear from and to date after request the vacation to can request new vacation
-  fromDate = "";
-  toDate = "";
-
-}//************************************************************************ new function
+//************************************************************************ new function
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg) {
