@@ -166,7 +166,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                         "short": true
                                     },
                                     {
-                                        "title": "Total",
+                                        "title": "Balance",
                                         "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
                                         "short": false
                                     }
@@ -245,7 +245,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                         "short": true
                                     },
                                     {
-                                        "title": "Manager 1",
+                                        "title": "Approver 1",
                                         "value": "tareq",
                                         "short": true
                                     },
@@ -256,7 +256,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                         "short": true
                                     },
                                     {
-                                        "title": "Manager 2",
+                                        "title": "Approver 2",
                                         "value": "Sari",
                                         "short": true
                                     },

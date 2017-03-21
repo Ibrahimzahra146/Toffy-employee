@@ -155,6 +155,11 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                         "title": "Show history ",
                         "value": "",
                         "short": false
+                    },
+                    {
+                        "title": "Show holidays ,or show holidays from  date to date. ",
+                        "value": "",
+                        "short": false
                     }
                 ]
             }
@@ -421,12 +426,14 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
+                            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayname) {
+                                if (i > 0) {
+                                    stringMessage = stringMessage + ","
+                                }
+                                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "" + dayName  + "\"" + ",\"short\":true}"
+                                i++;
 
-                            if (i > 0) {
-                                stringMessage = stringMessage + ","
-                            }
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + "\"" + ",\"short\":true}"
-                            i++;
+                            })
 
                         }
                         printLogs("stringMessage::" + stringMessage);
@@ -669,4 +676,17 @@ function makeGetRequest(path, callback) {
 
 function printLogs(msg) {
     console.log("msg:========>:" + msg)
+}
+function getDayNameOfDate(date, callback) {
+    var weekday = new Array(7);
+    weekday[0] = "Monday";
+    weekday[1] = "Tuesday";
+    weekday[2] = "Wednesday";
+    weekday[3] = "Thursday";
+    weekday[4] = "Friday";
+    weekday[5] = "Saturday";
+    weekday[6] = "Sunday";
+
+    var d = new Date(date);
+    callback(weekday[d.getDay() - 1]);
 }
