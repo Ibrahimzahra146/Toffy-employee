@@ -426,7 +426,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
                         //build message Json result to send it to slack
                         while ((JSON.parse(body)[i])) {
-                            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayname) {
+                            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                                 if (i > 0) {
                                     stringMessage = stringMessage + ","
                                 }
