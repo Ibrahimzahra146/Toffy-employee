@@ -410,7 +410,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
 slapp.action('confirm_reject', 'confirm', (msg, value) => {
 
   var arr = value.toString().split(",");
-  var userEmail = arr[2];
+  var email = arr[2];
 
   toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, email, arr[3], function (vacationId, managerApproval) {
     console.log("vacationId--------->" + vacationId);
