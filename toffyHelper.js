@@ -636,7 +636,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                printLogs("the vacation have been posted" + response.statusCode)
+                printLogs("the vacation have been posted " + response.statusCode)
                 printLogs(error)
                 printLogs(response.message)
                 var vacationId = (JSON.parse(body)).id;
