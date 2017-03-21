@@ -454,7 +454,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                         printLogs("messageBody" + messageBody)
                         var stringfy = JSON.stringify(messageBody);
 
-                        printLogs("stringfy" + stringfy)
+                        printLogs("stringfy " + stringfy)
                         stringfy = stringfy.replace(/\\/g, "")
                         stringfy = stringfy.replace(/]\"/, "]")
                         stringfy = stringfy.replace(/\"\[/, "[")
