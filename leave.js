@@ -11,7 +11,7 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
                     "text": "",
                     "attachments": [
                         {
-                            "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm   . Should I go ahead ?",
+                            "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm. Should I go ahead ?",
                             "callback_id": 'leave_confirm_reject',
                             "color": "#3AA3E3",
                             "attachment_type": "default",
@@ -56,7 +56,7 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
                     "text": "",
                     "attachments": [
                         {
-                            "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm . Should I go ahead ?",
+                            "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm. Should I go ahead ?",
                             "callback_id": 'leave_spectime_specDay_confirm_reject',
                             "color": "#3AA3E3",
                             "attachment_type": "default",
@@ -96,7 +96,7 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
                         "text": "",
                         "attachments": [
                             {
-                                "text": "Okay, you asked for a leave today  from,  " + formattedFromTime + " " + middayFrom + "" + "  to   " + formattedTime + " " + midday + "  . Should I go ahead ?",
+                                "text": "Okay, you asked for a leave today  from,  " + formattedFromTime + " " + middayFrom + "" + "  to   " + formattedTime + " " + midday + ". Should I go ahead ?",
                                 "callback_id": 'leave_rangeTime_today_confirm_reject',
                                 "color": "#3AA3E3",
                                 "attachment_type": "default",
