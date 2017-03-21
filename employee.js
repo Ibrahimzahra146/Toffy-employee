@@ -107,7 +107,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 Show Employee stats like annual vacation and etc..
 *****/
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
-    printLogs("show emoloyee stats -0")
+    printLogs("show emoloyee stats ")
     toffyHelper.getIdFromEmail(email, function (Id) {
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
