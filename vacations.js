@@ -70,38 +70,38 @@ module.exports.sendOneDayVacationConfirmationtoEmp = function sendOneDayVacation
 
 module.exports.sendVacationConfirmationToEmp = function sendVacationConfirmationToEmp(msg, startDate, endDate, email, type) {
   getWorkingDays(startDate, endDate, email, function (body) {
-    console.log("arrive")
+    var workingDays = parseFloat(body).toFixed(1)
+    var text12 = {
+      "text": "",
+      "attachments": [
+        {
+          "text": "Okay, from " + startDate + "  to  " + endDate + " that would be " + workingDays + " working days . Should I go ahead  ?",
+          "callback_id": 'confirm_reject',
+          "color": "#3AA3E3",
+          "attachment_type": "default",
+          "actions": [
+            {
+              "name": 'confirm',
+              "text": "Yes",
+              "style": "primary",
+              "type": "button",
+              "value": startDate + "," + endDate + "," + email + "," + type
+            },
+            {
+              "name": 'reject',
+              "text": "No",
+              "style": "danger",
+              "type": "button",
+              "value": startDate + "," + endDate + "," + email + "," + type
+            }
+          ]
+        }
+      ]
+    }
 
+    msg.say(text12)
   })
-  var text12 = {
-    "text": "",
-    "attachments": [
-      {
-        "text": "Okay, from " + startDate + "  to  " + endDate + " that would be (" + " working days ). Should I go ahead  ?",
-        "callback_id": 'confirm_reject',
-        "color": "#3AA3E3",
-        "attachment_type": "default",
-        "actions": [
-          {
-            "name": 'confirm',
-            "text": "Yes",
-            "style": "primary",
-            "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
-          },
-          {
-            "name": 'reject',
-            "text": "No",
-            "style": "danger",
-            "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
-          }
-        ]
-      }
-    ]
-  }
 
-  msg.say(text12)
 }
 function getWorkingDays(startDate, endDate, email, callback) {
   var vacationBody = {
