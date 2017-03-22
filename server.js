@@ -141,13 +141,13 @@ function sendRequestToApiAi(emailValue, msg) {
     let responseText = response.result.fulfillment.speech;
     //user ask for new personal vacation with from to dates
     if (responseText == "newVacationRequest") {
-      vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "personal")
+      vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "time off")
 
 
     }
     //user ask for one day personal vacation
     else if (responseText == "oneDayPersonalVacation") {
-      vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "personal")
+      vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "time off")
 
     }
     //One  day sick  vacation  ,so the user just determine the day he was sick in
@@ -211,7 +211,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "newLeaveRequestSpecTimeToday") {
       console.log(JSON.stringify(response))
       console.log(response)
-      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "personal");
+      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "leave");
       console.log("response.result.parameters.time " + response.result.parameters.time)
     }
     else if ((responseText) == "SickLeave") {
@@ -224,18 +224,18 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "newLeaveRequestSpecTimeSpecDay") {
       var arr = (response.result.parameters.date_time).toString().split("T")//split the date from time since the response return both as one variable
       var time = arr[1].toString().split("Z")
-      leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "personal");
+      leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "leave");
     }
     else if ((responseText) == "newLeaveRequestRangetimeToday") {
       var arr = (response.result.parameters.time_period).toString().split("/")//split the date from time since the response return both as one variable
 
-      leave.sendLeaveRangeTimeTodayConfirmation(msg, arr[0], arr[1], emailValue, "personal");
+      leave.sendLeaveRangeTimeTodayConfirmation(msg, arr[0], arr[1], emailValue, "leave");
     }
     else if ((responseText) == "newLeaveRequestRangeTimeSpecDay") {
       var arr = (response.result.parameters.time_period).toString().split("/")//split the date from time since the response return both as one variable
       // from time =arr[0] to time =arr[1]
       var date = response.result.parameters.date;
-      leave.sendLeaveRangeTimeSpecDayConfirmation(msg, arr[0], arr[1], date, emailValue, "personal");
+      leave.sendLeaveRangeTimeSpecDayConfirmation(msg, arr[0], arr[1], date, emailValue, "leave");
     }
     else if ((responseText) == "leaveRequestWithoutTime") {
       msg.say("Please specify the day and time ")
@@ -245,7 +245,7 @@ function sendRequestToApiAi(emailValue, msg) {
       if (leaveFlag == "true") {
         var arr = (response.result.parameters.date_time).toString().split("T")//split the date from time since the response return both as one variable
         var time = arr[1].toString().split("Z")
-        leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "personal");
+        leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "leave");
         leaveFlag = "";
       }
     }
