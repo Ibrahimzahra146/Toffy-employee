@@ -291,7 +291,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             {
                                 "attachment_type": "default",
                                 "callback_id": "manager_confirm_reject",
-                                "text": "@ibrahim",
+                                "text": userEmail,
                                 "fallback": "ReferenceError",
                                 "fields": [
                                     {
