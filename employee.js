@@ -161,7 +161,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                         "short": false
                                     },
                                     {
-                                        "title": "Additional time off  ",
+                                        "title": "Extra time off  ",
                                         "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
                                         "short": true
                                     },

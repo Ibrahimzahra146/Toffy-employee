@@ -175,6 +175,7 @@ function sendRequestToApiAi(emailValue, msg) {
     //The user ask for one day vacation in conversation
     else if ((responseText) == "oneDayVacationConversation") {
       if (typeOfVacation != "") {
+
         vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, typeOfVacation)
         fromDate = ""
         toDate = ""
@@ -216,7 +217,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "SickLeave") {
       console.log("Sick leave")
       console.log(response)
-      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "sick");
+      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "sickLeave");
       console.log("response.result.parameters.time " + response.result.parameters.time)
     }
 
@@ -454,7 +455,7 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
         if (!managerApproval[0]) {
           msg.say("You dont have any manager right now ");
         } else {
-          toffyHelper.sendVacationToManager(fromDate, toDate, email, "personal", vacationId, managerApproval, "Manager")
+          toffyHelper.sendVacationToManager(fromDate, toDate, email, vacationType, vacationId, managerApproval, "Manager")
           msg.say("Your leave request have been submitted to your managers.");
         }
 
@@ -479,7 +480,7 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) =>
   console.log("arrrrrrrr--------->  " + arr[2])
   console.log("arrrrrrrr--------->  " + arr[3])
   var email = arr[2];
-  toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, "personal", function (vacationId, managerApproval) {
+  toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, arr[5], function (vacationId, managerApproval) {
     console.log("vacationId--------->" + vacationId);
 
     console.log("managersApproval--------->" + JSON.stringify(managerApproval));
@@ -491,7 +492,7 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) =>
       if (!managerApproval[0]) {
         msg.say("You dont have any manager right now ");
       } else {
-        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], arr[5], vacationId, managerApproval, "Manager")
         msg.say("Your leave request have been submitted to your managers.");
       }
 
@@ -518,7 +519,7 @@ slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => 
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
     var email = arr[2]
-    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, "personal", function (vacationId, managerApproval) {
+    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, arr[5], function (vacationId, managerApproval) {
 
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
