@@ -68,6 +68,10 @@ module.exports.sendOneDayVacationConfirmationtoEmp = function sendOneDayVacation
 // send a confirmation to user to be sure he want the vacation and enter true dates
 
 module.exports.sendVacationConfirmationToEmp = function sendVacationConfirmationToEmp(msg, startDate, endDate, email, type) {
+  getWorkingDays(startDate, endDate, email, function (body) {
+    console.log("arrive")
+
+  })
   var text12 = {
     "text": "",
     "attachments": [
@@ -116,6 +120,11 @@ function getWorkingDays(startDate, endDate, email, callback) {
     body: vacationBody
     //Set the body as a stringcc
   }, function (error, response, body) {
+    console.log("getWorkingDays" + response.statusCode)
+    console.log("getWorkingDays" + body);
+    console.log("getWorkingDays" + JSON.stringify(body));
+    callback(body)
+
 
   })
 
