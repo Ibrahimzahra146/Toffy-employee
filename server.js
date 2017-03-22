@@ -454,7 +454,7 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
         if (!managerApproval[0]) {
           msg.say("You dont have any manager right now ");
         } else {
-          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+          toffyHelper.sendVacationToManager(fromDate, toDate, email, "personal", vacationId, managerApproval, "Manager")
           msg.say("Your leave request have been submitted to your managers.");
         }
 
