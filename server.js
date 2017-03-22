@@ -400,17 +400,19 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
     console.log("vacationId--------->" + vacationId);
     console.log("managersApproval--------->" + managerApproval[0].id);
     console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+    if (!managerApproval[0]) {
+      msg.say("You dont have any manager right now ");
+    } else {
+      toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval, "Manager")
 
-    toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval, "Manager")
+      if (arr[3] == "sick") {
+        msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR Rep. You might asked to provide a sick report. I’ll inform you about this.  ")
 
-    if (arr[3] == "sick") {
-
-
-      msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR Rep. You might asked to provide a sick report. I’ll inform you about this.  ")
-
+      }
+      else
+        msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
     }
-    else
-      msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
+
   })
 
   fromDate = "";
@@ -448,16 +450,18 @@ slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
         fromDate = todayDate + " T " + formattedTime + " " + midday
         toDate = todayDate + " T 5:00 pm "
-        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+        if (!managerApproval[0]) {
+          msg.say("You dont have any manager right now ");
+        } else {
+          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+          msg.say("Your leave request have been submitted to your managers.");
+        }
 
       });
 
     })
-    fromDate = "";
-    toDate = "";
 
   });
-  msg.say("Your leave request have been submitted to your managers.");
   fromDate = "";
   toDate = "";
 })
@@ -483,15 +487,17 @@ slapp.action('leave_spectime_specDay_confirm_reject', 'confirm', (msg, value) =>
     toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
       fromDate = arr[1] + " T " + formattedTime + " " + midday
       toDate = arr[1] + " T 5:00 pm "
-      toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+      if (!managerApproval[0]) {
+        msg.say("You dont have any manager right now ");
+      } else {
+        toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "personal", vacationId, managerApproval, "Manager")
+        msg.say("Your leave request have been submitted to your managers.");
+      }
 
     });
-    fromDate = "";
-    toDate = "";
   })
 
 
-  msg.say("Your leave request have been submitted to your managers.");
   fromDate = "";
   toDate = "";
 
@@ -519,15 +525,19 @@ slapp.action('leave_rangeTime_today_confirm_reject', 'confirm', (msg, value) => 
 
           fromDate = todayDate + " T " + formattedTime + " " + midday
           toDate = todayDate + " T " + formattedTime1 + " " + midday1
+          if (!managerApproval[0]) {
+            msg.say("You dont have any manager right now ");
+          } else {
+            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager")
+            msg.say("Your leave request have been submitted to your managers.");
 
-          toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager")
+          }
         });
 
       });
 
     });
   })
-  msg.say("Your leave request have been submitted to your managers.");
   fromDate = "";
   toDate = "";
 
@@ -551,14 +561,17 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'confirm', (msg, value) =
 
           fromDate = todayDate + " T " + formattedTime + " " + midday
           toDate = todayDate + " T " + formattedTime1 + " " + midday1
+          if (!managerApproval[0]) {
+            msg.say("You dont have any manager right now ");
+          } else {
+            toffyHelper.sendVacationToManager(fromDate, toDate, arr[3], "leave", vacationId, managerApproval, "Manager")
+            msg.say("Your leave request have been submitted to your managers.");
 
-          toffyHelper.sendVacationToManager(fromDate, toDate, arr[3], "leave", vacationId, managerApproval, "Manager")
-
+          }
         });
       })
     })
   });
-  msg.say("Your leave request have been submitted to your managers.");
   fromDate = "";
   toDate = "";
 })
