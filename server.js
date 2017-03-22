@@ -189,6 +189,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //when the user enter the date as ranger like 12-1 to 15-1
     else if ((responseText) == "dates") {
+      console.log(" arrive at dates" + typeOfVacation)
       fromDate = response.result.parameters.date1;
       toDate = response.result.parameters.date
       if (typeOfVacation != "")
