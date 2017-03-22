@@ -1,5 +1,6 @@
 var request = require('request')
 var IP = process.env.SLACK_IP
+var toffyHelper = require('./toffyHelper')
 
 
 //send confirmation to emp when he request one day vacation 
