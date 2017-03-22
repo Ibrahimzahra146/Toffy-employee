@@ -304,7 +304,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     },
                                     {
                                         "title": "Days/Time ",
-                                        "value": workingDays + "day",
+                                        "value": workingDays + " day",
                                         "short": true
                                     },
                                     {
