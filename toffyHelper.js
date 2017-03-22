@@ -217,7 +217,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
-module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho) {
+module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -304,7 +304,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     },
                                     {
                                         "title": "Days/Time ",
-                                        "value": "()",
+                                        "value": workingDays + "day",
                                         "short": true
                                     },
                                     {

@@ -1,45 +1,52 @@
+var request = require('request')
+var IP = process.env.SLACK_IP
+var toffyHelper = require('./toffyHelper')
+
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email, type) {
     console.log("sendLeaveSpecTimeTodayConfirmation::")
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
             converDateToMilliseconds("17:00:00", function (milliSeconds1) {
-                console.log("Converted Time---->" + time)
-                console.log("Converted Time---->" + TimeforMilliseconds)
-                console.log("Converted Time---->" + milliSeconds)
-                console.log("Converted Time---->" + milliSeconds1)
-                var text12 = {
-                    "text": "",
-                    "attachments": [
-                        {
-                            "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm. Should I go ahead ?",
-                            "callback_id": 'leave_confirm_reject',
-                            "color": "#3AA3E3",
-                            "attachment_type": "default",
-                            "actions": [
-                                {
-                                    "name": 'confirm',
-                                    "text": "Yes",
-                                    "style": "primary",
-                                    "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-                                },
-                                {
-                                    "name": 'reject',
-                                    "text": "No",
-                                    "style": "danger",
-                                    "type": "button",
-                                    "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-                                }
-                            ]
-                        }
-                    ]
-                }
-                msg.say(text12)
+                getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
+                    var workingDays = parseFloat(body).toFixed(1)
+                    console.log("Converted Time---->" + time)
+                    console.log("Converted Time---->" + TimeforMilliseconds)
+                    console.log("Converted Time---->" + milliSeconds)
+                    console.log("Converted Time---->" + milliSeconds1)
+                    var text12 = {
+                        "text": "",
+                        "attachments": [
+                            {
+                                "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm. Should I go ahead ?",
+                                "callback_id": 'leave_confirm_reject',
+                                "color": "#3AA3E3",
+                                "attachment_type": "default",
+                                "actions": [
+                                    {
+                                        "name": 'confirm',
+                                        "text": "Yes",
+                                        "style": "primary",
+                                        "type": "button",
+                                        "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                    },
+                                    {
+                                        "name": 'reject',
+                                        "text": "No",
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    msg.say(text12)
+                })
+
             })
 
-        })
-
-    });
+        });
+    })
 
 
 }//-------------------------------------
@@ -49,55 +56,17 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
             converDateToMillisecondsWithSpecDate("17:00:00", date, function (milliSeconds1) {
-                console.log("milliSeconds--->" + milliSeconds)
-                console.log("milliSeconds1--->" + milliSeconds1)
+                getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
+                    var workingDays = parseFloat(body).toFixed(1)
+                    console.log("milliSeconds--->" + milliSeconds)
+                    console.log("milliSeconds1--->" + milliSeconds1)
 
-                var text12 = {
-                    "text": "",
-                    "attachments": [
-                        {
-                            "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm. Should I go ahead ?",
-                            "callback_id": 'leave_spectime_specDay_confirm_reject',
-                            "color": "#3AA3E3",
-                            "attachment_type": "default",
-                            "actions": [
-                                {
-                                    "name": 'confirm',
-                                    "text": "Yes",
-                                    "style": "primary",
-                                    "type": "button",
-                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-
-                                },
-                                {
-                                    "name": 'reject',
-                                    "text": "No",
-                                    "style": "danger",
-                                    "type": "button",
-                                    "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-                                }
-                            ]
-                        }
-                    ]
-                }
-                msg.say(text12)
-
-            });
-        });
-    });
-}
-module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email, type) {
-    console.log("RangeTimeToday")
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
-            converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
-                converDateToMilliseconds(TimeforMilliseconds1, function (milliSeconds1) {
                     var text12 = {
                         "text": "",
                         "attachments": [
                             {
-                                "text": "Okay, you asked for a leave today  from,  " + formattedFromTime + " " + middayFrom + "" + "  to   " + formattedTime + " " + midday + ". Should I go ahead ?",
-                                "callback_id": 'leave_rangeTime_today_confirm_reject',
+                                "text": "Okay, you asked for a leave on " + date + " from " + formattedTime + "  " + midday + "  to 5:00 pm. Should I go ahead ?",
+                                "callback_id": 'leave_spectime_specDay_confirm_reject',
                                 "color": "#3AA3E3",
                                 "attachment_type": "default",
                                 "actions": [
@@ -106,22 +75,66 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
                                         "text": "Yes",
                                         "style": "primary",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
+                                        "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+
                                     },
                                     {
                                         "name": 'reject',
                                         "text": "No",
                                         "style": "danger",
                                         "type": "button",
-                                        "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
+                                        "value": time + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
                                     }
                                 ]
                             }
                         ]
                     }
                     msg.say(text12)
+
+                });
+            });
+        });
+    })
+}
+module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email, type) {
+    console.log("RangeTimeToday")
+    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+            converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
+                converDateToMilliseconds(TimeforMilliseconds1, function (milliSeconds1) {
+                    getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
+                        var workingDays = parseFloat(body).toFixed(1);
+                        var text12 = {
+                            "text": "",
+                            "attachments": [
+                                {
+                                    "text": "Okay, you asked for a leave today  from,  " + formattedFromTime + " " + middayFrom + "" + "  to   " + formattedTime + " " + midday + ". Should I go ahead ?",
+                                    "callback_id": 'leave_rangeTime_today_confirm_reject',
+                                    "color": "#3AA3E3",
+                                    "attachment_type": "default",
+                                    "actions": [
+                                        {
+                                            "name": 'confirm',
+                                            "text": "Yes",
+                                            "style": "primary",
+                                            "type": "button",
+                                            "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                        },
+                                        {
+                                            "name": 'reject',
+                                            "text": "No",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": fromTime + "," + toTime + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                        msg.say(text12)
+                    })
                 })
-            })
+            });
         });
     });
 
@@ -131,37 +144,40 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
         convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
                 converDateToMillisecondsWithSpecDate(TimeforMilliseconds1, date, function (milliSeconds1) {
-                    var text12 = {
-                        "text": "",
-                        "attachments": [
-                            {
-                                "text": "Okay, you asked for a leave  on " + date + " from " + formattedFromTime + " " + middayFrom + "" + "  to  " + formattedTime + " " + midday + ". Should I go ahead ?",
-                                "callback_id": 'leave_rangeTime_specDay_confirm_reject',
-                                "color": "#3AA3E3",
-                                "attachment_type": "default",
-                                "actions": [
-                                    {
-                                        "name": 'confirm',
-                                        "text": "Yes",
-                                        "style": "primary",
-                                        "type": "button",
-                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-                                    },
-                                    {
-                                        "name": 'reject',
-                                        "text": "No",
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                    msg.say(text12)
+                    getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
+                        var workingDays = parseFloat(body).toFixed(1)
+                        var text12 = {
+                            "text": "",
+                            "attachments": [
+                                {
+                                    "text": "Okay, you asked for a leave  on " + date + " from " + formattedFromTime + " " + middayFrom + "" + "  to  " + formattedTime + " " + midday + ". Should I go ahead ?",
+                                    "callback_id": 'leave_rangeTime_specDay_confirm_reject',
+                                    "color": "#3AA3E3",
+                                    "attachment_type": "default",
+                                    "actions": [
+                                        {
+                                            "name": 'confirm',
+                                            "text": "Yes",
+                                            "style": "primary",
+                                            "type": "button",
+                                            "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                        },
+                                        {
+                                            "name": 'reject',
+                                            "text": "No",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": fromTime + "," + toTime + "," + date + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                        msg.say(text12)
+                    });
                 });
             });
-        });
+        })
     })
 }
 function convertTimeFormat(time, callback) {
@@ -264,4 +280,50 @@ function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callbac
     var milliSeconds = y.getTime()
     console.log("milliSeconds===>" + milliSeconds)
     callback(milliSeconds)
+}
+
+function getWorkingDays(startDate, endDate, email, callback) {
+    var vacationBody = {
+        "from": startDate,
+        "to": endDate
+
+    }
+    vacationBody = JSON.stringify(vacationBody)
+
+    request({
+        url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': toffyHelper.generalCookies
+        },
+        body: vacationBody
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        if (response.statusCode == 403) {
+            toffyHelper.sessionFlag = 0;
+        } toffyHelper.getNewSession(email, function (cookies) {
+            toffyHelper.generalCookies = cookies
+            request({
+                url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': toffyHelper.generalCookies
+                },
+                body: vacationBody
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                console.log("getWorkingDays" + response.statusCode)
+                console.log("getWorkingDays" + body);
+                console.log("getWorkingDays" + JSON.stringify(body));
+                callback(body)
+            })
+
+        })
+
+
+
+    })
+
 }

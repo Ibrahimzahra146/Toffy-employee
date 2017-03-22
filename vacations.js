@@ -5,6 +5,7 @@ var toffyHelper = require('./toffyHelper')
 
 //send confirmation to emp when he request one day vacation 
 module.exports.sendOneDaySickVacationConfirmationtoEmp = function sendOneDaySickVacationConfirmationtoEmp(msg, startDate, endDate, email, type) {
+  var workingDays = 1;
   msg.say("Sorry to hear that :( ")
   var text12 = {
     "text": "",
@@ -20,14 +21,14 @@ module.exports.sendOneDaySickVacationConfirmationtoEmp = function sendOneDaySick
             "text": "Yes",
             "style": "primary",
             "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
+            "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
           },
           {
             "name": 'reject',
             "text": "No",
             "style": "danger",
             "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
+            "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
           }
         ]
       }
@@ -37,6 +38,7 @@ module.exports.sendOneDaySickVacationConfirmationtoEmp = function sendOneDaySick
 }
 // send confirmation to employee when he want just one day vacation
 module.exports.sendOneDayVacationConfirmationtoEmp = function sendOneDayVacationConfirmationtoEmp(msg, startDate, endDate, email, type) {
+  var workingDays = 1
   var text12 = {
     "text": "",
     "attachments": [
@@ -51,14 +53,14 @@ module.exports.sendOneDayVacationConfirmationtoEmp = function sendOneDayVacation
             "text": "Yes",
             "style": "primary",
             "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
+            "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
           },
           {
             "name": 'reject',
             "text": "No",
             "style": "danger",
             "type": "button",
-            "value": startDate + "," + endDate + "," + email + "," + type
+            "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
           }
         ]
       }
@@ -85,14 +87,14 @@ module.exports.sendVacationConfirmationToEmp = function sendVacationConfirmation
               "text": "Yes",
               "style": "primary",
               "type": "button",
-              "value": startDate + "," + endDate + "," + email + "," + type
+              "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
             },
             {
               "name": 'reject',
               "text": "No",
               "style": "danger",
               "type": "button",
-              "value": startDate + "," + endDate + "," + email + "," + type
+              "value": startDate + "," + endDate + "," + email + "," + type + "," + workingDays
             }
           ]
         }
