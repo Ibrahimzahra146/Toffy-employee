@@ -150,7 +150,7 @@ function sendRequestToApiAi(emailValue, msg) {
       vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "time off")
 
     }
-    if (responseText == "newSickVacationResponseRange") {
+    else if (responseText == "newSickVacationResponseRange") {
       var vacation_type = response.result.parameters.vacation_type
       if (response.result.parameters.vacation_type == "personal") {
         vacation_type = "time off"
