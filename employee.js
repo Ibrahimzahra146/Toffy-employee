@@ -192,7 +192,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 Show employee profile (employee basic employee)
 *****/
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
-    var Approver2 = "-";
+    var Approver2 = "---";
     toffyHelper.getIdFromEmail(email, function (Id) {
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
