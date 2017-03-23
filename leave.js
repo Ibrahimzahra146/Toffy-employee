@@ -3,6 +3,9 @@ var IP = process.env.SLACK_IP
 var toffyHelper = require('./toffyHelper')
 
 module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email, type) {
+    if (type == "sickLeave") {
+        type = "sick"
+    }
     console.log("sendLeaveSpecTimeTodayConfirmation::")
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
