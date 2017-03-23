@@ -597,7 +597,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     printLogs("to======>" + to);
     printLogs("employee_id======>" + toffyHelper.userIdInHr);
     printLogs("type======>" + type);
-    getIdFromEmail(email, function (Id) {
+    toffyHelper.getIdFromEmail(email, function (Id) {
         console.log("::::" + "::" + email + "::" + Id)
         var vacationType = "0"
         if (type == "sick") {
