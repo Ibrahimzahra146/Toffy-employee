@@ -147,27 +147,27 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                 "fields": [
                                     {
                                         "title": "Rolled over",
-                                        "value": parseFloat((body).left_over).toFixed(1) + " weeks ",
+                                        "value": parseFloat((body).left_over).toFixed(2) + " weeks ",
                                         "short": true
                                     },
                                     {
                                         "title": "Used time off  ",
-                                        "value": parseFloat(body.vacation_balance).toFixed(1) + " weeks ",
+                                        "value": parseFloat(body.vacation_balance).toFixed(2) + " weeks ",
                                         "short": true
                                     },
                                     {
                                         "title": "Annual time offf ",
-                                        "value": parseFloat(body.static_balance).toFixed(1) + " weeks ",
+                                        "value": parseFloat(body.static_balance).toFixed(2) + " weeks ",
                                         "short": false
                                     },
                                     {
                                         "title": "Extra time off  ",
-                                        "value": parseFloat(body.compensation_balance).toFixed(1) + " weeks ",
+                                        "value": parseFloat(body.compensation_balance).toFixed(2) + " weeks ",
                                         "short": true
                                     },
                                     {
                                         "title": "Balance",
-                                        "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(1) + " weeks ",
+                                        "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(2) + " weeks ",
                                         "short": false
                                     }
                                 ],
