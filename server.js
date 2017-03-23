@@ -150,6 +150,15 @@ function sendRequestToApiAi(emailValue, msg) {
       vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "time off")
 
     }
+    if (responseText == "newSickVacationResponseRange") {
+      var vacation_type = response.result.parameters.vacation_type
+      if (response.result.parameters.vacation_type == "personal") {
+        vacation_type = "time off"
+      }
+      vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, vacation_type)
+
+
+    }
     //One  day sick  vacation  ,so the user just determine the day he was sick in
     else if (responseText == "oneDaySickVacation") {
       vacation.sendOneDaySickVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "sick")
@@ -298,7 +307,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "profile") {
       sendUserProfile(msg);
     }
-  
+
     else if ((responseText) == "salesforce") {
       if (salesforceCode != "")
         msg.say("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + salesforceCode + "'");
