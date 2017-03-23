@@ -106,6 +106,9 @@ module.exports.sendVacationConfirmationToEmp = function sendVacationConfirmation
 
 }
 function getWorkingDays(startDate, endDate, email, callback) {
+  console.log("getWorkingDays" + startDate)
+  console.log("endDate" + endDate)
+
   var vacationBody = {
     "from": startDate,
     "to": endDate
