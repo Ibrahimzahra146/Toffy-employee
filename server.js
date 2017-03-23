@@ -298,10 +298,7 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "profile") {
       sendUserProfile(msg);
     }
-    else if ((responseText) == "debug") {
-      var stringfy = JSON.stringify(msg);
-      msg.say(stringfy);
-    }
+  
     else if ((responseText) == "salesforce") {
       if (salesforceCode != "")
         msg.say("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + salesforceCode + "'");

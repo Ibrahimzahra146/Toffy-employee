@@ -156,7 +156,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                         "short": true
                                     },
                                     {
-                                        "title": "Annual time offf ",
+                                        "title": "Annual time off ",
                                         "value": parseFloat(body.static_balance).toFixed(2) + " weeks ",
                                         "short": false
                                     },
@@ -169,6 +169,11 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                         "title": "Balance",
                                         "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(2) + " weeks ",
                                         "short": false
+                                    },
+                                    {
+                                        "title": "Used Sick time off  ",
+                                        "value": parseFloat(body.sick_vacation_balance).toFixed(2) + " weeks ",
+                                        "short": true
                                     }
                                 ],
                                 "color": "#F35A00"
