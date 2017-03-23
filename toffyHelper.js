@@ -597,61 +597,66 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     printLogs("to======>" + to);
     printLogs("employee_id======>" + toffyHelper.userIdInHr);
     printLogs("type======>" + type);
-    var vacationType = "0"
-    if (type == "sick") {
-        vacationType = "4"
-    }
-
-    var vacationBody = {
-        "employee_id": toffyHelper.userIdInHr,
-        "from": from,
-        "to": to,
-        "type": vacationType,
-        "comments": "From ibrahim"
-
-    }
-    vacationBody = JSON.stringify(vacationBody)
-
-    request({
-        url: 'http://' + IP + '/api/v1/employee/profile', //URL to hitDs
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
-        }
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        if (response.statusCode == 403) {
-            toffyHelper.sessionFlag = 0
+    getIdFromEmail(email, function (Id) {
+        console.log("::::" + "::" + email + "::" + Id)
+        var vacationType = "0"
+        if (type == "sick") {
+            vacationType = "4"
         }
 
-        toffyHelper.getNewSession(email, function (cookie) {
-            toffyHelper.generalCookies = cookie
-            var uri = 'http://' + IP + '/api/v1/vacation'
-            printLogs("Uri " + uri)
-            request({
-                url: uri, //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
-                },
+        var vacationBody = {
+            "employee_id": Id,
+            "from": from,
+            "to": to,
+            "type": vacationType,
+            "comments": "From ibrahim"
 
-                body: vacationBody
-                //Set the body as a stringcc
-            }, function (error, response, body) {
-                printLogs("the vacation have been posted " + response.statusCode)
-                printLogs(error)
-                printLogs(response.message)
-                var vacationId = (JSON.parse(body)).id;
-                var managerApproval = (JSON.parse(body)).managerApproval
-                printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
-                printLogs("managerApproval --->" + managerApproval)
-                callback(vacationId, managerApproval);
+        }
+        vacationBody = JSON.stringify(vacationBody)
 
+        request({
+            url: 'http://' + IP + '/api/v1/employee/profile', //URL to hitDs
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.generalCookies
+            }
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            if (response.statusCode == 403) {
+                toffyHelper.sessionFlag = 0
+            }
+
+            toffyHelper.getNewSession(email, function (cookie) {
+                toffyHelper.generalCookies = cookie
+                var uri = 'http://' + IP + '/api/v1/vacation'
+                printLogs("Uri " + uri)
+                request({
+                    url: uri, //URL to hitDs
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cookie': toffyHelper.generalCookies
+                    },
+
+                    body: vacationBody
+                    //Set the body as a stringcc
+                }, function (error, response, body) {
+                    printLogs("the vacation have been posted " + response.statusCode)
+                    printLogs(error)
+                    printLogs(response.message)
+                    var vacationId = (JSON.parse(body)).id;
+                    var managerApproval = (JSON.parse(body)).managerApproval
+                    printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
+                    printLogs("managerApproval --->" + managerApproval)
+                    callback(vacationId, managerApproval);
+
+                })
             })
-        })
-    });
+        });
+
+    })
+
 }
 module.exports.getEmailById = function getEmailById(Path, callback) {
     printLogs("arrive11")
