@@ -192,6 +192,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 Show employee profile (employee basic employee)
 *****/
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
+    var Approver2 = "-";
     toffyHelper.getIdFromEmail(email, function (Id) {
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
@@ -219,6 +220,10 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                         'Cookie': toffyHelper.generalCookies
                     },
                 }, function (error, response, body) {
+                    if (body.manager[1]) {
+                        Approver2 = body.manager[1].name;
+
+                    }
                     printLogs("show profile bod" + JSON.stringify(body))
                     printLogs("show profile bod" + response.statusCode)
                     var messageBody = {
@@ -252,12 +257,12 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
                                     {
                                         "title": "Emp.type ",
-                                        "value": body.type,
+                                        "value": body.employeeType,
                                         "short": true
                                     },
                                     {
                                         "title": "Approver 2",
-                                        "value": "Sari",
+                                        "value": Approver2,
                                         "short": true
                                     },
                                     {
