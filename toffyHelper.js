@@ -521,9 +521,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
-
-
-        toffyHelper.generalCookies = cookie
         var uri = 'http://' + IP + '/api/v1/vacation'
         printLogs("Uri " + uri)
         request({
