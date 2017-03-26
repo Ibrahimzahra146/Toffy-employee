@@ -393,7 +393,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
-    var i=0;
     getNewSessionwithCookie(email, function (remember_me_cookie) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
@@ -404,6 +403,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
             },
         }, function (error, response, body) {
             console.log("Ibrahim::" + response.statusCode)
+            var i = 0;
+            var stringMessage = "["
             if (!error && response.statusCode === 200) {
                 if (!(JSON.parse(body)[i])) {
                     msg.say("There are no holidays, sorry!");
