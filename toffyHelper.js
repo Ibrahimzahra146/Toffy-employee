@@ -12,12 +12,14 @@ var currentBot = server.bot;
 var hrRole = 0;
 var general_remember_me = "";
 exports.general_remember_me = general_remember_me
+general_session_id="";
+exports.general_session_id=general_session_id;
 
 
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
-    toffyHelper.getNewSessionwithCookie(email, function (cookies) {
+    toffyHelper.getNewSessionwithCookie(email, function (cookies, sessionId) {
         toffyHelper.generalCookies = cookies
         request({
             url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
@@ -372,7 +374,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
             method: 'GET',
@@ -471,10 +473,11 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
         toffyHelper.general_remember_me = remember_me_cookie
+        toffyHelper.general_session_id = sessionId
 
-        console.log("1-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
+        console.log("1-toffyHelper.general_remember_me+ " + toffyHelper.general_remember_me)
         printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
         printLogs("==========>Getting user id from Hr")
         request({
@@ -482,7 +485,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie
+                'Cookie': toffyHelper.general_remember_me
             },
             body: email
             //Set the body as a stringcc
@@ -640,9 +643,12 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
         var arr = cookies.toString().split(";")
         res = arr[0].replace(/['"]+/g, '');
+        var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
+        var arr1 = cookies1.toString().split(";")
+        res1 = arr1[0].replace(/['"]+/g, '');
         printLogs("final session is =========>" + res)
         toffyHelper.sessionFlag = 1;
-        callback(res);
+        callback(res, res1);
     });
 
 

@@ -171,13 +171,16 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
 
         console.log("2-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
+        console.log("2-toffyHelper.general_session_id" + toffyHelper.general_session_id)
+
+        consol
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me
+                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
             },
         }, function (error, response, body) {
             console.log("3-" + response.statusCode)
