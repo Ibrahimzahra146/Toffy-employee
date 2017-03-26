@@ -393,61 +393,65 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
-
-    request({
-        url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': 'REMEMBER_ME_COOKIE=eTFudzVNZmZWU1FEMjNpcmJ6YlZSUT09Om04L1JScUQxUERPMmltWmtPR2dEcWc9PQ'
-        },
-    }, function (error, response, body) {
-        console.log("Ibrahim::"+response.statusCode)
-        if (!error && response.statusCode === 200) {
-            if (!(JSON.parse(body)[i])) {
-                msg.say("There are no holidays, sorry!");
-            }
-            else {
-                //build message Json result to send it to slack
-                while ((JSON.parse(body)[i])) {
-                    getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-                        if (i > 0) {
-                            stringMessage = stringMessage + ","
-                        }
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
-                        i++;
-
-                    })
-
+    getNewSessionwithCookie(email, function (remember_me_cookie) {
+        request({
+            url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie
+            },
+        }, function (error, response, body) {
+            console.log("Ibrahim::" + response.statusCode)
+            if (!error && response.statusCode === 200) {
+                if (!(JSON.parse(body)[i])) {
+                    msg.say("There are no holidays, sorry!");
                 }
-                printLogs("stringMessage::" + stringMessage);
+                else {
+                    //build message Json result to send it to slack
+                    while ((JSON.parse(body)[i])) {
+                        getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+                            if (i > 0) {
+                                stringMessage = stringMessage + ","
+                            }
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                            i++;
 
-                stringMessage = stringMessage + "]"
-                var messageBody = {
-                    "text": "The holidays are:",
-                    "attachments": [
-                        {
-                            "attachment_type": "default",
-                            "text": " ",
-                            "fallback": "ReferenceError",
-                            "fields": stringMessage,
-                            "color": "#F35A00"
-                        }
-                    ]
+                        })
+
+                    }
+                    printLogs("stringMessage::" + stringMessage);
+
+                    stringMessage = stringMessage + "]"
+                    var messageBody = {
+                        "text": "The holidays are:",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": stringMessage,
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    printLogs("messageBody" + messageBody)
+                    var stringfy = JSON.stringify(messageBody);
+
+                    printLogs("stringfy " + stringfy)
+                    stringfy = stringfy.replace(/\\/g, "")
+                    stringfy = stringfy.replace(/]\"/, "]")
+                    stringfy = stringfy.replace(/\"\[/, "[")
+                    stringfy = JSON.parse(stringfy)
+
+                    msg.say(stringfy)
                 }
-                printLogs("messageBody" + messageBody)
-                var stringfy = JSON.stringify(messageBody);
-
-                printLogs("stringfy " + stringfy)
-                stringfy = stringfy.replace(/\\/g, "")
-                stringfy = stringfy.replace(/]\"/, "]")
-                stringfy = stringfy.replace(/\"\[/, "[")
-                stringfy = JSON.parse(stringfy)
-
-                msg.say(stringfy)
             }
-        }
+        })
     })
+
+
+
 
 
 }
@@ -696,4 +700,27 @@ function getDayNameOfDate(date, callback) {
 
     var d = new Date(date);
     callback(weekday[d.getDay() - 1]);
+}
+function getNewSessionwithCookie(email, callback) {
+    request({
+        url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: email
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        console.log("REMEMBER_ME_COOKIE::" + JSON.stringify(response.headers["set-cookie"]))
+        var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
+        printLogs("cookies==================>" + cookies)
+        var arr = cookies.toString().split(";")
+        printLogs("trim based on ;==========>" + arr[0])
+        res = arr[0].replace(/['"]+/g, '');
+        printLogs("final session is =========>" + res)
+        toffyHelper.sessionFlag = 1;
+        callback(res);
+    });
+
+
 }
