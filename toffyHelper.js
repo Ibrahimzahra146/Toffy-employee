@@ -15,7 +15,7 @@ var hrRole = 0;
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
-    toffyHelper.getNewSession(email, function (cookies) {
+    toffyHelper.getNewSessionwithCookie(email, function (cookies) {
         toffyHelper.generalCookies = cookies
         request({
             url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
@@ -469,9 +469,7 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
-    toffyHelper.getNewSession(email, function (cookies) {
-
-        toffyHelper.generalCookies = cookies
+    toffyHelper.getNewSessionwithCookie(email, function (cookies) {
         printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
         printLogs("==========>Getting user id from Hr")
         request({
@@ -624,7 +622,7 @@ function getDayNameOfDate(date, callback) {
     var d = new Date(date);
     callback(weekday[d.getDay() - 1]);
 }
-function getNewSessionwithCookie(email, callback) {
+module.exports.getNewSessionwithCookie=function getNewSessionwithCookie(email, callback) {
     request({
         url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',

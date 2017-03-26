@@ -168,22 +168,22 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     toffyHelper.getIdFromEmail(email, function (Id) {
 
 
-        toffyHelper.getNewSession(email, function (cookie) {
+        toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
             printLogs("show profile bod" + toffyHelper.userIdInHr)
-            toffyHelper.generalCookies = cookie
+
             request({
                 url: "http://" + IP + "/api/v1/employee/" + Id,
                 json: true,
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
+                    'Cookie': remember_me_cookie
                 },
             }, function (error, response, body) {
-               /* if (body.manager[1]) {
-                    Approver2 = body.manager[1].name;
-
-                }*/
+                 if (body.manager[1]) {
+                     Approver2 = body.manager[1].name;
+ 
+                 }
 
                 printLogs("show profile bod" + JSON.stringify(body))
                 printLogs("show profile bod" + response.statusCode)
