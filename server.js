@@ -41,6 +41,8 @@ var generalId = "";
 var generalMsg = "";
 var salesforceCode = "";
 var leaveFlag = "";
+var count=0;
+exports.count=count;
 pg.defaults.ssl = true;
 
 if (!process.env.PORT) throw Error('PORT missing but required')
