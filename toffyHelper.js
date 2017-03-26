@@ -402,8 +402,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
             'Cookie': 'REMEMBER_ME_COOKIE=eTFudzVNZmZWU1FEMjNpcmJ6YlZSUT09Om04L1JScUQxUERPMmltWmtPR2dEcWc9PQ'
         },
     }, function (error, response, body) {
-     
-
+        console.log("Ibrahim::"+response.statusCode)
         if (!error && response.statusCode === 200) {
             if (!(JSON.parse(body)[i])) {
                 msg.say("There are no holidays, sorry!");
