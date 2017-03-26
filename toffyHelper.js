@@ -218,7 +218,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
+            printLogs("approvarType" + approvarType)
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+
 
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
@@ -234,10 +236,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     body: managerEmail
                     //Set the body as a stringcc
                 }, function (error, response, body) {
-                    printLogs("approvalId" + approvalId)
-                    printLogs("approvarType" + approvarType)
-                    printLogs("managerEmail:" + managerEmail)
-                    printLogs("Get recore body:" + JSON.stringify(body))
+
                     var jsonResponse = JSON.parse(body);
 
                     if (approvarType == "Manager") {
@@ -268,7 +267,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
 
                     }
-                    printLogs("approval id" + approvalId)
                     var messageBody = {
                         "text": "This folk has pending time off request:",
                         "attachments": [
@@ -324,7 +322,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             }
                         ]
                     }
-                    printLogs("message info " + JSON.stringify(message12))
                     if (approvarType == "Manager") {
                         currentBot = server.bot;
 
@@ -350,14 +347,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             })
             i++;
-            console.log("I: " + i)
             setTimeout(callback, 1000);
         },
         function (err) {
             // 5 seconds have passed
         }
     );
-    printLogs("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
@@ -537,7 +532,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
 }
 module.exports.getEmailById = function getEmailById(Path, email, callback) {
-    printLogs("arrive11")
     makeGetRequest(Path, email, function (response, body) {
 
         callback(body)
@@ -559,9 +553,7 @@ function makeGetRequest(path, email, callback) {
             }
             //Set the body as a stringcc
         }, function (error, response, body) {
-            printLogs("arrive13")
-
-            printLogs("bodyyy:" + body)
+            printLogs("email:" + body)
             callback(response, body)
         })
 
