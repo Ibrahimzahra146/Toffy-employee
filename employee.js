@@ -21,76 +21,66 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
     printLogs("Show employee history")
     printLogs("email::" + email)
     toffyHelper.getIdFromEmail(email, function (Id) {
-        printLogs("Id in employee history function" + Id);
-
-        toffyHelper.getNewSession(email, function (cookie) {
-            var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
-            printLogs("URI" + uri)
-            toffyHelper.generalCookies = cookie;
-            request({
-                url: uri,
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
-                },
-            }, function (error, response, body) {
-                var i = 0;
-                //check if no holidays ,so empty response
-                if (!error && response.statusCode === 200) {
-                    if (!(JSON.parse(body)[i])) {
-                        msg.say("There are no requested vacations for you");
-                    }
-                    else {
-                        //build message Json result to send it to slack
-                        while ((JSON.parse(body)[i])) {
-                            var stringMessage = "["
-                            var fromDate = new Date((JSON.parse(body))[i].fromDate);
-                            var toDate = new Date((JSON.parse(body))[i].toDate)
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
-                            stringMessage = stringMessage + ","
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
-                            stringMessage = stringMessage + ","
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
-
-                            printLogs("stringMessage::" + stringMessage);
-                            stringMessage = stringMessage + "]"
-                            var messageBody = {
-                                "text": "Vacation number (" + i + "):",
-                                "attachments": [
-                                    {
-                                        "attachment_type": "default",
-                                        "text": " ",
-                                        "fallback": "ReferenceError",
-                                        "fields": stringMessage,
-                                        "color": "#F35A00"
-                                    }
-                                ]
-                            }
-                            printLogs("messageBody" + messageBody)
-                            var stringfy = JSON.stringify(messageBody);
-
-                            printLogs("stringfy" + stringfy)
-                            stringfy = stringfy.replace(/\\/g, "")
-                            stringfy = stringfy.replace(/]\"/, "]")
-                            stringfy = stringfy.replace(/\"\[/, "[")
-                            stringfy = JSON.parse(stringfy)
-
-                            msg.say(stringfy)
-                            i++;
-
-                        }
-
-                    }
+        var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
+        request({
+            url: uri,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+            },
+        }, function (error, response, body) {
+            var i = 0;
+            //check if no holidays ,so empty response
+            if (!error && response.statusCode === 200) {
+                if (!(JSON.parse(body)[i])) {
+                    msg.say("There are no requested vacations for you");
                 }
-            })
+                else {
+                    //build message Json result to send it to slack
+                    while ((JSON.parse(body)[i])) {
+                        var stringMessage = "["
+                        var fromDate = new Date((JSON.parse(body))[i].fromDate);
+                        var toDate = new Date((JSON.parse(body))[i].toDate)
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + ","
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + ","
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
 
+                        printLogs("stringMessage::" + stringMessage);
+                        stringMessage = stringMessage + "]"
+                        var messageBody = {
+                            "text": "Vacation number (" + i + "):",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "text": " ",
+                                    "fallback": "ReferenceError",
+                                    "fields": stringMessage,
+                                    "color": "#F35A00"
+                                }
+                            ]
+                        }
+                        printLogs("messageBody" + messageBody)
+                        var stringfy = JSON.stringify(messageBody);
+
+                        printLogs("stringfy" + stringfy)
+                        stringfy = stringfy.replace(/\\/g, "")
+                        stringfy = stringfy.replace(/]\"/, "]")
+                        stringfy = stringfy.replace(/\"\[/, "[")
+                        stringfy = JSON.parse(stringfy)
+
+                        msg.say(stringfy)
+                        i++;
+
+                    }
+
+                }
+            }
         })
 
-
-    });
-
-
+    })
 }
 /***** 
 Show Employee stats like annual vacation and etc..
