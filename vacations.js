@@ -113,21 +113,20 @@ function getWorkingDays(startDate, endDate, email, callback) {
   vacationBody = JSON.stringify(vacationBody)
 
 
-  toffyHelper.getNewSession(email, function (cookies) {
+  toffyHelper.getNewSession(email, function (cookies, session_Id) {
     toffyHelper.generalCookies = cookies
     request({
       url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': toffyHelper.generalCookies
+        'Cookie': cookies + ";" + session_Id
       },
       body: vacationBody
       //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("getWorkingDays" + response.statusCode)
-      console.log("getWorkingDays" + body);
-      console.log("getWorkingDays" + JSON.stringify(body));
+
       callback(body)
     })
   })

@@ -12,21 +12,21 @@ var currentBot = server.bot;
 var hrRole = 0;
 var general_remember_me = "";
 exports.general_remember_me = general_remember_me
-general_session_id="";
-exports.general_session_id=general_session_id;
+general_session_id = "";
+exports.general_session_id = general_session_id;
 
 
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
-    toffyHelper.getNewSessionwithCookie(email, function (cookies, sessionId) {
-        toffyHelper.generalCookies = cookies
+    toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
+
         request({
             url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
+                'Cookie': cookies + ";" + session_Id
             },
             body: email
             //Set the body as a stringcc
@@ -374,13 +374,13 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie
+                'Cookie': remember_me_cookie + ";" + session_Id
             },
         }, function (error, response, body) {
             console.log("Ibrahim::" + response.statusCode)
@@ -506,7 +506,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
 
 
-    toffyHelper.getNewSession(email, function (cookies) {
+    toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
 
         toffyHelper.generalCookies = cookies
 
@@ -516,7 +516,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
+                'Cookie': cookies + ";" + session_Id
             },
         }, function (error, response, body) {
             printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
@@ -552,7 +552,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
-        toffyHelper.getNewSession(email, function (cookie) {
+        toffyHelper.getNewSessionwithCookie(email, function (cookie) {
             toffyHelper.generalCookies = cookie
             var uri = 'http://' + IP + '/api/v1/vacation'
             printLogs("Uri " + uri)
@@ -561,7 +561,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
+                    'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
                 },
 
                 body: vacationBody
