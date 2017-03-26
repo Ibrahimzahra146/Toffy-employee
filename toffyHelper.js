@@ -632,11 +632,8 @@ module.exports.getNewSessionwithCookie=function getNewSessionwithCookie(email, c
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("REMEMBER_ME_COOKIE::" + JSON.stringify(response.headers["set-cookie"]))
         var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
-        printLogs("cookies==================>" + cookies)
         var arr = cookies.toString().split(";")
-        printLogs("trim based on ;==========>" + arr[0])
         res = arr[0].replace(/['"]+/g, '');
         printLogs("final session is =========>" + res)
         toffyHelper.sessionFlag = 1;
