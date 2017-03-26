@@ -218,7 +218,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
-            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, function (emailFromId) {
+            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
@@ -229,7 +229,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
+
                     },
                     body: managerEmail
                     //Set the body as a stringcc
@@ -358,19 +358,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         }
     );
     printLogs("JSON.stringify(managerApproval )" + JSON.stringify(managerApproval))
-
-    //body is the managers for the user
-
-
-
-
-    //get the email of manager approval from user managers  ,the priority fro manager approval
-
-
-
-
-
-
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
@@ -549,35 +536,37 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
 
 }
-module.exports.getEmailById = function getEmailById(Path, callback) {
+module.exports.getEmailById = function getEmailById(Path, email, callback) {
     printLogs("arrive11")
-    makeGetRequest(Path, function (response, body) {
+    makeGetRequest(Path, email, function (response, body) {
 
         callback(body)
     })
 
 }
-function makeGetRequest(path, callback) {
-    printLogs("arrive11")
+function makeGetRequest(path, email, callback) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        var uri = 'http://' + IP + '/api/v1/' + path
+        printLogs("uri " + uri)
 
-    var uri = 'http://' + IP + '/api/v1/' + path
-    printLogs("uri " + uri)
+        request({
+            url: uri, //URL to hitDs
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + session_Id
 
-    request({
-        url: uri, //URL to hitDs
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
+            }
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            printLogs("arrive13")
 
-        }
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        printLogs("arrive13")
+            printLogs("bodyyy:" + body)
+            callback(response, body)
+        })
 
-        printLogs("bodyyy:" + body)
-        callback(response, body)
     })
+
 }
 
 function printLogs(msg) {
