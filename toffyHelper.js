@@ -60,7 +60,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Cookie': toffyHelper.generalCookies
+                            'Cookie': cookies + ";" + session_Id
                         },
                         body: email
                         //Set the body as a stringcc
@@ -521,31 +521,31 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
-        toffyHelper.getNewSessionwithCookie(email, function (cookie) {
-            toffyHelper.generalCookies = cookie
-            var uri = 'http://' + IP + '/api/v1/vacation'
-            printLogs("Uri " + uri)
-            request({
-                url: uri, //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
-                },
 
-                body: vacationBody
-                //Set the body as a stringcc
-            }, function (error, response, body) {
-                printLogs("the vacation have been posted " + response.statusCode)
-                printLogs(error)
-                printLogs(response.message)
-                var vacationId = (JSON.parse(body)).id;
-                var managerApproval = (JSON.parse(body)).managerApproval
-                printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
-                printLogs("managerApproval --->" + managerApproval)
-                callback(vacationId, managerApproval);
 
-            })
+        toffyHelper.generalCookies = cookie
+        var uri = 'http://' + IP + '/api/v1/vacation'
+        printLogs("Uri " + uri)
+        request({
+            url: uri, //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+            },
+
+            body: vacationBody
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            printLogs("the vacation have been posted " + response.statusCode)
+            printLogs(error)
+            printLogs(response.message)
+            var vacationId = (JSON.parse(body)).id;
+            var managerApproval = (JSON.parse(body)).managerApproval
+            printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
+            printLogs("managerApproval --->" + managerApproval)
+            callback(vacationId, managerApproval);
+
         })
     });
 
