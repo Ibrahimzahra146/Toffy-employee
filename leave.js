@@ -293,40 +293,23 @@ function getWorkingDays(startDate, endDate, email, callback) {
     }
     vacationBody = JSON.stringify(vacationBody)
 
-    request({
-        url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
-        },
-        body: vacationBody
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        if (response.statusCode == 403) {
-            toffyHelper.sessionFlag = 0;
-        } toffyHelper.getNewSession(email, function (cookies) {
-            toffyHelper.generalCookies = cookies
-            request({
-                url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
-                },
-                body: vacationBody
-                //Set the body as a stringcc
-            }, function (error, response, body) {
-                console.log("getWorkingDays" + response.statusCode)
-                console.log("getWorkingDays" + body);
-                console.log("getWorkingDays" + JSON.stringify(body));
-                callback(body)
-            })
-
+    toffyHelper.getNewSession(email, function (cookies) {
+        toffyHelper.generalCookies = cookies
+        request({
+            url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.generalCookies
+            },
+            body: vacationBody
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            console.log("getWorkingDays" + response.statusCode)
+            console.log("getWorkingDays" + body);
+            console.log("getWorkingDays" + JSON.stringify(body));
+            callback(body)
         })
 
-
-
     })
-
 }

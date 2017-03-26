@@ -15,97 +15,74 @@ var hrRole = 0;
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
+    toffyHelper.getNewSession(email, function (cookies) {
+        toffyHelper.generalCookies = cookies
+        request({
+            url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.generalCookies
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+
+            if (response.statusCode == 404) {
+                printLogs("the employee not found ")
+
+                requestify.post("http://" + IP + "/api/v1/toffy", {
+                    "email": email,
+                    "hrChannelId": "",
+                    "managerChannelId": "",
+                    "slackUserId": msg.body.event.user,
+                    "teamId": msg.body.team_id,
+                    "userChannelId": msg.body.event.channel
+                })
+                    .then(function (response) {
+                        // Get the response body
+                        response.getBody();
+                    });
+            }
+            else if (response.statusCode == 200) {
+                if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
+
+                    var managerChId = JSON.parse(body).managerChannelId;
+                    var hrChId = JSON.parse(body).hrChannelId;
 
 
-    printLogs("Store user slack information ")
-    request({
-        url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
+                    request({
+                        url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cookie': toffyHelper.generalCookies
+                        },
+                        body: email
+                        //Set the body as a stringcc
+                    }, function (error, response, body) {
+                        printLogs("DELETED");
 
-        //check if the session is expired  so we request a new session 
-        if ((response.statusCode == 403)) {
-            toffyHelper.sessionFlag = 0
-        }
-
-        toffyHelper.getNewSession(email, function (cookies) {
-
-            toffyHelper.generalCookies = cookies
-            request({
-                url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
-                },
-                body: email
-                //Set the body as a stringcc
-            }, function (error, response, body) {
-                printLogs("response:404");
-
-                if (response.statusCode == 404) {
-                    printLogs("the employee not found ")
-
+                    });
                     requestify.post("http://" + IP + "/api/v1/toffy", {
                         "email": email,
-                        "hrChannelId": "",
-                        "managerChannelId": "",
+                        "hrChannelId": hrChId,
+                        "managerChannelId": managerChId,
                         "slackUserId": msg.body.event.user,
                         "teamId": msg.body.team_id,
                         "userChannelId": msg.body.event.channel
                     })
                         .then(function (response) {
+                            printLogs("=====>arrive4")
+
                             // Get the response body
                             response.getBody();
-                        });
-                }
-                else if (response.statusCode == 200) {
-                    printLogs((JSON.parse(body)).managerChannelId)
-                    printLogs(msg.body.event.channel)
-                    if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
-
-                        var managerChId = JSON.parse(body).managerChannelId;
-                        var hrChId = JSON.parse(body).hrChannelId;
-
-
-                        request({
-                            url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Cookie': toffyHelper.generalCookies
-                            },
-                            body: email
-                            //Set the body as a stringcc
-                        }, function (error, response, body) {
-                            printLogs("DELETED");
 
                         });
-                        requestify.post("http://" + IP + "/api/v1/toffy", {
-                            "email": email,
-                            "hrChannelId": hrChId,
-                            "managerChannelId": managerChId,
-                            "slackUserId": msg.body.event.user,
-                            "teamId": msg.body.team_id,
-                            "userChannelId": msg.body.event.channel
-                        })
-                            .then(function (response) {
-                                printLogs("=====>arrive4")
-
-                                // Get the response body
-                                response.getBody();
-
-                            });
-                    }
                 }
-            })
+            }
         })
+
 
     });
 }
@@ -461,131 +438,82 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 get new session id using login api
 */
 module.exports.getNewSession = function getNewSession(email, callback) {
-    var res = toffyHelper.generalCookies
-    printLogs("sessionFlag" + sessionFlag)
-
-    if (toffyHelper.sessionFlag == 1) {
-        res = toffyHelper.generalCookies
-        callback(res)
-
-    } else {
-        printLogs("Getting new session")
-        request({
-            url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
-
-            },
-            body: email
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            printLogs("Arrive 2334")
-            toffyHelper.userIdInHr = (JSON.parse(body)).id;
-            printLogs("userIdInHr ====>>>" + userIdInHr);
-
-            var cookies = JSON.stringify((response.headers["set-cookie"])[0]);
-            printLogs("cookies==================>" + cookies)
-            var arr = cookies.toString().split(";")
-            printLogs("trim based on ;==========>" + arr[0])
-            res = arr[0].replace(/['"]+/g, '');
-            printLogs("final session is =========>" + res)
-            toffyHelper.sessionFlag = 1;
-            callback(res);
-        });
-    }
-}
-
-module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
     request({
-        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+        url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
         },
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 403) {
-            toffyHelper.sessionFlag = 0;
-        }
-        toffyHelper.getNewSession(email, function (cookies) {
+        console.log("REMEMBER_ME_COOKIE::" + JSON.stringify(response.headers["set-cookie"]))
+        var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
+        printLogs("cookies==================>" + cookies)
+        var arr = cookies.toString().split(";")
+        printLogs("trim based on ;==========>" + arr[0])
+        res = arr[0].replace(/['"]+/g, '');
+        printLogs("final session is =========>" + res)
+        toffyHelper.sessionFlag = 1;
+        callback(res);
+    });
 
-            toffyHelper.generalCookies = cookies
-            printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
-            printLogs("==========>Getting user id from Hr")
-            request({
-                url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.generalCookies
-                },
-                body: email
-                //Set the body as a stringcc
-            }, function (error, response, body) {
-                printLogs("=======>body: " + body)
-                userIdInHr = JSON.parse(body);
-                printLogs("====>user id:" + userIdInHr)
-                printLogs(JSON.stringify(body))
-                callback(body)
+}
 
-            })
-        });
-        F
-    })
+module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
+
+    toffyHelper.getNewSession(email, function (cookies) {
+
+        toffyHelper.generalCookies = cookies
+        printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
+        printLogs("==========>Getting user id from Hr")
+        request({
+            url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.generalCookies
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            printLogs("=======>body: " + body)
+            userIdInHr = JSON.parse(body);
+            printLogs("====>user id:" + userIdInHr)
+            printLogs(JSON.stringify(body))
+            callback(body)
+
+        })
+    });
+
 
 
 }
 
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
-    printLogs("info:=======>Getting user manager")
-    printLogs("info:=======>User ID" + userId)
-    printLogs("toffyHelper.generalCookies=========>" + toffyHelper.generalCookies)
 
-    request({
-        url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
-        json: true,
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': toffyHelper.generalCookies
-        },
-    }, function (error, response, body) {
-        if (response.statusCode == 403) {
-            toffyHelper.getNewSession(email, function (cookies) {
 
-                toffyHelper.generalCookies = cookies
+    toffyHelper.getNewSession(email, function (cookies) {
 
-                request({
-                    url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
-                    json: true,
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Cookie': toffyHelper.generalCookies
-                    },
-                }, function (error, response, body) {
-                    printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
-                    callback(body)
+        toffyHelper.generalCookies = cookies
 
-                })
-
-            })
-        }
-        else {
-            printLogs("correct" + response.statusCode)
+        request({
+            url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.generalCookies
+            },
+        }, function (error, response, body) {
             printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
-            callback(body);
+            callback(body)
 
-        }
+        })
 
-        // printLogs("JSON.parse(body)====>" + JSON.parse(body));
+    })
 
-    });
-
+    // printLogs("JSON.parse(body)====>" + JSON.parse(body));
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, callback) {
     printLogs("Sending vacation post request")
@@ -611,49 +539,35 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
+        toffyHelper.getNewSession(email, function (cookie) {
+            toffyHelper.generalCookies = cookie
+            var uri = 'http://' + IP + '/api/v1/vacation'
+            printLogs("Uri " + uri)
+            request({
+                url: uri, //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': toffyHelper.generalCookies
+                },
 
-        request({
-            url: 'http://' + IP + '/api/v1/employee/profile', //URL to hitDs
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
-            }
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            if (response.statusCode == 403) {
-                toffyHelper.sessionFlag = 0
-            }
+                body: vacationBody
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                printLogs("the vacation have been posted " + response.statusCode)
+                printLogs(error)
+                printLogs(response.message)
+                var vacationId = (JSON.parse(body)).id;
+                var managerApproval = (JSON.parse(body)).managerApproval
+                printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
+                printLogs("managerApproval --->" + managerApproval)
+                callback(vacationId, managerApproval);
 
-            toffyHelper.getNewSession(email, function (cookie) {
-                toffyHelper.generalCookies = cookie
-                var uri = 'http://' + IP + '/api/v1/vacation'
-                printLogs("Uri " + uri)
-                request({
-                    url: uri, //URL to hitDs
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Cookie': toffyHelper.generalCookies
-                    },
-
-                    body: vacationBody
-                    //Set the body as a stringcc
-                }, function (error, response, body) {
-                    printLogs("the vacation have been posted " + response.statusCode)
-                    printLogs(error)
-                    printLogs(response.message)
-                    var vacationId = (JSON.parse(body)).id;
-                    var managerApproval = (JSON.parse(body)).managerApproval
-                    printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
-                    printLogs("managerApproval --->" + managerApproval)
-                    callback(vacationId, managerApproval);
-
-                })
             })
-        });
+        })
+    });
 
-    })
+
 
 }
 module.exports.getEmailById = function getEmailById(Path, callback) {
