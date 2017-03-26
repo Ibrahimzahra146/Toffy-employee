@@ -173,7 +173,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
         console.log("2-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
         console.log("2-toffyHelper.general_session_id" + toffyHelper.general_session_id)
 
-        consol
+        
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
