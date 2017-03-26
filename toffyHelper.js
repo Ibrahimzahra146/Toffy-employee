@@ -515,29 +515,44 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 }
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
-    toffyHelper.getNewSession(email, function (cookies) {
+    request({
+        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': toffyHelper.generalCookies
+        },
+        body: email
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        if (response.statusCode == 403) {
+            toffyHelper.sessionFlag = 0;
+        }
+        toffyHelper.getNewSession(email, function (cookies) {
 
-        toffyHelper.generalCookies = cookies
-        printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
-        printLogs("==========>Getting user id from Hr")
-        request({
-            url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
-            },
-            body: email
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            printLogs("=======>body: " + body)
-            userIdInHr = JSON.parse(body);
-            printLogs("====>user id:" + userIdInHr)
-            printLogs(JSON.stringify(body))
-            callback(body)
+            toffyHelper.generalCookies = cookies
+            printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
+            printLogs("==========>Getting user id from Hr")
+            request({
+                url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': toffyHelper.generalCookies
+                },
+                body: email
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                printLogs("=======>body: " + body)
+                userIdInHr = JSON.parse(body);
+                printLogs("====>user id:" + userIdInHr)
+                printLogs(JSON.stringify(body))
+                callback(body)
 
-        })
-    });
+            })
+        });
+        F
+    })
 
 
 }
