@@ -10,6 +10,8 @@ exports.sessionFlag = sessionFlag;
 var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
+var general_remember_me = "";
+exports.general_remember_me = general_remember_me
 
 
 
@@ -469,7 +471,8 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
-    toffyHelper.getNewSessionwithCookie(email, function (cookies) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
+        toffyHelper.general_remember_me = remember_me_cookie
         printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
         printLogs("==========>Getting user id from Hr")
         request({
@@ -477,7 +480,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.generalCookies
+                'Cookie': remember_me_cookie
             },
             body: email
             //Set the body as a stringcc
@@ -622,7 +625,7 @@ function getDayNameOfDate(date, callback) {
     var d = new Date(date);
     callback(weekday[d.getDay() - 1]);
 }
-module.exports.getNewSessionwithCookie=function getNewSessionwithCookie(email, callback) {
+module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
     request({
         url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',

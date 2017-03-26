@@ -11,7 +11,7 @@ var toffyHelper = require('./toffyHelper')
 var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
-var remember_me = "initial";
+var remember_me="initial";
 
 /****** 
 Show employee vacation history
@@ -166,82 +166,82 @@ Show employee profile (employee basic employee)
 *****/
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     var Approver2 = "---";
-    //toffyHelper.getIdFromEmail(email, function (Id) {
+    toffyHelper.getIdFromEmail(email, function (Id) {
 
 
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
-        printLogs("show profile bod" + toffyHelper.userIdInHr)
+       
+            printLogs("show profile bod" + toffyHelper.userIdInHr)
 
-        request({
-            url: "http://" + IP + "/api/v1/employee/" + "292",
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie
-            },
-        }, function (error, response, body) {
-            if (body.manager[1]) {
-                Approver2 = body.manager[1].name;
+            request({
+                url: "http://" + IP + "/api/v1/employee/" + Id,
+                json: true,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': toffyHelper.general_remember_me;
+                },
+            }, function (error, response, body) {
+                 if (body.manager[1]) {
+                     Approver2 = body.manager[1].name;
+ 
+                 }
 
-            }
+                printLogs("show profile bod" + JSON.stringify(body))
+                printLogs("show profile bod" + response.statusCode)
+                var messageBody = {
+                    "text": "Your profile details",
+                    "attachments": [
+                        {
+                            "attachment_type": "default",
+                            "text": " ",
+                            "fallback": "ReferenceError",
+                            "fields": [
+                                {
+                                    "title": "Full name ",
+                                    "value": body.name,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Working days  ",
+                                    "value": "Sun to Thu",
+                                    "short": true
+                                },
+                                {
+                                    "title": "Email ",
+                                    "value": body.email,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Approver 1",
+                                    "value": body.manager[0].name,
+                                    "short": true
+                                },
 
-            printLogs("show profile bod" + JSON.stringify(body))
-            printLogs("show profile bod" + response.statusCode)
-            var messageBody = {
-                "text": "Your profile details",
-                "attachments": [
-                    {
-                        "attachment_type": "default",
-                        "text": " ",
-                        "fallback": "ReferenceError",
-                        "fields": [
-                            {
-                                "title": "Full name ",
-                                "value": body.name,
-                                "short": true
-                            },
-                            {
-                                "title": "Working days  ",
-                                "value": "Sun to Thu",
-                                "short": true
-                            },
-                            {
-                                "title": "Email ",
-                                "value": body.email,
-                                "short": true
-                            },
-                            {
-                                "title": "Approver 1",
-                                "value": body.manager[0].name,
-                                "short": true
-                            },
-
-                            {
-                                "title": "Emp.type ",
-                                "value": body.employeeType,
-                                "short": true
-                            },
-                            {
-                                "title": "Approver 2",
-                                "value": Approver2,
-                                "short": true
-                            },
-                            {
-                                "title": "Employment date",
-                                "value": body.hireDate,
-                                "short": true
-                            }
-                        ],
-                        "color": "#F35A00"
-                    }
-                ]
-            }
-            var stringfy = JSON.stringify(messageBody);
-            var obj1 = JSON.parse(stringfy);
-            msg.say(obj1)
-        });
-    })
+                                {
+                                    "title": "Emp.type ",
+                                    "value": body.employeeType,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Approver 2",
+                                    "value": Approver2,
+                                    "short": true
+                                },
+                                {
+                                    "title": "Employment date",
+                                    "value": body.hireDate,
+                                    "short": true
+                                }
+                            ],
+                            "color": "#F35A00"
+                        }
+                    ]
+                }
+                var stringfy = JSON.stringify(messageBody);
+                var obj1 = JSON.parse(stringfy);
+                msg.say(obj1)
+            });
+        })
 
 }
 function printLogs(msg) {
