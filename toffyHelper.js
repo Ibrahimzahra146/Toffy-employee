@@ -472,8 +472,9 @@ module.exports.getNewSession = function getNewSession(email, callback) {
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie) {
-        console.log("1-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
         toffyHelper.general_remember_me = remember_me_cookie
+
+        console.log("1-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
         printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
         printLogs("==========>Getting user id from Hr")
         request({
