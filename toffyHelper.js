@@ -438,38 +438,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
 
 
 }
-/*
-get new session id using login api
-*/
-module.exports.getNewSession = function getNewSession(email, callback) {
 
-    printLogs("Not Getting new session")
-    callback(toffyHelper.generalCookies);
-
-    printLogs("Getting new session")
-    request({
-        url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        console.log("REMEMBER_ME_COOKIE::" + JSON.stringify(response.headers["set-cookie"]))
-        var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
-        printLogs("cookies==================>" + cookies)
-        var arr = cookies.toString().split(";")
-        printLogs("trim based on ;==========>" + arr[0])
-        res = arr[0].replace(/['"]+/g, '');
-        printLogs("final session is =========>" + res)
-        toffyHelper.generalCookies = res;
-        server.count = 1;
-        callback(res);
-    });
-
-
-}
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
