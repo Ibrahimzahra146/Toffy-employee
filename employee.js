@@ -180,10 +180,11 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     'Cookie': toffyHelper.generalCookies
                 },
             }, function (error, response, body) {
-                if (body.manager[1]) {
+               /* if (body.manager[1]) {
                     Approver2 = body.manager[1].name;
 
-                }
+                }*/
+
                 printLogs("show profile bod" + JSON.stringify(body))
                 printLogs("show profile bod" + response.statusCode)
                 var messageBody = {
