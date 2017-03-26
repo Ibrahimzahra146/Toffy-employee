@@ -170,8 +170,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
 
 
-        printLogs("show profile bod" + toffyHelper.userIdInHr)
-
+        console.log("2-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
@@ -181,6 +180,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                 'Cookie': toffyHelper.general_remember_me
             },
         }, function (error, response, body) {
+            console.log("3-" + response.statusCode)
             if (body.manager[1]) {
                 Approver2 = body.manager[1].name;
 
