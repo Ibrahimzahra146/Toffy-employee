@@ -410,7 +410,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
   toffyHelper.sendVacationPostRequest(arr[0], arr[1], toffyHelper.userIdInHr, email, arr[3], function (vacationId, managerApproval) {
     console.log("vacationId--------->" + vacationId);
     console.log("managersApproval--------->" + managerApproval[0].id);
-    console.log("managersApproval---------> " + JSON.stringify(managerApproval));
+    console.log("managersApproval--------->" + JSON.stringify(managerApproval));
     if (!managerApproval[0]) {
       msg.say("You dont have any manager right now ");
     } else {
