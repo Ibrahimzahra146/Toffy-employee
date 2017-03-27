@@ -25,8 +25,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
             url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Cookie': cookies + ";" + session_Id
+                'Content-Type': 'application/json'
             },
             body: email
             //Set the body as a stringcc
@@ -59,8 +58,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                         url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                         method: 'DELETE',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Cookie': cookies + ";" + session_Id
+                            'Content-Type': 'application/json'
                         },
                         body: email
                         //Set the body as a stringcc
