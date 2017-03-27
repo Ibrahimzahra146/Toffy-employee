@@ -132,7 +132,7 @@ function sendUserProfile(msg) {
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg) {
-  //toffyHelper.storeUserSlackInformation(emailValue, msg);
+  toffyHelper.storeUserSlackInformation(emailValue, msg);
   var msgText = msg.body.event.text;
   let apiaiRequest = apiAiService.textRequest(msgText,
     {
