@@ -213,7 +213,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
-            printLogs("i----->" + i)
 
 
             approvalId = managerApproval[i].id
@@ -225,7 +224,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
 
-                printLogs("arrive to send coonfirmation");
+
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -326,7 +325,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         currentBot = server.bot;
 
                     } else {
-                        printLogs("HR Role ")
 
                         currentBot = server.hRbot
                     }
