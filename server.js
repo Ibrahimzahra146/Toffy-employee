@@ -417,7 +417,7 @@ slapp.action('confirm_reject', 'confirm', (msg, value) => {
       toffyHelper.sendVacationToManager(arr[0], arr[1], arr[2], arr[3], vacationId, managerApproval, "Manager", workingDays)
 
       if (arr[3] == "sick") {
-        console.log("Manager approvals sick vacation is ::" + JSON.stringfy(managerApproval))
+        console.log("Manager approvals sick vacation is ::" + JSON.stringify(managerApproval))
         msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR admin. You might asked to provide a sick report. I’ll inform you about this.  ")
 
       }
