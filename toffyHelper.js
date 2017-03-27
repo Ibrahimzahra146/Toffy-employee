@@ -220,7 +220,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvarType = managerApproval[i].type
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
-
+                i = i + 1;
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("mananger email:::" + managerEmail);
@@ -344,7 +344,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 });
 
             })
-            i++;
+
             setTimeout(callback, 1000);
         },
         function (err) {
