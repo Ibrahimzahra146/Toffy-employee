@@ -217,14 +217,13 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
-            printLogs("approvarType" + approvarType)
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
 
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-
-
+                console.log("mananger email:::" + managerEmail);
+                console.log("mananger number :::" + i);
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -237,7 +236,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 }, function (error, response, body) {
 
                     var jsonResponse = JSON.parse(body);
-
+                    console.log("approvarType:::" + approvarType)
                     if (approvarType == "Manager") {
                         printLogs("Manager Role ")
                         message12 = {
