@@ -19,6 +19,7 @@ exports.general_session_id = general_session_id;
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
+    printLogs("Store user slack info :::")
     toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
 
         request({
