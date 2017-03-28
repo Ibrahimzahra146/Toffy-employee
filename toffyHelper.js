@@ -222,7 +222,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("mananger email:::" + managerEmail);
-                console.log("mananger number   :::" + i);
+                console.log("mananger number    :::" + i);
                 i = i + 1;
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
