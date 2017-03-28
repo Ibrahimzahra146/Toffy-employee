@@ -141,6 +141,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
   apiaiRequest.on('response', (response) => {
     let responseText = response.result.fulfillment.speech;
+    console.log("responseText:::" + responseText)
     //user ask for new personal vacation with from to dates
     if (responseText == "newVacationRequest") {
       vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "time off")
