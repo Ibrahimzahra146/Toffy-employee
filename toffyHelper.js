@@ -20,7 +20,7 @@ exports.general_session_id = general_session_id;
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
     printLogs("Store user slack info :::")
-    toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
+    
 
         request({
             url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
@@ -87,7 +87,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         })
 
 
-    });
+    
 }
 //if the user exist but may be added or not at toffy record
 
