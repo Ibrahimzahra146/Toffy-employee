@@ -26,14 +26,14 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + date + "," + type + "," + workingDays
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + date + "," + type + "," + workingDays
                                 }
                             ]
                         }

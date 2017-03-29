@@ -504,35 +504,33 @@ slapp.action('confirm_reject', 'reject', (msg, value) => {
   -------------____________________________________________________---------------------
   */
 slapp.action('leave_confirm_reject', 'confirm', (msg, value) => {
-  getTodayDate(function (todayDate) {
-    var arr = value.toString().split(",");
-    console.log("arrrrrrrr--------->  " + arr[1])
-    console.log("arrrrrrrr--------->  " + arr[2])
-    console.log("arrrrrrrr--------->  " + arr[3])
-    console.log("arrrrrrrr--------->  " + arr[4])
-    var email = arr[1];
+
+  var arr = value.toString().split(",");
+  console.log("arrrrrrrr--------->  " + arr[1])
+  console.log("arrrrrrrr--------->  " + arr[2])
+  console.log("arrrrrrrr--------->  " + arr[3])
+  console.log("arrrrrrrr--------->  " + arr[4])
+  var email = arr[1];
+  var date = arr[4]
 
 
-    var vacationType = arr[4]
-    var workingDays = arr[5]
-    toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, email, vacationType, function (vacationId, managerApproval) {
-      console.log("vacationId--------->" + vacationId);
+  var vacationType = arr[5]
+  var workingDays = arr[6]
+  toffyHelper.sendVacationPostRequest(/*from  */arr[2], arr[3], toffyHelper.userIdInHr, email, vacationType, function (vacationId, managerApproval) {
+    console.log("vacationId--------->" + vacationId);
 
-      console.log("managersApproval--------->" + JSON.stringify(managerApproval));
-      console.log("managersApproval--------->" + managerApproval[0].id);
+    console.log("managersApproval--------->" + JSON.stringify(managerApproval));
+    console.log("managersApproval--------->" + managerApproval[0].id);
 
-      toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
-        fromDate = todayDate + " T " + formattedTime + " " + midday
-        toDate = todayDate + " T 5:00 pm "
-        if (!managerApproval[0]) {
-          msg.say("You dont have any manager right now ");
-        } else {
-          toffyHelper.sendVacationToManager(fromDate, toDate, email, vacationType, vacationId, managerApproval, "Manager", workingDays)
-          msg.say("Your leave request have been submitted to your managers.");
-        }
-
-      });
-
+    toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+      var fromDate = date + " T " + formattedTime + " " + midday
+      var toDate = date + " T 5:00 pm "
+      if (!managerApproval[0]) {
+        msg.say("You dont have any manager right now ");
+      } else {
+        toffyHelper.sendVacationToManager(fromDate, toDate, email, vacationType, vacationId, managerApproval, "Manager", workingDays)
+        msg.say("Your leave request have been submitted to your managers.");
+      }
     })
 
   });
