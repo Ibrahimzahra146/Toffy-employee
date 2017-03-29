@@ -197,7 +197,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     "text": "",
                     "attachments": [
                         {
-                            "text": "Okay, you asked for a leave today  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?",
+                            "text": "Okay, you asked for a leave in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?",
                             "callback_id": 'leave_with_vacation_confirm_reject',
                             "color": "#3AA3E3",
                             "attachment_type": "default",
@@ -214,7 +214,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + ","  + fromDate + "," + ToDate
+                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
                                 }
                             ]
                         }
