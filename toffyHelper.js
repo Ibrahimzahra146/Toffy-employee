@@ -215,16 +215,16 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function (callback) {
 
 
-
+            approvalId = managerApproval[i].id
+            approvarType = managerApproval[i].type
+            managerEmail = emailFromId.replace(/\"/, "")
+            managerEmail = managerEmail.replace(/\"/, "")
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
                 console.log("Arrive after get emailFromId:: " + i)
-                approvalId = managerApproval[i].id
-                approvarType = managerApproval[i].type
-                managerEmail = emailFromId.replace(/\"/, "")
-                managerEmail = managerEmail.replace(/\"/, "")
-                console.log("mananger email:::" + managerEmail);
-                console.log("mananger number    :::" + i);
 
+                console.log("mananger email:::" + managerEmail);
+                console.log("approvarType" + approvarType);
+                i = i + 1;
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -346,11 +346,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             })
 
             setTimeout(callback, 1000);
-            i = i + 1;
+
         },
         function (err) {
             // 5 seconds have passed
         }
+
     );
 }
 //list all holidays with range period
