@@ -199,8 +199,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
         }
-
-
+        date1 = date1.replace(/-/g, "/")
+        date = date.replace(/-/g, "/")
 
 
 
