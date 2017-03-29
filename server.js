@@ -275,7 +275,7 @@ function sendRequestToApiAi(emailValue, msg) {
         var time = response.result.parameters.time
         var dateWithTime = date + " " + time
         dateWithTime = new Date(dateWithTime);
-        var dateMilliSeconds = toDate.getTime();
+        var dateMilliSeconds = dateWithTime.getTime();
         leave.sendLeaveSpecTimeTodayConfirmation(msg, time, date, dateMilliSeconds, emailValue, "personal")
 
       })
