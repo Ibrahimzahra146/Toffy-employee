@@ -151,6 +151,7 @@ function sendRequestToApiAi(emailValue, msg) {
       //get the milliseconds for the  end of the vacation 
       var date = response.result.parameters.date;
       date = date + " " + "17:00:00"
+      console.log(date);
       date = new Date(date);
       var dateMilliSeconds = date.getTime();
       console.log("dateMilliSeconds:::" + dateMilliSeconds)
