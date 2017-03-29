@@ -648,8 +648,8 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
 
         toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
 
-          fromDate = todayDate + " T " + formattedTime + " " + midday
-          toDate = todayDate + " T " + formattedTime1 + " " + midday1
+          fromDate = fromDate + " T " + formattedTime + " " + midday
+          toDate = toDate + " T " + formattedTime1 + " " + midday1
           if (!managerApproval[0]) {
             msg.say("You dont have any manager right now ");
           } else {
