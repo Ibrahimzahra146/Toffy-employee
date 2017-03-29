@@ -349,7 +349,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             })
 
             setTimeout(function () {
-                i = i + 1;
+               
             }, 500);
 
         },
