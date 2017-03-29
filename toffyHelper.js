@@ -529,6 +529,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             var managerApproval = (JSON.parse(body)).managerApproval
             printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
             printLogs("managerApproval --->" + managerApproval)
+            printLogs("managerApproval --->" + JSON.stringify(managerApproval))
             callback(vacationId, managerApproval);
 
         })
