@@ -203,6 +203,8 @@ function sendRequestToApiAi(emailValue, msg) {
         date = date.replace(/-/g, "/")
         date1 = new Date(date1);
         date1 = date1.getMonth() + 1 + "-" + date1.getDate() + "-" + date1.getFullYear()
+        date = new Date(date);
+
         date = date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear()
 
 
