@@ -215,7 +215,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function (callback) {
 
 
-            i = i + 1
+
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
                 console.log("Arrive after get emailFromId:: " + i)
@@ -349,8 +349,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             })
 
             setTimeout(function () {
+                i = i + 1
 
-            }, 500);
+            }, 2000);
 
         },
         function (err) {
