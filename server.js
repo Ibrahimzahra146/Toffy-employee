@@ -208,6 +208,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
         var toDate = date1 + " " + time1
         console.log("toDate::" + toDate);
+        console.log("toDate::" + fromDate);
         toDate = new Date(toDate);
         var dateMilliSeconds = toDate.getTime();
         console.log("dateMilliSeconds:::" + dateMilliSeconds)
