@@ -187,6 +187,12 @@ function sendRequestToApiAi(emailValue, msg) {
           date = response.result.parameters.date
           timeOffCase = 5
 
+        }
+        else if (response.result.parameters.time && response.result.parameters.date1) {
+          time = response.result.parameters.time
+          date1 = response.result.parameters.date1
+          timeOffCase = 5
+
         } else if (response.result.parameters.time) {
           time = response.result.parameters.time
           timeOffCase = 6
@@ -703,7 +709,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
     console.log("email:::::" + email)
     console.log("toDate:::::" + toDate)
     console.log("fromDateInMilliseconds:::::" + fromDateInMilliseconds)
-     console.log("toDateInMilliseconds:::::" + toDateInMilliseconds)
+    console.log("toDateInMilliseconds:::::" + toDateInMilliseconds)
     console.log("workingDays:::::" + workingDays)
     console.log("fromDate:::::" + fromDate)
     console.log("toDate:::::" + toDate)
