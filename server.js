@@ -263,11 +263,16 @@ function sendRequestToApiAi(emailValue, msg) {
     -------------____________________________________________________---------------------
     */
 
-    else if ((responseText) == "newLeaveRequestSpecTimeToday") {
+    else if ((responseText) == "newLeaveRequest") {
+      var date = ""
+      var time = response.result.parameters.tome
+      if (response.result.parameters.date) {
+        date = response.result.parameters.date
+      }
       console.log(JSON.stringify(response))
-      console.log(response)
-      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "leave");
-      console.log("response.result.parameters.time " + response.result.parameters.time)
+      //leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "leave");
+      console.log("response.result.parameters.time " + time)
+      console.log("date" + date)
     }
     else if ((responseText) == "SickLeave") {
       console.log("Sick leave")
