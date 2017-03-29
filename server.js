@@ -635,9 +635,14 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'reject', (msg, value) =>
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(",");
-    var email = arr[2]
+    var type = arr[5]
+    var email = arr[2];
+    var fromDateInMilliseconds = arr[3];
+    var toDateInMilliseconds = arr[4]
     var workingDays = arr[6]
-    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, arr[5], function (vacationId, managerApproval) {
+    var fromDate = arr[7]
+    var toDate = arr[8]
+    toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, function (vacationId, managerApproval) {
 
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 

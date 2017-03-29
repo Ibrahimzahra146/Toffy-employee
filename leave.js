@@ -198,7 +198,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     "attachments": [
                         {
                             "text": "Okay, you asked for a leave today  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?",
-                            "callback_id": 'leave_rangeTime_today_confirm_reject',
+                            "callback_id": 'leave_with_vacation_confirm_reject',
                             "color": "#3AA3E3",
                             "attachment_type": "default",
                             "actions": [
@@ -207,14 +207,14 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                     "text": "Yes",
                                     "style": "primary",
                                     "type": "button",
-                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays
+                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
                                 },
                                 {
                                     "name": 'reject',
                                     "text": "No",
                                     "style": "danger",
                                     "type": "button",
-                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays
+                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + ","  + fromDate + "," + ToDate
                                 }
                             ]
                         }
