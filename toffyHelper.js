@@ -206,7 +206,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         type = "sick"
     }
 
-    var i = -1
+    var i = 0
     var j = 0
 
     console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
