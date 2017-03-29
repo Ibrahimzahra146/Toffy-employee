@@ -151,7 +151,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
       getTodayDate(function (today) {
         var time1 = "17:00:00";
-        var time = "";
+        var time = "8:00:00";
         var date = today
         var date1 = today
         var timeOffCase = -1
