@@ -145,9 +145,32 @@ function sendRequestToApiAi(emailValue, msg) {
     //user ask for new personal vacation with from to dates
     if (responseText == "newVacationRequest") {
       vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "time off")
+    }
+    //Vacation with leave scenarios
+    else if (responseText == "vacationWithLeave") {
+      var date = response.result.parameters.date;
+      date = date + " " + "17:00:00"
+      date = new Date(date);
+      var dateMilliSeconds = date.getTime();
+      console.log("dateMilliSeconds:::" + dateMilliSeconds)
 
+      var time = response.result.parameters.time;
+      getTodayDate(function (today) {
+        today = today + " " + time;
+        var timeMilliseconds = new Date(date);
+        timeMilliseconds = timeMilliseconds.getTime();
+        console.log("timeMilliseconds:::" + timeMilliseconds)
+
+      })
 
     }
+
+    if (response.result.parameters.vacation_type == "personal") {
+      vacation_type = "time off"
+    }
+    //end 
+
+
     //user ask for one day personal vacation
     else if (responseText == "oneDayPersonalVacation") {
       vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "time off")
