@@ -224,7 +224,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("mananger email:::" + managerEmail);
                 console.log("mananger number    :::" + i);
-                i = i + 1;
+
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -346,6 +346,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             })
 
             setTimeout(callback, 1000);
+            i = i + 1;
         },
         function (err) {
             // 5 seconds have passed
