@@ -148,6 +148,7 @@ function sendRequestToApiAi(emailValue, msg) {
     }
     //Vacation with leave scenarios
     else if (responseText == "vacationWithLeave") {
+      //get the milliseconds for the  end of the vacation 
       var date = response.result.parameters.date;
       date = date + " " + "17:00:00"
       date = new Date(date);
@@ -159,7 +160,7 @@ function sendRequestToApiAi(emailValue, msg) {
         today = today + " " + time;
         var timeMilliseconds = new Date(date);
         timeMilliseconds = timeMilliseconds.getTime();
-        console.log("timeMilliseconds :::" + timeMilliseconds)
+        console.log("timeMilliseconds:::" + timeMilliseconds)
 
       })
 
