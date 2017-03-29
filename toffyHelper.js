@@ -213,9 +213,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
+            
 
-
-
+            console.log("Fisrt i"+i)
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
                 console.log("Arrive after get emailFromId:: " + i)
