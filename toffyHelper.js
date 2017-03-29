@@ -215,7 +215,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function (callback) {
 
 
-            console.log("Fisrt i" + i)
+
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
                 console.log("Arrive after get emailFromId:: " + i)
@@ -226,7 +226,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-                console.log("Second i")
+                console.log("Second i" + i)
 
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -350,7 +350,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
             setTimeout(function () {
                 i = i + 1;
-            }, 1000);
+            }, 500);
 
         },
         function (err) {
