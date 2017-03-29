@@ -157,6 +157,7 @@ function sendRequestToApiAi(emailValue, msg) {
       console.log("dateMilliSeconds:::" + dateMilliSeconds)
 
       var time = response.result.parameters.time;
+      console.log("time::::" + time)
       getTodayDate(function (today) {
         today = today + " " + time;
         console.log(today);
@@ -169,7 +170,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     }
 
-    if (response.result.parameters.vacation_type == "personal") {
+    else if (response.result.parameters.vacation_type == "personal") {
       vacation_type = "time off"
     }
     //end 
