@@ -201,7 +201,9 @@ function sendRequestToApiAi(emailValue, msg) {
         }
         date1 = date1.replace(/-/g, "/")
         date = date.replace(/-/g, "/")
-
+        date1 = new Date(date1);
+        date1 = date1.getMonth() + 1 + "-" + date1.getDate() + "-" + date1.getFullYear()
+        date = date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear()
 
 
         //get the milliseconds for the  end of the vacation 
