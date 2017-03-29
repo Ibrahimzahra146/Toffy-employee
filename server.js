@@ -148,6 +148,7 @@ function sendRequestToApiAi(emailValue, msg) {
     }
     //Vacation with leave scenarios
     else if (responseText == "vacationWithLeave") {
+      console.log(JSON.stringify(response));
       var time = response.result.parameters.time;
       console.log("time::::" + time)
 
