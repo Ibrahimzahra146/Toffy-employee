@@ -215,15 +215,18 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function (callback) {
 
 
-            approvalId = managerApproval[i].id
-            approvarType = managerApproval[i].type
-            managerEmail = emailFromId.replace(/\"/, "")
-            managerEmail = managerEmail.replace(/\"/, "")
+
+
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
                 console.log("Arrive after get emailFromId:: " + i)
 
                 console.log("mananger email:::" + managerEmail);
                 console.log("approvarType" + approvarType);
+                approvalId = managerApproval[i].id
+                approvarType = managerApproval[i].type
+                managerEmail = emailFromId.replace(/\"/, "")
+                managerEmail = managerEmail.replace(/\"/, "")
+                console.log("Second i")
                 i = i + 1;
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
