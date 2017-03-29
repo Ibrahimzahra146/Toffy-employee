@@ -71,6 +71,8 @@ module.exports.sendOneDayVacationConfirmationtoEmp = function sendOneDayVacation
 // send a confirmation to user to be sure he want the vacation and enter true dates
 
 module.exports.sendVacationConfirmationToEmp = function sendVacationConfirmationToEmp(msg, startDate, endDate, email, type) {
+  console.log("startDate::" + startDate)
+  console.log("endDate" + endDate)
   getWorkingDays(startDate, endDate, email, function (body) {
     var workingDays = parseFloat(body).toFixed(1)
     var text12 = {
