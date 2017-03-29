@@ -2,56 +2,49 @@ var request = require('request')
 var IP = process.env.SLACK_IP
 var toffyHelper = require('./toffyHelper')
 
-module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, email, type) {
+module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTodayConfirmation(msg, time, date, timeInMilliseconds, email, type) {
     if (type == "sickLeave") {
         type = "sick"
     }
     console.log("sendLeaveSpecTimeTodayConfirmation::")
     convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
-        converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
-            converDateToMilliseconds("17:00:00", function (milliSeconds1) {
-                getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
-                    var workingDays = parseFloat(body).toFixed(1)
-                    console.log("Converted Time---->" + time)
-                    console.log("Converted Time---->" + TimeforMilliseconds)
-                    console.log("Converted Time---->" + milliSeconds)
-                    console.log("Converted Time---->" + milliSeconds1)
-                    var text12 = {
-                        "text": "",
-                        "attachments": [
-                            {
-                                "text": "Okay, you asked for a leave today from  " + formattedTime + " " + midday + "  to 5:00 pm. Should I go ahead ?",
-                                "callback_id": 'leave_confirm_reject',
-                                "color": "#3AA3E3",
-                                "attachment_type": "default",
-                                "actions": [
-                                    {
-                                        "name": 'confirm',
-                                        "text": "Yes",
-                                        "style": "primary",
-                                        "type": "button",
-                                        "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
-                                    },
-                                    {
-                                        "name": 'reject',
-                                        "text": "No",
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": time + "," + email + "," + milliSeconds + "," + milliSeconds1 + "," + type + "," + workingDays
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                    msg.say(text12)
-                })
+        converDateToMilliseconds("17:00:00", function (milliSeconds1) {
+            getWorkingDays(timeInMilliseconds, milliSeconds1, email, function (body) {
+                var workingDays = parseFloat(body).toFixed(1)
 
+                var text12 = {
+                    "text": "",
+                    "attachments": [
+                        {
+                            "text": "Okay, you asked for a leave at " + date + " from  " + formattedTime + " " + midday + "  to 5:00 pm. Should I go ahead ?",
+                            "callback_id": 'leave_confirm_reject',
+                            "color": "#3AA3E3",
+                            "attachment_type": "default",
+                            "actions": [
+                                {
+                                    "name": 'confirm',
+                                    "text": "Yes",
+                                    "style": "primary",
+                                    "type": "button",
+                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                },
+                                {
+                                    "name": 'reject',
+                                    "text": "No",
+                                    "style": "danger",
+                                    "type": "button",
+                                    "value": time + "," + email + "," + timeInMilliseconds + "," + milliSeconds1 + "," + type + "," + workingDays
+                                }
+                            ]
+                        }
+                    ]
+                }
+                msg.say(text12)
             })
 
-        });
-    })
+        })
 
-
+    });
 }//-------------------------------------
 module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email, type) {
     console.log("The time is " + time)

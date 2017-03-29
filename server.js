@@ -264,11 +264,22 @@ function sendRequestToApiAi(emailValue, msg) {
     */
 
     else if ((responseText) == "newLeaveRequest") {
-      var date = "hi"
-      var time = response.result.parameters.time
-      if (response.result.parameters.date) {
-        date = response.result.parameters.date
-      }
+      var date = ""
+      getTodayDate(function (today) {
+
+
+        if (response.result.parameters.date) {
+          date = response.result.parameters.date
+        } else date = today
+
+        var time = response.result.parameters.time
+        var dateWithTime = date + " " + time
+        dateWithTime = new Date(dateWithTime);
+        var dateMilliSeconds = toDate.getTime();
+        leave.sendLeaveSpecTimeTodayConfirmation(msg, time, date, dateMilliSeconds, emailValue, "personal")
+
+      })
+
       console.log(JSON.stringify(response))
       //leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "leave");
       console.log("response.result.parameters.time " + time)
