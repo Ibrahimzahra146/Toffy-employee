@@ -205,18 +205,7 @@ function sendRequestToApiAi(emailValue, msg) {
         toDate = new Date(toDate);
         var dateMilliSeconds = toDate.getTime();
         console.log("dateMilliSeconds:::" + dateMilliSeconds)
-
-
-
-
-
-        if (response.result.parameters.date) {
-          date = response.result.parameters.date
-        } if (response.result.parameters.date) {
-          date = response.result.parameters.date
-        }
         var dateAndTime = date + " " + time;
-
         console.log(dateAndTime);
         var timeMilliseconds = new Date(dateAndTime);
         timeMilliseconds = timeMilliseconds.getTime();
