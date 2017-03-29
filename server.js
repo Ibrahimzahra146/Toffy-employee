@@ -160,7 +160,7 @@ function sendRequestToApiAi(emailValue, msg) {
       //get the milliseconds for the  end of the vacation 
       var date1 = response.result.parameters.date1;
       var toDate = date1 + " " + time1
-      console.log(date);
+      console.log("toDate::" + toDate);
       toDate = new Date(toDate);
       var dateMilliSeconds = toDate.getTime();
       console.log("dateMilliSeconds:::" + dateMilliSeconds)
@@ -173,9 +173,10 @@ function sendRequestToApiAi(emailValue, msg) {
         if (response.result.parameters.date) {
           date = response.result.parameters.date
         }
-        date = date + " " + time;
-        console.log(today);
-        var timeMilliseconds = new Date(today);
+        var dateAndTime = date + " " + time;
+
+        console.log(dateAndTime);
+        var timeMilliseconds = new Date(dateAndTime);
         timeMilliseconds = timeMilliseconds.getTime();
         console.log("timeMilliseconds:::" + timeMilliseconds)
         leave.sendVacationWithLeaveConfirmation(msg, time, date, time1, date1, timeMilliseconds, dateMilliSeconds, emailValue, "personal")
