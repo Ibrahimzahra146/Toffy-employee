@@ -265,7 +265,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     else if ((responseText) == "newLeaveRequest") {
       var date = ""
-      var time = response.result.parameters.tome
+      var time = response.result.parameters.time
       if (response.result.parameters.date) {
         date = response.result.parameters.date
       }
