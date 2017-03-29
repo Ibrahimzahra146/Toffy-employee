@@ -183,6 +183,50 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
         })
     })
 }
+
+/*
+
+*/
+module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type) {
+    console.log("sendVacationWithLeaveConfirmation ")
+    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+            getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body) {
+                var workingDays = parseFloat(body).toFixed(1);
+                var text12 = {
+                    "text": "",
+                    "attachments": [
+                        {
+                            "text": "Okay, you asked for a leave today  from,  " + formattedFromTime + " " + middayFrom + "" + "  to   " + formattedTime + " " + midday + "at " + ToDate + "and that would be " + body + " working days" + ". Should I go ahead ?",
+                            "callback_id": 'leave_rangeTime_today_confirm_reject',
+                            "color": "#3AA3E3",
+                            "attachment_type": "default",
+                            "actions": [
+                                {
+                                    "name": 'confirm',
+                                    "text": "Yes",
+                                    "style": "primary",
+                                    "type": "button",
+                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays
+                                },
+                                {
+                                    "name": 'reject',
+                                    "text": "No",
+                                    "style": "danger",
+                                    "type": "button",
+                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays
+                                }
+                            ]
+                        }
+                    ]
+                }
+                msg.say(text12)
+            })
+        })
+    });
+
+
+}
 function convertTimeFormat(time, callback) {
     console.log("The Time is =" + time)
     var arr = time.toString().split(":")

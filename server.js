@@ -150,10 +150,10 @@ function sendRequestToApiAi(emailValue, msg) {
     else if (responseText == "vacationWithLeave") {
       //get the milliseconds for the  end of the vacation 
       var date = response.result.parameters.date;
-      date = date + " " + "17:00:00"
+      var toDate = date + " " + "17:00:00"
       console.log(date);
-      date = new Date(date);
-      var dateMilliSeconds = date.getTime();
+      toDate = new Date(toDate);
+      var dateMilliSeconds = toDate.getTime();
       console.log("dateMilliSeconds:::" + dateMilliSeconds)
 
       var time = response.result.parameters.time;
@@ -163,6 +163,7 @@ function sendRequestToApiAi(emailValue, msg) {
         var timeMilliseconds = new Date(today);
         timeMilliseconds = timeMilliseconds.getTime();
         console.log("timeMilliseconds:::" + timeMilliseconds)
+        leave.sendVacationWithLeaveConfirmation(msg, time, today, "17:00:00", date, timeMilliseconds, dateMilliSeconds, emailValue, "personal")
 
       })
 
@@ -623,6 +624,39 @@ slapp.action('leave_rangeTime_specDay_confirm_reject', 'reject', (msg, value) =>
   msg.say("Ok,request aborted");
   fromDate = "";
   toDate = "";
+})
+
+
+
+slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+  getTodayDate(function (todayDate) {
+    var arr = value.toString().split(",");
+    var email = arr[2]
+    var workingDays = arr[6]
+    toffyHelper.sendVacationPostRequest(/*from  */arr[3], arr[4], toffyHelper.userIdInHr, email, arr[5], function (vacationId, managerApproval) {
+
+      toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+
+        toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
+
+          fromDate = todayDate + " T " + formattedTime + " " + midday
+          toDate = todayDate + " T " + formattedTime1 + " " + midday1
+          if (!managerApproval[0]) {
+            msg.say("You dont have any manager right now ");
+          } else {
+            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager", workingDays)
+            msg.say("Your leave request have been submitted to your managers.");
+
+          }
+        });
+
+      });
+
+    });
+  })
+  fromDate = "";
+  toDate = "";
+
 })
 
 /*--------------___________________________________________________----------------------
