@@ -159,7 +159,8 @@ function sendRequestToApiAi(emailValue, msg) {
       var time = response.result.parameters.time;
       getTodayDate(function (today) {
         today = today + " " + time;
-        var timeMilliseconds = new Date(date);
+        console.log(today);
+        var timeMilliseconds = new Date(today);
         timeMilliseconds = timeMilliseconds.getTime();
         console.log("timeMilliseconds:::" + timeMilliseconds)
 
