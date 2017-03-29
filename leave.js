@@ -182,6 +182,10 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
 */
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type) {
     console.log("sendVacationWithLeaveConfirmation")
+    console.log("fromDate " + fromDate)
+    console.log("fromTime " + fromTime)
+    console.log("toTime " + toTime)
+    console.log("ToDate " + ToDate)
     console.log("fromMilliseconds " + fromMilliseconds)
     console.log("toMilliseconds " + toMilliseconds)
     convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
