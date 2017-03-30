@@ -157,7 +157,13 @@ function sendRequestToApiAi(emailValue, msg) {
         if (response.result.parameters.sick_synonyms) {
           vacation_type = "sick"
         }
-        if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+        if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+          msg.say("Please specify the dates or time ")
+
+
+
+        }
+        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
           time = response.result.parameters.time
           time1 = response.result.parameters.time1
           date = response.result.parameters.date;
@@ -165,7 +171,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
           timeOffCase = 1
 
-        } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
+        }
+        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
           time = response.result.parameters.time
           time1 = response.result.parameters.time1
           date = response.result.parameters.date1
@@ -257,8 +264,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
     //user ask for one day personal vacation
-    else if (responseText == "oneDayPersonalVacation") {
-      vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "time off")
+    else if (responseText == "leavingForHours") {
+
 
     }
     else if (responseText == "newSickVacationResponseRange") {
