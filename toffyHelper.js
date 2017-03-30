@@ -223,11 +223,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         }
 
     } else if (managerApproval[1]) {
-        console.log("here 13")
         console.log("managerApproval[1].type" + managerApproval[1].type)
 
-        if (managerApproval[1].type == "Manager") {
+        console.log("here 13")
 
+        if (managerApproval[1].type == "Manager") {
             console.log("here 14")
 
             i = 1
@@ -249,7 +249,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
         request({
             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-            "method: 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
 
@@ -365,7 +365,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
         });
 
-})
+    })
 
     /* setTimeout(function () {
          i = i + 1;
