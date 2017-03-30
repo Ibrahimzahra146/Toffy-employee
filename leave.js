@@ -396,7 +396,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
     } else if (timeOffcase == 9) {
-        messageText = "Okay, you asked for a" + typeText + " time off on " + fromDate + " and that would be 1 working days. Should I go ahead ? "
+        messageText = "Okay, you asked for a" + typeText + " time off on " + fromDate + " and that would be 1 working day. Should I go ahead ? "
 
 
     } else if (timeOffcase == 10) {
