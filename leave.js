@@ -402,5 +402,6 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     } else if (timeOffcase == 12) {
 
     }
+    callback(messageText)
 
 }
