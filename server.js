@@ -273,63 +273,14 @@ function sendRequestToApiAi(emailValue, msg) {
 
     }
 
-    else if (response.result.parameters.vacation_type == "personal") {
-      vacation_type = "time off"
-    }
-    //end 
-
 
     //user ask for one day personal vacation
     else if (responseText == "leavingForHours") {
 
 
     }
-    else if (responseText == "newSickVacationResponseRange") {
-      var vacation_type = response.result.parameters.vacation_type
-      if (response.result.parameters.vacation_type == "personal") {
-        vacation_type = "time off"
-      }
-      vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, vacation_type)
 
 
-    }
-    //One  day sick  vacation  ,so the user just determine the day he was sick in
-    else if (responseText == "oneDaySickVacation") {
-      vacation.sendOneDaySickVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, "sick")
-    }
-    // The user ask for vacation as conversation
-    else if ((responseText) == "newVacationRequestWithoutDates") {
-      msg.say("Sick or personal vacation ?")
-    }
-    //determine the type of vacation if its sick or personal vacations
-    else if ((responseText) == "typeOfVacation") {
-      if ((fromDate != "") && (toDate != "")) {
-        typeOfVacation = response.result.parameters.vacationType;
-        vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
-      }
-      else {
-        typeOfVacation = response.result.parameters.vacationType;
-        if (typeOfVacation == "sick") {
-          msg.say("Sorry to hear that. What days were you sick?")
-        }
-        else msg.say("what are the dates?");
-      }
-    }
-    //The user ask for one day vacation in conversation
-    else if ((responseText) == "oneDayVacationConversation") {
-      if (typeOfVacation != "") {
-
-        vacation.sendOneDayVacationConfirmationtoEmp(msg, response.result.parameters.date, response.result.parameters.date, emailValue, typeOfVacation)
-        fromDate = ""
-        toDate = ""
-      }
-    }
-    // the user ask for vacation in conversation scenario
-    else if ((responseText) == "sickVacation") {
-      typeOfVacation = "sick";
-      msg.say("Sorry to hear that. What days were you sick?")
-
-    }
 
     //when the user enter the date as ranger like 12-1 to 15-1
     else if ((responseText) == "dates") {
@@ -346,73 +297,6 @@ function sendRequestToApiAi(emailValue, msg) {
 
     }
 
-    /*--------------___________________________________________________----------------------
-    Leave Section
-    -------------____________________________________________________---------------------
-    */
-
-    else if ((responseText) == "newLeaveRequest") {
-      var date = ""
-      getTodayDate(function (today) {
-
-
-        if (response.result.parameters.date) {
-          date = response.result.parameters.date
-        } else date = today
-
-        var time = response.result.parameters.time
-        var dateWithTime = date + " " + time
-        dateWithTime = new Date(dateWithTime);
-        var dateMilliSeconds = dateWithTime.getTime();
-        leave.sendLeaveSpecTimeTodayConfirmation(msg, time, date, dateMilliSeconds, emailValue, "personal")
-
-      })
-
-      console.log(JSON.stringify(response))
-      //leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "leave");
-      console.log("response.result.parameters.time " + time)
-      console.log("date" + date)
-    }
-    else if ((responseText) == "SickLeave") {
-      console.log("Sick leave")
-      console.log(response)
-      leave.sendLeaveSpecTimeTodayConfirmation(msg, response.result.parameters.time, emailValue, "sickLeave");
-      console.log("response.result.parameters.time " + response.result.parameters.time)
-    }
-
-    else if ((responseText) == "newLeaveRequestSpecTimeSpecDay") {
-      var arr = (response.result.parameters.date_time).toString().split("T")//split the date from time since the response return both as one variable
-      var time = arr[1].toString().split("Z")
-      leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "leave");
-    }
-    else if ((responseText) == "newLeaveRequestRangetimeToday") {
-      var arr = (response.result.parameters.time_period).toString().split("/")//split the date from time since the response return both as one variable
-
-      leave.sendLeaveRangeTimeTodayConfirmation(msg, arr[0], arr[1], emailValue, "leave");
-    }
-    else if ((responseText) == "newLeaveRequestRangeTimeSpecDay") {
-      var arr = (response.result.parameters.time_period).toString().split("/")//split the date from time since the response return both as one variable
-      // from time =arr[0] to time =arr[1]
-      var date = response.result.parameters.date;
-      leave.sendLeaveRangeTimeSpecDayConfirmation(msg, arr[0], arr[1], date, emailValue, "leave");
-    }
-    else if ((responseText) == "leaveRequestWithoutTime") {
-      msg.say("Please specify the day and time ")
-      leaveFlag = "true";
-    }
-    else if ((responseText) == "newLeaveRequestSpecDaySpecTimeConv") {
-      if (leaveFlag == "true") {
-        var arr = (response.result.parameters.date_time).toString().split("T")//split the date from time since the response return both as one variable
-        var time = arr[1].toString().split("Z")
-        leave.sendLeaveSpecTimeSpecDayConfirmation(msg, time[0], arr[0], emailValue, "leave");
-        leaveFlag = "";
-      }
-    }
-
-    /*--------------___________________________________________________----------------------
-     End of Leave Section
-     -------------____________________________________________________---------------------
-     */
 
     //When user ask for help,response will be the menu of all things that he can do
     else if ((responseText) == "Help") {
@@ -439,23 +323,10 @@ function sendRequestToApiAi(emailValue, msg) {
       var date1 = "	2017-12-30";
       toffyHelper.showHolidays(msg, emailValue, date, date1);
     }
-    else if ((responseText) == "sickInfo") {
-      msg.say("Sorry to hear that. What dayss were you sick?")
-      sickFlag = "true";
-    }
-    else if ((responseText) == "sickRequestJustDates") {
-      if (sickFlag == "true") {
-        msg.say("I will request a vacation for you");
-        sickFlag = "";
 
-      }
-      else msg.say("I cant understand you")
-    }
+
     else if ((response.result.action) == "input.welcome") {
       SendWelcomeResponse(msg, responseText)
-    }
-    else if ((responseText) == "profile") {
-      sendUserProfile(msg);
     }
 
     else if ((responseText) == "salesforce") {
