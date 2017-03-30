@@ -222,7 +222,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             i = 2
         }
 
-    } else if (managerApproval[1]) {
+    }  if (managerApproval[1]) {
         console.log("managerApproval[1].type" + managerApproval[1].type)
 
         console.log("here 13")
