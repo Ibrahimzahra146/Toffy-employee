@@ -213,6 +213,7 @@ function sendRequestToApiAi(emailValue, msg) {
           } else if (response.result.parameters.time && response.result.parameters.date) {
             time = response.result.parameters.time
             date = response.result.parameters.date
+            date1 = response.result.parameters.date1
             timeOffCase = 6
 
           }
