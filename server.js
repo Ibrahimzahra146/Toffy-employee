@@ -240,7 +240,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
             var timeMilliseconds = new Date(fromDate);
             timeMilliseconds = timeMilliseconds.getTime();
-            console.log("timeMilliseconds:::" + timeMilliseconds)
+            console.log("timeMilliseconds :::" + timeMilliseconds)
             leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
           })
         })
