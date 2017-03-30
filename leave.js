@@ -195,7 +195,9 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                 getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
 
-
+                    if(type=="sick"){
+                        msg.say("Sorry to hear that :(")
+                    }
 
                     var text12 = {
                         "text": "",
