@@ -249,8 +249,8 @@ function sendRequestToApiAi(emailValue, msg) {
           }
           //get the milliseconds for the  end of the vacation 
 
-          var toDate = date1 + " " + convertedtime1
-          var fromDate = date + " " + convertedtime;
+          var toDate = date1 + " " + time1
+          var fromDate = date + " " + time;
           console.log("toDate::" + toDate);
           console.log("fromDate::" + fromDate);
           toDate = new Date(toDate);
