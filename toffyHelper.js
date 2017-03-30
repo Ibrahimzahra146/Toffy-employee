@@ -214,11 +214,15 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
          function () { return managerApproval[i]; },
          function (callback) {*/
 
-    if (managerApproval[1]) {
-        if (managerApproval[1].type == "HR") {
-            i = 0
-        } else i = 1
+    if (managerApproval[2]) {
+        if (managerApproval[2].type == "Manager") {
+            i = 2
+        }
 
+    } else if (managerApproval[1]) {
+        if (managerApproval[1].type == "Manager") {
+            i = 1
+        }
     }
 
 
