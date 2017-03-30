@@ -22,6 +22,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
+var vacation_type = ""
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
@@ -153,7 +154,7 @@ function sendRequestToApiAi(emailValue, msg) {
         var date = today
         var date1 = today
         var timeOffCase = -1
-        var vacation_type = "personal"
+
         if (response.result.parameters.sick_synonyms) {
           vacation_type = "sick"
         }
@@ -241,7 +242,9 @@ function sendRequestToApiAi(emailValue, msg) {
           date = date.replace(/-/g, "/")
 
 
-
+          if (vacation_type == "") {
+            vacation_type = "personal"
+          }
           //get the milliseconds for the  end of the vacation 
           leave.convertTimeFormat(time1, function (x, y, convertedtime1) {
             leave.convertTimeFormat(time, function (x, y, convertedtime) {
@@ -257,6 +260,7 @@ function sendRequestToApiAi(emailValue, msg) {
               timeMilliseconds = timeMilliseconds.getTime();
               console.log("timeMilliseconds :::" + timeMilliseconds)
               leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
+              vacation_type = ""
             })
           })
 
