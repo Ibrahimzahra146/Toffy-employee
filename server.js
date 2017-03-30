@@ -162,99 +162,100 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
 
-        }
-        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
-          time = response.result.parameters.time
-          time1 = response.result.parameters.time1
-          date = response.result.parameters.date;
-          date1 = response.result.parameters.date1;
+        } else {
+          if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+            time = response.result.parameters.time
+            time1 = response.result.parameters.time1
+            date = response.result.parameters.date;
+            date1 = response.result.parameters.date1;
 
-          timeOffCase = 1
+            timeOffCase = 1
 
-        }
-        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
-          time = response.result.parameters.time
-          time1 = response.result.parameters.time1
-          date = response.result.parameters.date1
-          date1 = response.result.parameters.date1
+          }
+          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
+            time = response.result.parameters.time
+            time1 = response.result.parameters.time1
+            date = response.result.parameters.date1
+            date1 = response.result.parameters.date1
 
-          timeOffCase = 2
+            timeOffCase = 2
 
-        } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
-          time = response.result.parameters.time
-          time1 = response.result.parameters.time1
-          date = response.result.parameters.date
-          date1 = response.result.parameters.date1
-          timeOffCase = 3
+          } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
+            time = response.result.parameters.time
+            time1 = response.result.parameters.time1
+            date = response.result.parameters.date
+            date1 = response.result.parameters.date1
+            timeOffCase = 3
 
-        }
+          }
 
-        else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
-          time = response.result.parameters.time
-          time1 = response.result.parameters.time1
-          date = response.result.parameters.date
-          date1 = response.result.parameters.date1
-          timeOffCase = 4
+          else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
+            time = response.result.parameters.time
+            time1 = response.result.parameters.time1
+            date = response.result.parameters.date
+            date1 = response.result.parameters.date1
+            timeOffCase = 4
 
-        } else if (response.result.parameters.time && response.result.parameters.time1) {
-          time = response.result.parameters.time
-          time1 = response.result.parameters.time1
-          timeOffCase = 5
+          } else if (response.result.parameters.time && response.result.parameters.time1) {
+            time = response.result.parameters.time
+            time1 = response.result.parameters.time1
+            timeOffCase = 5
 
-        } else if (response.result.parameters.time && response.result.parameters.date) {
-          time = response.result.parameters.time
-          date = response.result.parameters.date
-          timeOffCase = 6
+          } else if (response.result.parameters.time && response.result.parameters.date) {
+            time = response.result.parameters.time
+            date = response.result.parameters.date
+            timeOffCase = 6
 
-        }
-        else if (response.result.parameters.time && response.result.parameters.date1) {
-          time = response.result.parameters.time
-          date1 = response.result.parameters.date1
-          timeOffCase = 7
+          }
+          else if (response.result.parameters.time && response.result.parameters.date1) {
+            time = response.result.parameters.time
+            date1 = response.result.parameters.date1
+            timeOffCase = 7
 
-        }
-        else if (response.result.parameters.date && response.result.parameters.date1) {
-          date = response.result.parameters.date
-          date1 = response.result.parameters.date1
-          timeOffCase = 8
+          }
+          else if (response.result.parameters.date && response.result.parameters.date1) {
+            date = response.result.parameters.date
+            date1 = response.result.parameters.date1
+            timeOffCase = 8
 
-        }
-        else if (response.result.parameters.date) {
-          date = response.result.parameters.date
-          timeOffCase = 9
+          }
+          else if (response.result.parameters.date) {
+            date = response.result.parameters.date
+            timeOffCase = 9
 
-        } else if (response.result.parameters.time) {
-          time = response.result.parameters.time
-          timeOffCase = 10
-
-
-        }
-        date1 = date1.replace(/-/g, "/")
-        date = date.replace(/-/g, "/")
+          } else if (response.result.parameters.time) {
+            time = response.result.parameters.time
+            timeOffCase = 10
 
 
+          }
+          date1 = date1.replace(/-/g, "/")
+          date = date.replace(/-/g, "/")
 
-        //get the milliseconds for the  end of the vacation 
-        leave.convertTimeFormat(time1, function (x, y, convertedtime1) {
-          leave.convertTimeFormat(time, function (x, y, convertedtime) {
-            var toDate = date1 + " " + convertedtime1
-            var fromDate = date + " " + convertedtime;
-            console.log("toDate::" + toDate);
-            console.log("fromDate::" + fromDate);
-            toDate = new Date(toDate);
-            var dateMilliSeconds = toDate.getTime();
-            console.log("dateMilliSeconds:::" + dateMilliSeconds)
 
-            var timeMilliseconds = new Date(fromDate);
-            timeMilliseconds = timeMilliseconds.getTime();
-            console.log("timeMilliseconds :::" + timeMilliseconds)
-            leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
+
+          //get the milliseconds for the  end of the vacation 
+          leave.convertTimeFormat(time1, function (x, y, convertedtime1) {
+            leave.convertTimeFormat(time, function (x, y, convertedtime) {
+              var toDate = date1 + " " + convertedtime1
+              var fromDate = date + " " + convertedtime;
+              console.log("toDate::" + toDate);
+              console.log("fromDate::" + fromDate);
+              toDate = new Date(toDate);
+              var dateMilliSeconds = toDate.getTime();
+              console.log("dateMilliSeconds:::" + dateMilliSeconds)
+
+              var timeMilliseconds = new Date(fromDate);
+              timeMilliseconds = timeMilliseconds.getTime();
+              console.log("timeMilliseconds :::" + timeMilliseconds)
+              leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
+            })
           })
-        })
 
 
-
+        }
       })
+
     }
 
     else if (response.result.parameters.vacation_type == "personal") {
