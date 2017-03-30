@@ -364,39 +364,43 @@ function getWorkingDays(startDate, endDate, email, callback) {
     })
 }
 function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
+    var typeText = ""
+    if (type == "sick") {
+        typeText = " sick "
+    }
     var messageText = ""
     if (timeOffcase == 1) {
-        messageText = "Okay, you asked for a time off in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
     } else if (timeOffcase == 2) {
-        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " on " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
     } else if (timeOffcase == 3) {
-        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + fromDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + fromDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
     } else if (timeOffcase == 4) {
-        messageText = "Okay, you asked for a time off in, " + fromDate + " at " + formattedFromTime + " " + middayFrom + " to the end of  " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off on, " + fromDate + " at " + formattedFromTime + " " + middayFrom + " to the end of  " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
 
     } else if (timeOffcase == 5) {
-        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + ", today  and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + ", today  and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
     } else if (timeOffcase == 6) {
-        messageText = "Okay, you asked for a time off at " + formattedFromTime + " " + middayFrom + " in  " + fromDate + " to 5:00: pm , and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a " + typeText + "time off at " + formattedFromTime + " " + middayFrom + " to 5:00: pm on " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
     } else if (timeOffcase == 7) {
-        messageText = "Okay, you asked for a time off in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a " + typeText + "time off on " + fromDate + "  at " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
 
     } else if (timeOffcase == 8) {
-        messageText = "Okay, you asked for a time off from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
 
     } else if (timeOffcase == 9) {
-        messageText = "Okay, you asked for a time off in " + fromDate + " and that would be 1 working days. Should I go ahead ? "
+        messageText = "Okay, you asked for a" + typeText + " time off on " + fromDate + " and that would be 1 working days. Should I go ahead ? "
 
 
     } else if (timeOffcase == 10) {
-        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day  " + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day  " + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
 
     } else if (timeOffcase == 11) {
