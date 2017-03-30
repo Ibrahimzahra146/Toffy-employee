@@ -231,6 +231,7 @@ function sendRequestToApiAi(emailValue, msg) {
           }
           else if (response.result.parameters.date) {
             date = response.result.parameters.date
+            date1 = response.result.parameters.date
             timeOffCase = 9
 
           } else if (response.result.parameters.time) {
@@ -454,11 +455,12 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
         toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
-          fromDate = fromDate;
+          fromDate = fromDate+" T 5:00 pm ";
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
             fromDate = fromDate + " T " + formattedTime + " " + midday
           }
+          else 
           if (arr[1] && (arr[1] != undefined)) {
             toDate = toDate + " T " + formattedTime1 + " " + midday1
           }
