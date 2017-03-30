@@ -366,7 +366,7 @@ function getWorkingDays(startDate, endDate, email, callback) {
 function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
     var typeText = ""
     if (type == "sick") {
-        typeText = " sick "
+        typeText = " sick"
     }
     var messageText = ""
     if (timeOffcase == 1) {
