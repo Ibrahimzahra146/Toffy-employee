@@ -181,6 +181,15 @@ function sendRequestToApiAi(emailValue, msg) {
           date1 = response.result.parameters.date1
           timeOffCase = 3
 
+        }
+
+        else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
+          time = response.result.parameters.time
+          time1 = response.result.parameters.time1
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date1
+          timeOffCase = 3
+
         } else if (response.result.parameters.time && response.result.parameters.time1) {
           time = response.result.parameters.time
           time1 = response.result.parameters.time1
@@ -476,7 +485,7 @@ function getTodayDate(callback) {
     mm = '0' + mm
   }
 
-  today =yyyy+ '/'+ mm + '/' + dd ;
+  today = yyyy + '/' + mm + '/' + dd;
   callback(today)
 
 }
@@ -731,7 +740,14 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
             msg.say("You dont have any manager right now ");
           } else {
             toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager", workingDays)
-            msg.say("Your leave request have been submitted to your managers.");
+
+            if (type == "sick") {
+              console.log("Manager approvals sick vacation is ::" + JSON.stringify(managerApproval))
+              msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR admin. You might asked to provide a sick report. I’ll inform you about this.  ")
+
+            }
+            else
+              msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
 
           }
         });
@@ -743,6 +759,12 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   fromDate = "";
   toDate = "";
 
+})
+
+slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+  msg.say("Ok, operation aborted.")
+  fromDate = "";
+  toDate = "";
 })
 
 /*--------------___________________________________________________----------------------
