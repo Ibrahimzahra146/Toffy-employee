@@ -283,6 +283,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //user ask for one day personal vacation
     else if (responseText == "leavingForHours") {
+      nsg.say("Sorry! This feature is not supported yet.")
 
 
     }
