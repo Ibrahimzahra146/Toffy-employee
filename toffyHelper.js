@@ -224,6 +224,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             i = 1
         }
     }
+    console.log("The iiiiiiiii::::: is::" + i)
 
 
     var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
