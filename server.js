@@ -166,7 +166,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
         }
         else if (response.result.parameters.sick_synonyms && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
-          msg.say("Please specify the dates or time ")
+          msg.say("Please specify the date and/or time ")
 
 
           vacation_type1 = "sick"
