@@ -805,7 +805,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
 
 })
 
-slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok, operation aborted.")
   fromDate = "";
   toDate = "";
