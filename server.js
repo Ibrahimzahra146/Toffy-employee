@@ -228,8 +228,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
         //get the milliseconds for the  end of the vacation 
-        toffyHelper.convertTimeFormat(time1, function (convertedtime1) {
-          toffyHelper.convertTimeFormat(time, function (convertedtime) {
+        toffyHelper.convertTimeFormat(time1, function (x, y, convertedtime1) {
+          toffyHelper.convertTimeFormat(time, function (x, y, convertedtime) {
             var toDate = date1 + " " + convertedtime1
             var fromDate = date + " " + convertedtime;
             console.log("toDate::" + toDate);
