@@ -175,7 +175,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
         } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
           time = response.result.parameters.time
-          time1 = response.result.parameters.time1  
+          time1 = response.result.parameters.time1
           date = response.result.parameters.date
           date1 = response.result.parameters.date1
           timeOffCase = 3
@@ -228,19 +228,23 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
         //get the milliseconds for the  end of the vacation 
+        toffyHelper.convertTimeFormat(time1, function (convertedtime1) {
+          toffyHelper.convertTimeFormat(time, function (convertedtime) {
+            var toDate = date1 + " " + convertedtime1
+            var fromDate = date + " " + convertedtime;
+            console.log("toDate::" + toDate);
+            console.log("fromDate::" + fromDate);
+            toDate = new Date(toDate);
+            var dateMilliSeconds = toDate.getTime();
+            console.log("dateMilliSeconds:::" + dateMilliSeconds)
 
-        var toDate = date1 + " " + time1
-        var fromDate = date + " " + time;
-        console.log("toDate::" + toDate);
-        console.log("fromDate::" + fromDate);
-        toDate = new Date(toDate);
-        var dateMilliSeconds = toDate.getTime();
-        console.log("dateMilliSeconds:::" + dateMilliSeconds)
+            var timeMilliseconds = new Date(fromDate);
+            timeMilliseconds = timeMilliseconds.getTime();
+            console.log("timeMilliseconds:::" + timeMilliseconds)
+            leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
+          })
+        })
 
-        var timeMilliseconds = new Date(fromDate);
-        timeMilliseconds = timeMilliseconds.getTime();
-        console.log("timeMilliseconds:::" + timeMilliseconds)
-        leave.sendVacationWithLeaveConfirmation(msg, time, date, time1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
 
 
       })

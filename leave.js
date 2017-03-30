@@ -7,8 +7,8 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
         type = "sick"
     }
     console.log("sendLeaveSpecTimeTodayConfirmation::")
-    convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
-        converDateToMilliseconds("17:00:00", function (milliSeconds1) {
+    toffyHelper.convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
+        toffyHelper. converDateToMilliseconds("17:00:00", function (milliSeconds1) {
             getWorkingDays(timeInMilliseconds, milliSeconds1, email, function (body) {
                 var workingDays = parseFloat(body).toFixed(1)
 
@@ -49,7 +49,7 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
 module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email, type) {
     console.log("The time is " + time)
     console.log("The date is " + date)
-    convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
+     toffyHelper.convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
             converDateToMillisecondsWithSpecDate("17:00:00", date, function (milliSeconds1) {
                 getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -94,8 +94,8 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
 }
 module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email, type) {
     console.log("RangeTimeToday")
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
                 converDateToMilliseconds(TimeforMilliseconds1, function (milliSeconds1) {
                     getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -136,8 +136,8 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
 
 }
 module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email, type) {
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        toffyHelper. convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
                 converDateToMillisecondsWithSpecDate(TimeforMilliseconds1, date, function (milliSeconds1) {
                     getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -188,14 +188,14 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     console.log("ToDate " + ToDate)
     console.log("fromMilliseconds " + fromMilliseconds)
     console.log("toMilliseconds " + toMilliseconds)
-    convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+    toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body) {
                 var workingDays = parseFloat(body).toFixed(1);
 
                 getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
 
-                    if(type=="sick"){
+                    if (type == "sick") {
                         msg.say("Sorry to hear that :(")
                     }
 
@@ -233,7 +233,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
     })
 }
-function convertTimeFormat(time, callback) {
+module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
     console.log("The Time is =" + time)
     var arr = time.toString().split(":")
     var formattedTime = ""
