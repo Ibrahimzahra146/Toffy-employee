@@ -290,7 +290,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
         formattedTime = arr[0] + ":" + arr[1];
         midday = "am";
     }
-
+    console.log("TimeforMilliseconds" + TimeforMilliseconds)
     callback(formattedTime, midday, TimeforMilliseconds)
 }
 function converDateToMilliseconds(TimeforMilliseconds, callback) {
