@@ -248,25 +248,22 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 = "personal"
           }
           //get the milliseconds for the  end of the vacation 
-          leave.convertTimeFormat(time1, function (x, y, convertedtime1) {
-            leave.convertTimeFormat(time, function (x, y, convertedtime) {
-              var toDate = date1 + " " + convertedtime1
-              var fromDate = date + " " + convertedtime;
-              console.log("toDate::" + toDate);
-              console.log("fromDate::" + fromDate);
-              toDate = new Date(toDate);
-              var dateMilliSeconds = toDate.getTime();
-              console.log("dateMilliSeconds:::" + dateMilliSeconds)
-              dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
 
-              var timeMilliseconds = new Date(fromDate);
-              timeMilliseconds = timeMilliseconds.getTime();
-              timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
-              console.log("timeMilliseconds :::" + timeMilliseconds)
-              leave.sendVacationWithLeaveConfirmation(msg, convertedtime, date, convertedtime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
-              vacation_type1 = ""
-            })
-          })
+          var toDate = date1 + " " + convertedtime1
+          var fromDate = date + " " + convertedtime;
+          console.log("toDate::" + toDate);
+          console.log("fromDate::" + fromDate);
+          toDate = new Date(toDate);
+          var dateMilliSeconds = toDate.getTime();
+          console.log("dateMilliSeconds:::" + dateMilliSeconds)
+          dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
+
+          var timeMilliseconds = new Date(fromDate);
+          timeMilliseconds = timeMilliseconds.getTime();
+          timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
+          console.log("timeMilliseconds :::" + timeMilliseconds)
+          leave.sendVacationWithLeaveConfirmation(msg, time, date, time1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
+          vacation_type1 = ""
 
 
         }
