@@ -193,7 +193,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
             getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body) {
                 var workingDays = parseFloat(body).toFixed(1);
 
-                getmessage(fromTime, middayFrom, fromDate, toTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
+                getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
 
 
 
