@@ -351,7 +351,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             setTimeout(function () {
                 i = i + 1;
 
-            }, 3000);
+            }, 1500);
 
         },
         function (err) {
