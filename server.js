@@ -205,11 +205,7 @@ function sendRequestToApiAi(emailValue, msg) {
         }
         date1 = date1.replace(/-/g, "/")
         date = date.replace(/-/g, "/")
-        date1 = new Date(date1);
-        date1 = date1.getDate() + "/" + (date1.getMonth() + 1) + "/" + date1.getFullYear()
-        date = new Date(date);
 
-        date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
 
 
         //get the milliseconds for the  end of the vacation 
@@ -217,7 +213,7 @@ function sendRequestToApiAi(emailValue, msg) {
         var toDate = date1 + " " + time1
         var fromDate = date + " " + time;
         console.log("toDate::" + toDate);
-        console.log("toDate::" + fromDate);
+        console.log("fromDate::" + fromDate);
         toDate = new Date(toDate);
         var dateMilliSeconds = toDate.getTime();
         console.log("dateMilliSeconds:::" + dateMilliSeconds)
