@@ -8,7 +8,7 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
     }
     console.log("sendLeaveSpecTimeTodayConfirmation::")
     toffyHelper.convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
-        toffyHelper. converDateToMilliseconds("17:00:00", function (milliSeconds1) {
+        toffyHelper.converDateToMilliseconds("17:00:00", function (milliSeconds1) {
             getWorkingDays(timeInMilliseconds, milliSeconds1, email, function (body) {
                 var workingDays = parseFloat(body).toFixed(1)
 
@@ -49,7 +49,7 @@ module.exports.sendLeaveSpecTimeTodayConfirmation = function sendLeaveSpecTimeTo
 module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, time, date, email, type) {
     console.log("The time is " + time)
     console.log("The date is " + date)
-     toffyHelper.convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
+    toffyHelper.convertTimeFormat(time, function (formattedTime, midday, TimeforMilliseconds) {
         converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
             converDateToMillisecondsWithSpecDate("17:00:00", date, function (milliSeconds1) {
                 getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -94,8 +94,8 @@ module.exports.sendLeaveSpecTimeSpecDayConfirmation = function sendLeaveSpecTime
 }
 module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTimeTodayConfirmation(msg, fromTime, toTime, email, type) {
     console.log("RangeTimeToday")
-     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+    toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMilliseconds(TimeforMilliseconds, function (milliSeconds) {
                 converDateToMilliseconds(TimeforMilliseconds1, function (milliSeconds1) {
                     getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -136,8 +136,8 @@ module.exports.sendLeaveRangeTimeTodayConfirmation = function sendLeaveRangeTime
 
 }
 module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTimeSpecDayConfirmation(msg, fromTime, toTime, date, email, type) {
-     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        toffyHelper. convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+    toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, function (milliSeconds) {
                 converDateToMillisecondsWithSpecDate(TimeforMilliseconds1, date, function (milliSeconds1) {
                     getWorkingDays(milliSeconds, milliSeconds1, email, function (body) {
@@ -259,7 +259,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
         formattedTime = "05:" + arr[1];
         TimeforMilliseconds = "17:" + arr[1]
     }
-    else if (arr[0] == "20") {
+    else if (arr[0] == "20" || arr[0] == "08") {
         formattedTime = "08:" + arr[1];
         midday = "am"
         TimeforMilliseconds = "8:" + arr[1]
