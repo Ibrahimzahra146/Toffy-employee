@@ -382,7 +382,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
     } else if (timeOffcase == 5) {
-        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + ", today  and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        messageText = "Okay, you asked for a" + typeText + " time off from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + " todaym and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
     } else if (timeOffcase == 6) {
         messageText = "Okay, you asked for a " + typeText + "time off at " + formattedFromTime + " " + middayFrom + " to 5:00: pm on " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
