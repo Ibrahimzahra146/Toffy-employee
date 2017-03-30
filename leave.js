@@ -361,7 +361,7 @@ function getWorkingDays(startDate, endDate, email, callback) {
 
     })
 }
-function getmessage(fromTime, middayFrom, fromDate, toTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
+function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
     var messageText = ""
     if (timeOffcase == 1) {
         messageText = "Okay, you asked for a time off in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
