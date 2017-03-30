@@ -180,7 +180,7 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
 /*
 
 */
-module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type) {
+module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
     console.log("sendVacationWithLeaveConfirmation")
     console.log("fromDate " + fromDate)
     console.log("fromTime " + fromTime)
@@ -192,39 +192,44 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
         convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body) {
                 var workingDays = parseFloat(body).toFixed(1);
-                var text12 = {
-                    "text": "",
-                    "attachments": [
-                        {
-                            "text": "Okay, you asked for a leave in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?",
-                            "callback_id": 'leave_with_vacation_confirm_reject',
-                            "color": "#3AA3E3",
-                            "attachment_type": "default",
-                            "actions": [
-                                {
-                                    "name": 'confirm',
-                                    "text": "Yes",
-                                    "style": "primary",
-                                    "type": "button",
-                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
-                                },
-                                {
-                                    "name": 'reject',
-                                    "text": "No",
-                                    "style": "danger",
-                                    "type": "button",
-                                    "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
-                                }
-                            ]
-                        }
-                    ]
-                }
-                msg.say(text12)
+
+                getmessage(fromTime, middayFrom, fromDate, toTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
+
+
+
+                    var text12 = {
+                        "text": "",
+                        "attachments": [
+                            {
+                                "text": messagetext,
+                                "callback_id": 'leave_with_vacation_confirm_reject',
+                                "color": "#3AA3E3",
+                                "attachment_type": "default",
+                                "actions": [
+                                    {
+                                        "name": 'confirm',
+                                        "text": "Yes",
+                                        "style": "primary",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
+                                    },
+                                    {
+                                        "name": 'reject',
+                                        "text": "No",
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    msg.say(text12)
+                })
             })
-        })
-    });
+        });
 
-
+    })
 }
 function convertTimeFormat(time, callback) {
     console.log("The Time is =" + time)
@@ -355,4 +360,47 @@ function getWorkingDays(startDate, endDate, email, callback) {
         })
 
     })
+}
+function getmessage(fromTime, middayFrom, fromDate, toTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
+    var messageText = ""
+    if (timeOffcase == 1) {
+        messageText = "Okay, you asked for a time off in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+    } else if (timeOffcase == 2) {
+        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+    } else if (timeOffcase == 3) {
+        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + fromDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+    } else if (timeOffcase == 4) {
+        messageText = "Okay, you asked for a time off in, " + fromDate + " at " + formattedFromTime + " " + middayFrom + " to the end of  " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+
+    } else if (timeOffcase == 5) {
+        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + " to " + toTime + " " + midday + ", today  and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+    } else if (timeOffcase == 6) {
+        messageText = "Okay, you asked for a time off at , " + formattedFromTime + " " + middayFrom + " in  " + fromDate + ", and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+    } else if (timeOffcase == 7) {
+        messageText = "Okay, you asked for a time off in " + fromDate + "  from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+
+    } else if (timeOffcase == 8) {
+        messageText = "Okay, you asked for a time off from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+
+    } else if (timeOffcase == 9) {
+        messageText = "Okay, you asked for a time off in " + fromDate + " and that would be 1 working days. Should I go ahead ? "
+
+
+    } else if (timeOffcase == 10) {
+        messageText = "Okay, you asked for a time off from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day  " + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+
+
+    } else if (timeOffcase == 11) {
+
+    } else if (timeOffcase == 12) {
+
+    }
+
 }

@@ -143,12 +143,10 @@ function sendRequestToApiAi(emailValue, msg) {
     let responseText = response.result.fulfillment.speech;
     console.log("responseText:::" + responseText)
     //user ask for new personal vacation with from to dates
-    if (responseText == "newVacationRequest") {
-      vacation.sendVacationConfirmationToEmp(msg, response.result.parameters.date, response.result.parameters.date1, emailValue, "time off")
-    }
-    //Vacation with leave scenarios
-    else if (responseText == "vacationWithLeave") {
 
+    //Vacation with leave scenarios
+    if (responseText == "vacationWithLeave") {
+      var messageText = ""
       getTodayDate(function (today) {
         var time1 = "17:00:00";
         var time = "8:00:00";
@@ -164,6 +162,7 @@ function sendRequestToApiAi(emailValue, msg) {
           time1 = response.result.parameters.time1
           date = response.result.parameters.date;
           date1 = response.result.parameters.date1;
+
           timeOffCase = 1
 
         } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
@@ -176,7 +175,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
         } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
           time = response.result.parameters.time
-          time1 = response.result.parameters.time1
+          time1 = response.result.parameters.time1  
           date = response.result.parameters.date
           date1 = response.result.parameters.date1
           timeOffCase = 3
@@ -188,17 +187,17 @@ function sendRequestToApiAi(emailValue, msg) {
           time1 = response.result.parameters.time1
           date = response.result.parameters.date
           date1 = response.result.parameters.date1
-          timeOffCase = 3
+          timeOffCase = 4
 
         } else if (response.result.parameters.time && response.result.parameters.time1) {
           time = response.result.parameters.time
           time1 = response.result.parameters.time1
-          timeOffCase = 4
+          timeOffCase = 5
 
         } else if (response.result.parameters.time && response.result.parameters.date) {
           time = response.result.parameters.time
           date = response.result.parameters.date
-          timeOffCase = 5
+          timeOffCase = 6
 
         }
         else if (response.result.parameters.time && response.result.parameters.date1) {
@@ -210,11 +209,16 @@ function sendRequestToApiAi(emailValue, msg) {
         else if (response.result.parameters.date && response.result.parameters.date1) {
           date = response.result.parameters.date
           date1 = response.result.parameters.date1
-          timeOffCase = 7
+          timeOffCase = 8
+
+        }
+        else if (response.result.parameters.date) {
+          date = response.result.parameters.date
+          timeOffCase = 9
 
         } else if (response.result.parameters.time) {
           time = response.result.parameters.time
-          timeOffCase = 6
+          timeOffCase = 10
 
 
         }
@@ -236,7 +240,7 @@ function sendRequestToApiAi(emailValue, msg) {
         var timeMilliseconds = new Date(fromDate);
         timeMilliseconds = timeMilliseconds.getTime();
         console.log("timeMilliseconds:::" + timeMilliseconds)
-        leave.sendVacationWithLeaveConfirmation(msg, time, date, time1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type)
+        leave.sendVacationWithLeaveConfirmation(msg, time, date, time1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type, timeOffCase)
 
 
       })
