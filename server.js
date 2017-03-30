@@ -193,7 +193,7 @@ function sendRequestToApiAi(emailValue, msg) {
             time = response.result.parameters.time
             time1 = response.result.parameters.time1
             date = response.result.parameters.date
-            date1 = response.result.parameters.date1
+            date1 = response.result.parameters.date
             timeOffCase = 3
 
           }
