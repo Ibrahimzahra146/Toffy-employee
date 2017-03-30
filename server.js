@@ -749,10 +749,10 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
         toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
           fromDate = fromDate;
           toDate = toDate
-          if (formattedTime) {
+          if (arr[0] && (arr[0] != undefined)) {
             fromDate = fromDate + " T " + formattedTime + " " + midday
           }
-          if (formattedTime1) {
+          if (arr[1] && (arr[1] != undefined)) {
             toDate = toDate + " T " + formattedTime1 + " " + midday1
           }
 
