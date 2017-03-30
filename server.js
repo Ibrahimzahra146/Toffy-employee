@@ -747,13 +747,20 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
       toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
         toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
+          fromDate = fromDate;
+          toDate = toDate
+          if (formattedTime) {
+            fromDate = fromDate + " T " + formattedTime + " " + midday
+          }
+          if (formattedTime1) {
+            toDate = toDate + " T " + formattedTime1 + " " + midday1
+          }
 
-          fromDate = fromDate + " T " + formattedTime + " " + midday
-          toDate = toDate + " T " + formattedTime1 + " " + midday1
+
           if (!managerApproval[0]) {
             msg.say("You dont have any manager right now ");
           } else {
-            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], "leave", vacationId, managerApproval, "Manager", workingDays)
+            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays)
 
             if (type == "sick") {
               console.log("Manager approvals sick vacation is ::" + JSON.stringify(managerApproval))
