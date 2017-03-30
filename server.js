@@ -158,9 +158,17 @@ function sendRequestToApiAi(emailValue, msg) {
           vacation_type = "sick"
         }
         if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+
           msg.say("Please specify the dates or time ")
 
 
+
+        }
+        else if (response.result.parameters.sick_synonyms && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+          msg.say("Please specify the dates or time ")
+
+
+          vacation_type = "sick"
 
         } else {
           if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
