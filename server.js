@@ -158,7 +158,50 @@ function sendRequestToApiAi(emailValue, msg) {
         if (response.result.parameters.sick_synonyms) {
           vacation_type1 = "sick"
         }
-        if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
+          time = response.result.parameters.time
+
+          if (response.result.parameters.time1) {
+
+            console.log("time1 isnot empty")
+
+            time1 = response.result.parameters.time1;
+            time = time1;
+            time1 = response.result.parameters.time;
+            var arr = time1.toString().split(":")
+            var arr1 = time.toString().split(":")
+            arr[0] = arr[0] + arr1[0];
+            arr[1] = arr[1] + arr1[1];
+            arr[2] = arr[2] + arr1[2];
+            time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+            console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+            console.log("time:" + time)
+          }
+          else {
+            console.log("time1 is empty")
+            var d = new Date(); // for now
+            time1 = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+            time = time1;
+            time1 = response.result.parameters.time;
+            var arr = time1.toString().split(":")
+            var arr1 = time.toString().split(":")
+            console.log("arr[0]" + arr[0])
+            console.log("arr[1]" + arr1[0])
+            console.log(arr[0] + arr1[0])
+
+
+            arr[0] = (arr[0] + arr1[0]);
+            arr[1] = arr[1] + arr1[1];
+            arr[2] = arr[2] + arr1[2];
+            time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+            console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+            console.log("time:" + time)
+          }
+
+
+          timeOffCase = 5
+        }
+        else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
 
           msg.say("Please specify the date and/or time ")
 
@@ -239,48 +282,6 @@ function sendRequestToApiAi(emailValue, msg) {
             time = response.result.parameters.time
             timeOffCase = 10
 
-          } else if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
-            time = response.result.parameters.time
-            if (response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
-              if (response.result.parameters.time1) {
-
-                console.log("time1 isnot empty")
-
-                time1 = response.result.parameters.time1;
-                time = time1;
-                time1 = response.result.parameters.time;
-                var arr = time1.toString().split(":")
-                var arr1 = time.toString().split(":")
-                arr[0] = arr[0] + arr1[0];
-                arr[1] = arr[1] + arr1[1];
-                arr[2] = arr[2] + arr1[2];
-                time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-                console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-                console.log("time:" + time)
-              }
-              else {
-                console.log("time1 is empty")
-                var d = new Date(); // for now
-                time1 = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-                time = time1;
-                time1 = response.result.parameters.time;
-                var arr = time1.toString().split(":")
-                var arr1 = time.toString().split(":")
-                console.log("arr[0]" + arr[0])
-                console.log("arr[1]" + arr1[0])
-                console.log(arr[0] + arr1[0])
-
-
-                arr[0] = (arr[0] + arr1[0]);
-                arr[1] = arr[1] + arr1[1];
-                arr[2] = arr[2] + arr1[2];
-                time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-                console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-                console.log("time:" + time)
-              }
-            }
-
-            timeOffCase = 5
           }
           date1 = date1.replace(/-/g, "/")
           date = date.replace(/-/g, "/")
