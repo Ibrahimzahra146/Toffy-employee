@@ -221,7 +221,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
             timeOffCase = 5
           }
-          if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
             time = response.result.parameters.time
             time1 = response.result.parameters.time1
             date = response.result.parameters.date;
