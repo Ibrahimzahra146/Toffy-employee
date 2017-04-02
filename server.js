@@ -200,7 +200,7 @@ function sendRequestToApiAi(emailValue, msg) {
             else {
               console.log("time1 is empty")
               var d = new Date(); // for now
-              time1 = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+              time1 = (Number(d.getHours()) + 3) + ":" + d.getMinutes() + ":" + d.getSeconds()
               console.log("arr[0] + + arr[1] + + arr[2]" + time1)
               console.log("time:" + time)
               time = time1;
