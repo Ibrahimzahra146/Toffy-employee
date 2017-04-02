@@ -236,9 +236,41 @@ function sendRequestToApiAi(emailValue, msg) {
 
           } else if (response.result.parameters.time) {
             time = response.result.parameters.time
+            if (response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
+              if (response.result.parameters.time1) {
+
+                console.log("time1 isnot empty")
+
+                time1 = response.result.parameters.time1;
+                time = time1;
+                time1 = response.result.parameters.time;
+                var arr = time1.toString().split(":")
+                var arr1 = time.toString().split(":")
+                arr[0] = arr[0] + arr1[0];
+                arr[1] = arr[1] + arr1[1];
+                arr[2] = arr[2] + arr1[2];
+                time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+                console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+                console.log("time:" + time)
+              }
+              else {
+                console.log("time1 is empty")
+                var d = new Date(); // for now
+                time1 = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+                time = time1;
+                time1 = response.result.parameters.time;
+                var arr = time1.toString().split(":")
+                var arr1 = time.toString().split(":")
+                arr[0] = arr[0] + arr1[0];
+                arr[1] = arr[1] + arr1[1];
+                arr[2] = arr[2] + arr1[2];
+                time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+                console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+                console.log("time:" + time)
+              }
+            }
+
             timeOffCase = 10
-
-
           }
           date1 = date1.replace(/-/g, "/")
           date = date.replace(/-/g, "/")
@@ -283,7 +315,9 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //user ask for one day personal vacation
     else if (responseText == "leavingForHours") {
-      nsg.say("Sorry! This feature is not supported yet.")
+      var numberOfHours = response.result.parameters.number;
+      var
+        msg.say("Sorry! This feature is not supported yet.")
 
 
     }
