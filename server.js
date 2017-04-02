@@ -234,7 +234,12 @@ function sendRequestToApiAi(emailValue, msg) {
             date1 = response.result.parameters.date
             timeOffCase = 9
 
-          } else if (response.result.parameters.time) {
+          }
+          else if (response.result.parameters.time) {
+            time = response.result.parameters.time
+            timeOffCase = 10
+
+          } else if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
             time = response.result.parameters.time
             if (response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
               if (response.result.parameters.time1) {
@@ -261,7 +266,12 @@ function sendRequestToApiAi(emailValue, msg) {
                 time1 = response.result.parameters.time;
                 var arr = time1.toString().split(":")
                 var arr1 = time.toString().split(":")
-                arr[0] = arr[0] + arr1[0];
+                console.log("arr[0]" + arr[0])
+                console.log("arr[1]" + arr1[0])
+                console.log(arr[0] + arr1[0])
+
+
+                arr[0] = (arr[0] + arr1[0]);
                 arr[1] = arr[1] + arr1[1];
                 arr[2] = arr[2] + arr1[2];
                 time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
@@ -270,7 +280,7 @@ function sendRequestToApiAi(emailValue, msg) {
               }
             }
 
-            timeOffCase = 10
+            timeOffCase = 5
           }
           date1 = date1.replace(/-/g, "/")
           date = date.replace(/-/g, "/")
