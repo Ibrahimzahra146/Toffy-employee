@@ -313,14 +313,6 @@ function sendRequestToApiAi(emailValue, msg) {
     }
 
 
-    //user ask for one day personal vacation
-    else if (responseText == "leavingForHours") {
-      var numberOfHours = response.result.parameters.number;
-      var
-        msg.say("Sorry! This feature is not supported yet.")
-
-
-    }
 
 
 
