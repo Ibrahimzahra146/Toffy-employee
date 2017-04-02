@@ -170,9 +170,14 @@ function sendRequestToApiAi(emailValue, msg) {
             time1 = response.result.parameters.time;
             var arr = time1.toString().split(":")
             var arr1 = time.toString().split(":")
-            arr[0] = arr[0] + arr1[0];
-            arr[1] = arr[1] + arr1[1];
-            arr[2] = arr[2] + arr1[2];
+            console.log("arr[0]" + arr[0])
+            console.log("arr[1]" + arr1[0])
+            console.log((Number(arr[0]) + Number(arr1[0])))
+
+
+            arr[0] = (Number(arr[0]) + Number(arr1[0]));
+            arr[1] = (Number(arr[1]) + Number(arr1[1]))
+            arr[2] = (Number(arr[2]) + Number(arr1[2]))
             time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
             console.log("arr[0] + + arr[1] + + arr[2]" + time1)
             console.log("time:" + time)
@@ -187,12 +192,12 @@ function sendRequestToApiAi(emailValue, msg) {
             var arr1 = time.toString().split(":")
             console.log("arr[0]" + arr[0])
             console.log("arr[1]" + arr1[0])
-            console.log(arr[0] + arr1[0])
+            console.log((Number(arr[0]) + Number(arr1[0])))
 
 
-            arr[0] = (arr[0] + arr1[0]);
-            arr[1] = arr[1] + arr1[1];
-            arr[2] = arr[2] + arr1[2];
+            arr[0] = (Number(arr[0]) + Number(arr1[0]));
+            arr[1] = (Number(arr[1]) + Number(arr1[1]))
+            arr[2] = (Number(arr[2]) + Number(arr1[2]))
             time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
             console.log("arr[0] + + arr[1] + + arr[2]" + time1)
             console.log("time:" + time)
