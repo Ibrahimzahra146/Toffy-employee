@@ -159,7 +159,7 @@ function sendRequestToApiAi(emailValue, msg) {
           vacation_type1 = "sick"
         }
 
-         if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
 
           msg.say("Please specify the date and/or time ")
 
@@ -187,12 +187,12 @@ function sendRequestToApiAi(emailValue, msg) {
               var arr1 = time.toString().split(":")
               console.log("arr[0]" + arr[0])
               console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0]))+Number("00"))
+              console.log((Number(arr[0]) + Number(arr1[0])) + Number("00"))
 
 
-              arr[0] = (Number(arr[0]) + Number(arr1[0])+Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1])+Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2])+Number("00"))
+              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
+              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
+              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
               time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
               console.log("arr[0] + + arr[1] + + arr[2]" + time1)
               console.log("time:" + time)
@@ -201,21 +201,22 @@ function sendRequestToApiAi(emailValue, msg) {
               console.log("time1 is empty")
               var d = new Date(); // for now
               time1 = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+              console.log("time:" + time)
               time = time1;
               time1 = response.result.parameters.time;
               var arr = time1.toString().split(":")
               var arr1 = time.toString().split(":")
               console.log("arr[0]" + arr[0])
               console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0])+Number("00")))
+              console.log((Number(arr[0]) + Number(arr1[0]) + Number("00")))
 
 
-              arr[0] = (Number(arr[0]) + Number(arr1[0])+Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1])+Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2])+Number("00"))
+              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
+              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
+              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
               time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-              console.log("time:" + time)
+
             }
 
 
