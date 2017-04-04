@@ -290,8 +290,7 @@ function sendRequestToApiAi(emailValue, msg) {
             timeOffCase = 10
 
           }
-          date1 = date1.replace(/-/g, "/")
-          date = date.replace(/-/g, "/")
+     
 
 
           if (vacation_type1 == "") {
