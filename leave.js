@@ -369,7 +369,6 @@ function getWorkingDays(startDate, endDate, email, callback) {
         })
 
     })
-    toffyHelper.generalCookies = cookies
 
 
 }
