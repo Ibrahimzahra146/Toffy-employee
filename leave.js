@@ -191,47 +191,47 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body, isValid) {
-                if (isValid == true) {
-                    var workingDays = parseFloat(body).toFixed(1);
+                // if (isValid == false) {
+                var workingDays = parseFloat(body).toFixed(1);
 
-                    getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
+                getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
 
-                        if (type == "sick") {
-                            msg.say("Sorry to hear that :(")
-                        }
+                    if (type == "sick") {
+                        msg.say("Sorry to hear that :(")
+                    }
 
-                        var text12 = {
-                            "text": "",
-                            "attachments": [
-                                {
-                                    "text": messagetext,
-                                    "callback_id": 'leave_with_vacation_confirm_reject',
-                                    "color": "#3AA3E3",
-                                    "attachment_type": "default",
-                                    "actions": [
-                                        {
-                                            "name": 'confirm',
-                                            "text": "Yes",
-                                            "style": "primary",
-                                            "type": "button",
-                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
-                                        },
-                                        {
-                                            "name": 'reject',
-                                            "text": "No",
-                                            "style": "danger",
-                                            "type": "button",
-                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                        msg.say(text12)
+                    var text12 = {
+                        "text": "",
+                        "attachments": [
+                            {
+                                "text": messagetext,
+                                "callback_id": 'leave_with_vacation_confirm_reject',
+                                "color": "#3AA3E3",
+                                "attachment_type": "default",
+                                "actions": [
+                                    {
+                                        "name": 'confirm',
+                                        "text": "Yes",
+                                        "style": "primary",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
+                                    },
+                                    {
+                                        "name": 'reject',
+                                        "text": "No",
+                                        "style": "danger",
+                                        "type": "button",
+                                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                    msg.say(text12)
 
-                    })
-                }
-                else msg.say("You are rude man ")
+                })
+
+                //else msg.say("Sorry! u cant ")
             })
         });
 
