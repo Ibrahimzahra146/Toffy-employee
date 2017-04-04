@@ -341,21 +341,23 @@ function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callbac
 }
 
 function getWorkingDays(startDate, endDate, email, callback) {
-    var vacationBody = {
-        "from": startDate,
-        "to": endDate
 
-    }
-    vacationBody = JSON.stringify(vacationBody)
 
-    toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
-        toffyHelper.generalCookies = cookies
+
+    toffyHelper.getIdFromEmail(email, function (Id) {
+        var vacationBody = {
+            "employee_id": Id,
+            "from": startDate,
+            "to": endDate
+
+        }
+        vacationBody = JSON.stringify(vacationBody)
         request({
             url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': cookies + ";" + session_Id
+                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
             },
             body: vacationBody
             //Set the body as a stringcc
@@ -367,6 +369,9 @@ function getWorkingDays(startDate, endDate, email, callback) {
         })
 
     })
+    toffyHelper.generalCookies = cookies
+
+
 }
 function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, callback) {
     var typeText = ""
