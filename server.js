@@ -280,7 +280,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
           }
           else if (response.result.parameters.date) {
-            console.log("Case 9" + response.result.parameters.date)
+            console.log("Case 9" + response.result.parameters.date+"hi")
             if ((response.result.parameters.date == "[]") || (response.result.parameters.date == "")) {
               msg.say("Please specify the date and/or time ")
             } else {
