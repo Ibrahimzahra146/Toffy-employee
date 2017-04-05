@@ -280,23 +280,26 @@ function sendRequestToApiAi(emailValue, msg) {
 
           }
           else if (response.result.parameters.date) {
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            timeOffCase = 9
-
+            if (response.result.parameters.date == "[]") {
+              msg.say("Please specify the date and/or time ")
+            } else {
+              date = response.result.parameters.date
+              date1 = response.result.parameters.date
+              timeOffCase = 9
+            }
           }
           else if (response.result.parameters.time) {
             time = response.result.parameters.time
             timeOffCase = 10
 
           }
-     
+
 
 
           if (vacation_type1 == "") {
             vacation_type1 = "personal"
           }
-          console.log("timeOffCase"+timeOffCase)
+          console.log("timeOffCase" + timeOffCase)
           //get the milliseconds for the  end of the vacation 
           leave.convertTimeFormat(time, function (x, y, convertedTime) {
             leave.convertTimeFormat(time1, function (x, y, convertedTime1) {
