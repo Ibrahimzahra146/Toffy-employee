@@ -172,7 +172,11 @@ function sendRequestToApiAi(emailValue, msg) {
 
           vacation_type1 = "sick"
 
-        } else {
+        }
+        else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && (response.result.parameters.date == "") && !(response.result.parameters.date1)) {
+          msg.say("Please specify the date and/or time ")
+        }
+        else {
           if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
             time = response.result.parameters.time
 
@@ -280,14 +284,12 @@ function sendRequestToApiAi(emailValue, msg) {
 
           }
           else if (response.result.parameters.date) {
-            console.log("Case 9" + response.result.parameters.date+"hi")
-            if ((response.result.parameters.date == "[]") || (response.result.parameters.date == "")) {
-              msg.say("Please specify the date and/or time ")
-            } else {
-              date = response.result.parameters.date
-              date1 = response.result.parameters.date
-              timeOffCase = 9
-            }
+            console.log("Case 9" + response.result.parameters.date)
+
+            date = response.result.parameters.date
+            date1 = response.result.parameters.date
+            timeOffCase = 9
+
           }
           else if (response.result.parameters.time) {
             time = response.result.parameters.time
