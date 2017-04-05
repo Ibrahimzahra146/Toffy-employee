@@ -182,7 +182,7 @@ module.exports.sendLeaveRangeTimeSpecDayConfirmation = function sendLeaveRangeTi
 */
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
     console.log("sendVacationWithLeaveConfirmation")
-    console.log("fromDate " + fromDate)
+    console.log("fromDate  " + fromDate)
     console.log("fromTime " + fromTime)
     console.log("toTime " + toTime)
     console.log("ToDate " + ToDate)
