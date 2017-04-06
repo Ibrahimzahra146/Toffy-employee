@@ -255,34 +255,34 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                 "attachment_type": "default",
                 "fields": [
                     {
-                        "title": "0-2​ hours ( same day ).",
+                        "title": "0-2​ hours ( same day).",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "​Over 2​ hours to 1 day (1 day ahead ).",
+                        "title": "​Over 2​ hours to 1 day (1 day ahead).",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "2-4 days ( 2 weeks ahead​).",
+                        "title": "2-4 days (2 weeks ahead​).",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "1 week ( 3 weeks ahead).",
+                        "title": "1 week (3 weeks ahead).",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "1.20 - 2 weeks (​ 2 months a head​ ).",
+                        "title": "1.20 - 2 weeks (​2 months ahead​).",
                         "value": "",
                         "short": false
                     }
                     ,
 
                     {
-                        "title": "2.20 - 3 weeks or more ( 3 months a head ).",
+                        "title": "2.20 - 3 weeks or more (3 months ahead).",
                         "value": "",
                         "short": false
                     }
