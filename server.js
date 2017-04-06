@@ -283,12 +283,18 @@ function sendRequestToApiAi(emailValue, msg) {
             time = response.result.parameters.time
             date = response.result.parameters.date
             date1 = response.result.parameters.date
+            if (response.result.parameters.date == "") {
+              date = today
+            }
             timeOffCase = 6
 
           }
           else if (response.result.parameters.time && response.result.parameters.date1) {
             time = response.result.parameters.time
             date1 = response.result.parameters.date1
+            if (response.result.parameters.date1 == "") {
+              date1 = today
+            }
             timeOffCase = 7
 
           }

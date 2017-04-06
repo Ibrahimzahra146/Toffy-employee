@@ -324,19 +324,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         "text": "Accept",
                                         "style": "primary",
                                         "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee"
                                     },
                                     {
                                         "name": "reject",
                                         "text": "Reject",
                                         "style": "danger",
                                         "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee"
                                     }, {
                                         "name": "dont_detuct",
                                         "text": "Don’t Deduct ",
                                         "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail
+                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee"
                                     }
                                 ],
                                 "color": "#F35A00"
