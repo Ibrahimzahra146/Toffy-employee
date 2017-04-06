@@ -240,3 +240,58 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 function printLogs(msg) {
     console.log("msg:========>:" + msg)
 }
+/**
+ * 
+ */
+module.exports.ShowRules = function showEmployeeStats(email, msg) {
+
+    var messageBody = {
+        "text": "",
+        "attachments": [
+            {
+
+                "pretext": "You can use on of the following expressions to engage with me:",
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "fields": [
+                    {
+                        "title": "0-2​ hours ( same day )",
+                        "value": "",
+                        "short": false
+                    },
+                    {
+                        "title": "​over 2​ hours to 1 days (1 day ahead )",
+                        "value": "",
+                        "short": false
+                    },
+                    {
+                        "title": "2-4 days ( 2 week ahead​)",
+                        "value": "",
+                        "short": false
+                    },
+                    {
+                        "title": "1 week ( 3 weeks ahead) ",
+                        "value": "",
+                        "short": false
+                    },
+                    {
+                        "title": "1.20 - 2 weeks (​ 2 months a head​ ) ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                   
+                    {
+                        "title": "2.20 - 3 weeks or more ( 3 months a head )",
+                        "value": "",
+                        "short": false
+                    }
+                ]
+            }
+        ]
+    }
+    var stringfy = JSON.stringify(messageBody);
+    var obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+}
+

@@ -391,6 +391,9 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "showStats") {
       employee.showEmployeeStats(emailValue, msg);
     }
+    else if ((responseText) == "showRules") {
+      employee.ShowRules(emailValue, msg);
+    }
     else if ((responseText) == "showProfile") {
       employee.showEmployeeProfile(emailValue, msg);
     }
