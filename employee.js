@@ -250,7 +250,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
         "attachments": [
             {
 
-                "pretext": "You can use on of the following expressions to engage with me:",
+                "pretext": "Leave/ Vacation  request rules: ",
                 "color": "#3AA3E3",
                 "attachment_type": "default",
                 "fields": [
@@ -280,7 +280,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                         "short": false
                     }
                     ,
-                   
+
                     {
                         "title": "2.20 - 3 weeks or more ( 3 months a head ).",
                         "value": "",
