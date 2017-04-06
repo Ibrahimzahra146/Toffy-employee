@@ -317,11 +317,11 @@ function sendRequestToApiAi(emailValue, msg) {
               toDate = new Date(toDate);
               var dateMilliSeconds = toDate.getTime();
               console.log("dateMilliSeconds:::" + dateMilliSeconds)
-              dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
+             // dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
 
               var timeMilliseconds = new Date(fromDate);
               timeMilliseconds = timeMilliseconds.getTime();
-              timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
+            //  timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
               console.log("timeMilliseconds :::" + timeMilliseconds)
               leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
               vacation_type1 = ""
