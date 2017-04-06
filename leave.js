@@ -188,9 +188,13 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     console.log("ToDate " + ToDate)
     console.log("fromMilliseconds " + fromMilliseconds)
     console.log("toMilliseconds " + toMilliseconds)
+    var typeNum = ""
+    if (type == "sick") {
+        typeNum = 4
+    }
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
-            getWorkingDays(fromMilliseconds, toMilliseconds, email, function (body, isValid) {
+            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
                 if (isValid == true || (isValid == false && type == "sick")) {
                     var workingDays = parseFloat(body).toFixed(1);
 
@@ -231,7 +235,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                     })
                 }
-                else msg.say("Sorry! your  time off   reuquest has been rejected automatically, according to submition time rules ! ")
+                else msg.say("Sorry! your  time off   reuquest has been rejected automatically, according to submition time rules.Contact your manager  ")
             })
         });
 
@@ -344,7 +348,7 @@ function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callbac
     callback(milliSeconds)
 }
 
-function getWorkingDays(startDate, endDate, email, callback) {
+function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
 
@@ -352,7 +356,8 @@ function getWorkingDays(startDate, endDate, email, callback) {
         var vacationBody = {
             "employee_id": Id,
             "from": startDate,
-            "to": endDate
+            "to": endDate,
+            "type": typeNum
 
         }
         vacationBody = JSON.stringify(vacationBody)
