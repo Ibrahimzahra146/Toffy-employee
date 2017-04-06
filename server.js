@@ -227,19 +227,27 @@ function sendRequestToApiAi(emailValue, msg) {
             timeOffCase = 5
           }
           else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+
             time = response.result.parameters.time
             time1 = response.result.parameters.time1
             date = response.result.parameters.date;
             date1 = response.result.parameters.date1;
-
+            if (response.result.parameters.date == "") {
+              date = today
+            }
             timeOffCase = 1
 
           }
           else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
+
             time = response.result.parameters.time
             time1 = response.result.parameters.time1
             date = response.result.parameters.date1
             date1 = response.result.parameters.date1
+            if (response.result.parameters.date1 == "") {
+              date = today
+              date1 = today
+            }
 
             timeOffCase = 2
 
@@ -248,6 +256,10 @@ function sendRequestToApiAi(emailValue, msg) {
             time1 = response.result.parameters.time1
             date = response.result.parameters.date
             date1 = response.result.parameters.date
+            if (response.result.parameters.date == "") {
+              date = today
+              date1 = today
+            }
             timeOffCase = 3
 
           }
@@ -317,11 +329,11 @@ function sendRequestToApiAi(emailValue, msg) {
               toDate = new Date(toDate);
               var dateMilliSeconds = toDate.getTime();
               console.log("dateMilliSeconds:::" + dateMilliSeconds)
-             // dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
+              // dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
 
               var timeMilliseconds = new Date(fromDate);
               timeMilliseconds = timeMilliseconds.getTime();
-            //  timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
+              //  timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
               console.log("timeMilliseconds :::" + timeMilliseconds)
               leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
               vacation_type1 = ""
