@@ -260,12 +260,12 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                         "short": false
                     },
                     {
-                        "title": "​over 2​ hours to 1 days (1 day ahead ).",
+                        "title": "​Over 2​ hours to 1 day (1 day ahead ).",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "2-4 days ( 2 week ahead​).",
+                        "title": "2-4 days ( 2 weeks ahead​).",
                         "value": "",
                         "short": false
                     },
