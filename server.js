@@ -285,7 +285,7 @@ function sendRequestToApiAi(emailValue, msg) {
             date1 = response.result.parameters.date
             if (response.result.parameters.date == "") {
               date = today
-              date1 = today
+              date1 = date
             }
             timeOffCase = 6
 
