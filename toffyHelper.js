@@ -267,7 +267,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             'channel': jsonResponse.managerChannelId,
                             user: jsonResponse.slackUserId,
                             text: 'what is my name',
-                            ts: '150I',
+                            ts: 150,
                             team: jsonResponse.teamId,
                             event: 'direct_message'
 
