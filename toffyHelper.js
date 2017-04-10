@@ -262,12 +262,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     console.log("approvarType:::" + approvarType)
                     if (approvarType == "Manager") {
                         printLogs("Manager Role ")
+                        var timeststamp = new Date().getTime()
+                        console.log("timeststamp" + timeststamp)
                         message12 = {
                             'type': 'message',
                             'channel': jsonResponse.managerChannelId,
                             user: jsonResponse.slackUserId,
                             text: 'what is my name',
-                            ts: '1491841693.5483100',
+                            ts: timeststamp,
                             team: jsonResponse.teamId,
                             event: 'direct_message'
 
