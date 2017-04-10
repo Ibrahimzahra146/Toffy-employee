@@ -244,54 +244,69 @@ function printLogs(msg) {
  * 
  */
 module.exports.ShowRules = function showEmployeeStats(email, msg) {
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        var url = "http://" + IP + "/api/v1/vacation/rules";
 
-    var messageBody = {
-        "text": "",
-        "attachments": [
-            {
-
-                "pretext": "Leave/ Vacation  request rules: ",
-                "color": "#3AA3E3",
-                "attachment_type": "default",
-                "fields": [
-                    {
-                        "title": "0-2​ hours ( same day).",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "​Over 2​ hours to 1 day (1 day ahead).",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "2-4 days (2 weeks ahead​).",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "1 week (3 weeks ahead).",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "1.20 - 2 weeks (​2 months ahead​).",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-
-                    {
-                        "title": "2.20 - 3 weeks or more (3 months ahead).",
-                        "value": "",
-                        "short": false
-                    }
-                ]
+        request({
+            url: url,
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + session_Id
             }
-        ]
-    }
-    var stringfy = JSON.stringify(messageBody);
-    var obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
+        }, function (error, response, body) {
+            console.log(JSON.stringify(body))
+            console.log("Rule:" + body[0])
+            var i = 0;
+            var stringMessage = "["
+            if (!error && response.statusCode === 200) {
+                if (!(body)[i]) {
+                    msg.say("There are no employees with that balnce.");
+                }
+                else {
+                    //build message Json result to send it to slack
+                    while (body[i]) {
+
+                        if (i > 0) {
+                            stringMessage = stringMessage + ","
+                        }
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "\"" + ",\"value\":" + "\"" + body[i] + "\"" + ",\"short\":false}"
+                        i++;
+
+
+
+                    }
+                    printLogs("stringMessage::" + stringMessage);
+
+                    stringMessage = stringMessage + "]"
+                    var messageBody = {
+                        "text": "The Employees are:",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": stringMessage,
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    printLogs("messageBody" + messageBody)
+                    var stringfy = JSON.stringify(messageBody);
+
+                    printLogs("stringfy " + stringfy)
+                    stringfy = stringfy.replace(/\\/g, "")
+                    stringfy = stringfy.replace(/]\"/, "]")
+                    stringfy = stringfy.replace(/\"\[/, "[")
+                    stringfy = JSON.parse(stringfy)
+
+                    msg.say(stringfy)
+                }
+            }
+        })
+    })
+
+
 }
 
