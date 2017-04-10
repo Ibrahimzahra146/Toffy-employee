@@ -271,7 +271,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                         if (i > 0) {
                             stringMessage = stringMessage + ","
                         }
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "\"" + ",\"value\":" + "\"" + body[i] + "\"" + ",\"short\":false}"
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "\"" + ",\"value\":" + "\"" + body[i] + ".\"" + ",\"short\":false}"
                         i++;
 
 
