@@ -271,7 +271,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             text: 'what is my name',
                             ts: timeststamp,
                             team: jsonResponse.teamId,
-                            event: 'direct_message'
+                            event: 'direct_message',
+                            as_user:true
 
                         }
 
