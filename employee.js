@@ -41,7 +41,11 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                     while ((JSON.parse(body)[i])) {
                         var stringMessage = "["
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
+                        fromDate = fromDate.toString().split("GMT")
+                        fromDate = fromDate[0]
                         var toDate = new Date((JSON.parse(body))[i].toDate)
+                        toDate = toDate.toString().split("GMT")
+                        toDate = toDate[0]
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
                         stringMessage = stringMessage + ","
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
