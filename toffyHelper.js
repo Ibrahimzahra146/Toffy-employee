@@ -394,6 +394,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
             var i = 0;
             var stringMessage = "["
             if (!error && response.statusCode === 200) {
+                console.log("ahmad" + JSON.stringify(body))
                 if (!(JSON.parse(body)[i])) {
                     msg.say("There are no holidays, sorry!");
                 }
@@ -593,6 +594,7 @@ function printLogs(msg) {
     console.log("msg:========>:" + msg)
 }
 function getDayNameOfDate(date, callback) {
+    console.log("arrive getDayNameOfDate")
     var weekday = new Array(7);
     weekday[0] = "Monday";
     weekday[1] = "Tuesday";
