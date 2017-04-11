@@ -607,7 +607,7 @@ function getDayNameOfDate(date, callback) {
 
     var d = new Date(date);
     console.log(d);
-    console.log("d.getDay() - 1]" + d.getDay() - 1)
+    console.log("d.getDay() - 1]" + d.getDay())
     callback(weekday[d.getDay() - 1]);
 }
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
