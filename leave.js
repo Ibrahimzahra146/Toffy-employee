@@ -57,7 +57,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                     })
                 }
-                else msg.say("Sorry! your  time off   reuquest has been rejected automatically, according to submition time rules.Contact your manager  ")
+                else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
             })
         });
 

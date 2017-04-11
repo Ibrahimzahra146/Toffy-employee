@@ -285,7 +285,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
                     stringMessage = stringMessage + "]"
                     var messageBody = {
-                        "text": "Rules for requestd time off:",
+                        "text": "Time off submission rules:",
                         "attachments": [
                             {
                                 "attachment_type": "default",
