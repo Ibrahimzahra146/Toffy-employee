@@ -542,12 +542,12 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
 
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
-            fromDate = fromDate + " T " + formattedTime + " " + midday
-          } else fromDate = fromDate + " T 08:00 am ";
+            fromDate = fromDate + " at " + formattedTime + " " + midday
+          } else fromDate = fromDate + " at 08:00 am ";
 
           if (arr[1] && (arr[1] != undefined)) {
-            toDate = toDate + " T " + formattedTime1 + " " + midday1
-          } else toDate = toDate + " T 05:00 pm ";
+            toDate = toDate + " at " + formattedTime1 + " " + midday1
+          } else toDate = toDate + " at 05:00 pm ";
 
 
           if (!managerApproval[0]) {
