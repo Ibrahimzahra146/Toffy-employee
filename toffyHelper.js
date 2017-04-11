@@ -272,7 +272,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             ts: timeststamp,
                             team: jsonResponse.teamId,
                             event: 'direct_message',
-                            as_user:true
+                            as_user: true
 
                         }
 
@@ -404,7 +404,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                             if (i > 0) {
                                 stringMessage = stringMessage + ","
                             }
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].comments + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
                             i++;
 
                         })
@@ -603,6 +603,7 @@ function getDayNameOfDate(date, callback) {
     weekday[6] = "Sunday";
 
     var d = new Date(date);
+    console.log("d.getDay() - 1]" + d.getDay() - 1)
     callback(weekday[d.getDay() - 1]);
 }
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
