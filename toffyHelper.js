@@ -402,6 +402,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     //build message Json result to send it to slack
                     while ((JSON.parse(body)[i])) {
                         getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+                            console.log("dayName" + dayName)
                             if (i > 0) {
                                 stringMessage = stringMessage + ","
                             }
@@ -594,7 +595,7 @@ function printLogs(msg) {
     console.log("msg:========>:" + msg)
 }
 function getDayNameOfDate(date, callback) {
-    console.log("arrive getDayNameOfDate")
+    console.log("arrive getDayNameOfDate" + date)
     var weekday = new Array(7);
     weekday[0] = "Monday";
     weekday[1] = "Tuesday";
@@ -605,6 +606,7 @@ function getDayNameOfDate(date, callback) {
     weekday[6] = "Sunday";
 
     var d = new Date(date);
+    console.log(d);
     console.log("d.getDay() - 1]" + d.getDay() - 1)
     callback(weekday[d.getDay() - 1]);
 }
