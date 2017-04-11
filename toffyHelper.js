@@ -597,18 +597,18 @@ function printLogs(msg) {
 function getDayNameOfDate(date, callback) {
     console.log("arrive getDayNameOfDate" + date)
     var weekday = new Array(7);
-    weekday[0] = "Monday";
-    weekday[1] = "Tuesday";
-    weekday[2] = "Wednesday";
-    weekday[3] = "Thursday";
-    weekday[4] = "Friday";
-    weekday[5] = "Saturday";
-    weekday[6] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+    weekday[0] = "Sunday";
 
     var d = new Date(date);
     console.log(d);
     console.log("d.getDay() - 1]" + d.getDay())
-    callback(weekday[d.getDay() - 1]);
+    callback(weekday[d.getDay()]);
 }
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
     request({
