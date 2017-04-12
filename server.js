@@ -582,7 +582,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                 }
               ]
             }
-            msg.say(msg.body.response_url, text12)
+            msg.respond(msg.body.response_url, text12)
 
           }
         });
