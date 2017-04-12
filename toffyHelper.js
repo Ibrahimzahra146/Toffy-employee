@@ -643,6 +643,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 
     var i = 0
     var j = 0
+    managerApproval = JSON.parse(managerApproval)
 
     console.log("Mnaagers approvals ::::" + managerApproval)
     async.whilst(
