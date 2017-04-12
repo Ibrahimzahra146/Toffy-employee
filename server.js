@@ -608,7 +608,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
   toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     request({
       url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
-      method: 'GET',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Cookie': remember_me_cookie + ";" + session_Id
