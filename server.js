@@ -601,6 +601,10 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   fromDate = "";
   toDate = "";
 })
+slapp.action('cancel', 'cancel', (msg, value) => {
+  msg.respond(msg.body.response_url, "Canceled")
+})
+
 
 /*--------------___________________________________________________----------------------
 End of Leave Section
