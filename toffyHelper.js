@@ -645,7 +645,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
     var j = 0
 
 
-    console.log("cancel_request22 " + JSON.stringify(managerApproval))
+    console.log("cancel_request22 " + (JSON.parse(managerApproval))[i].manager)
 
     console.log("Mnaagers approvals ::::" + managerApproval)
     console.log(JSON.stringify(managerApproval));
