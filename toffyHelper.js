@@ -639,12 +639,12 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
-   
+
 
     var i = 0
     var j = 0
 
-    console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
+    console.log("Mnaagers approvals ::::" + managerApproval)
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
@@ -708,7 +708,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 
                         if (!err) {
 
-                      
+
                             currentBot.reply(message12, "The employee has canceled the vacation");
 
                         }
