@@ -576,7 +576,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                       "text": "Cancel Request",
                       "style": "danger",
                       "type": "button",
-                      "value": "Hi"
+                      "value": email + ";" + vacationId
                     }
                   ]
                 }
@@ -602,7 +602,21 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   toDate = "";
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
-  msg.respond(msg.body.response_url, "Your request has been canceled")
+  var arr = value.toString().split(";")
+  var email = arr[0]
+  var vacationId = arr[1]
+  toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+    request({
+      url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': remember_me_cookie + ";" + session_Id
+      },
+    }, function (error, response, body) {
+      msg.respond(msg.body.response_url, "Your request has been canceled")
+    })
+  })
 })
 
 
