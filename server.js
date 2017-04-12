@@ -605,6 +605,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
   var arr = value.toString().split(";")
   var email = arr[0]
   var vacationId = arr[1]
+  var managerApproval=arr[2]
   toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     //get vacation state
     var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
