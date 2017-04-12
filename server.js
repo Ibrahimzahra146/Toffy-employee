@@ -582,6 +582,8 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                 }
               ]
             }
+            console.log("cancel_request1" + JSON.stringify(managerApproval))
+
             msg.respond(msg.body.response_url, text12)
 
           }
@@ -605,7 +607,8 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
   var arr = value.toString().split(";")
   var email = arr[0]
   var vacationId = arr[1]
-  var managerApproval=arr[2]
+  var managerApproval = arr[2]
+  console.log("cancel_request" + JSON.stringify(managerApproval))
   toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     //get vacation state
     var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
