@@ -602,7 +602,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   toDate = "";
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
-  msg.respond(msg.body.response_url, "Canceled")
+  msg.respond(msg.body.response_url, "Your request has been canceled")
 })
 
 
