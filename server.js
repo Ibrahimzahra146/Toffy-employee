@@ -567,7 +567,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
               "attachments": [
                 {
                   "text": messageFB,
-                  "callback_id": 'cancel',
+                  "callback_id": 'cancel_request',
                   "color": "#3AA3E3",
                   "attachment_type": "default",
                   "actions": [
@@ -582,7 +582,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                 }
               ]
             }
-            msg.respond(msg.body.response_url, text12)
+            msg.say(msg.body.response_url, text12)
 
           }
         });
@@ -601,7 +601,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   fromDate = "";
   toDate = "";
 })
-slapp.action('cancel', 'cancel', (msg, value) => {
+slapp.action('cancel_request', 'cancel', (msg, value) => {
   msg.respond(msg.body.response_url, "Canceled")
 })
 
