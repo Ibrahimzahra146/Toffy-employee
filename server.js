@@ -554,14 +554,33 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
             msg.say("You dont have any manager right now ");
           } else {
             toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays)
-
+            var text12 = {
+              "text": "",
+              "attachments": [
+                {
+                  "text": "Your request has been submitted to your managers and HR admin. You might asked to provide a sick report. I’ll inform you about this.  ",
+                  "callback_id": 'cancel',
+                  "color": "#3AA3E3",
+                  "attachment_type": "default",
+                  "actions": [
+                    {
+                      "name": 'confirm',
+                      "text": "Yes",
+                      "style": "primary",
+                      "type": "button",
+                      "value": "Hi"
+                    }
+                  ]
+                }
+              ]
+            }
             if (type == "sick") {
               console.log("Manager approvals sick vacation is ::" + JSON.stringify(managerApproval))
-              msg.respond(msg.body.response_url, "Your request has been submitted to your managers and HR admin. You might asked to provide a sick report. I’ll inform you about this.  ")
+              msg.respond(msg.body.response_url, text12)
 
             }
             else
-              msg.respond(msg.body.response_url, "Your request has been submitted and is awaiting your managers approval ")
+              msg.respond(msg.body.response_url, text12)
 
           }
         });
