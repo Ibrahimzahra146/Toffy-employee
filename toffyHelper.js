@@ -639,9 +639,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
-    if (type == "sickLeave") {
-        type = "sick"
-    }
+   
 
     var i = 0
     var j = 0
