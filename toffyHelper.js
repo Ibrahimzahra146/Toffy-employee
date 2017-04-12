@@ -708,8 +708,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 
                         if (!err) {
 
-                            var stringfy = JSON.stringify(messageBody);
-                            var obj1 = JSON.parse(stringfy);
+                      
                             currentBot.reply(message12, "The employee has canceled the vacation");
 
                         }
