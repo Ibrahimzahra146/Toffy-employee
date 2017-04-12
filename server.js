@@ -565,7 +565,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                   "actions": [
                     {
                       "name": 'confirm',
-                      "text": "Yes",
+                      "text": "Cancel Request",
                       "style": "primary",
                       "type": "button",
                       "value": "Hi"
