@@ -633,3 +633,100 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
 
 
 }
+//Send cancel feedback to managers()
+module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(startDate, endDate, userEmail, vacationId, managerApproval) {
+    var message12 = ""
+    var approvarType = ""
+    var approvalId = ""
+    var managerEmail = ""
+    if (type == "sickLeave") {
+        type = "sick"
+    }
+
+    var i = 0
+    var j = 0
+
+    console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
+    async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
+
+            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+
+                approvalId = managerApproval[i].id
+                approvarType = managerApproval[i].type
+                managerEmail = emailFromId.replace(/\"/, "")
+                managerEmail = managerEmail.replace(/\"/, "")
+
+                request({
+                    url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+
+                    },
+                    body: managerEmail
+                    //Set the body as a stringcc
+                }, function (error, response, body) {
+
+                    var jsonResponse = JSON.parse(body);
+                    if (approvarType == "Manager") {
+                        var timeststamp = new Date().getTime()
+                        message12 = {
+                            'type': 'message',
+                            'channel': jsonResponse.managerChannelId,
+                            user: jsonResponse.slackUserId,
+                            text: 'what is my name',
+                            ts: timeststamp,
+                            team: jsonResponse.teamId,
+                            event: 'direct_message',
+                            as_user: true
+
+                        }
+
+                    } else {
+                        hrRole = 1
+                        message12 = {
+                            'type': 'message',
+                            'channel': jsonResponse.hrChannelId,
+                            user: jsonResponse.slackUserId,
+                            text: 'what is my name',
+                            ts: startDate + ';' + endDate + ';' + userEmail,
+                            team: jsonResponse.teamId,
+                            event: 'direct_message'
+                        }
+
+                    }
+
+                    if (approvarType == "Manager") {
+                        currentBot = server.bot;
+
+                    } else {
+
+                        currentBot = server.hRbot
+                    }
+                    currentBot.startConversation(message12, function (err, convo) {
+
+
+                        if (!err) {
+
+                            var stringfy = JSON.stringify(messageBody);
+                            var obj1 = JSON.parse(stringfy);
+                            currentBot.reply(message12, "The employee has canceled the vacation");
+
+                        }
+                    });
+
+                });
+                i++;
+
+            })
+            setTimeout(callback, 2000);
+
+        },
+        function (err) {
+            // 5 seconds have passed
+        }
+
+    );
+}

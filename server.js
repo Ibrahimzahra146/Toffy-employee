@@ -576,7 +576,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                       "text": "Cancel Request",
                       "style": "danger",
                       "type": "button",
-                      "value": email + ";" + vacationId
+                      "value": email + ";" + vacationId + ";" + managerApproval
                     }
                   ]
                 }
@@ -630,6 +630,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
           },
         }, function (error, response, body) {
           msg.respond(msg.body.response_url, "Your request has been canceled")
+          toffyHelper.sendCancelationFeedBackToManagers("22-5-2017", "", email, vacationId, managerApproval)
         })
       } else {
         //the managers take an action
