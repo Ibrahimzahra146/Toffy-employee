@@ -618,6 +618,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       }
       //Set the body as a stringcc
     }, function (error, response, body) {
+      console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
       if ((JSON.parse(body)).vacationState == "PendingManagersApproval") {
         //delete vacation request
         request({
