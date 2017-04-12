@@ -613,7 +613,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': remember_me_cookie + ";" + session_id
+        'Cookie': remember_me_cookie + ";" + session_Id
 
       }
       //Set the body as a stringcc
