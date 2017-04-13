@@ -340,6 +340,7 @@ function sendRequestToApiAi(emailValue, msg) {
               var y = someDate.getFullYear();
 
               date1 = y + '/' + mm + '/' + dd;
+              console.log("//" + date1)
               timeOffCase = 8
             }
 
