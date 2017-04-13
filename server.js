@@ -332,6 +332,7 @@ function sendRequestToApiAi(emailValue, msg) {
               } else if (vacation_type1 == "Paternity") {
                 numberOfDaysToAdd = 3
               }
+              console.log("numberOfDaysToAdd" + numberOfDaysToAdd)
               var someDate = new Date(date);
               someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 
