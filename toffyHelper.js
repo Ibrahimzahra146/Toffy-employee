@@ -745,7 +745,7 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
                 flag = true
             }
             i++;
-            setTimeout(callback, 2000);
+            setTimeout(callback, 500);
 
         },
         function (err) {
