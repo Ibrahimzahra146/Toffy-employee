@@ -333,6 +333,17 @@ function sendRequestToApiAi(emailValue, msg) {
                 console.log("Here")
                 numberOfDaysToAdd = 3
               }
+              else if (response.result.parameters.other_vacation_types == "Marriage") {
+                console.log("Here")
+                numberOfDaysToAdd = 3
+              }
+              else if (response.result.parameters.other_vacation_types == "death") {
+                console.log("Here")
+                numberOfDaysToAdd = 3
+              } else if (response.result.parameters.other_vacation_types == "Haj") {
+                console.log("Here")
+                numberOfDaysToAdd = 10
+              }
               console.log("numberOfDaysToAdd" + numberOfDaysToAdd)
               var someDate = new Date(date);
               someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
