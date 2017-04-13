@@ -147,6 +147,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //Vacation with leave scenarios
     if (responseText == "vacationWithLeave") {
+      var other_vacation_types = ""
       var messageText = ""
       getTodayDate(function (today) {
         var time1 = "17:00:00";
@@ -158,7 +159,14 @@ function sendRequestToApiAi(emailValue, msg) {
         if (response.result.parameters.sick_synonyms) {
           vacation_type1 = "sick"
         }
+        else if (response.result.parameters.other_vacation_types) {
+          other_vacation_types = response.result.parameters.other_vacation_types;
+          if (other_vacation_types == "Maternity")
+            vacation_type1 = "Maternity"
+          else if (other_vacation_types == "Paternity")
+            vacation_type1 == "Paternity"
 
+        }
         if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
 
           msg.say("Please specify the date and/or time ")
@@ -314,6 +322,17 @@ function sendRequestToApiAi(emailValue, msg) {
 
             date = response.result.parameters.date
             date1 = response.result.parameters.date
+            if (vacation_type1 == "Maternity") {
+              var someDate = new Date();
+              var numberOfDaysToAdd = 70;
+              someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+
+              var dd = someDate.getDate();
+              var mm = someDate.getMonth() + 1;
+              var y = someDate.getFullYear();
+
+              date1 = y + '/' + mm + '/' + dd;
+            }
             timeOffCase = 9
 
           }
