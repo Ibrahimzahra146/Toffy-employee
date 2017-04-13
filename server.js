@@ -628,27 +628,27 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
       toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction) {
         console.log("isThereIsAction" + isThereIsAction)
+        if (isThereIsAction == false) {
+          //delete vacation request
+          request({
+            url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Cookie': remember_me_cookie + ";" + session_Id
+            },
+          }, function (error, response, body) {
+            msg.respond(msg.body.response_url, "Your request has been canceled")
+            toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval)
+          })
+        } else {
+          //the managers take an action
+          msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
 
+
+        }
       })
-      if ((JSON.parse(body)).vacationState == "PendingManagersApproval") {
-        //delete vacation request
-        request({
-          url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            'Cookie': remember_me_cookie + ";" + session_Id
-          },
-        }, function (error, response, body) {
-          msg.respond(msg.body.response_url, "Your request has been canceled")
-          toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval)
-        })
-      } else {
-        //the managers take an action
-        msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
 
-
-      }
     })
 
   })
