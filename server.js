@@ -627,6 +627,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
     }, function (error, response, body) {
       console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
       toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction) {
+        console.log("isThereIsAction" + isThereIsAction)
 
       })
       if ((JSON.parse(body)).vacationState == "PendingManagersApproval") {

@@ -735,6 +735,21 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 //Function to ckeack if any manager take an action 
 module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerApproval, callback) {
     console.log("isManagersTakeAnAction" + JSON.stringify(managerApproval));
-    callback(true)
+    var flag = false
+    var i = 0;
+
+    async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
+            if (managerApproval[i].state != "Pending") {
+                flag = true
+            }
+            i++;
+            setTimeout(callback, 2000);
+
+        },
+        function (err) {
+            callback(flag)
+        });
 
 }
