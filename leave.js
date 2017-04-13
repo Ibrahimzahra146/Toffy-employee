@@ -17,6 +17,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
         typeNum = 2
     else if (type == "Paternity")
         typeNum = 3
+    else if (type == "Haj")
+        typeNum = 9
     else typeNum = 0
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
