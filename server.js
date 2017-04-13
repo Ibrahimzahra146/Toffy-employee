@@ -318,6 +318,8 @@ function sendRequestToApiAi(emailValue, msg) {
 
           }
           else if (response.result.parameters.date) {
+            timeOffCase = 9
+
             var numberOfDaysToAdd = ""
             console.log("Case 9" + response.result.parameters.date)
 
@@ -338,8 +340,8 @@ function sendRequestToApiAi(emailValue, msg) {
               var y = someDate.getFullYear();
 
               date1 = y + '/' + mm + '/' + dd;
+              timeOffCase = 8
             }
-            timeOffCase = 9
 
           }
           else if (response.result.parameters.time) {
