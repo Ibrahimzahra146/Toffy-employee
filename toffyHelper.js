@@ -732,3 +732,9 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 
     );
 }
+//Function to ckeack if any manager take an action 
+module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerApproval, callback) {
+    console.log("isManagersTakeAnAction" + JSON.stringify(managerApproval));
+    callback(true)
+
+}
