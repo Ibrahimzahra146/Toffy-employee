@@ -326,6 +326,7 @@ function sendRequestToApiAi(emailValue, msg) {
             date = response.result.parameters.date
             date1 = response.result.parameters.date
             if (response.result.parameters.other_vacation_types) {
+              console.log("response.result.parameters.other_vacation_types)" + response.result.parameters.other_vacation_types)
               if (vacation_type1 == "Maternity") {
                 numberOfDaysToAdd = 70
 
