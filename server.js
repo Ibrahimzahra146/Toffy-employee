@@ -307,10 +307,15 @@ function sendRequestToApiAi(emailValue, msg) {
           }
           else if (response.result.parameters.date) {
             console.log("Case 9" + response.result.parameters.date)
+            if (response.result.parameters.date == "") {
+              msg.say("Please specify the date and/or time ")
+              vacation_type1 = "sick"
+            } else {
 
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            timeOffCase = 9
+              date = response.result.parameters.date
+              date1 = response.result.parameters.date
+              timeOffCase = 9
+            }
 
           }
           else if (response.result.parameters.time) {
