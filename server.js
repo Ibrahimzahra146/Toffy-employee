@@ -318,13 +318,19 @@ function sendRequestToApiAi(emailValue, msg) {
 
           }
           else if (response.result.parameters.date) {
+            var numberOfDaysToAdd = ""
             console.log("Case 9" + response.result.parameters.date)
 
             date = response.result.parameters.date
             date1 = response.result.parameters.date
-            if (vacation_type1 == "Maternity") {
-              var someDate = new Date();
-              var numberOfDaysToAdd = 70;
+            if (response.result.parameters.other_vacation_types) {
+              if (vacation_type1 == "Maternity") {
+                numberOfDaysToAdd = 70
+
+              } else if (vacation_type1 == "Paternity") {
+                numberOfDaysToAdd = 3
+              }
+              var someDate = new Date(date);
               someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 
               var dd = someDate.getDate();

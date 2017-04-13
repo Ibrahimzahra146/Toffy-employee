@@ -13,11 +13,15 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     var typeNum = ""
     if (type == "sick") {
         typeNum = 4
-    } else typeNum = 0
+    } else if (type == "Maternity")
+        typeNum = 2
+    else if (type == "Paternity")
+        typeNum = 3
+    else typeNum = 0
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
-                if (isValid == true || (isValid == false && type == "sick")) {
+                if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
                     var workingDays = parseFloat(body).toFixed(2);
 
                     getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
@@ -207,6 +211,10 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     var typeText = ""
     if (type == "sick") {
         typeText = " sick"
+    } else if (type == "Maternity") {
+        typeText = " maternity"
+    } else if (type == "Paternity") {
+        typeText = " paternity"
     }
     var messageText = ""
     if (timeOffcase == 1) {
