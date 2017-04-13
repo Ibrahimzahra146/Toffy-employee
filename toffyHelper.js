@@ -634,7 +634,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
 
 }
 //Send cancel feedback to managers()
-module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(startDate, endDate, userEmail, vacationId, managerApproval) {
+module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(fromDate, toDate, userEmail, vacationId, managerApproval) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -714,7 +714,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
                         if (!err) {
 
 
-                            currentBot.reply(message12, "The employee has canceled the vacation");
+                            currentBot.reply(message12, email + " has canceled his time off request (" + fromDate + " - " + toDate + ")");
 
                         }
                     });

@@ -576,7 +576,8 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                       "text": "Cancel Request",
                       "style": "danger",
                       "type": "button",
-                      "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval)
+                      "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate
+
                     }
                   ]
                 }
@@ -608,6 +609,8 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
   var email = arr[0]
   var vacationId = arr[1]
   var managerApproval = arr[2]
+  var fromDate = arr[3]
+  var toDate = arr[4]
   console.log("cancel_request" + JSON.stringify(managerApproval))
   toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     //get vacation state
@@ -634,7 +637,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
           },
         }, function (error, response, body) {
           msg.respond(msg.body.response_url, "Your request has been canceled")
-          toffyHelper.sendCancelationFeedBackToManagers("22-5-2017", "", email, vacationId, managerApproval)
+          toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval)
         })
       } else {
         //the managers take an action
