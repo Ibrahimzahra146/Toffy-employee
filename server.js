@@ -462,20 +462,30 @@ function sendRequestToApiAi(emailValue, msg) {
     else if ((responseText) == "showHolidays") {
       var date;
       var date1;
+      var holidayRequestType = "";
+      getTodayDate(function (today) {
 
-      if (!(response.result.parameters.date != "")) {
-        console.log("not equal")
-      }
-      if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
-        console.log("1")
-        date = "2017-01-01";
-        date1 = "	2017-12-30";
-      } else {
-        date = response.result.parameters.date;
-        date1 = response.result.parameters.date1;
-      }
-      toffyHelper.showHolidays(msg, emailValue, date, date1);
 
+        if (!(response.result.parameters.date != "")) {
+          console.log("not equal")
+        }
+        if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+          console.log("1")
+          date = "2017-01-01";
+          date1 = "	2017-12-30";
+        } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+          console.log("1")
+          date = today
+          date1 = "	2017-12-30"
+          holidayRequestType = 2;
+        }
+        else {
+          date = response.result.parameters.date;
+          date1 = response.result.parameters.date1;
+        }
+        toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType);
+
+      })
     }
     else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
       var date = "2017-01-01";

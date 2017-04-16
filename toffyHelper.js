@@ -386,7 +386,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     );
 }
 //list all holidays with range period
-module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
+module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType) {
+
     console.log("date" + date)
     console.log("date1" + date1)
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
@@ -411,7 +412,8 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
                     while ((JSON.parse(body)[i])) {
                         getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                             console.log("dayName" + dayName)
-                            if (i > 0) {
+                            if (i > 0 && holidayRequestType == 2) {
+                                break;
                                 stringMessage = stringMessage + ","
                             }
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
