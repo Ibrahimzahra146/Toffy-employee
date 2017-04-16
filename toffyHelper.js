@@ -202,12 +202,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
+    var dont_detuct_button = ""
     if (type == "sickLeave") {
         type = "sick"
     }
 
     var i = 0
     var j = 0
+
 
     console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
     async.whilst(
@@ -291,6 +293,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
 
                     }
+                    if (type != "WFH") {
+                        dont_detuct_button = {
+                            "name": "dont_detuct",
+                            "text": "Don’t Deduct ",
+                            "type": "button",
+                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
+                        }
+                    }
                     var messageBody = {
                         "text": "This folk has pending time off request:",
                         "attachments": [
@@ -335,12 +345,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         "style": "danger",
                                         "type": "button",
                                         "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
-                                    }, {
-                                        "name": "dont_detuct",
-                                        "text": "Don’t Deduct ",
-                                        "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
-                                    }
+                                    }, dont_detuct_button
                                 ],
                                 "color": "#F35A00"
                             }
