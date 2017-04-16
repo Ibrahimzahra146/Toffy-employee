@@ -621,7 +621,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
 
             }
             else
-              messageFB = "Your request has been submitted and is awaiting your managers approval "
+              messageFB = "Your request ( " + fromDate + "-" + toDate + " ) has been submitted and is awaiting your managers approval "
 
             var text12 = {
               "text": "",
