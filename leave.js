@@ -59,7 +59,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                             "type": "button",
                                             "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + fromDate + "," + ToDate
                                         }
-                                    ], "thumb_url": "https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/16832227_1341475782539973_288842465026282085_n.jpg?oh=24d384a7c11ae0be0cca6451f00d7dfd&oe=5980EBC3",
+                                    ],
                                 }
                             ]
                         }
