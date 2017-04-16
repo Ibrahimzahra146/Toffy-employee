@@ -463,7 +463,7 @@ function sendRequestToApiAi(emailValue, msg) {
       var date;
       var date1;
 
-      if (!(response.result.parameters.date || response.result.parameters.date == "")) {
+      if (!(response.result.parameters.date != "")) {
         console.log("not equal")
       }
       if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date) && !(response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
