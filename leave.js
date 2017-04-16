@@ -220,7 +220,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     } else if (type == "Paternity") {
         typeText = " you asked for a  paternity" + " time off"
     } else if (type == "WFH")
-        typeText ="you asked to work from home"
+        typeText = "you asked to work from home"
     var messageText = ""
     if (timeOffcase == 1) {
         messageText = "Okay, " + typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
@@ -245,11 +245,20 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
     } else if (timeOffcase == 8) {
-        messageText = "Okay, " + typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+        if (type == "WFH") {
+            messageText = ""
+            messageText = "Okay, " + typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
+
+        } else
+            messageText = "Okay, " + typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
 
     } else if (timeOffcase == 9) {
-        messageText = "Okay," + typeText + "  on " + fromDate + " and that would be 1 working day. Should I go ahead ? "
+        if (type == "WFH") {
+            messageText = ""
+            messageText = "Okay," + typeText + " on " + fromDate + ". Should I go ahead ?"
+        } else
+            messageText = "Okay," + typeText + " on " + fromDate + " and that would be 1 working day. Should I go ahead ? "
 
 
     } else if (timeOffcase == 10) {
