@@ -387,6 +387,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1) {
+    console.log("date" + date)
+    console.log("date1" + date1)
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,

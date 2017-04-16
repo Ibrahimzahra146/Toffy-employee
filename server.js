@@ -460,14 +460,17 @@ function sendRequestToApiAi(emailValue, msg) {
       employee.showEmployeeProfile(emailValue, msg);
     }
     else if ((responseText) == "showHolidays") {
+      var date;
+      var date1;
       if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date) && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
-        var date = "2017-01-01";
-        var date1 = "	2017-12-30";
+        date = "2017-01-01";
+        date1 = "	2017-12-30";
       } else {
-        var date = response.result.parameters.date;
-        var date1 = response.result.parameters.date1;
-        toffyHelper.showHolidays(msg, emailValue, date, date1);
+        date = response.result.parameters.date;
+        date1 = response.result.parameters.date1;
       }
+      toffyHelper.showHolidays(msg, emailValue, date, date1);
+
     }
     else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
       var date = "2017-01-01";
