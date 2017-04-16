@@ -167,6 +167,9 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 == "Paternity"
 
         }
+        else if (response.result.parameters.working_from_home) {
+          vacation_type1 = "WFH"
+        }
         if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
 
           msg.say("Please specify the date and/or time ")
@@ -181,229 +184,236 @@ function sendRequestToApiAi(emailValue, msg) {
           vacation_type1 = "sick"
 
         }
+        else if (response.result.parameters.working_from_home && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        msg.say("Please specify the date and/or time ")
+
+
+        vacation_type1 = "WFH"
+
+      }
         else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && (response.result.parameters.date == "") && !(response.result.parameters.date1)) {
-          msg.say("Please specify the date and/or time ")
-        } else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "") {
-          msg.say("Please specify the date and/or time ")
-          vacation_type1 = "sick"
+        msg.say("Please specify the date and/or time ")
+      } else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "") {
+        msg.say("Please specify the date and/or time ")
+        vacation_type1 = "sick"
+      }
+
+      else {
+        if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
+          time = response.result.parameters.time
+
+          if (response.result.parameters.time1) {
+
+            console.log("time1 isnot empty")
+
+            time1 = response.result.parameters.time1;
+            time = time1;
+            time1 = response.result.parameters.time;
+            var arr = time1.toString().split(":")
+            var arr1 = time.toString().split(":")
+            console.log("arr[0]" + arr[0])
+            console.log("arr[1]" + arr1[0])
+            console.log((Number(arr[0]) + Number(arr1[0])) + Number("00"))
+
+
+            arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
+            arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
+            arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
+            time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+            console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+            console.log("time:" + time)
+          }
+          else {
+            console.log("time1 is empty")
+            var d = new Date(); // for now
+            time1 = (Number(d.getHours()) + 3) + ":" + d.getMinutes() + ":" + d.getSeconds()
+            console.log("arr[0] + + arr[1] + + arr[2]" + time1)
+            console.log("time:" + time)
+            time = time1;
+            time1 = response.result.parameters.time;
+            var arr = time1.toString().split(":")
+            var arr1 = time.toString().split(":")
+            console.log("arr[0]" + arr[0])
+            console.log("arr[1]" + arr1[0])
+            console.log((Number(arr[0]) + Number(arr1[0]) + Number("00")))
+
+
+            arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
+            arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
+            arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
+            time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
+
+          }
+
+
+          timeOffCase = 5
+        }
+        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+
+          time = response.result.parameters.time
+          time1 = response.result.parameters.time1
+          date = response.result.parameters.date;
+          date1 = response.result.parameters.date1;
+          if (response.result.parameters.date == "") {
+            date = today
+          }
+          timeOffCase = 1
+
+        }
+        else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
+
+          time = response.result.parameters.time
+          time1 = response.result.parameters.time1
+          date = response.result.parameters.date1
+          date1 = response.result.parameters.date1
+          if (response.result.parameters.date1 == "") {
+            date = today
+            date1 = today
+          }
+
+          timeOffCase = 2
+
+        } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
+          time = response.result.parameters.time
+          time1 = response.result.parameters.time1
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date
+          if (response.result.parameters.date == "") {
+            date = today
+            date1 = today
+          }
+          timeOffCase = 3
+
         }
 
-        else {
-          if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
-            time = response.result.parameters.time
+        else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
+          time = response.result.parameters.time
 
-            if (response.result.parameters.time1) {
-
-              console.log("time1 isnot empty")
-
-              time1 = response.result.parameters.time1;
-              time = time1;
-              time1 = response.result.parameters.time;
-              var arr = time1.toString().split(":")
-              var arr1 = time.toString().split(":")
-              console.log("arr[0]" + arr[0])
-              console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0])) + Number("00"))
-
-
-              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
-              time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-              console.log("time:" + time)
-            }
-            else {
-              console.log("time1 is empty")
-              var d = new Date(); // for now
-              time1 = (Number(d.getHours()) + 3) + ":" + d.getMinutes() + ":" + d.getSeconds()
-              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-              console.log("time:" + time)
-              time = time1;
-              time1 = response.result.parameters.time;
-              var arr = time1.toString().split(":")
-              var arr1 = time.toString().split(":")
-              console.log("arr[0]" + arr[0])
-              console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0]) + Number("00")))
-
-
-              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
-              time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-
-            }
-
-
-            timeOffCase = 5
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date1
+          if (response.result.parameters.date == "") {
+            date = today
           }
-          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
+          timeOffCase = 4
 
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date;
-            date1 = response.result.parameters.date1;
-            if (response.result.parameters.date == "") {
-              date = today
-            }
-            timeOffCase = 1
+        } else if (response.result.parameters.time && response.result.parameters.time1) {
+          time = response.result.parameters.time
+          time1 = response.result.parameters.time1
+          timeOffCase = 5
 
+        } else if (response.result.parameters.time && response.result.parameters.date) {
+          time = response.result.parameters.time
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date
+          if (response.result.parameters.date == "") {
+            date = today
+            date1 = date
           }
-          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
+          timeOffCase = 6
 
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date1
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date1 == "") {
-              date = today
-              date1 = today
-            }
-
-            timeOffCase = 2
-
-          } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.date == "") {
-              date = today
-              date1 = today
-            }
-            timeOffCase = 3
-
+        }
+        else if (response.result.parameters.time && response.result.parameters.date1) {
+          time = response.result.parameters.time
+          date1 = response.result.parameters.date1
+          if (response.result.parameters.date1 == "") {
+            date1 = today
           }
+          timeOffCase = 7
 
-          else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
-            time = response.result.parameters.time
+        }
+        else if (response.result.parameters.date && response.result.parameters.date1) {
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date1
+          timeOffCase = 8
 
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date == "") {
-              date = today
+        }
+        else if (response.result.parameters.date) {
+          timeOffCase = 9
+
+          var numberOfDaysToAdd = ""
+          console.log("Case 9" + response.result.parameters.date)
+
+          date = response.result.parameters.date
+          date1 = response.result.parameters.date
+          if (response.result.parameters.other_vacation_types) {
+            if (vacation_type1 == "Maternity") {
+              numberOfDaysToAdd = 70
+
+            } else if (response.result.parameters.other_vacation_types == "Paternity") {
+              console.log("Here")
+              numberOfDaysToAdd = 3
             }
-            timeOffCase = 4
-
-          } else if (response.result.parameters.time && response.result.parameters.time1) {
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            timeOffCase = 5
-
-          } else if (response.result.parameters.time && response.result.parameters.date) {
-            time = response.result.parameters.time
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.date == "") {
-              date = today
-              date1 = date
+            else if (response.result.parameters.other_vacation_types == "Marriage") {
+              console.log("Here")
+              numberOfDaysToAdd = 3
             }
-            timeOffCase = 6
-
-          }
-          else if (response.result.parameters.time && response.result.parameters.date1) {
-            time = response.result.parameters.time
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date1 == "") {
-              date1 = today
+            else if (response.result.parameters.other_vacation_types == "death") {
+              console.log("Here")
+              numberOfDaysToAdd = 3
+            } else if (response.result.parameters.other_vacation_types == "Haj") {
+              console.log("Here")
+              numberOfDaysToAdd = 10
             }
-            timeOffCase = 7
+            console.log("numberOfDaysToAdd" + numberOfDaysToAdd)
+            var someDate = new Date(date);
+            someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 
-          }
-          else if (response.result.parameters.date && response.result.parameters.date1) {
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date1
+            var dd = someDate.getDate();
+            var mm = someDate.getMonth() + 1;
+            var y = someDate.getFullYear();
+
+            date1 = y + '/' + mm + '/' + dd;
+            console.log("//" + date1)
             timeOffCase = 8
-
-          }
-          else if (response.result.parameters.date) {
-            timeOffCase = 9
-
-            var numberOfDaysToAdd = ""
-            console.log("Case 9" + response.result.parameters.date)
-
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.other_vacation_types) {
-              if (vacation_type1 == "Maternity") {
-                numberOfDaysToAdd = 70
-
-              } else if (response.result.parameters.other_vacation_types == "Paternity") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              }
-              else if (response.result.parameters.other_vacation_types == "Marriage") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              }
-              else if (response.result.parameters.other_vacation_types == "death") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              } else if (response.result.parameters.other_vacation_types == "Haj") {
-                console.log("Here")
-                numberOfDaysToAdd = 10
-              }
-              console.log("numberOfDaysToAdd" + numberOfDaysToAdd)
-              var someDate = new Date(date);
-              someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-
-              var dd = someDate.getDate();
-              var mm = someDate.getMonth() + 1;
-              var y = someDate.getFullYear();
-
-              date1 = y + '/' + mm + '/' + dd;
-              console.log("//" + date1)
-              timeOffCase = 8
-            }
-
-          }
-          else if (response.result.parameters.time) {
-            time = response.result.parameters.time
-            timeOffCase = 10
-
           }
 
+        }
+        else if (response.result.parameters.time) {
+          time = response.result.parameters.time
+          timeOffCase = 10
+
+        }
 
 
-          if (vacation_type1 == "") {
-            vacation_type1 = "personal"
-          }
-          console.log("timeOffCase" + timeOffCase)
-          //get the milliseconds for the  end of the vacation 
-          leave.convertTimeFormat(time, function (x, y, convertedTime) {
-            leave.convertTimeFormat(time1, function (x, y, convertedTime1) {
-              console.log("convertedTime" + convertedTime)
-              console.log("convertedTime1" + convertedTime1)
+
+        if (vacation_type1 == "") {
+          vacation_type1 = "personal"
+        }
+        console.log("timeOffCase" + timeOffCase)
+        //get the milliseconds for the  end of the vacation 
+        leave.convertTimeFormat(time, function (x, y, convertedTime) {
+          leave.convertTimeFormat(time1, function (x, y, convertedTime1) {
+            console.log("convertedTime" + convertedTime)
+            console.log("convertedTime1" + convertedTime1)
 
 
-              var toDate = date1 + " " + convertedTime1
-              console.log("toDate::" + toDate);
+            var toDate = date1 + " " + convertedTime1
+            console.log("toDate::" + toDate);
 
-              var fromDate = date + " " + convertedTime;
-              var timeMilliseconds = new Date(fromDate);
-              timeMilliseconds = timeMilliseconds.getTime();
-              timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
-              console.log("timeMilliseconds :::" + timeMilliseconds)
+            var fromDate = date + " " + convertedTime;
+            var timeMilliseconds = new Date(fromDate);
+            timeMilliseconds = timeMilliseconds.getTime();
+            timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
+            console.log("timeMilliseconds :::" + timeMilliseconds)
 
-              toDate = new Date(toDate);
-              var dateMilliSeconds = toDate.getTime();
-              dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
+            toDate = new Date(toDate);
+            var dateMilliSeconds = toDate.getTime();
+            dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
 
 
-              console.log("timeMilliseconds :::" + timeMilliseconds)
-              leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
-              vacation_type1 = ""
-            })
-
+            console.log("timeMilliseconds :::" + timeMilliseconds)
+            leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
+            vacation_type1 = ""
           })
 
+        })
 
 
-        }
-      })
 
-    }
+      }
+    })
+
+}
 
 
 
@@ -411,71 +421,71 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //when the user enter the date as ranger like 12-1 to 15-1
     else if ((responseText) == "dates") {
-      console.log(" arrive at dates" + typeOfVacation)
-      fromDate = response.result.parameters.date1;
-      toDate = response.result.parameters.date
-      if (typeOfVacation != "")
-        //send Post request
-        vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
+  console.log(" arrive at dates" + typeOfVacation)
+  fromDate = response.result.parameters.date1;
+  toDate = response.result.parameters.date
+  if (typeOfVacation != "")
+    //send Post request
+    vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
 
-      else msg.say("Sick or personal vacation?")
-      fromDate = ""
-      toDate = ""
-
-    }
-
-
-    //When user ask for help,response will be the menu of all things that he can do
-    else if ((responseText) == "Help") {
-
-      toffyHelper.sendHelpOptions(msg);
-    }
-    //show enployee vacation history 
-    else if ((responseText) == "showHistory") {
-      employee.showEmployeeHistory(emailValue, msg);
-    }
-    else if ((responseText) == "showStats") {
-      employee.showEmployeeStats(emailValue, msg);
-    }
-    else if ((responseText) == "showRules") {
-      employee.ShowRules(emailValue, msg);
-    }
-    else if ((responseText) == "showProfile") {
-      employee.showEmployeeProfile(emailValue, msg);
-    }
-    else if ((responseText) == "showHolidays") {
-      var date = response.result.parameters.date;
-      var date1 = response.result.parameters.date1;
-      toffyHelper.showHolidays(msg, emailValue, date, date1);
-    }
-    else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
-      var date = "2017-01-01";
-      var date1 = "	2017-12-30";
-      toffyHelper.showHolidays(msg, emailValue, date, date1);
-    }
-
-
-    else if ((response.result.action) == "input.welcome") {
-      SendWelcomeResponse(msg, responseText)
-    }
-
-    else if ((responseText) == "salesforce") {
-      if (salesforceCode != "")
-        msg.say("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + salesforceCode + "'");
-      else {
-        generalId = msg.body.event.user;
-        generalMsg = msg;
-        msg.say("You are not logged in, please visit this URL to login to Sales Force");
-        msg.say("https://login.salesforce.com/services/oauth2/authorize?client_id=3MVG9HxRZv05HarRwahdcdooErBOoQcBqIyghM1uhSz5nqz4b66MpGNzzd7k2bV1I3WHHaEwOSeyNaeB2KuN6&response_type=code&redirect_uri=https://beepboophq.com/proxy/b1bddd9741944d5d9298c7c37691b6d4/newteam")
-      }
-    }
-
-    else msg.say(responseText)
-  });
+  else msg.say("Sick or personal vacation?")
   fromDate = ""
   toDate = ""
-  apiaiRequest.on('error', (error) => console.error(error));
-  apiaiRequest.end();
+
+}
+
+
+//When user ask for help,response will be the menu of all things that he can do
+else if ((responseText) == "Help") {
+
+  toffyHelper.sendHelpOptions(msg);
+}
+//show enployee vacation history 
+else if ((responseText) == "showHistory") {
+  employee.showEmployeeHistory(emailValue, msg);
+}
+else if ((responseText) == "showStats") {
+  employee.showEmployeeStats(emailValue, msg);
+}
+else if ((responseText) == "showRules") {
+  employee.ShowRules(emailValue, msg);
+}
+else if ((responseText) == "showProfile") {
+  employee.showEmployeeProfile(emailValue, msg);
+}
+else if ((responseText) == "showHolidays") {
+  var date = response.result.parameters.date;
+  var date1 = response.result.parameters.date1;
+  toffyHelper.showHolidays(msg, emailValue, date, date1);
+}
+else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
+  var date = "2017-01-01";
+  var date1 = "	2017-12-30";
+  toffyHelper.showHolidays(msg, emailValue, date, date1);
+}
+
+
+else if ((response.result.action) == "input.welcome") {
+  SendWelcomeResponse(msg, responseText)
+}
+
+else if ((responseText) == "salesforce") {
+  if (salesforceCode != "")
+    msg.say("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + salesforceCode + "'");
+  else {
+    generalId = msg.body.event.user;
+    generalMsg = msg;
+    msg.say("You are not logged in, please visit this URL to login to Sales Force");
+    msg.say("https://login.salesforce.com/services/oauth2/authorize?client_id=3MVG9HxRZv05HarRwahdcdooErBOoQcBqIyghM1uhSz5nqz4b66MpGNzzd7k2bV1I3WHHaEwOSeyNaeB2KuN6&response_type=code&redirect_uri=https://beepboophq.com/proxy/b1bddd9741944d5d9298c7c37691b6d4/newteam")
+  }
+}
+
+else msg.say(responseText)
+  });
+fromDate = ""
+toDate = ""
+apiaiRequest.on('error', (error) => console.error(error));
+apiaiRequest.end();
 }
 //get all information about team users like email ,name ,user id ...sssss
 //**********************************************************************************************
