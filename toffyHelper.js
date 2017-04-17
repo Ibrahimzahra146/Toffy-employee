@@ -743,17 +743,36 @@ function getHolidayMessage(body, holidayRequestType, callback) {
 
     var i = 0;
     var stringMessage = "["
-    while ((JSON.parse(body)[i])) {
-        getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-            console.log("dayName" + dayName)
-            if (i > 0) {
-                stringMessage = stringMessage + ","
-            }
-            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
-            i++;
+    var obj = JSON.parse(body);
+    var shareInfoLen = Object.keys(obj).length;
+    console.log("shareInfoLen" + shareInfoLen)
+    console.log()
+    if (holidayRequestType == 2) {
+        while (i < 1) {
+            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+                console.log("dayName" + dayName)
+                if (i > 0) {
+                    stringMessage = stringMessage + ","
+                }
+                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                i++;
 
-        })
+            })
 
+        }
+    } else {
+        while ((JSON.parse(body)[i])) {
+            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+                console.log("dayName" + dayName)
+                if (i > 0) {
+                    stringMessage = stringMessage + ","
+                }
+                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                i++;
+
+            })
+
+        }
     }
     callback(stringMessage)
 }
