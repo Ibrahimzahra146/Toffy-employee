@@ -562,7 +562,7 @@ function getTodayDate(callback) {
     mm = '0' + mm
   }
 
-  today = yyyy + '/' + mm + '/' + dd;
+  today = yyyy + '-' + mm + '-' + dd;
   callback(today)
 
 }
