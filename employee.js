@@ -51,11 +51,15 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
                         stringMessage = stringMessage + ","
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
-
+                        var typeOfVacation = ""
+                        if ((JSON.parse(body))[i].type == 0)
+                            typeOfVacation = "Time off"
+                        else if ((JSON.parse(body))[i].type == 4)
+                            typeOfVacation = "Sick time off"
                         printLogs("stringMessage::" + stringMessage);
                         stringMessage = stringMessage + "]"
                         var messageBody = {
-                            "text": "Vacation number (" + i + "):",
+                            "text": typeOfVacation,
                             "attachments": [
                                 {
                                     "attachment_type": "default",
