@@ -399,7 +399,6 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                 'Cookie': remember_me_cookie + ";" + session_Id
             },
         }, function (error, response, body) {
-            console.log("Ibrahim::" + response.statusCode)
             var i = 0;
             var stringMessage = "["
             if (!error && response.statusCode === 200) {
@@ -412,8 +411,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                     while ((JSON.parse(body)[i])) {
                         getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                             console.log("dayName" + dayName)
-                            if (i > 0 && holidayRequestType == 2) {
-                                break;
+                            if (i > 0) {
                                 stringMessage = stringMessage + ","
                             }
                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
@@ -465,9 +463,6 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
         toffyHelper.general_remember_me = remember_me_cookie
         toffyHelper.general_session_id = sessionId
 
-        console.log("1-toffyHelper.general_remember_me+ " + toffyHelper.general_remember_me)
-        printLogs("toffyHelper.generalCookies=======> " + toffyHelper.generalCookies)
-        printLogs("==========>Getting user id from Hr")
         request({
             url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
@@ -478,10 +473,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
-            printLogs("=======>body: " + body)
             userIdInHr = JSON.parse(body);
-            printLogs("====>user id:" + userIdInHr)
-            printLogs(JSON.stringify(body))
             callback(body)
 
         })
@@ -507,7 +499,6 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
                 'Cookie': cookies + ";" + session_Id
             },
         }, function (error, response, body) {
-            printLogs("JSON.stringify(body)------------>>>>>" + JSON.stringify(body))
             callback(body)
 
         })
@@ -761,5 +752,23 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
         function (err) {
             callback(flag)
         });
+
+}
+function getHolidayMessage(body, holidayRequestType, callback) {
+
+    var i = 0;
+    var stringMessage = "["
+    while ((JSON.parse(body)[i])) {
+        getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+            console.log("dayName" + dayName)
+            if (i > 0) {
+                stringMessage = stringMessage + ","
+            }
+            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+            i++;
+
+        })
+
+    }
 
 }
