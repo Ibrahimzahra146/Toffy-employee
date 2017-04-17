@@ -387,6 +387,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType) {
+    console.log("holidayRequestType" + holidayRequestType)
 
     console.log("date" + date)
     console.log("date1" + date1)
@@ -401,6 +402,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
         }, function (error, response, body) {
 
             if (!error && response.statusCode === 200) {
+                console.log("Response.statuscode" + response.statusCode)
                 if (!(JSON.parse(body)[0])) {
                     msg.say("There are no holidays, sorry!");
                 }
@@ -746,7 +748,7 @@ function getHolidayMessage(body, holidayRequestType, callback) {
     var obj = JSON.parse(body);
     var shareInfoLen = Object.keys(obj).length;
     console.log("shareInfoLen" + shareInfoLen)
-   
+
     if (holidayRequestType == 2) {
         while (i < 1) {
             getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
