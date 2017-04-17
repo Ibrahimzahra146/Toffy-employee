@@ -399,61 +399,46 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                 'Cookie': remember_me_cookie + ";" + session_Id
             },
         }, function (error, response, body) {
-            var i = 0;
-            var stringMessage = "["
+
             if (!error && response.statusCode === 200) {
-                console.log("ahmad" + JSON.stringify(body))
-                if (!(JSON.parse(body)[i])) {
+                if (!(JSON.parse(body)[0])) {
                     msg.say("There are no holidays, sorry!");
                 }
                 else {
                     //build message Json result to send it to slack
-                    while ((JSON.parse(body)[i])) {
-                        getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-                            console.log("dayName" + dayName)
-                            if (i > 0) {
-                                stringMessage = stringMessage + ","
-                            }
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
-                            i++;
+                    getHolidayMessage(body, holidayRequestType, function (stringMessage) {
 
-                        })
 
-                    }
-                    printLogs("stringMessage::" + stringMessage);
+                        printLogs("stringMessage::" + stringMessage);
 
-                    stringMessage = stringMessage + "]"
-                    var messageBody = {
-                        "text": "The holidays are:",
-                        "attachments": [
-                            {
-                                "attachment_type": "default",
-                                "text": " ",
-                                "fallback": "ReferenceError",
-                                "fields": stringMessage,
-                                "color": "#F35A00"
-                            }
-                        ]
-                    }
-                    printLogs("messageBody" + messageBody)
-                    var stringfy = JSON.stringify(messageBody);
+                        stringMessage = stringMessage + "]"
+                        var messageBody = {
+                            "text": "The holidays are:",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "text": " ",
+                                    "fallback": "ReferenceError",
+                                    "fields": stringMessage,
+                                    "color": "#F35A00"
+                                }
+                            ]
+                        }
+                        printLogs("messageBody" + messageBody)
+                        var stringfy = JSON.stringify(messageBody);
 
-                    printLogs("stringfy " + stringfy)
-                    stringfy = stringfy.replace(/\\/g, "")
-                    stringfy = stringfy.replace(/]\"/, "]")
-                    stringfy = stringfy.replace(/\"\[/, "[")
-                    stringfy = JSON.parse(stringfy)
+                        printLogs("stringfy " + stringfy)
+                        stringfy = stringfy.replace(/\\/g, "")
+                        stringfy = stringfy.replace(/]\"/, "]")
+                        stringfy = stringfy.replace(/\"\[/, "[")
+                        stringfy = JSON.parse(stringfy)
 
-                    msg.say(stringfy)
+                        msg.say(stringfy)
+                    })
                 }
             }
         })
     })
-
-
-
-
-
 }
 
 
@@ -770,5 +755,5 @@ function getHolidayMessage(body, holidayRequestType, callback) {
         })
 
     }
-
+    callback(stringMessage)
 }
