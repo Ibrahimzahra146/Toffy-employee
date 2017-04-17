@@ -386,7 +386,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     );
 }
 //list all holidays with range period
-module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType) {
+module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response) {
     console.log("holidayRequestType" + holidayRequestType)
 
     console.log("date" + date)
@@ -409,7 +409,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                 }
                 else {
                     //build message Json result to send it to slack
-                    getHolidayMessage(body, holidayRequestType, function (stringMessage) {
+                    getHolidayMessage(body, holidayRequestType, response, function (stringMessage) {
 
 
                         printLogs("stringMessage::" + stringMessage);
@@ -742,7 +742,8 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
         });
 
 }
-function getHolidayMessage(body, holidayRequestType, callback) {
+function getHolidayMessage(body, holidayRequestType, response, callback) {
+    var max=""
 
     var i = 0;
     var stringMessage = "["
@@ -750,8 +751,12 @@ function getHolidayMessage(body, holidayRequestType, callback) {
     var shareInfoLen = Object.keys(obj).length;
     console.log("shareInfoLen" + shareInfoLen)
 
-    if (holidayRequestType == 2) {
-        while (i < 1) {
+    if (holidayRequestType == 2 || holidayRequestType == 3) {
+        if (holidayRequestType == 2)
+             max = 1;
+        else if (holidayRequestType == 3)
+            max = response.result.parameters.number
+        while (i < max) {
             getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                 console.log("dayName" + dayName)
                 if (i > 0) {

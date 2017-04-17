@@ -478,12 +478,17 @@ function sendRequestToApiAi(emailValue, msg) {
           date = today
           date1 = "	2017-12-30"
           holidayRequestType = 2;
+        } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && (response.result.parameters.number)) {
+          console.log("1")
+          date = today
+          date1 = "	2017-12-30"
+          holidayRequestType = 3;
         }
         else {
           date = response.result.parameters.date;
           date1 = response.result.parameters.date1;
         }
-        toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType);
+        toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType, response);
 
       })
     }
