@@ -386,7 +386,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     );
 }
 //list all holidays with range period
-module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response) {
+module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
     console.log("holidayRequestType" + holidayRequestType)
 
     console.log("date" + date)
@@ -409,7 +409,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                 }
                 else {
                     //build message Json result to send it to slack
-                    getHolidayMessage(body, holidayRequestType, response, function (stringMessage) {
+                    getHolidayMessage(body, holidayRequestType, response11, function (stringMessage) {
 
 
                         printLogs("stringMessage::" + stringMessage);
