@@ -746,7 +746,7 @@ function getHolidayMessage(body, holidayRequestType, callback) {
     var obj = JSON.parse(body);
     var shareInfoLen = Object.keys(obj).length;
     console.log("shareInfoLen" + shareInfoLen)
-    console.log()
+   
     if (holidayRequestType == 2) {
         while (i < 1) {
             getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
