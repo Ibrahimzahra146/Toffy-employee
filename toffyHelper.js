@@ -403,6 +403,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
 
             if (!error && response.statusCode === 200) {
                 console.log("Response.statuscode" + response.statusCode)
+                console.log(JSON.stringify(body))
                 if (!(JSON.parse(body)[0])) {
                     msg.say("There are no holidays, sorry!");
                 }
