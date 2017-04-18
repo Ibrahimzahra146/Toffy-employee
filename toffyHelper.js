@@ -216,26 +216,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function () { return managerApproval[i]; },
         function (callback) {
 
-            /* if (managerApproval[2]) {
-                 console.log("here 11")
-                 console.log("managerApproval[2].type" + managerApproval[2].type)
-                 if (managerApproval[2].type == "Manager") {
-                     console.log("here 12")
-                     i = 2
-                 }
- 
-             } if (managerApproval[1]) {
-                 console.log("managerApproval[1].type" + managerApproval[1].type)
- 
-                 console.log("here 13")
- 
-                 if (managerApproval[1].type == "Manager") {
-                     console.log("here 14")
- 
-                     i = 1
-                 }
-             }
-             console.log("The iiiiiiiii::::: is::" + i)*/
 
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
@@ -301,80 +281,84 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
                         }
                     }
-                    var messageBody = {
-                        "text": "This folk has pending time off request:",
-                        "attachments": [
-                            {
-                                "attachment_type": "default",
-                                "callback_id": "manager_confirm_reject",
-                                "text": userEmail,
-                                "fallback": "ReferenceError",
-                                "fields": [
-                                    {
-                                        "title": "From",
-                                        "value": startDate,
-                                        "short": true
-                                    },
-                                    {
-                                        "title": "Days/Time ",
-                                        "value": workingDays + " day",
-                                        "short": true
-                                    },
-                                    {
-                                        "title": "to",
-                                        "value": endDate,
-                                        "short": true
-                                    },
-                                    {
-                                        "title": "Type",
-                                        "value": type,
-                                        "short": true
-                                    }
-                                ],
-                                "actions": [
-                                    {
-                                        "name": "confirm",
-                                        "text": "Accept",
-                                        "style": "primary",
-                                        "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
-                                    },
-                                    {
-                                        "name": "reject",
-                                        "text": "Reject",
-                                        "style": "danger",
-                                        "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
-                                    }, dont_detuct_button
-                                ],
-                                "color": "#F35A00",
-                                "thumb_url": "https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/16832227_1341475782539973_288842465026282085_n.jpg?oh=24d384a7c11ae0be0cca6451f00d7dfd&oe=5980EBC3",
-                            }
-                        ]
-                    }
-                    if (approvarType == "Manager") {
-                        currentBot = server.bot;
-
-                    } else {
-
-                        currentBot = server.hRbot
-                    }
-                    currentBot.startConversation(message12, function (err, convo) {
+                    getUserImage(userEmail, function (ImageUrl) {
 
 
-                        if (!err) {
 
-                            var stringfy = JSON.stringify(messageBody);
-                            var obj1 = JSON.parse(stringfy);
-                            currentBot.reply(message12, obj1);
-
+                        var messageBody = {
+                            "text": "This folk has pending time off request:",
+                            "attachments": [
+                                {
+                                    "attachment_type": "default",
+                                    "callback_id": "manager_confirm_reject",
+                                    "text": userEmail,
+                                    "fallback": "ReferenceError",
+                                    "fields": [
+                                        {
+                                            "title": "From",
+                                            "value": startDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Days/Time ",
+                                            "value": workingDays + " day",
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "to",
+                                            "value": endDate,
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Type",
+                                            "value": type,
+                                            "short": true
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "name": "confirm",
+                                            "text": "Accept",
+                                            "style": "primary",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
+                                        },
+                                        {
+                                            "name": "reject",
+                                            "text": "Reject",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
+                                        }, dont_detuct_button
+                                    ],
+                                    "color": "#F35A00",
+                                    "thumb_url": ImageUrl,
+                                }
+                            ]
                         }
+                        if (approvarType == "Manager") {
+                            currentBot = server.bot;
+
+                        } else {
+
+                            currentBot = server.hRbot
+                        }
+                        currentBot.startConversation(message12, function (err, convo) {
+
+
+                            if (!err) {
+
+                                var stringfy = JSON.stringify(messageBody);
+                                var obj1 = JSON.parse(stringfy);
+                                currentBot.reply(message12, obj1);
+
+                            }
+                        });
+                        flagForWhileCallbacks = 1
+
                     });
-                    flagForWhileCallbacks = 1
-
-                });
-                i++;
-
+                    i++;
+                })
             })
             setTimeout(callback, 2000);
 
@@ -743,7 +727,7 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
 
 }
 function getHolidayMessage(body, holidayRequestType, response, callback) {
-    var max=""
+    var max = ""
 
     var i = 0;
     var stringMessage = "["
@@ -753,7 +737,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
 
     if (holidayRequestType == 2 || holidayRequestType == 3) {
         if (holidayRequestType == 2)
-             max = 1;
+            max = 1;
         else if (holidayRequestType == 3)
             max = response.result.parameters.number
         while (i < max) {
@@ -783,4 +767,27 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
         }
     }
     callback(stringMessage)
+}
+function getUserImage(email, callback) {
+
+    toffyHelper.getIdFromEmail(email, function (Id) {
+
+        var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/image'
+        printLogs("uri " + uri)
+
+        request({
+            url: uri, //URL to hitDs
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+
+            }
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            printLogs("email:" + body)
+            callback(response, body)
+        })
+
+    })
 }
