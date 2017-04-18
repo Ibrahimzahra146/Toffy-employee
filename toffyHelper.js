@@ -332,7 +332,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, dont_detuct_button
                                     ],
                                     "color": "#F35A00",
-                                    "thumb_url": ImageUrl,
+                                    "thumb_url": "172.30.204.243:9090/files/profiles/ibrahim.jpg",
                                 }
                             ]
                         }
