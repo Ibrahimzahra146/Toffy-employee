@@ -648,7 +648,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                 "name": "upload_sick_report",
                 "text": "Don’t Deduct ",
                 "type": "button",
-                "value": email + ";" + vacationId + ";" + approvalId + ";" + fromDate + ";" + toDate
+                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
               }
             }
 
@@ -668,7 +668,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                       "type": "button",
                       "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate
 
-                    },uploadSickReportButton
+                    }, uploadSickReportButton
                   ]
                 }
               ]
