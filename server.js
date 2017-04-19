@@ -646,7 +646,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
             if (type == "sick") {
               uploadSickReportButton = {
                 "name": "upload_sick_report",
-                "text": "Don’t Deduct ",
+                "text": "Upload sick report ",
                 "type": "button",
                 "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
               }
@@ -749,6 +749,16 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
 End of Leave Section
   -------------____________________________________________________---------------------
   */
+//upload sick report button 
+slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
+  var arr = value.toString().split(";")
+  var email = arr[0]
+  var vacationId = arr[1]
+
+  var fromDate = arr[2]
+  var toDate = arr[3]
+  msg.say("Please visit this url to upload sick report http://172.30.204.243:9090/sick-report?vacationId=" + vacationId);
+})
 slapp.event('team_join', (msg) => {
   console.log('received team join event')
 });
