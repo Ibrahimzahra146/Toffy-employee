@@ -761,6 +761,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   var fromDate = arr[2]
   var toDate = arr[3]
   opn("http://172.30.204.243:9090/sick-report?vacationId=" + vacationId);
+  console.log("Opened")
 })
 slapp.event('team_join', (msg) => {
   console.log('received team join event')
