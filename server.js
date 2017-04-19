@@ -11,6 +11,8 @@ const JSONbig = require('json-bigint');
 const async = require('async');
 const apiai = require('apiai');
 const APIAI_LANG = 'en';
+const opn = require('opn');
+
 var sessionId = uuid.v1();
 var db = require('node-localdb');
 var requestify = require('requestify');
@@ -43,6 +45,7 @@ var generalMsg = "";
 var salesforceCode = "";
 var leaveFlag = "";
 var count = 0;
+
 exports.count = count;
 pg.defaults.ssl = true;
 
@@ -757,7 +760,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.say("Please visit this url to upload sick report http://172.30.204.243:9090/sick-report?vacationId=" + vacationId);
+  opn("http://172.30.204.243:9090/sick-report?vacationId=" + vacationId);
 })
 slapp.event('team_join', (msg) => {
   console.log('received team join event')
