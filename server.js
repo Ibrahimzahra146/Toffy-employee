@@ -614,14 +614,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
     var workingDays = arr[6]
     var fromDate = arr[7]
     var toDate = arr[8]
-    console.log("type:::::" + type)
-    console.log("email:::::" + email)
-    console.log("toDate:::::" + toDate)
-    console.log("fromDateInMilliseconds:::::" + fromDateInMilliseconds)
-    console.log("toDateInMilliseconds:::::" + toDateInMilliseconds)
-    console.log("workingDays:::::" + workingDays)
-    console.log("fromDate:::::" + fromDate)
-    console.log("toDate:::::" + toDate)
+    var uploadSickReportButton = ""
 
     toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, function (vacationId, managerApproval) {
 
@@ -650,6 +643,14 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
             }
             else
               messageFB = "Your request ( " + fromDate + "-" + toDate + " ) has been submitted and is awaiting your managers approval "
+            if (type == "sick") {
+              uploadSickReportButton = {
+                "name": "upload_sick_report",
+                "text": "Don’t Deduct ",
+                "type": "button",
+                "value": email + ";" + vacationId + ";" + approvalId + ";" + fromDate + ";" + toDate
+              }
+            }
 
             var text12 = {
               "text": "",
@@ -667,7 +668,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
                       "type": "button",
                       "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate
 
-                    }
+                    },uploadSickReportButton
                   ]
                 }
               ]
