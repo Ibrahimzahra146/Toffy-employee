@@ -789,7 +789,7 @@ function getUserImage(email, callback) {
             //Set the body as a stringcc
         }, function (error, response, body) {
             printLogs("email:" + body)
-            callback(response, body)
+            callback(body)
         })
 
     })
