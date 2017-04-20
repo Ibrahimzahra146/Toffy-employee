@@ -282,6 +282,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
                     }
                     getUserImage(userEmail, function (ImageUrl) {
+                        console.log("ImageUrl" + ImageUrl)
+                        console.log("ImageUrl" + JSON.stringify(ImageUrl))
 
 
 
