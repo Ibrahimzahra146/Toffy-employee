@@ -284,7 +284,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     getUserImage(userEmail, function (ImageUrl) {
                         console.log("ImageUrl" + ImageUrl)
                         console.log("ImageUrl" + JSON.stringify(ImageUrl))
-                        ImageUrl = JSON.stringify(ImageUrl)
 
 
 
@@ -335,7 +334,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, dont_detuct_button
                                     ],
                                     "color": "#F35A00",
-                                    "thumb_url": ImageUrl,
+                                    "thumb_url": '46.43.71.50:19090/files/profiles/ibrahim.jpg',
                                 }
                             ]
                         }
