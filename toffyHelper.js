@@ -332,7 +332,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, dont_detuct_button
                                     ],
                                     "color": "#F35A00",
-                                    "thumb_url": "http://46.43.71.50:19090/files/profiles/ibrahim.jpg",
+                                    "thumb_url": ImageUrl,
                                 }
                             ]
                         }
@@ -768,6 +768,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
     }
     callback(stringMessage)
 }
+
 function getUserImage(email, callback) {
 
     toffyHelper.getIdFromEmail(email, function (Id) {
