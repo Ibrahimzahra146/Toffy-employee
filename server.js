@@ -778,7 +778,7 @@ app.post('/birthday', (req, res) => {
   console.log("New get request is received");
   // work /var state= req.param('code')
     console.log(req.body);
-    res.send("test");
+    res.send("200");
   /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
 });
