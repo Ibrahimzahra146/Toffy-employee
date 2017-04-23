@@ -77,7 +77,7 @@ var controller2 = Botkit.slackbot({
   debug: true,
 });
 var employeeBot = controller2.spawn({
-  token: "s"//SLACK_EMPLOYEE_BOT_ACCESS_KEY
+  token: SLACK_EMPLOYEE_BOT_ACCESS_KEY
 
 }).startRTM();
 exports.employeeBot = employeeBot
