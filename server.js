@@ -32,6 +32,7 @@ var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
 var SLACK_HR_TOKEN = process.env.SLACK_HR_ACCESS_KEY;
+var SLACK_EMPLOYEE_BOT_ACCESS_KEY = process.env.SLACK_EMPLOYEE_BOT_ACCESS_KEY
 var sickFlag = "";
 var userId = "U3FNW74JD"
 var managerChannel = "D3RR2RE68"
