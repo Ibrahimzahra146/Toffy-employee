@@ -669,7 +669,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
                             'channel': jsonResponse.hrChannelId,
                             user: jsonResponse.slackUserId,
                             text: 'what is my name',
-                            ts: startDate + ';' + endDate + ';' + userEmail,
+                            ts: "1294e8475",
                             team: jsonResponse.teamId,
                             event: 'direct_message'
                         }
