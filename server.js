@@ -777,8 +777,10 @@ app.use(bodyParser.text({ type: 'application/json' }));
 app.post('/birthday', (req, res) => {
   console.log("New get request is received");
   // work /var state= req.param('code')
-    console.log(req.body);
-    res.send("200");
+  console.log(req.body);
+  console.log((JSON.parse(req.body))[0].email);
+
+  res.send("200");
   /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
 });
