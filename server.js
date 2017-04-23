@@ -777,9 +777,9 @@ app.use(bodyParser.text({ type: 'application/json' }));
 app.get('/birthday', (req, res) => {
   console.log("New get request is received");
   // work /var state= req.param('code')
- /* var code = req.param('code');
+  var code = req.param('code');
   console.log("the data" + code);
-  console.log("generalId " + generalId)
+  /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
 });
 
