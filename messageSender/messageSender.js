@@ -29,8 +29,18 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
         server.employeeBot.startConversation(message, function (err, convo) {
             if (!err) {
                 var text12 = {
-                    "text": text,
+                    "text": "happy birthday man ",
+                    "attachments": [
+                        {
+                            "attachment_type": "default",
+
+                            "text": userEmail,
+                            "fallback": "ReferenceError",
+                            "image_url": "http://68.media.tumblr.com/28c52c2891b4784e093830763fd92e48/tumblr_inline_o2195iz6PK1t8z0o6_540.gif"
+                        }
+                    ]
                 }
+
                 var stringfy = JSON.stringify(text12);
                 var obj1 = JSON.parse(stringfy);
                 server.employeeBot.reply(message, obj1);
