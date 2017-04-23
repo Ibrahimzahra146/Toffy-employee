@@ -26,14 +26,14 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
             team: responseBody.teamId,
             event: 'direct_message'
         };
-        server.bot.startConversation(message, function (err, convo) {
+        server.employeeBot.startConversation(message, function (err, convo) {
             if (!err) {
                 var text12 = {
                     "text": text,
                 }
                 var stringfy = JSON.stringify(text12);
                 var obj1 = JSON.parse(stringfy);
-                server.bot.reply(message, obj1);
+                server.employeeBot.reply(message, obj1);
             }
         });
     });

@@ -12,6 +12,10 @@ config:
   friendly_name: SLACK  manager bot access token
   type: secret
   global: true
+- name: SLACK_EMPLOYEE_BOT_ACCESS_KEY
+  friendly_name: SLACK  employee bot access token
+  type: secret
+  global: true
 - name: SLACK_HR_ACCESS_KEY
   friendly_name: SLACK Hr access token
   type: secret

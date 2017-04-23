@@ -72,6 +72,15 @@ var hRbot = controller1.spawn({
 
 }).startRTM();
 exports.hRbot = hRbot;
+//
+var controller2 = Botkit.slackbot({
+  debug: true,
+});
+var employeeBot = controller2.spawn({
+  token: SLACK_EMPLOYEE_BOT_ACCESS_KEY
+
+}).startRTM();
+exports.employeeBot = employeeBot
 
 function SendWelcomeResponse(msg, responseText) {
   console.log("the aoo token " + msg.meta.app_token);
@@ -781,7 +790,7 @@ app.post('/birthday', (req, res) => {
   console.log(req.body);
 
   var email = JSON.parse(req.body)[0].email
-  messageSender.sendMessageSpecEmployee(email,"With all the best")
+  messageSender.sendMessageSpecEmployee(email, "With all the best")
   res.send("200");
   /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
