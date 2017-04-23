@@ -34,7 +34,7 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
                         {
                             "attachment_type": "default",
 
-                            "text": userEmail,
+                            "text": "",
                             "fallback": "ReferenceError",
                             "image_url": "http://68.media.tumblr.com/28c52c2891b4784e093830763fd92e48/tumblr_inline_o2195iz6PK1t8z0o6_540.gif"
                         }
