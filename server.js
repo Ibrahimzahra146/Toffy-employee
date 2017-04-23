@@ -636,7 +636,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
 
 
           if (!managerApproval[0]) {
-            msg.say("You dont have any manager right now ");
+            msg.say("You dont have any approver right now ");
           } else {
             toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays)
             var messageFB = ""
@@ -774,13 +774,13 @@ app.get('/', function (req, res) {
 })
 app.use(bodyParser.text({ type: 'application/json' }));
 
-app.get('/newteam', (req, res) => {
+app.get('/birthday', (req, res) => {
   console.log("New get request is received");
   // work /var state= req.param('code')
-  var code = req.param('code');
+ /* var code = req.param('code');
   console.log("the data" + code);
   console.log("generalId " + generalId)
-  getSalesForceAccessToken(code)
+  getSalesForceAccessToken(code)*/
 });
 
 app.post('/newat', (req, res) => {
