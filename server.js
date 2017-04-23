@@ -24,6 +24,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
+const messageSender = require('./messageSender/messageSender.js')
 var vacation_type1 = ""
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
@@ -778,8 +779,10 @@ app.post('/birthday', (req, res) => {
   console.log("New get request is received");
   // work /var state= req.param('code')
   console.log(req.body);
-  console.log((JSON.parse(req.body))[1].id);
 
+  console.log((JSON.parse(req.body))[1].id);
+  var email = JSON.parse(req.body)[0].email
+  messageSender.sendMessageSpecEmployee(email,"With all the best")
   res.send("200");
   /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
