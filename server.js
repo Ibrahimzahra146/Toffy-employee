@@ -780,7 +780,6 @@ app.post('/birthday', (req, res) => {
   // work /var state= req.param('code')
   console.log(req.body);
 
-  console.log((JSON.parse(req.body))[1].id);
   var email = JSON.parse(req.body)[0].email
   messageSender.sendMessageSpecEmployee(email,"With all the best")
   res.send("200");
