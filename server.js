@@ -122,7 +122,7 @@ function getSalesForceAccessToken(code1) {
       console.log(body)
       var data = JSONbig.parse(body);
 
-      console.log("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + data.access_token + "'");
+      console.log("Your Slack  Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + data.access_token + "'");
       salesforceCode = data.access_token;
     }
   });
