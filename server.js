@@ -773,6 +773,7 @@ End of Leave Section
   */
 //upload sick report button 
 slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
+  console.log("upload sick report")
   var arr = value.toString().split(";")
   var email = arr[0]
   var vacationId = arr[1]
