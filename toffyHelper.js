@@ -609,7 +609,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
 
 }
 //Send cancel feedback to managers()
-module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(fromDate, toDate, userEmail, vacationId, managerApproval) {
+module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(fromDate, toDate, userEmail, vacationId, managerApproval, type) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -689,7 +689,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
                         if (!err) {
 
 
-                            currentBot.reply(message12, userEmail + " has canceled his time off request (" + fromDate + " - " + toDate + ")");
+                            currentBot.reply(message12, userEmail + " has canceled his" + type + " time off request (" + fromDate + " - " + toDate + ")");
 
                         }
                     });
