@@ -689,7 +689,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
                         if (!err) {
 
 
-                            currentBot.reply(message12, userEmail + " has canceled his" + type + " time off request (" + fromDate + " - " + toDate + ")");
+                            currentBot.reply(message12, userEmail + " has canceled his " + type + " time off request (" + fromDate + " - " + toDate + ")");
 
                         }
                     });
