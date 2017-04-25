@@ -354,6 +354,10 @@ function sendRequestToApiAi(emailValue, msg) {
               date = today;
               date1 = date
 
+            } else if ((response.result.parameters.date).indexOf(',') > -1) {
+              var arr = (response.result.parameters.date).toString().split(',')
+              date = arr[0];
+              date1 = arr[1]
             }
             if (response.result.parameters.other_vacation_types) {
               if (vacation_type1 == "Maternity") {
