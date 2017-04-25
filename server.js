@@ -721,7 +721,6 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
   var managerApproval = arr[2]
   var fromDate = arr[3]
   var toDate = arr[4]
-  console.log("cancel_request" + JSON.stringify(managerApproval))
   toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     //get vacation state
     var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
@@ -748,7 +747,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
               'Cookie': remember_me_cookie + ";" + session_Id
             },
           }, function (error, response, body) {
-            msg.respond(msg.body.response_url, ".  ")
+            msg.respond(msg.body.response_url, "Request canceled")
             msg.say("Your request from ( " + fromDate + "-" + toDate + " ) has been canceled")
             toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval)
 
