@@ -29,7 +29,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     var workingDays = parseFloat(body).toFixed(2);
                     var wordFromDate = new Date(fromDate).toDateString();
                     var wordTodate = new Date(ToDate).toDateString();
-                  
+
                     getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
 
                         if (type == "sick") {
@@ -42,7 +42,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             "text": "",
                             "attachments": [
                                 {
-                                    "text": messagetext,
+                                    "text": messagetext + " Note: Any official holiday will not be deducted from your time off request.",
                                     "callback_id": 'leave_with_vacation_confirm_reject',
                                     "color": "#3AA3E3",
                                     "attachment_type": "default",
@@ -262,7 +262,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
             messageText = ""
             messageText = "Okay," + typeText + " on " + fromDate + ". Should I go ahead ?"
         } else
-            messageText = "Okay," + typeText + " on " + fromDate + " and that would be 1 working day. Should I go ahead ? "
+            messageText = "Okay," + typeText + " on " + fromDate + " and that would be " + workingDays + " working day. Should I go ahead ? "
 
 
     } else if (timeOffcase == 10) {
