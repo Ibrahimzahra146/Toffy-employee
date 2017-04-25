@@ -29,6 +29,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     var workingDays = parseFloat(body).toFixed(2);
                     var wordFromDate = new Date(fromDate).toDateString();
                     var wordTodate = new Date(ToDate).toDateString();
+                    console.log("toDateString" + wordFromDate)
+                    console.log("toDateString" + wordTodate)
                     getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
 
                         if (type == "sick") {
