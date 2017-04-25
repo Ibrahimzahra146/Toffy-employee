@@ -355,6 +355,8 @@ function sendRequestToApiAi(emailValue, msg) {
               date1 = date
 
             } else if ((response.result.parameters.date).indexOf(',') > -1) {
+
+              console.log("spachiittt")
               var arr = (response.result.parameters.date).toString().split(',')
               date = arr[0];
               date1 = arr[1]
