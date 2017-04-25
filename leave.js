@@ -27,8 +27,9 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
                 if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
                     var workingDays = parseFloat(body).toFixed(2);
-
-                    getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, function (messagetext) {
+                    var wordFromDate = new Date(fromDate).toDateString();
+                    var wordTodate = new Date(ToDate).toDateString();
+                    getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
 
                         if (type == "sick") {
                             // msg.say("Sorry to hear that :(")
