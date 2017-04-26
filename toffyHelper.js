@@ -239,51 +239,51 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     body: managerEmail
                     //Set the body as a stringcc
                 }, function (error, response, body) {
-
-                    var jsonResponse = JSON.parse(body);
-                    console.log("approvarType:::" + approvarType)
-                    if (approvarType == "Manager") {
-                        printLogs("Manager Role ")
-                        var timeststamp = new Date().getTime()
-                        console.log("timeststamp" + timeststamp)
-                        message12 = {
-                            'type': 'message',
-                            'channel': jsonResponse.managerChannelId,
-                            user: jsonResponse.slackUserId,
-                            text: 'what is my name',
-                            ts: timeststamp,
-                            team: jsonResponse.teamId,
-                            event: 'direct_message',
-                            as_user: true
-
-                        }
-
-                    } else {
-                        printLogs("HR Role")
-                        hrRole = 1
-                        message12 = {
-                            'type': 'message',
-
-                            'channel': jsonResponse.hrChannelId,
-                            user: jsonResponse.slackUserId,
-                            text: 'what is my name',
-                            ts: startDate + ';' + endDate + ';' + userEmail,
-                            team: jsonResponse.teamId,
-                            event: 'direct_message'
-                        }
-
-                    }
-                    if (type != "WFH") {
-                        dont_detuct_button = {
-                            "name": "dont_detuct",
-                            "text": "Don’t Deduct ",
-                            "type": "button",
-                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
-                        }
-                    }
                     getUserImage(userEmail, function (ImageUrl) {
                         console.log("ImageUrl" + ImageUrl)
                         console.log("ImageUrl" + JSON.stringify(ImageUrl))
+                        var jsonResponse = JSON.parse(body);
+                        console.log("approvarType:::" + approvarType)
+                        if (approvarType == "Manager") {
+                            printLogs("Manager Role ")
+                            var timeststamp = new Date().getTime()
+                            console.log("timeststamp" + timeststamp)
+                            message12 = {
+                                'type': 'message',
+                                'channel': jsonResponse.managerChannelId,
+                                user: jsonResponse.slackUserId,
+                                text: 'what is my name',
+                                ts: timeststamp,
+                                team: jsonResponse.teamId,
+                                event: 'direct_message',
+                                as_user: true
+
+                            }
+
+                        } else {
+                            printLogs("HR Role")
+                            hrRole = 1
+                            message12 = {
+                                'type': 'message',
+
+                                'channel': jsonResponse.hrChannelId,
+                                user: jsonResponse.slackUserId,
+                                text: 'what is my name',
+                                ts: startDate + ';' + endDate + ';' + userEmail,
+                                team: jsonResponse.teamId,
+                                event: 'direct_message'
+                            }
+
+                        }
+                        if (type != "WFH") {
+                            dont_detuct_button = {
+                                "name": "dont_detuct",
+                                "text": "Don’t Deduct ",
+                                "type": "button",
+                                "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                            }
+                        }
+
 
 
 
@@ -323,14 +323,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
                                         }, dont_detuct_button
                                     ],
                                     "color": "#F35A00",
@@ -355,21 +355,24 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 currentBot.reply(message12, obj1);
 
                             }
+
                         });
                         flagForWhileCallbacks = 1
 
                     });
+
                     i++;
                 })
             })
+
+
+
             setTimeout(callback, 2000);
 
         },
         function (err) {
             // 5 seconds have passed
-        }
-
-    );
+        });
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
