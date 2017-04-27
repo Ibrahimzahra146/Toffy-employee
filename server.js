@@ -714,6 +714,11 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   fromDate = "";
   toDate = "";
 })
+slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
+  msg.say("Ok, operation aborted.")
+  fromDate = "";
+  toDate = "";
+})
 slapp.action('cancel_request', 'cancel', (msg, value) => {
   var arr = value.toString().split(";")
   var email = arr[0]

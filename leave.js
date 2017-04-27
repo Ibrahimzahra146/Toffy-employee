@@ -52,14 +52,21 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                             "text": "Yes",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate
+                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
                                         },
                                         {
                                             "name": 'reject',
                                             "text": "No",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate
+                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
+                                        },
+                                        {
+                                            "name": 'yesWithComment',
+                                            "text": "yes with comment",
+                                            "style": "danger",
+                                            "type": "button",
+                                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodat + "," + messagetext
                                         }
                                     ],
                                 }
