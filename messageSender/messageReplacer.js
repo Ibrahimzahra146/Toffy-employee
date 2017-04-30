@@ -17,12 +17,12 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                 "attachment_type": "default",
                 "actions": [
                     {
-                        "name": "choose_comment",
+                        "name": "Send_Commnet",
                         "text": "choose comment",
                         "type": "select",
                         "options": [
                             {
-                                "name": 'Send_Commnet',
+                               
                                 "text": "Travel",
 
                                 "type": "button",
