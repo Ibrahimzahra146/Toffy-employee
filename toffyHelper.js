@@ -604,6 +604,7 @@ function getDayNameOfDate(date, callback) {
     callback(weekday[d.getDay()]);
 }
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
+    console.log("getNewSessionwithCookie:" + email)
     request({
         url: 'http://' + IP + '/api/v1/employee/login', //URL to hitDs
         method: 'POST',
@@ -613,6 +614,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("getNewSessionwithCookie:" + response.statusCode)
         var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
         var arr = cookies.toString().split(";")
         res = arr[0].replace(/['"]+/g, '');
