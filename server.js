@@ -809,7 +809,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.say("Please visit the follownig url to upload sick report http://172.30.204.243:9090/sick-report?vacationId=" + vacationId);
+  msg.say("Please visit the follownig url to upload sick report http://172.30.204.243:9090/sick-report?vId=" + vacationId);
   console.log()
 })
 slapp.event('team_join', (msg) => {
