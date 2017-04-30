@@ -716,20 +716,18 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   toDate = "";
 })
 slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
-  var arr = value.toString().split(";")
-  var userEmail = arr[0];
-  var vacationId = arr[1];
-  var approvalId = arr[2]
-  var managerEmail = arr[3]
-  var fromWho = arr[4];
-  var fromDate = arr[5];
-  var toDate = arr[6];
-  var type = arr[7]
-  var workingDays = arr[8]
-  var ImageUrl = arr[9]
-  var messagetext = arr[10]
-  messageReplacer.replaceWithComment(msg, userEmail, managerEmail, fromDate, toDate, type, vacationId, approvalId, ImageUrl, workingDays, messagetext)
-replaceWithComment
+  var arr = value.toString().split(",");
+  var fromTime = arr[0]
+  var toTime = arr[1]
+  var email = arr[2];
+  var fromDateInMilliseconds = arr[3];
+  var toDateInMilliseconds = arr[4]
+  var type = arr[5]
+  var workingDays = arr[6]
+  var wordFromDate = arr[7]
+  var wordToDate = arr[8]
+  var messageText = arr[9]
+  messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
   var arr = value.toString().split(";")

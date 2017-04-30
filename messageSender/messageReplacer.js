@@ -3,7 +3,7 @@ var toffyHelper = require('.././toffyHelper.js')
 var server = require('.././server.js')
 var sessionFlag = 0;
 var IP = process.env.SLACK_IP
-module.exports.replaceWithComment = function replaceWithComment(msg, userEmail, managerEmail, fromDate, toDate, type, vacationId, approvalId, ImageUrl, workingDays, messagetext) {
+module.exports.replaceWithComment = functionreplaceWithComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messageText) {
 
     var dont_detuct_button = ""
 
@@ -17,38 +17,51 @@ module.exports.replaceWithComment = function replaceWithComment(msg, userEmail, 
                 "attachment_type": "default",
                 "actions": [
                     {
-                        "name": "Send_comment",
-                        "text": "Sorry",
+                        "name": 'confirm',
+                        "text": "Training",
+                        "style": "primary",
+                        "type": "button",
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
+                    },
+                    {
+                        "name": 'reject',
+                        "text": "Training",
                         "style": "danger",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + fromDate + ";" + toDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";Sorry!"
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
                     },
                     {
-                        "name": "Send_comment",
-                        "text": "Project deadline",
-                        "style": "primary",
+                        "name": 'yesWithComment',
+                        "text": "University",
+                        "style": "danger",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + fromDate + ";" + toDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";Project deadline"
-                    },
-
-                    {
-                        "name": "Send_comment",
-                        "text": "Discuss it privately",
-                        "style": "primary",
-                        "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + fromDate + ";" + toDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";Discuss it privately"
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
                     },
                     {
-                        "name": "Send_comment",
-                        "text": "No replaceable emp",
+                        "name": 'yesWithComment',
+                        "text": "Personal",
+                        "style": "danger",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + fromDate + ";" + toDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";No replaceable emp"
-                    }, {
-                        "name": "Undo",
-                        "text": "Undo",
-                        "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + fromDate + ";" + toDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
                     }
+                    ,
+                    {
+                        "name": 'yesWithComment',
+                        "text": "Honeymoon",
+                        "style": "danger",
+                        "type": "button",
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
+                    }
+                    ,
+                    {
+                        "name": 'yesWithComment',
+                        "text": "Umrah",
+                        "style": "danger",
+                        "type": "button",
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
+                    }
+
+
 
                 ],
                 "color": "#F35A00",
