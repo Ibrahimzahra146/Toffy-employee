@@ -51,7 +51,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Honeymoon"
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Honeymoon"
                     }
                     ,
                     {
