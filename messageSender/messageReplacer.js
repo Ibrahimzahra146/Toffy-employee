@@ -3,7 +3,7 @@ var toffyHelper = require('.././toffyHelper.js')
 var server = require('.././server.js')
 var sessionFlag = 0;
 var IP = process.env.SLACK_IP
-module.exports.replaceWithComment = functionreplaceWithComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messageText) {
+module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messageText) {
 
     var dont_detuct_button = ""
 
@@ -65,7 +65,7 @@ module.exports.replaceWithComment = functionreplaceWithComment(msg, fromTime, to
 
                 ],
                 "color": "#F35A00",
-                "thumb_url": ImageUrl,
+               
             }
         ]
     }
