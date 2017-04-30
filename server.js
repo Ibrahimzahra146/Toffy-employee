@@ -617,8 +617,12 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
         'Content-Type': 'application/json',
       },
       body: 'ibrahim.zahra@exalt.ps'
+      //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("arrive")
+      if (response == undefined) {
+        msg.say("error in server")
+      }
 
       console.log("getNewSessionwithCookie:" + response.statusCode)
     });
