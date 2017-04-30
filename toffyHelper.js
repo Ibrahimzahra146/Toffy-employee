@@ -197,12 +197,20 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 
 //*************************************************************************************************
 //send vacation notification to the managers to approve or reject
-module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays) {
+module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
     var dont_detuct_button = ""
+    var commentFieldInManagerMessage = ""
+    if (comment != "") {
+        commentFieldInManagerMessage = {
+            "title": "Comment",
+            "value": comment,
+            "short": true
+        }
+    }
     if (type == "sickLeave") {
         type = "sick"
     }
@@ -315,7 +323,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "title": "Type",
                                             "value": type,
                                             "short": true
-                                        }
+                                        }, commentFieldInManagerMessage
                                     ],
                                     "actions": [
                                         {

@@ -626,9 +626,12 @@ slapp.event('file_shared', (msg) => {
 
 
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
-  userAction(msg, value)
+  userAction(msg, value, 0)
 })
-function userAction(msg, value) {
+slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
+  userAction(msg, value, 1)
+})
+function userAction(msg, value, isComment) {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(";");
     var type = arr[5]
@@ -638,7 +641,13 @@ function userAction(msg, value) {
     var workingDays = arr[6]
     var fromDate = arr[7]
     var toDate = arr[8]
+    var comment = ""
+    if (isComment == 1) {
+      comment = arr[10]
+
+    }
     var uploadSickReportButton = ""
+
 
     toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, function (vacationId, managerApproval) {
 
@@ -659,7 +668,7 @@ function userAction(msg, value) {
           if (!managerApproval[0]) {
             msg.say("You dont have any approver right now ");
           } else {
-            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays)
+            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
               messageFB = "Your request has been submitted to your managers and HR admin. You might asked to provide a sick report. I’ll inform you about this.  "

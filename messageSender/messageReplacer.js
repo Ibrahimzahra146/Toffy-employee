@@ -17,48 +17,48 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                 "attachment_type": "default",
                 "actions": [
                     {
-                        "name": 'confirm',
-                        "text": "Training",
+                        "name": 'Send_Commnet',
+                        "text": "Travel",
                         "style": "primary",
                         "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Travel"
                     },
                     {
-                        "name": 'reject',
+                        "name": 'Send_Commnet',
                         "text": "Training",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Training"
                     },
                     {
-                        "name": 'yesWithComment',
+                        "name": 'Send_Commnet',
                         "text": "University",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "University"
                     },
                     {
-                        "name": 'yesWithComment',
+                        "name": 'Send_Commnet',
                         "text": "Personal",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Personal"
                     }
                     ,
                     {
-                        "name": 'yesWithComment',
+                        "name": 'Send_Commnet',
                         "text": "Honeymoon",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Honeymoon"
                     }
                     ,
                     {
-                        "name": 'yesWithComment',
+                        "name": 'Send_Commnet',
                         "text": "Umrah",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
                     }
 
 
