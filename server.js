@@ -627,7 +627,7 @@ slapp.event('file_shared', (msg) => {
 
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   getTodayDate(function (todayDate) {
-    var arr = value.toString().split(",");
+    var arr = value.toString().split(";");
     var type = arr[5]
     var email = arr[2];
     var fromDateInMilliseconds = arr[3];
@@ -716,7 +716,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   toDate = "";
 })
 slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
-  var arr = value.toString().split(",");
+  var arr = value.toString().split(";");
   var fromTime = arr[0]
   var toTime = arr[1]
   var email = arr[2];
