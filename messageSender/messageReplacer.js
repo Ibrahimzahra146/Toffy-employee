@@ -21,21 +21,21 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                         "text": "Training",
                         "style": "primary",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messageText
                     },
                     {
                         "name": 'reject',
                         "text": "Training",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messagetext
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + ";" + messageText
                     },
                     {
                         "name": 'yesWithComment',
                         "text": "University",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
                     },
                     {
                         "name": 'yesWithComment',
@@ -50,7 +50,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                         "text": "Honeymoon",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
                     }
                     ,
                     {
@@ -58,7 +58,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                         "text": "Umrah",
                         "style": "danger",
                         "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messagetext
+                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText
                     }
 
 
