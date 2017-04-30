@@ -18,21 +18,6 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                 "actions": [
                     {
                         "name": 'Send_Commnet',
-                        "text": "Travel",
-
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Travel"
-                    },
-
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "University",
-
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "University"
-                    },
-                    {
-                        "name": 'Send_Commnet',
                         "text": "Personal",
 
                         "type": "button",
@@ -40,15 +25,32 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                     },
                     {
                         "name": 'Send_Commnet',
+                        "text": "Travel",
+
+                        "type": "button",
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Travel"
+                    },
+
+
+
+                    {
+                        "name": 'Send_Commnet',
                         "text": "Umrah",
 
                         "type": "button",
                         "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
                     },
-                    ,
+                    {
+                        "name": 'Send_Commnet',
+                        "text": "Honeymoon",
+
+                        "type": "button",
+                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Honeymoon"
+                    },
+
                     {
                         "name": 'Undo',
-                        "text": "undo",
+                        "text": "back",
 
                         "style": "danger",
                         "type": "button",

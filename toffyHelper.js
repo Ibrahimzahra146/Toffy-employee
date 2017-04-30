@@ -460,7 +460,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me
+                'Cookie': remember_me_cookie + ";" + sessionId
             },
             body: email
             //Set the body as a stringcc
