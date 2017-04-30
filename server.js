@@ -727,6 +727,8 @@ slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value
   var wordFromDate = arr[7]
   var wordToDate = arr[8]
   var messageText = arr[9]
+  console.log("Value" + value)
+  console.log("messageText" + messageText)
   messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
