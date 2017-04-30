@@ -606,7 +606,7 @@ function getDayNameOfDate(date, callback) {
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
     console.log("getNewSessionwithCookie:" + email)
     var uri = 'http://' + IP + '/api/v1/employee/login'
-    console.log("getNewSessionwithCookie:" + IP)
+    console.log("getNewSessionwithCookie:" + uri)
     request({
         url: uri, //URL to hitDs
         method: 'POST',
