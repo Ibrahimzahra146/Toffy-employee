@@ -265,7 +265,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
             }
         }, function (error, response, body) {
             console.log(JSON.stringify(body))
-            console.log("Rule:" + body[0])
+            console.log("Rule:   " + body[0])
             var i = 0;
             var stringMessage = "["
             if (!error && response.statusCode === 200) {
