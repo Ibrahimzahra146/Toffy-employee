@@ -626,6 +626,9 @@ slapp.event('file_shared', (msg) => {
 
 
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+  userAction(msg, value)
+})
+function userAction(msg, value) {
   getTodayDate(function (todayDate) {
     var arr = value.toString().split(";");
     var type = arr[5]
@@ -708,7 +711,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   fromDate = "";
   toDate = "";
 
-})
+}
 
 slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   msg.say("Ok, operation aborted.")
