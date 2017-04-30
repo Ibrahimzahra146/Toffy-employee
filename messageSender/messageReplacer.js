@@ -17,65 +17,71 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                 "attachment_type": "default",
                 "actions": [
                     {
-                        "name": 'Send_Commnet',
-                        "text": "Travel",
-                     
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Travel"
-                    },
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Training",
-                      
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Training"
-                    },
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "University",
-                       
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "University"
-                    },
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Personal",
-                       
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Personal"
-                    }
-                    ,
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Honeymoon",
-                     
-                        "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Honeymoon"
-                    }
-                    ,
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Umrah",
-                     
-                        "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
-                    }  ,
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Funeral",
-                     
-                        "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
-                    }
-                     ,
-                    {
-                        "name": 'Send_Commnet',
-                        "text": "Family affairs",
-                     
-                        "type": "button",
-                        "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
-                    }
+                        "name": "choose_comment",
+                        "text": "choose_comment",
+                        "type": "select",
+                        "options": [
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Travel",
 
+                                "type": "button",
+                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Travel"
+                            },
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Training",
+
+                                "type": "button",
+                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Training"
+                            },
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "University",
+
+                                "type": "button",
+                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "University"
+                            },
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Personal",
+
+                                "type": "button",
+                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Personal"
+                            }
+                            ,
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Honeymoon",
+
+                                "type": "button",
+                                "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Honeymoon"
+                            }
+                            ,
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Umrah",
+
+                                "type": "button",
+                                "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
+                            },
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Funeral",
+
+                                "type": "button",
+                                "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
+                            }
+                            ,
+                            {
+                                "name": 'Send_Commnet',
+                                "text": "Family affairs",
+
+                                "type": "button",
+                                "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
+                            }
+                        ]
+                    }
 
 
 
