@@ -11,7 +11,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
         "text": "",
         "attachments": [
             {
-                "text": messagetext + "\n ( Note: Any official holiday will not be deducted from your time off request.)",
+                "text": messageText + "\n ( Note: Any official holiday will not be deducted from your time off request.)",
                 "callback_id": 'leave_with_vacation_confirm_reject',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
@@ -65,7 +65,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 
                 ],
                 "color": "#F35A00",
-               
+
             }
         ]
     }
