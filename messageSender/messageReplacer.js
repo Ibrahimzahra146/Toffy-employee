@@ -18,7 +18,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                 "actions": [
                     {
                         "name": "choose_comment",
-                        "text": "choose_comment",
+                        "text": "choose comment",
                         "type": "select",
                         "options": [
                             {
