@@ -64,7 +64,6 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                         {
                                             "name": 'yesWithComment',
                                             "text": "Add comment",
-                                            "style": "primary",
                                             "type": "button",
                                             "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                         }
