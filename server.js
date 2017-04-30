@@ -25,6 +25,7 @@ var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
 const messageSender = require('./messageSender/messageSender.js')
+const messageReplacer = require('./messageSender/messageReplacer.js')
 var vacation_type1 = ""
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
@@ -715,9 +716,20 @@ slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   toDate = "";
 })
 slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
-  msg.say("Ok, operation aborted.")
-  fromDate = "";
-  toDate = "";
+  var arr = value.toString().split(";")
+  var userEmail = arr[0];
+  var vacationId = arr[1];
+  var approvalId = arr[2]
+  var managerEmail = arr[3]
+  var fromWho = arr[4];
+  var fromDate = arr[5];
+  var toDate = arr[6];
+  var type = arr[7]
+  var workingDays = arr[8]
+  var ImageUrl = arr[9]
+  var messagetext = arr[10]
+  messageReplacer.replaceWithComment(msg, userEmail, managerEmail, fromDate, toDate, type, vacationId, approvalId, ImageUrl, workingDays, messagetext)
+replaceWithComment
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
   var arr = value.toString().split(";")
@@ -755,7 +767,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
           }, function (error, response, body) {
             msg.respond(msg.body.response_url, "Request canceled")
             msg.say("Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
-            toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval,type)
+            toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
           })
         } else {
