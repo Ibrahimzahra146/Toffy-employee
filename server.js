@@ -628,6 +628,22 @@ slapp.event('file_shared', (msg) => {
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   userAction(msg, value, 0)
 })
+slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
+  var arr = value.toString().split(";");
+  var fromTime = arr[0]
+  var toTime = arr[1]
+  var email = arr[2];
+  var fromDateInMilliseconds = arr[3];
+  var toDateInMilliseconds = arr[4]
+  var type = arr[5]
+  var workingDays = arr[6]
+  var wordFromDate = arr[7]
+  var wordToDate = arr[8]
+  var messageText = arr[9]
+  console.log("Value" + value)
+  console.log("messageText" + messageText)
+  messageReplacer.undoUserComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText);
+})
 slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
   userAction(msg, value, 1)
 })
