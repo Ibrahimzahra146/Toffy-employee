@@ -608,24 +608,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     var stringfy = JSON.stringify(msg);
     console.log("the message");
     console.log(stringfy);
-    // getMembersList(msg.body.event.user, msg)
-    console.log("arrive")
-    request({
-      url: 'http://46.43.71.50:19090/api/v1/employee/login', //URL to hitDs
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: 'ibrahim.zahra@exalt.ps'
-      //Set the body as a stringcc
-    }, function (error, response, body) {
-      console.log("arrive")
-      if (response == undefined) {
-        msg.say("error in server")
-      }
-
-      console.log("getNewSessionwithCookie:" + response.statusCode)
-    });
+    getMembersList(msg.body.event.user, msg)
 
 
   }
