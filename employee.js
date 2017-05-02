@@ -235,7 +235,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                             }
                         ],
                         "color": "#F35A00",
-                        thumb_url: body.profilePicture
+                        thumb_url: "http://46.43.71.50:19090/files/profiles/_419_3727.665870997061Dina%20Haddad.jpg"
                     }
                 ]
             }
