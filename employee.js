@@ -234,7 +234,8 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 "short": true
                             }
                         ],
-                        "color": "#F35A00"
+                        "color": "#F35A00",
+                        thumb_url: body.profilePicture
                     }
                 ]
             }
