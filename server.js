@@ -691,7 +691,7 @@ function userAction(msg, value, isComment) {
 
             }
             else
-              messageFB = "Your request ( " + fromDate + "-" + toDate + " ) has been submitted and is awaiting your managers approval "
+              messageFB = "Your request ( " + fromDate + " to " + toDate + " ) has been submitted and is awaiting your managers approval "
             if (type == "sick") {
               uploadSickReportButton = {
                 "name": "upload_sick_report",
