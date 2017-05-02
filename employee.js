@@ -189,7 +189,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
             printLogs("show profile bod" + JSON.stringify(body))
             printLogs("show profile bod" + response.statusCode)
-            var imageUrl=bory.profilePicture.replace(/ /,"%20")
+            var imageUrl = body.profilePicture.replace(/ /, "%20")
             var messageBody = {
                 "text": "Your profile details",
                 "attachments": [
@@ -236,7 +236,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                             }
                         ],
                         "color": "#F35A00",
-                        thumb_url: body.profilePicture
+                        thumb_url: imageUrl
                     }
                 ]
             }
@@ -307,8 +307,8 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
                     printLogs("stringfy " + stringfy)
                     stringfy = stringfy.
-                    
-                    stringfy = stringfy.replace(/]\"/, "]")
+
+                        stringfy = stringfy.replace(/]\"/, "]")
                     stringfy = stringfy.replace(/\"\[/, "[")
                     stringfy = JSON.parse(stringfy)
 
