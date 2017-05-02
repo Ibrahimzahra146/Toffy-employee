@@ -763,6 +763,9 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             max = 1;
         else if (holidayRequestType == 3)
             max = response.result.parameters.number
+        if (max > shareInfoLen) {
+            max = shareInfoLen
+        }
         while (i < max) {
             getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                 console.log("dayName" + dayName)
