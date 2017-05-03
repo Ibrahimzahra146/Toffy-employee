@@ -26,6 +26,7 @@ var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
 const messageSender = require('./messageSender/messageSender.js')
 const messageReplacer = require('./messageSender/messageReplacer.js')
+const dateHelper = require('./DateEngine/DateHelper.js')
 var vacation_type1 = ""
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
@@ -432,7 +433,9 @@ function sendRequestToApiAi(emailValue, msg) {
               timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
               toDate = new Date(toDate);
               if (toDate.getFullYear() == 2018) {
-                toDate.setFullYear(2017)
+                // toDate.setFullYear(2017)
+                var res = dateHelper.getDayNumber(fromDate)
+                console.log("res" + res)
               }
               var dateMilliSeconds = toDate.getTime();
               dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
