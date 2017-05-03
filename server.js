@@ -180,9 +180,9 @@ function sendRequestToApiAi(emailValue, msg) {
           if (other_vacation_types == "Maternity")
             vacation_type1 = "Maternity"
           else if (other_vacation_types == "Paternity")
-            vacation_type1 == "Paternity"
+            vacation_type1 = "Paternity"
           else if (other_vacation_types == "death") {
-            vacation_type1 == "death"
+            vacation_type1 = "death"
             console.log("deth1")
           }
           console.log("vacation_type1" + vacation_type1)
