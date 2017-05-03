@@ -175,6 +175,7 @@ function sendRequestToApiAi(emailValue, msg) {
           vacation_type1 = "sick"
         }
         else if (response.result.parameters.other_vacation_types) {
+          console.log("other_vacation_types")
           other_vacation_types = response.result.parameters.other_vacation_types;
           if (other_vacation_types == "Maternity")
             vacation_type1 = "Maternity"
