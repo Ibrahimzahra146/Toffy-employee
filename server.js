@@ -185,6 +185,10 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 = "death"
             console.log("deth1")
           }
+          else if (other_vacation_types == "Marriage") {
+            vacation_type1 = "Marriage"
+            console.log("deth1")
+          }
           console.log("vacation_type1" + vacation_type1)
 
           console.log("other_vacation_types" + other_vacation_types)
