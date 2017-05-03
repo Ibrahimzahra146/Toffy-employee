@@ -181,10 +181,13 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 = "Maternity"
           else if (other_vacation_types == "Paternity")
             vacation_type1 == "Paternity"
-          else if (other_vacation_types == "death")
+          else if (other_vacation_types == "death") {
             vacation_type1 == "death"
+            console.log("deth1")
+          }
           console.log("vacation_type1" + vacation_type1)
 
+          console.log("other_vacation_types" + other_vacation_types)
         }
         else if (response.result.parameters.working_from_home) {
           vacation_type1 = "WFH"
