@@ -106,38 +106,74 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                 "attachment_type": "default",
                 "fields": [
                     {
-                        "title": "Request a time off from date to date ",
+                        "title": "Time off tomorrow ",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "I want a vacation from data to date",
+                        "title": "Time off or vacation from 3 may to 5 may ",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "I am sick today ",
+                        "title": "I want a vacation or time off tomorrow or next Monday  ",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "Show stats ",
+                        "title": "I am sick today or i was sick yesterday ",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "Show profile ",
+                        "title": "I want a maternity time off from 20 May",
                         "value": "",
                         "short": false
                     }
                     ,
                     {
-                        "title": "Show history ",
+                        "title": "Paternity time off on 10 May",
                         "value": "",
                         "short": false
                     },
                     {
-                        "title": "Show holidays ,or show holidays from  date to date. ",
+                        "title": "Marriage vacation on 10 May",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Haj vacation on 10 June ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Family death today or yesterday ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Show stats or profile or history ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Show holidays or next holidays ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Show time off submission rules ",
+                        "value": "",
+                        "short": false
+                    }
+                    ,
+                    {
+                        "title": "Work from home today or WFH from 5 May to 8 May ",
                         "value": "",
                         "short": false
                     }
