@@ -221,13 +221,13 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
 
                             {
-                                "title": "Approver 2",
-                                "value": Approver2,
+                                "title": "Employment date",
+                                "value": body.hireDate,
                                 "short": true
                             },
                             {
-                                "title": "Employment date",
-                                "value": body.hireDate,
+                                "title": "Approver 2",
+                                "value": Approver2,
                                 "short": true
                             }
                         ],
