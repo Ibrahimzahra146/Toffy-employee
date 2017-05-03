@@ -429,7 +429,7 @@ function sendRequestToApiAi(emailValue, msg) {
               if (timeMilliseconds.getFullYear() == 2018) {
                 // toDate.setFullYear(2017)
                 var res = dateHelper.getDayNumber(timeMilliseconds)
-                if (res < 7 && res >= 0) {
+                if (res < 7 && res >= 0 ) {
                   timeMilliseconds.setFullYear(2017)
                 } else validPreviousDate = 0
               }
@@ -440,7 +440,7 @@ function sendRequestToApiAi(emailValue, msg) {
               if (toDate.getFullYear() == 2018) {
                 // toDate.setFullYear(2017)
                 var res = dateHelper.getDayNumber(toDate)
-                if (res < 7 && res >= 0) {
+                if (res < 7 && res >= 0 ) {
                   toDate.setFullYear(2017)
                 } else validPreviousDate = 0
               }
