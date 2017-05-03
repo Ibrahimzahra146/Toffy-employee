@@ -450,7 +450,7 @@ function sendRequestToApiAi(emailValue, msg) {
               console.log("validPreviousDate" + validPreviousDate)
               var dateMilliSeconds = toDate.getTime();
               dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
-              if (validPreviousDate = 1) {
+              if (validPreviousDate == 1) {
                 leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
                 vacation_type1 = ""
               } else msg.say("Not valid date")
