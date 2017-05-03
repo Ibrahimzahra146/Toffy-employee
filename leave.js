@@ -194,7 +194,7 @@ function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callbac
     y.setHours((arr[0] - 2))
     y.setMinutes(arr[1])
     var milliSeconds = y.getTime()
-    console.log("milliSeconds===>" + milliSeconds)
+    console.log("milliSeconds ===>" + milliSeconds)
     callback(milliSeconds)
 }
 
