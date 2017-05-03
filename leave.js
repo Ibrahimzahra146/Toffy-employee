@@ -10,6 +10,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     console.log("ToDate " + ToDate)
     console.log("fromMilliseconds " + fromMilliseconds)
     console.log("toMilliseconds " + toMilliseconds)
+    console.log("TYPEEE" + type)
     var typeNum = ""
     if (type == "sick") {
         typeNum = 4
