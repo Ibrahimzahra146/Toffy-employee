@@ -183,6 +183,7 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 == "Paternity"
           else if (other_vacation_types == "death")
             vacation_type1 == "death"
+          console.log("vacation_type1" + vacation_type1)
 
         }
         else if (response.result.parameters.working_from_home) {
@@ -432,6 +433,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
               console.log("timeMilliseconds :::" + timeMilliseconds)
+              console.log("vacation_type1 before" + vacation_type1)
               leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
               vacation_type1 = ""
             })
