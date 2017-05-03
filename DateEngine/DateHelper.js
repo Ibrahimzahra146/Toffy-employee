@@ -10,6 +10,7 @@ module.exports.getDayNumber = function getDayNumber(date) {
     diff = now - start;
     day1 = Math.floor(diff / oneDay);
     var res = (day - day1)
+    console.log(res + "sssw");
     return res;
 
 }
