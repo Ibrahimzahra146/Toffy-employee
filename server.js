@@ -751,7 +751,7 @@ function userAction(msg, value, isComment) {
 }
 
 slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
-  msg.say("Ok, operation aborted.")
+  msg.respond(msg.body.response_url, "Ok, operation aborted.")
   fromDate = "";
   toDate = "";
 })
