@@ -177,6 +177,12 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                         "value": "",
                         "short": false
                     }
+                    ,
+                    {
+                        "title": "Tutorial video https://www.screencast.com/t/pPR0xftK",
+                        "value": "",
+                        "short": false
+                    }
                 ]
             }
         ]
