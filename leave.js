@@ -34,18 +34,20 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     arr = wordTodate.toString().split(" ")
                     wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
                     getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
-
+                        var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
                         if (type == "sick") {
                             // msg.say("Sorry to hear that :(")
+                            holidaysNotice = ""
                         }
                         if (type == "WFH") {
                             workingDays = 0
+                            holidaysNotice = ""
                         }
                         var text12 = {
                             "text": "",
                             "attachments": [
                                 {
-                                    "text": messagetext + "\n ( Note: Any official holiday will not be deducted from your time off request.)",
+                                    "text": messagetext + "" + holidaysNotice,
                                     "callback_id": 'leave_with_vacation_confirm_reject',
                                     "color": "#3AA3E3",
                                     "attachment_type": "default",
