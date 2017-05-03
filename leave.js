@@ -243,6 +243,8 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
         typeText = "you asked to work from home"
     else if (type == "death")
         typeText = "Sorry about your loss, our deepest condolences, "
+    else if (type == "Marriage")
+        typeText = "Congratulations on your marriage."
     var messageText = ""
     if (timeOffcase == 1) {
         messageText = typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
