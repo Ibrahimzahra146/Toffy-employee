@@ -429,19 +429,31 @@ function sendRequestToApiAi(emailValue, msg) {
               if (timeMilliseconds.getFullYear() == 2018) {
                 timeMilliseconds.setFullYear(2017)
               }
+              var validPreviousDate = 1;
               timeMilliseconds = timeMilliseconds.getTime();
               timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
               toDate = new Date(toDate);
               if (toDate.getFullYear() == 2018) {
                 // toDate.setFullYear(2017)
                 var res = dateHelper.getDayNumber(fromDate)
-                console.log("res" + res)
+                if (res < 7 && res > 0) {
+                  toDate.setFullYear(2017)
+                } else validPreviousDate = 0
               }
+              if (fromDate.getFullYear() == 2018) {
+                // toDate.setFullYear(2017)
+                var res = dateHelper.getDayNumber(fromDate)
+                if (res < 7 && res > 0) {
+                  toDate.setFullYear(2017)
+                } else validPreviousDate = 0
+              }
+
               var dateMilliSeconds = toDate.getTime();
               dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
-
-              leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
-              vacation_type1 = ""
+              if (validPreviousDate = 1) {
+                leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
+                vacation_type1 = ""
+              } else msg.say("Not valid date")
             })
 
           })
