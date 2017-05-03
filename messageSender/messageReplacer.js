@@ -4,14 +4,21 @@ var server = require('.././server.js')
 var sessionFlag = 0;
 var IP = process.env.SLACK_IP
 module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messageText) {
-
+    var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+    if (type == "sick") {
+        // msg.say("Sorry to hear that :(")
+        holidaysNotice = ""
+    }
+    if (type == "WFH") {
+        holidaysNotice = ""
+    }
     var dont_detuct_button = ""
 
     var messageBody = {
         "text": "",
         "attachments": [
             {
-                "text": messageText + "\n ( Note: Any official holiday will not be deducted from your time off request.)",
+                "text": messageText + holidaysNotice,
                 "callback_id": 'leave_with_vacation_confirm_reject',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
