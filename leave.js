@@ -236,9 +236,9 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     if (type == "sick") {
         typeText = " you asked for a sick" + " time off"
     } else if (type == "Maternity") {
-        typeText = "  you asked for a maternity" + " time off"
+        typeText = "Congratulations! a great joy is coming. Many best wishes,"
     } else if (type == "Paternity") {
-        typeText = " you asked for a  paternity" + " time off"
+        typeText = "Congratulations on your baby’s paternity,"
     } else if (type == "WFH")
         typeText = "you asked to work from home"
     else if (type == "death")
