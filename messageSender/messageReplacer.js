@@ -86,11 +86,19 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 }
 //Undo in the employee side 
 module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messagetext) {
+    var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+    if (type == "sick") {
+        // msg.say("Sorry to hear that :(")
+        holidaysNotice = ""
+    }
+    if (type == "WFH") {
+        holidaysNotice = ""
+    }
     var messageBody = {
         "text": "",
         "attachments": [
             {
-                "text": messagetext + "\n ( Note: Any official holiday will not be deducted from your time off request.)",
+                "text": messagetext + holidaysNotice,
                 "callback_id": 'leave_with_vacation_confirm_reject',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
