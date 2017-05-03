@@ -240,7 +240,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     } else if (type == "Paternity") {
         typeText = "Congratulations on your baby’s paternity,"
     } else if (type == "WFH")
-        typeText = "you asked to work from home"
+        typeText = "Okay, you asked to work from home"
     else if (type == "death")
         typeText = "Sorry about your loss, our deepest condolences, "
     else if (type == "Marriage")
@@ -271,7 +271,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     } else if (timeOffcase == 8) {
         if (type == "WFH") {
             messageText = ""
-            messageText = "Okay, " + typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
+            messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
 
         } else
             messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
@@ -280,9 +280,9 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     } else if (timeOffcase == 9) {
         if (type == "WFH") {
             messageText = ""
-            messageText = "Okay," + typeText + " on " + fromDate + ". Should I go ahead ?"
+            messageText = typeText + " on " + fromDate + ". Should I go ahead ?"
         } else
-            messageText = "Okay," + typeText + " on " + fromDate + " and that would be " + workingDays + " working day. Should I go ahead ? "
+            messageText = typeText + " on " + fromDate + " and that would be " + workingDays + " working day. Should I go ahead ? "
 
 
     } else if (timeOffcase == 10) {
