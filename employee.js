@@ -219,7 +219,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                                 "short": true
                             },
 
-                          
+
                             {
                                 "title": "Approver 2",
                                 "value": Approver2,
@@ -302,9 +302,10 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                     var stringfy = JSON.stringify(messageBody);
 
                     printLogs("stringfy " + stringfy)
-                    stringfy = stringfy.
+                    //    stringfy = stringfy.
+                    stringfy = stringfy.replace(/\\/g, "")
 
-                        stringfy = stringfy.replace(/]\"/, "]")
+                    stringfy = stringfy.replace(/]\"/, "]")
                     stringfy = stringfy.replace(/\"\[/, "[")
                     stringfy = JSON.parse(stringfy)
 
