@@ -435,16 +435,16 @@ function sendRequestToApiAi(emailValue, msg) {
               toDate = new Date(toDate);
               if (toDate.getFullYear() == 2018) {
                 // toDate.setFullYear(2017)
-                var res = dateHelper.getDayNumber(fromDate)
-                if (res < 7 && res > 0) {
+                var res = dateHelper.getDayNumber(toDate)
+                if (res < 7 && res >= 0) {
                   toDate.setFullYear(2017)
                 } else validPreviousDate = 0
               }
               if (fromDate.getFullYear() == 2018) {
                 // toDate.setFullYear(2017)
                 var res = dateHelper.getDayNumber(fromDate)
-                if (res < 7 && res > 0) {
-                  toDate.setFullYear(2017)
+                if (res < 7 && res >= 0) {
+                  fromDate.setFullYear(2017)
                 } else validPreviousDate = 0
               }
 
