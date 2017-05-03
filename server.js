@@ -447,7 +447,7 @@ function sendRequestToApiAi(emailValue, msg) {
                 } else validPreviousDate = 0
               }
 
-
+              console.log("validPreviousDate" + validPreviousDate)
               var dateMilliSeconds = toDate.getTime();
               dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
               if (validPreviousDate = 1) {
