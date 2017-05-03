@@ -417,7 +417,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
 
-            setTimeout(callback, 2000);
+            setTimeout(callback, 2500);
 
         },
         function (err) {
