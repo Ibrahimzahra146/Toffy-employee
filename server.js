@@ -180,6 +180,8 @@ function sendRequestToApiAi(emailValue, msg) {
             vacation_type1 = "Maternity"
           else if (other_vacation_types == "Paternity")
             vacation_type1 == "Paternity"
+          else if (other_vacation_types == "death")
+            vacation_type1 == "death"
 
         }
         else if (response.result.parameters.working_from_home) {
