@@ -183,18 +183,14 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
     callback(milliSeconds)
 }
 function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callback) {
-    console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
     var arr = TimeforMilliseconds.toString().split(":")
 
     var today = new Date();
     today = date + " " + TimeforMilliseconds
-
-
     y = new Date(today)
     y.setHours((arr[0] - 2))
     y.setMinutes(arr[1])
     var milliSeconds = y.getTime()
-    console.log("milliSeconds ===>" + milliSeconds)
     callback(milliSeconds)
 }
 

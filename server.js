@@ -421,26 +421,22 @@ function sendRequestToApiAi(emailValue, msg) {
           //get the milliseconds for the  end of the vacation 
           leave.convertTimeFormat(time, function (x, y, convertedTime) {
             leave.convertTimeFormat(time1, function (x, y, convertedTime1) {
-              console.log("convertedTime" + convertedTime)
-              console.log("convertedTime1" + convertedTime1)
-
-
               var toDate = date1 + " " + convertedTime1
-              console.log("toDate::" + toDate);
 
               var fromDate = date + " " + convertedTime;
               var timeMilliseconds = new Date(fromDate);
+              if (timeMilliseconds.getFullYear() == 2018) {
+                timeMilliseconds.setFullYear(2017)
+              }
               timeMilliseconds = timeMilliseconds.getTime();
               timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
-              console.log("timeMilliseconds :::" + timeMilliseconds)
-
               toDate = new Date(toDate);
+              if (toDate.getFullYear() == 2018) {
+                toDate.setFullYear(2017)
+              }
               var dateMilliSeconds = toDate.getTime();
               dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
 
-
-              console.log("timeMilliseconds :::" + timeMilliseconds)
-              console.log("vacation_type1 before" + vacation_type1)
               leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
               vacation_type1 = ""
             })
