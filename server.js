@@ -871,7 +871,7 @@ app.post('/birthday', (req, res) => {
   /*console.log("generalId " + generalId)
   getSalesForceAccessToken(code)*/
 });
-app.get('/uploaded_sick_report', (req, res) => {
+app.post('/uploaded_sick_report', (req, res) => {
   console.log("New get request is received");
 
 });
