@@ -872,7 +872,7 @@ app.post('/birthday', (req, res) => {
   getSalesForceAccessToken(code)*/
 });
 app.post('/uploaded_sick_report', (req, res) => {
-  console.log("New get request is received");
+  console.log(" New get request is received");
   console.log(req.body)
   res.send(200)
 
