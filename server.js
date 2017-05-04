@@ -878,11 +878,15 @@ app.post('/uploaded_sick_report', (req, res) => {
   var vacationId = parsedBody.id
   var fromDate = parsedBody.fromDate
   var toDate = parsedBody.toDate
-  var email = parsedBody.employee.id
+  var email = parsedBody.employee.email
+  var attachmentsUrl = parsedBody.attachments[0].reference
+  var managerApproval = parsedBody.managerApproval
   console.log("vacationId" + vacationId)
   console.log("fromDate" + fromDate)
   console.log("toDate" + toDate)
   console.log("email" + email)
+  console.log("managerApproval" + managerApproval)
+  console.log("attachmentsUrl" + attachmentsUrl)
 
   res.send(200)
 
