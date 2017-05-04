@@ -875,10 +875,10 @@ app.post('/uploaded_sick_report', (req, res) => {
   console.log(" New get request is received");
   console.log(req.body)
   var parsedBody = JSON.parse(req.body)
-  var vacationId = bodyParser.id
-  var fromDate = bodyParser.fromDate
-  var toDate = bodyParser.toDate
-  var email = bodyParser.employee.id
+  var vacationId = parsedBody.id
+  var fromDate = parsedBody.fromDate
+  var toDate = parsedBody.toDate
+  var email = parsedBody.employee.id
   console.log("vacationId" + vacationId)
   console.log("fromDate" + fromDate)
   console.log("toDate" + toDate)
