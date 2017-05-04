@@ -873,6 +873,7 @@ app.post('/birthday', (req, res) => {
 });
 app.post('/uploaded_sick_report', (req, res) => {
   console.log("New get request is received");
+  console.log(JSON.stringify(req))
   res.send(200)
 
 });
