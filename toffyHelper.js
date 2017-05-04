@@ -309,20 +309,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                             }
 
-                        } else {
-                            printLogs("HR Role")
-                            hrRole = 1
-                            message12 = {
-                                'type': 'message',
-
-                                'channel': jsonResponse.hrChannelId,
-                                user: jsonResponse.slackUserId,
-                                text: 'what is my name',
-                                ts: startDate + ';' + endDate + ';' + userEmail,
-                                team: jsonResponse.teamId,
-                                event: 'direct_message'
-                            }
-
                         }
                         if (type != "WFH") {
                             dont_detuct_button = {
@@ -396,29 +382,27 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
                         if (approvarType == "Manager") {
                             currentBot = server.bot;
+                            currentBot.startConversation(message12, function (err, convo) {
 
-                        } else {
 
-                            currentBot = server.hRbot
+                                if (!err) {
+
+                                    var stringfy = JSON.stringify(messageBody);
+                                    var obj1 = JSON.parse(stringfy);
+                                    currentBot.reply(message12, obj1, function (err, response) {
+                                        console.log("manager message response ")
+                                        console.log(response)
+                                        console.log("manager message response ")
+                                        console.log(JSON.stringify(response))
+
+                                    });
+
+                                }
+
+                            });
+
                         }
-                        currentBot.startConversation(message12, function (err, convo) {
 
-
-                            if (!err) {
-
-                                var stringfy = JSON.stringify(messageBody);
-                                var obj1 = JSON.parse(stringfy);
-                                currentBot.reply(message12, obj1, function (err, response) {
-                                    console.log("manager message response ")
-                                    console.log(response)
-                                    console.log("manager message response ")
-                                    console.log(JSON.stringify(response))
-
-                                });
-
-                            }
-
-                        });
                         flagForWhileCallbacks = 1
 
                     });
