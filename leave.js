@@ -30,64 +30,69 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
-                if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
-                    var workingDays = parseFloat(body).toFixed(2);
-                    var wordFromDate = new Date(fromDate).toDateString();
-                    var wordTodate = new Date(ToDate).toDateString();
-                    var arr = wordFromDate.toString().split(" ")
-                    wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-                    arr = wordTodate.toString().split(" ")
-                    wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
-                    getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
-                        var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
-                        if (type == "sick") {
-                            // msg.say("Sorry to hear that :(")
-                            holidaysNotice = ""
-                        }
-                        if (type == "WFH") {
-                            workingDays = 0
-                            holidaysNotice = ""
-                        }
-                        var text12 = {
-                            "text": "",
-                            "attachments": [
-                                {
-                                    "text": messagetext + "" + holidaysNotice,
-                                    "callback_id": 'leave_with_vacation_confirm_reject',
-                                    "color": "#3AA3E3",
-                                    "attachment_type": "default",
-                                    "actions": [
-                                        {
-                                            "name": 'confirm',
-                                            "text": "Yes",
-                                            "style": "primary",
-                                            "type": "button",
-                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                        },
-                                        {
-                                            "name": 'reject',
-                                            "text": "No",
-                                            "style": "danger",
-                                            "type": "button",
-                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                        },
-                                        {
-                                            "name": 'yesWithComment',
-                                            "text": "Add comment",
-                                            "type": "button",
-                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                        }
-                                    ],
-                                }
-                            ]
-                        }
-                        msg.say(text12)
+                if (workingDays != 0.0) {
+                    if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
+                        var workingDays = parseFloat(body).toFixed(2);
+                        var wordFromDate = new Date(fromDate).toDateString();
+                        var wordTodate = new Date(ToDate).toDateString();
+                        var arr = wordFromDate.toString().split(" ")
+                        wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+                        arr = wordTodate.toString().split(" ")
+                        wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+                        getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
+                            var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+                            if (type == "sick") {
+                                // msg.say("Sorry to hear that :(")
+                                holidaysNotice = ""
+                            }
+                            if (type == "WFH") {
+                                workingDays = 0
+                                holidaysNotice = ""
+                            }
+                            var text12 = {
+                                "text": "",
+                                "attachments": [
+                                    {
+                                        "text": messagetext + "" + holidaysNotice,
+                                        "callback_id": 'leave_with_vacation_confirm_reject',
+                                        "color": "#3AA3E3",
+                                        "attachment_type": "default",
+                                        "actions": [
+                                            {
+                                                "name": 'confirm',
+                                                "text": "Yes",
+                                                "style": "primary",
+                                                "type": "button",
+                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                            },
+                                            {
+                                                "name": 'reject',
+                                                "text": "No",
+                                                "style": "danger",
+                                                "type": "button",
+                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                            },
+                                            {
+                                                "name": 'yesWithComment',
+                                                "text": "Add comment",
+                                                "type": "button",
+                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                            }
+                                        ],
+                                    }
+                                ]
+                            }
+                            msg.say(text12)
 
-                    })
+                        })
+                    }
+                    else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
                 }
-                else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
+                else msg.say("It's already an off day.")
             })
+
         });
+
 
     })
 }
