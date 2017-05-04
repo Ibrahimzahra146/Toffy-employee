@@ -30,7 +30,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
-                if (workingDays != 0.0) {
+                if (workingDays != 0.00) {
                     if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
                         var workingDays = parseFloat(body).toFixed(2);
                         var wordFromDate = new Date(fromDate).toDateString();
