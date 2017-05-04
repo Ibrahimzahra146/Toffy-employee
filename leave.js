@@ -30,9 +30,11 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
-                if (workingDays != 0.00) {
+                var workingDays = parseFloat(body).toFixed(2);
+                if (workingDays != 0.0) {
                     if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
-                        var workingDays = parseFloat(body).toFixed(2);
+
+
                         var wordFromDate = new Date(fromDate).toDateString();
                         var wordTodate = new Date(ToDate).toDateString();
                         var arr = wordFromDate.toString().split(" ")
@@ -85,10 +87,11 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             msg.say(text12)
 
                         })
-                    }
-                    else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
+                    } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
+
                 }
                 else msg.say("It's already an off day.")
+
             })
 
         });
