@@ -302,7 +302,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 'channel': jsonResponse.managerChannelId,
                                 user: jsonResponse.slackUserId,
                                 text: 'what is my name',
-                               
+
                                 team: jsonResponse.teamId,
                                 event: 'direct_message',
                                 as_user: true
@@ -408,7 +408,13 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                 var stringfy = JSON.stringify(messageBody);
                                 var obj1 = JSON.parse(stringfy);
-                                currentBot.reply(message12, obj1);
+                                currentBot.reply(message12, obj1, function (err, response) {
+                                    console.log("manager message response ")
+                                    console.log(response)
+                                    console.log("manager message response ")
+                                    console.log(JSON.stringify(response))
+
+                                });
 
                             }
 
