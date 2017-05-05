@@ -84,9 +84,12 @@ var employeeBot = controller2.spawn({
 }).startRTM();
 exports.employeeBot = employeeBot
 
+
+/**
+ * 
+ */
 function SendWelcomeResponse(msg, responseText) {
-  console.log("the aoo token " + msg.meta.app_token);
-  console.log("the user" + msg.body.event.user)
+
   // get the name from databasesss
   request({
     url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
@@ -96,10 +99,6 @@ function SendWelcomeResponse(msg, responseText) {
 
   });
 }
-
-//Leave confirmation Section
-
-//************************************************************************ new function
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg) {
@@ -112,31 +111,11 @@ function sendRequestToApiAi(emailValue, msg) {
 
   apiaiRequest.on('response', (response) => {
     let responseText = response.result.fulfillment.speech;
-    console.log("responseText:::" + responseText)
     //user ask for new personal vacation with from to dates
 
     //Vacation with leave scenarios
     if (responseText == "vacationWithLeave") {
-      vacationWithLeave.vacationWithLeave(msg,response,emailValue)
-
-    }
-
-
-
-
-
-    //when the user enter the date as ranger like 12-1 to 15-1
-    else if ((responseText) == "dates") {
-      console.log(" arrive at dates" + typeOfVacation)
-      fromDate = response.result.parameters.date1;
-      toDate = response.result.parameters.date
-      if (typeOfVacation != "")
-        //send Post request
-        vacation.sendVacationConfirmationToEmp(msg, fromDate, toDate, emailValue, typeOfVacation);
-
-      else msg.say("Sick or personal vacation?")
-      fromDate = ""
-      toDate = ""
+      vacationWithLeave.vacationWithLeave(msg, response, emailValue)
 
     }
 
@@ -144,7 +123,7 @@ function sendRequestToApiAi(emailValue, msg) {
     //When user ask for help,response will be the menu of all things that he can do
     else if ((responseText) == "Help") {
 
-      toffyHelper.sendHelpOptions(msg);
+      employee.sendHelpOptions(msg);
     }
     //show enployee vacation history 
     else if ((responseText) == "showHistory") {
@@ -198,16 +177,17 @@ function sendRequestToApiAi(emailValue, msg) {
 
     else if ((response.result.action) == "input.welcome") {
       SendWelcomeResponse(msg, responseText)
-    }
-
-
-    else msg.say(responseText)
+    } else msg.say(responseText)
   });
+
   fromDate = ""
   toDate = ""
   apiaiRequest.on('error', (error) => console.error(error));
   apiaiRequest.end();
 }
+
+
+
 //get all information about team users like email ,name ,user id ...sssss
 //**********************************************************************************************
 function getMembersList(Id, msg) {
@@ -490,8 +470,7 @@ app.post('/birthday', (req, res) => {
   var email = JSON.parse(req.body)[0].email
   messageSender.sendMessageSpecEmployee(email, "With all the best")
   res.send("200");
-  /*console.log("generalId " + generalId)
-  getSalesForceAccessToken(code)*/
+
 });
 app.post('/uploaded_sick_report', (req, res) => {
   console.log(" New get request is received");
@@ -503,12 +482,6 @@ app.post('/uploaded_sick_report', (req, res) => {
   var email = parsedBody.employee.email
   var attachmentsUrl = parsedBody.attachments[0].reference
   var managerApproval = parsedBody.managerApproval
-  console.log("vacationId" + vacationId)
-  console.log("fromDate" + fromDate)
-  console.log("toDate" + toDate)
-  console.log("email" + email)
-  console.log("managerApproval" + managerApproval)
-  console.log("attachmentsUrl" + attachmentsUrl)
 
   res.send(200)
 

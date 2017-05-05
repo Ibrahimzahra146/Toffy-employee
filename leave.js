@@ -128,17 +128,7 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
     var milliSeconds = y.getTime()
     callback(milliSeconds)
 }
-function converDateToMillisecondsWithSpecDate(TimeforMilliseconds, date, callback) {
-    var arr = TimeforMilliseconds.toString().split(":")
 
-    var today = new Date();
-    today = date + " " + TimeforMilliseconds
-    y = new Date(today)
-    y.setHours((arr[0] - 2))
-    y.setMinutes(arr[1])
-    var milliSeconds = y.getTime()
-    callback(milliSeconds)
-}
 
 function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 

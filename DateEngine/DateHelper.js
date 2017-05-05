@@ -87,21 +87,38 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 /**
  * get today date
  */
-module.exports.getTodayDate=function getTodayDate(callback) {
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
+module.exports.getTodayDate = function getTodayDate(callback) {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
 
-  if (dd < 10) {
-    dd = '0' + dd
-  }
+    if (dd < 10) {
+        dd = '0' + dd
+    }
 
-  if (mm < 10) {
-    mm = '0' + mm
-  }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
 
-  today = yyyy + '-' + mm + '-' + dd;
-  callback(today)
+    today = yyyy + '-' + mm + '-' + dd;
+    callback(today)
 
+}
+/**
+ * get  day name of any date 
+ */
+
+module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
+    console.log("arrive getDayNameOfDate" + date)
+    var weekday = new Array(7);
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+    weekday[0] = "Sunday";
+    var d = new Date(date);
+    callback(weekday[d.getDay()]);
 }

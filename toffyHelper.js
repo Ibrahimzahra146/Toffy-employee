@@ -14,6 +14,8 @@ var general_remember_me = "";
 exports.general_remember_me = general_remember_me
 general_session_id = "";
 exports.general_session_id = general_session_id;
+const dateHelper = require('./DateEngine/DateHelper.js')
+
 
 
 
@@ -94,103 +96,6 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
 
 
-//first we start we basic cases that doesnt need Api Ai like help
-module.exports.sendHelpOptions = function sendHelpOptions(msg) {
-    var messageBody = {
-        "text": "",
-        "attachments": [
-            {
-
-                "pretext": "You can use on of the following expressions to engage with me:",
-                "color": "#3AA3E3",
-                "attachment_type": "default",
-                "fields": [
-                    {
-                        "title": "Time off tomorrow ",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "Time off or vacation from 3 may to 5 may ",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "I want a vacation or time off tomorrow or next Monday  ",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "I am sick today or i was sick yesterday ",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "I want a maternity time off from 20 May",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Paternity time off on 10 May",
-                        "value": "",
-                        "short": false
-                    },
-                    {
-                        "title": "Marriage vacation on 10 May",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Haj vacation on 10 June ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Family death today or yesterday ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Show stats or profile or history ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Show holidays or next holidays ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Show time off submission rules ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Work from home today or WFH from 5 May to 8 May ",
-                        "value": "",
-                        "short": false
-                    }
-                    ,
-                    {
-                        "title": "Tutorial video https://www.screencast.com/t/pPR0xftK",
-                        "value": "",
-                        "short": false
-                    }
-                ]
-            }
-        ]
-    }
-    var stringfy = JSON.stringify(messageBody);
-    var obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-}
 
 //**************************************************************************************************
 
@@ -618,22 +523,7 @@ function makeGetRequest(path, email, callback) {
 function printLogs(msg) {
     console.log("msg:========>:" + msg)
 }
-function getDayNameOfDate(date, callback) {
-    console.log("arrive getDayNameOfDate" + date)
-    var weekday = new Array(7);
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
-    weekday[0] = "Sunday";
 
-    var d = new Date(date);
-    console.log(d);
-    console.log("d.getDay() - 1]" + d.getDay())
-    callback(weekday[d.getDay()]);
-}
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
     console.log("getNewSessionwithCookie:" + email)
     var uri = 'http://' + IP + '/api/v1/employee/login'
@@ -673,11 +563,8 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
     var j = 0
 
 
-    console.log("cancel_request22 " + (JSON.parse(managerApproval))[i].manager)
     managerApproval = JSON.parse(managerApproval)
-    console.log("Mnaagers approvals ::::" + managerApproval)
-    console.log(JSON.stringify(managerApproval));
-    console.log("ss")
+  
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
@@ -800,7 +687,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             max = shareInfoLen
         }
         while (i < max) {
-            getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+           dateHelper. getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                 console.log("dayName" + dayName)
                 if (i > 0) {
                     stringMessage = stringMessage + ","
