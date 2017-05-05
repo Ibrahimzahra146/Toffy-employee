@@ -247,7 +247,7 @@ function printLogs(msg) {
     console.log("msg:========>:" + msg)
 }
 /**
- * 
+ * Show time off  rules for employee from server 
  */
 module.exports.ShowRules = function showEmployeeStats(email, msg) {
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {

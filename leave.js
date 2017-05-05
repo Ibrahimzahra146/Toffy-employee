@@ -1,6 +1,8 @@
 var request = require('request')
 var IP = process.env.SLACK_IP
 var toffyHelper = require('./toffyHelper')
+const dateHelper = require('./DateEngine/DateHelper.js')
+
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
     console.log("sendVacationWithLeaveConfirmation")
@@ -27,8 +29,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else if (type == "Marriage")
         typeNum = 8
     else typeNum = 0
-    toffyHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        toffyHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+    dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
                 var workingDays = parseFloat(body).toFixed(2);
                 if (workingDays != 0.0) {
@@ -99,71 +101,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
     })
 }
-module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
-    console.log("The Time is =" + time)
-    var arr = time.toString().split(":")
-    var formattedTime = ""
-    var midday = "pm";
-    var TimeforMilliseconds = ""
-    var n = arr[1].length;
-    if (n == 1) {
-        arr[1] = "0" + arr[1]
-    }
 
-    if (arr[0] == "13" || arr[0] == "01" || arr[0] == "1") {
-        formattedTime = "01:" + arr[1];
-        TimeforMilliseconds = "13:" + arr[1]
-    }
-    else if (arr[0] == "14" || arr[0] == "02" || arr[0] == "2") {
-        formattedTime = "02:" + arr[1];
-        TimeforMilliseconds = "14:" + arr[1]
-    }
-    else if (arr[0] == "15" || arr[0] == "03" || arr[0] == "3") {
-        formattedTime = "03:" + arr[1];
-        TimeforMilliseconds = "15:" + arr[1]
-    }
-    else if (arr[0] == "16" || arr[0] == "04" || arr[0] == "4") {
-        formattedTime = "04:" + arr[1];
-        TimeforMilliseconds = "16:" + arr[1]
-    }
-    else if (arr[0] == "17" || arr[0] == "05" || arr[0] == "05") {
-        formattedTime = "05:" + arr[1];
-        TimeforMilliseconds = "17:" + arr[1]
-    }
-    else if (arr[0] == "20" || arr[0] == "08" || arr[0] == "8") {
-        formattedTime = "08:" + arr[1];
-        midday = "am"
-        TimeforMilliseconds = "8:" + arr[1]
-
-    }
-    else if (arr[0] == "21" || arr[0] == "09" || arr[0] == "9") {
-        formattedTime = "09:" + arr[1];
-        midday = "am"
-        TimeforMilliseconds = "9:" + arr[1]
-    }
-    else if (arr[0] == "22" || arr[0] == "10") {
-        formattedTime = "10:" + arr[1];
-        midday = "am"
-        TimeforMilliseconds = "10:" + arr[1]
-    }
-    else if (arr[0] == "23" || arr[0] == "11") {
-        formattedTime = "11:" + arr[1];
-        midday = "am"
-        TimeforMilliseconds = "11:" + arr[1]
-    }
-    else if (arr[0] == "00" || arr[0] == "12") {
-        formattedTime = "12:" + arr[1];
-        midday = "am"
-        TimeforMilliseconds = "12:" + arr[1]
-    }
-
-    else {
-        formattedTime = arr[0] + ":" + arr[1];
-        midday = "am";
-    }
-    console.log("TimeforMilliseconds" + TimeforMilliseconds)
-    callback(formattedTime, midday, TimeforMilliseconds)
-}
 function converDateToMilliseconds(TimeforMilliseconds, callback) {
     console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
     var arr = TimeforMilliseconds.toString().split(":")

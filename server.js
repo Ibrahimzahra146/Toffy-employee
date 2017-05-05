@@ -12,7 +12,6 @@ const async = require('async');
 const apiai = require('apiai');
 const APIAI_LANG = 'en';
 const opn = require('opn');
-
 var sessionId = uuid.v1();
 var db = require('node-localdb');
 var requestify = require('requestify');
@@ -24,10 +23,10 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
+const vacationWithLeave = require('./VacationEngine/vacationWithLeave')
 const messageSender = require('./messageSender/messageSender.js')
 const messageReplacer = require('./messageSender/messageReplacer.js')
 const dateHelper = require('./DateEngine/DateHelper.js')
-var vacation_type1 = ""
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);
 var IP = process.env.SLACK_IP;
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
@@ -100,51 +99,6 @@ function SendWelcomeResponse(msg, responseText) {
 
 //Leave confirmation Section
 
-//------------------------------***************************************-----------------------------
-function getSalesForceAccessToken(code1) {
-  console.log("the code is " + code1)
-  request({
-    url: 'https://login.salesforce.com/services/oauth2/token', //URL to hitDs
-    qs: {
-      grant_type: 'authorization_code',
-      client_secret: Constants.CLIENT_SECRET,
-      client_id: Constants.CLIENT_ID,
-      redirect_uri: 'https://www.facebook.com/',
-      code: code1
-    }, //Query string data
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'Hello Hello! String body!' //Set the body as a stringcc
-  }, function (error, response, body) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(body)
-      var data = JSONbig.parse(body);
-
-      console.log("Your Slack  Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + data.access_token + "'");
-      salesforceCode = data.access_token;
-    }
-  });
-}
-//***************************************************************--------------------------------------
-
-function sendUserProfile(msg) {
-  request({
-    url: Constants.SLACK_USER_INFO_URL + "" + msg.meta.app_token + "&user=" + msg.body.event.user,
-    json: true
-  }, function (error, response, body) {
-
-    if (!error && response.statusCode === 200) {
-      msg.say("based on your App token ' " + SLACK_ACCESS_TOKEN + "' and your user id, '" + msg.body.event.user + "'  your name is " + body.user.name)
-    }
-  });
-}
-//**************************************************************************************
-
-//send vacation request to back-end
 //************************************************************************ new function
 
 //send request to APi AI and get back with Json object and detrmine the action 
@@ -163,305 +117,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
     //Vacation with leave scenarios
     if (responseText == "vacationWithLeave") {
-      var other_vacation_types = ""
-      var messageText = ""
-      getTodayDate(function (today) {
-        var time1 = "17:00:00";
-        var time = "8:00:00";
-        var date = today
-        var date1 = today
-        var timeOffCase = -1
-
-        if (response.result.parameters.sick_synonyms) {
-          vacation_type1 = "sick"
-        }
-        else if (response.result.parameters.other_vacation_types) {
-          console.log("other_vacation_types")
-          other_vacation_types = response.result.parameters.other_vacation_types;
-          if (other_vacation_types == "Maternity")
-            vacation_type1 = "Maternity"
-          else if (other_vacation_types == "Paternity")
-            vacation_type1 = "Paternity"
-          else if (other_vacation_types == "death") {
-            vacation_type1 = "death"
-            console.log("deth1")
-          }
-          else if (other_vacation_types == "Marriage") {
-            vacation_type1 = "Marriage"
-            console.log("deth1")
-          }
-          console.log("vacation_type1" + vacation_type1)
-
-          console.log("other_vacation_types" + other_vacation_types)
-        }
-        else if (response.result.parameters.working_from_home) {
-          vacation_type1 = "WFH"
-        }
-        if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
-
-          msg.say("Please specify the date and/or time ")
-
-
-
-        }
-        else if (response.result.parameters.sick_synonyms && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
-          msg.say("Please specify the date and/or time ")
-
-
-          vacation_type1 = "sick"
-
-        }
-        else if (response.result.parameters.working_from_home && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
-          msg.say("Please specify the date and/or time ")
-
-
-          vacation_type1 = "WFH"
-
-        }
-        else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && (response.result.parameters.date == "") && !(response.result.parameters.date1)) {
-          msg.say("Please specify the date and/or time ")
-        } else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "") {
-          msg.say("Please specify the date and/or time ")
-          vacation_type1 = "sick"
-        }
-
-        else {
-          if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
-            time = response.result.parameters.time
-
-            if (response.result.parameters.time1) {
-
-              console.log("time1 isnot empty")
-
-              time1 = response.result.parameters.time1;
-              time = time1;
-              time1 = response.result.parameters.time;
-              var arr = time1.toString().split(":")
-              var arr1 = time.toString().split(":")
-              console.log("arr[0]" + arr[0])
-              console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0])) + Number("00"))
-
-
-              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
-              time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-              console.log("time:" + time)
-            }
-            else {
-              console.log("time1 is empty")
-              var d = new Date(); // for now
-              time1 = (Number(d.getHours()) + 3) + ":" + d.getMinutes() + ":" + d.getSeconds()
-              console.log("arr[0] + + arr[1] + + arr[2]" + time1)
-              console.log("time:" + time)
-              time = time1;
-              time1 = response.result.parameters.time;
-              var arr = time1.toString().split(":")
-              var arr1 = time.toString().split(":")
-              console.log("arr[0]" + arr[0])
-              console.log("arr[1]" + arr1[0])
-              console.log((Number(arr[0]) + Number(arr1[0]) + Number("00")))
-
-
-              arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
-              arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
-              arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
-              time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-
-            }
-
-
-            timeOffCase = 5
-          }
-          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1) {
-
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date;
-            date1 = response.result.parameters.date1;
-            if (response.result.parameters.date == "") {
-              date = today
-            }
-            timeOffCase = 1
-
-          }
-          else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1) {
-
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date1
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date1 == "") {
-              date = today
-              date1 = today
-            }
-
-            timeOffCase = 2
-
-          } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date) {
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.date == "") {
-              date = today
-              date1 = today
-            }
-            timeOffCase = 3
-
-          }
-
-          else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
-            time = response.result.parameters.time
-
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date == "") {
-              date = today
-            }
-            timeOffCase = 4
-
-          } else if (response.result.parameters.time && response.result.parameters.time1) {
-            time = response.result.parameters.time
-            time1 = response.result.parameters.time1
-            timeOffCase = 5
-
-          } else if (response.result.parameters.time && response.result.parameters.date) {
-            time = response.result.parameters.time
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.date == "") {
-              date = today
-              date1 = date
-            }
-            timeOffCase = 6
-
-          }
-          else if (response.result.parameters.time && response.result.parameters.date1) {
-            time = response.result.parameters.time
-            date1 = response.result.parameters.date1
-            if (response.result.parameters.date1 == "") {
-              date1 = today
-            }
-            timeOffCase = 7
-
-          }
-          else if (response.result.parameters.date && response.result.parameters.date1) {
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date1
-            timeOffCase = 8
-
-          }
-          else if (response.result.parameters.date) {
-
-            timeOffCase = 9
-
-            var numberOfDaysToAdd = ""
-            console.log("Case 9" + response.result.parameters.date)
-
-            date = response.result.parameters.date
-            date1 = response.result.parameters.date
-            if (response.result.parameters.date == "") {
-              date = today;
-              date1 = date
-
-            } else if ((response.result.parameters.date).indexOf(',') > -1) {
-
-              console.log("spachiittt")
-              var arr = (response.result.parameters.date).toString().split(',')
-              date = arr[0];
-              date1 = arr[1]
-            }
-            if (response.result.parameters.other_vacation_types) {
-              if (vacation_type1 == "Maternity") {
-                numberOfDaysToAdd = 70
-
-              } else if (response.result.parameters.other_vacation_types == "Paternity") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              }
-              else if (response.result.parameters.other_vacation_types == "Marriage") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              }
-              else if (response.result.parameters.other_vacation_types == "death") {
-                console.log("Here")
-                numberOfDaysToAdd = 3
-              } else if (response.result.parameters.other_vacation_types == "Haj") {
-                console.log("Here")
-                numberOfDaysToAdd = 10
-              }
-              console.log("numberOfDaysToAdd" + numberOfDaysToAdd)
-              var someDate = new Date(date);
-              someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-
-              var dd = someDate.getDate();
-              var mm = someDate.getMonth() + 1;
-              var y = someDate.getFullYear();
-
-              date1 = y + '/' + mm + '/' + dd;
-              console.log("//" + date1)
-              timeOffCase = 8
-            }
-
-          }
-          else if (response.result.parameters.time) {
-            time = response.result.parameters.time
-            timeOffCase = 10
-
-          }
-
-
-
-          if (vacation_type1 == "") {
-            vacation_type1 = "personal"
-          }
-          console.log("timeOffCase" + timeOffCase)
-          //get the milliseconds for the  end of the vacation 
-          leave.convertTimeFormat(time, function (x, y, convertedTime) {
-            leave.convertTimeFormat(time1, function (x, y, convertedTime1) {
-              var toDate = date1 + " " + convertedTime1
-
-              var fromDate = date + " " + convertedTime;
-              var timeMilliseconds = new Date(fromDate);
-              var validPreviousDate = 1;
-
-              if (timeMilliseconds.getFullYear() == 2018) {
-                // toDate.setFullYear(2017)
-
-                var res = dateHelper.getDayNumber(timeMilliseconds)
-                if (res < 7 && res >= 0) {
-                  timeMilliseconds.setFullYear(2017)
-                } else validPreviousDate = 0
-              }
-              timeMilliseconds = timeMilliseconds.getTime();
-              timeMilliseconds = timeMilliseconds - (3 * 60 * 60 * 1000);
-              toDate = new Date(toDate);
-              if (toDate.getFullYear() == 2018) {
-                // toDate.setFullYear(2017)
-                var res = dateHelper.getDayNumber(toDate)
-                if (res < 7 && res >= 0) {
-                  toDate.setFullYear(2017)
-                } else validPreviousDate = 0
-              }
-
-              console.log("validPreviousDate" + validPreviousDate)
-              var dateMilliSeconds = toDate.getTime();
-              dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
-              if (validPreviousDate == 1) {
-                leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
-                vacation_type1 = ""
-              } else msg.say("Not valid date")
-            })
-
-          })
-
-
-
-        }
-      })
+      vacationWithLeave.vacationWithLeave(msg,response,emailValue)
 
     }
 
@@ -507,14 +163,12 @@ function sendRequestToApiAi(emailValue, msg) {
       var date;
       var date1;
       var holidayRequestType = "";
-      getTodayDate(function (today) {
-
+      dateHelper.getTodayDate(function (today) {
 
         if (!(response.result.parameters.date != "")) {
           console.log("not equal")
         }
         if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
-          console.log("1")
           date = "2017-01-01";
           date1 = "	2017-12-30";
         } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
@@ -523,7 +177,6 @@ function sendRequestToApiAi(emailValue, msg) {
           date1 = "	2017-12-30"
           holidayRequestType = 2;
         } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && (response.result.parameters.number)) {
-          console.log("1")
           date = today
           date1 = "	2017-12-30"
           holidayRequestType = 3;
@@ -547,16 +200,6 @@ function sendRequestToApiAi(emailValue, msg) {
       SendWelcomeResponse(msg, responseText)
     }
 
-    else if ((responseText) == "salesforce") {
-      if (salesforceCode != "")
-        msg.say("Your Slack Id is  '" + generalMsg.body.event.user + "'" + " and your  Salesforce access token is  '" + salesforceCode + "'");
-      else {
-        generalId = msg.body.event.user;
-        generalMsg = msg;
-        msg.say("You are not logged in, please visit this URL to login to Sales Force");
-        msg.say("https://login.salesforce.com/services/oauth2/authorize?client_id=3MVG9HxRZv05HarRwahdcdooErBOoQcBqIyghM1uhSz5nqz4b66MpGNzzd7k2bV1I3WHHaEwOSeyNaeB2KuN6&response_type=code&redirect_uri=https://beepboophq.com/proxy/b1bddd9741944d5d9298c7c37691b6d4/newteam")
-      }
-    }
 
     else msg.say(responseText)
   });
@@ -580,7 +223,6 @@ function getMembersList(Id, msg) {
       while ((body.members[i] != null) && (body.members[i] != undefined)) {
 
         if (body.members[i]["id"] == Id) {
-          console.log(body.members[i]["profile"].email);
           emailValue = body.members[i]["profile"].email;
           sendRequestToApiAi(emailValue, msg);
           break;
@@ -597,24 +239,7 @@ function getMembersList(Id, msg) {
 
 //**************************************************************************************************
 
-function getTodayDate(callback) {
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
 
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-
-  today = yyyy + '-' + mm + '-' + dd;
-  callback(today)
-
-}
 
 //*********************************************
 var app = slapp.attachToExpress(express())
@@ -625,11 +250,8 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
     console.log("=============>message from  bot ")
 
   } else {
-
-
     console.log("I am not the bot")
     var stringfy = JSON.stringify(msg);
-    console.log("the message");
     console.log(stringfy);
     getMembersList(msg.body.event.user, msg)
 
@@ -671,7 +293,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) 
   userAction(msg, value, 1)
 })
 function userAction(msg, value, isComment) {
-  getTodayDate(function (todayDate) {
+  dateHelper.getTodayDate(function (todayDate) {
     var arr = value.toString().split(";");
     var type = arr[5]
     var email = arr[2];
@@ -690,9 +312,9 @@ function userAction(msg, value, isComment) {
 
     toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, function (vacationId, managerApproval) {
 
-      toffyHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+      dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
-        toffyHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
+        dateHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
 
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
