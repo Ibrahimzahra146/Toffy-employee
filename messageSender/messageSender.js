@@ -172,7 +172,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                                     "short": true
                                 }, commentFieldInManagerMessage,
                                 {
-                                    "title": "Report",
+                                    "title": "<" + attachmentsUrl + "|report>",
                                     "value": attachmentsUrl,
                                     "short": true
                                 },
