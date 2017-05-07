@@ -477,6 +477,7 @@ app.post('/uploaded_sick_report', (req, res) => {
   console.log(req.body)
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
+  var type = parsedBody.type
   var fromDate = parsedBody.fromDate
 
   var toDate = parsedBody.toDate
@@ -491,6 +492,7 @@ app.post('/uploaded_sick_report', (req, res) => {
     console.log("profilePicture" + profilePicture)
     console.log("managerApproval: " + managerApproval)
     console.log("managerApproval: " + JSON.stringify(managerApproval))
+    console.log("type" + type)
   })
   res.send(200)
 
