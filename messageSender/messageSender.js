@@ -67,7 +67,7 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
 This function send  message to the HR whenever the employee upload sick report for sick vacation with atthachments  
 
 */
-module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment,ImageUrl) {
+module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment, ImageUrl) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -93,6 +93,11 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
+            approvalId = managerApproval[i].id
+            approvarType = managerApproval[i].type
+            emailFromId = managerApproval[i].managerEmail
+            managerEmail = emailFromId.replace(/\"/, "")
+            managerEmail = managerEmail.replace(/\"/, "")
             request({
                 url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                 method: 'POST',
