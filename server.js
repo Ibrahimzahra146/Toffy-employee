@@ -486,13 +486,11 @@ app.post('/uploaded_sick_report', (req, res) => {
   var attachmentsUrl = parsedBody.attachments[0].reference
   var managerApproval = parsedBody.managerApproval
   var profilePicture = parsedBody.employee.profilePicture
+  var workingDays = parsedBody.days;
   dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
-    console.log("fromDateWord" + fromDateWord)
-    console.log("toDateWord" + toDateWord)
-    console.log("profilePicture" + profilePicture)
-    console.log("managerApproval: " + managerApproval)
-    console.log("managerApproval: " + JSON.stringify(managerApproval))
-    console.log("type" + type)
+    if (type == 0) type = "personal"
+    if (type == 4) type = "sick"
+    messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "")
   })
   res.send(200)
 
