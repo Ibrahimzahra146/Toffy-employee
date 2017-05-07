@@ -133,31 +133,34 @@ module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
 module.exports.converDateToWords = function converDateToWords(fromDate, toDate, callback) {
 
     var wordFromDate = new Date(fromDate).toDateString()
+    var arr = wordFromDate.toString().split(" ")
+    wordFromDate = arr[0] + "," + arr[1] + " " + arr[2]
+
     var hours = new Date(fromDate).getHours() + 3
 
     var minutes = new Date(fromDate).getMinutes()
     if (minutes == 0)
         minutes = "00"
-    var arr = wordFromDate.toString().split(" ")
-  
+
     dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime, midday, TimeforMilliseconds) {
-        var wordTodate = new Date(toDate).toDateString()
+        var wordToDate = new Date(toDate).toDateString()
+        var arr = wordToDate.toString().split(" ")
+        wordToDate = arr[0] + "," + arr[1] + " " + arr[2]
         hours = new Date(toDate).getHours() + 3
         minutes = new Date(toDate).getMinutes()
         if (minutes == 0)
             minutes = "00"
 
 
-        arr = wordTodate.toString().split(" ")
-       
+
         dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime1, midday1, TimeforMilliseconds1) {
-            wordFromDate = new Date(fromDate).toDateString() + " " + formattedTime + " " + midday;
+            wordFromDate = wordFromDate + " " + formattedTime + " " + midday;
 
             //toDateho
 
 
-            wordTodate = new Date(toDate).toDateString() + " " + formattedTime1 + " " + midday1;
-            callback(wordFromDate, wordTodate)
+            wordToDate = wordToDate + " " + formattedTime1 + " " + midday1;
+            callback(wordFromDate, wordToDate)
         })
 
     })
