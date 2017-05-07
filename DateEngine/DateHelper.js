@@ -133,7 +133,7 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
     var wordFromDate = new Date(fromDate).toDateString();
     var wordTodate = new Date(toDate).toDateString();
     console.log("wordTodate" + wordTodate)
-    console.log("wordTodate" + wordTodate)
+    console.log("wordFromDate" + wordFromDate)
     var arr = wordFromDate.toString().split(" ")
     wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
     arr = wordTodate.toString().split(" ")
