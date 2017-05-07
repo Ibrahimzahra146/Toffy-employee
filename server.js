@@ -490,7 +490,7 @@ app.post('/uploaded_sick_report', (req, res) => {
   dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
     if (type == 0) type = "personal"
     if (type == 4) type = "sick"
-    messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "")
+    messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "", profilePicture)
   })
   res.send(200)
 
