@@ -154,12 +154,12 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
 
 
         dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime1, midday1, TimeforMilliseconds1) {
-            wordFromDate = wordFromDate + " " + formattedTime + " " + midday;
+            wordFromDate = wordFromDate + " at " + formattedTime + " " + midday;
 
             //toDateho
 
 
-            wordToDate = wordToDate + " " + formattedTime1 + " " + midday1;
+            wordToDate = wordToDate + " at " + formattedTime1 + " " + midday1;
             callback(wordFromDate, wordToDate)
         })
 
