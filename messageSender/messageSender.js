@@ -112,7 +112,6 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
 
                 } else {
                     //Check the Role to send it for HR only
-                    printLogs("HR Role")
                     hrRole = 1
                     message12 = {
                         'type': 'message',
