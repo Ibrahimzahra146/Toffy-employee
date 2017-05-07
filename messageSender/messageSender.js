@@ -67,7 +67,7 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
 This function send  message to the HR whenever the employee upload sick report for sick vacation with atthachments  
 
 */
-module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment, ImageUrl) {
+module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment, ImageUrl, attachmentsUrl) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -170,7 +170,12 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                                     "title": "Type",
                                     "value": type,
                                     "short": true
-                                }, commentFieldInManagerMessage
+                                }, commentFieldInManagerMessage,
+                                {
+                                    "title": "Report",
+                                    "value": attachmentsUrl,
+                                    "short": true
+                                },
                             ],
                             "actions": [
                                 {
