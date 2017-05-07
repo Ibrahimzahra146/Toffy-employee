@@ -478,11 +478,17 @@ app.post('/uploaded_sick_report', (req, res) => {
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
   var fromDate = parsedBody.fromDate
+
   var toDate = parsedBody.toDate
+
   var email = parsedBody.employee.email
   var attachmentsUrl = parsedBody.attachments[0].reference
   var managerApproval = parsedBody.managerApproval
-
+  var profilePicture = parsedBody.employee.profilePicture
+  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
+    console.log("fromDateWord" + fromDateWord)
+    console.log("toDateWord" + toDateWord)
+  })
   res.send(200)
 
 });

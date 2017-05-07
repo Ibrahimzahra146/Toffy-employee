@@ -50,7 +50,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
         formattedTime = "05:" + arr[1];
         TimeforMilliseconds = "17:" + arr[1]
     }
-      else if (arr[0] == "19" || arr[0] == "07" || arr[0] == "7") {
+    else if (arr[0] == "19" || arr[0] == "07" || arr[0] == "7") {
         formattedTime = "07:" + arr[1];
         midday = "am"
         TimeforMilliseconds = "7:" + arr[1]
@@ -127,4 +127,14 @@ module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
     weekday[0] = "Sunday";
     var d = new Date(date);
     callback(weekday[d.getDay()]);
+}
+//convert Date to word 
+module.exports.converDateToWords = function converDateToWords(fromDate, toDate, callback) {
+    var wordFromDate = new Date(fromDate).toDateString();
+    var wordTodate = new Date(toDate).toDateString();
+    var arr = wordFromDate.toString().split(" ")
+    wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+    arr = wordTodate.toString().split(" ")
+    wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+    callback(wordFromDate, wordTodate)
 }
