@@ -488,6 +488,9 @@ app.post('/uploaded_sick_report', (req, res) => {
   dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
     console.log("fromDateWord" + fromDateWord)
     console.log("toDateWord" + toDateWord)
+    console.log("profilePicture" + profilePicture)
+    console.log("managerApproval: " + managerApproval)
+    console.log("managerApproval: " + JSON.stringify(managerApproval))
   })
   res.send(200)
 

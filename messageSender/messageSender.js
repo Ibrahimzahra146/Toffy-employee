@@ -57,7 +57,7 @@ module.exports.sendMessageSpecEmployee = function sendMessageSpecEmployee(email,
 This function send  message to the HR whenever the employee upload sick report for sick vacation with atthachments  
 
 */
-module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
+module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -101,6 +101,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
                 } else {
+                    //Check the Role to send it for HR only
                     printLogs("HR Role")
                     hrRole = 1
                     message12 = {
