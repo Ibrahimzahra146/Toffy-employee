@@ -132,12 +132,19 @@ module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
 module.exports.converDateToWords = function converDateToWords(fromDate, toDate, callback) {
     console.log("new Date " + new Date(fromDate))
     console.log("new Date " + new Date(fromDate).getHours())
-    var wordFromDate = new Date(fromDate).toDateString();
-    var wordTodate = new Date(toDate).toDateString();
- 
+    console.log("new Date " + new Date(fromDate).getMinutes())
+    var hours = new Date(fromDate).getHours()
+    var minutes = new Date(fromDate).getMinutes()
+    var wordFromDate = new Date(fromDate).toDateString()
+    hours = new Date(toDate).getHours()
+    minutes = new Date(toDate).getMinutes()
+    var wordTodate = new Date(toDate).toDateString()
+
     var arr = wordFromDate.toString().split(" ")
     wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+    wordFromDate = new Date(fromDate).toDateString() + " " + hours + ":" + minutes;
     arr = wordTodate.toString().split(" ")
     wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+    wordTodate = new Date(toDate).toDateString() + " " + hours + ":" + minutes;
     callback(wordFromDate, wordTodate)
 }

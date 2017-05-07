@@ -450,7 +450,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.say("Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId+"|sick report>");
+  msg.say("Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
   console.log()
 })
 slapp.event('team_join', (msg) => {
@@ -486,7 +486,7 @@ app.post('/uploaded_sick_report', (req, res) => {
   var attachmentsUrl = parsedBody.attachments[0].reference
   var managerApproval = parsedBody.managerApproval
   var profilePicture = parsedBody.employee.profilePicture
-  var workingDays = parsedBody.days;
+  var workingDays = parseFloat(parsedBody.days).toFixed(2);
   dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
     if (type == 0) type = "personal"
     if (type == 4) type = "sick"
