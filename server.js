@@ -473,7 +473,7 @@ app.post('/birthday', (req, res) => {
 
 });
 app.post('/uploaded_sick_report', (req, res) => {
-  console.log(" New get request is received");
+  console.log(" New get request  is received");
   console.log(req.body)
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
