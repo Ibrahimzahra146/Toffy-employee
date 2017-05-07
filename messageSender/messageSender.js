@@ -4,6 +4,16 @@ var server = require('.././server.js')
 var sessionFlag = 0;
 var generalCookies = "initial"
 var IP = process.env.SLACK_IP
+const express = require('express')
+const Slapp = require('slapp')
+const BeepBoopConvoStore = require('slapp-convo-beepboop')
+const BeepBoopContext = require('slapp-context-beepboop')
+const bodyParser = require('body-parser');
+const uuid = require('node-uuid');
+const JSONbig = require('json-bigint');
+const async = require('async');
+const apiai = require('apiai');
+
 /*   
 This function send atext message to the employee without any atthachments 
 
