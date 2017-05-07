@@ -450,7 +450,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.say("Tap the follownig link to upload your sick report <http://172.30.204.243:9090/sick-report?vId=" + vacationId+"|here>");
+  msg.say("Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId+"|sick report>");
   console.log()
 })
 slapp.event('team_join', (msg) => {
