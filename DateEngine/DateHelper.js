@@ -139,7 +139,7 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
     if (minutes == 0)
         minutes = "00"
     var arr = wordFromDate.toString().split(" ")
-    wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+  
     dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime, midday, TimeforMilliseconds) {
         var wordTodate = new Date(toDate).toDateString()
         hours = new Date(toDate).getHours() + 3
@@ -149,7 +149,7 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
 
 
         arr = wordTodate.toString().split(" ")
-        wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+       
         dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime1, midday1, TimeforMilliseconds1) {
             wordFromDate = new Date(fromDate).toDateString() + " " + formattedTime + " " + midday;
 
