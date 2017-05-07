@@ -1,3 +1,5 @@
+const dateHelper = require('./DateEngine/DateHelper.js')
+
 module.exports.getDayNumber = function getDayNumber(date) {
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
@@ -130,29 +132,32 @@ module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
 }
 //convert Date to word 
 module.exports.converDateToWords = function converDateToWords(fromDate, toDate, callback) {
-    console.log("new Date " + new Date(fromDate))
-    console.log("new Date " + new Date(fromDate).getHours())
-    console.log("new Date " + new Date(fromDate).getMinutes())
+
     var wordFromDate = new Date(fromDate).toDateString()
     var hours = new Date(fromDate).getHours() + 3
+
     var minutes = new Date(fromDate).getMinutes()
+    dateHe
     if (minutes == 0)
         minutes = "00"
     var arr = wordFromDate.toString().split(" ")
     wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-    wordFromDate = new Date(fromDate).toDateString() + " " + hours + ":" + minutes;
+    convertTimeFormat(hours + ":" + minutes, function (formattedTime, midday, TimeforMilliseconds) {
+        wordFromDate = new Date(fromDate).toDateString() + formattedTime + " " + midday;
 
-    //toDate
+        //toDateho
 
-    var wordTodate = new Date(toDate).toDateString()
-    hours = new Date(toDate).getHours() + 3
-    minutes = new Date(toDate).getMinutes()
-    if (minutes == 0)
-        minutes = "00"
+        var wordTodate = new Date(toDate).toDateString()
+        hours = new Date(toDate).getHours() + 3
+        minutes = new Date(toDate).getMinutes()
+        if (minutes == 0)
+            minutes = "00"
 
 
-    arr = wordTodate.toString().split(" ")
-    wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
-    wordTodate = new Date(toDate).toDateString() + " " + hours + ":" + minutes;
-    callback(wordFromDate, wordTodate)
+        arr = wordTodate.toString().split(" ")
+        wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+        wordTodate = new Date(toDate).toDateString() + " " + hours + ":" + minutes;
+        callback(wordFromDate, wordTodate)
+    })
+
 }
