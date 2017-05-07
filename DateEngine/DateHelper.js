@@ -1,4 +1,3 @@
-const dateHelper = require('./DateEngine/DateHelper.js')
 
 module.exports.getDayNumber = function getDayNumber(date) {
     var now = new Date();
@@ -137,7 +136,6 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
     var hours = new Date(fromDate).getHours() + 3
 
     var minutes = new Date(fromDate).getMinutes()
-    dateHe
     if (minutes == 0)
         minutes = "00"
     var arr = wordFromDate.toString().split(" ")
