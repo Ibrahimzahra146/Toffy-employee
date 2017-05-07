@@ -1,4 +1,4 @@
-
+var dateHelper=require('.././DateEngine/DateHelper.js')
 module.exports.getDayNumber = function getDayNumber(date) {
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
@@ -140,7 +140,7 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
         minutes = "00"
     var arr = wordFromDate.toString().split(" ")
     wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-    convertTimeFormat(hours + ":" + minutes, function (formattedTime, midday, TimeforMilliseconds) {
+    dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime, midday, TimeforMilliseconds) {
         wordFromDate = new Date(fromDate).toDateString() + formattedTime + " " + midday;
 
         //toDateho
