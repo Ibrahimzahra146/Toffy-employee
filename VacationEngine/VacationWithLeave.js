@@ -4,7 +4,7 @@ const leave = require('.././leave.js')
 
 
 var vacation_type1 = ""
-module.exports.vacationWithLeave = function vacationWithLeave(msg, response,emailValue) {
+module.exports.vacationWithLeave = function vacationWithLeave(msg, response, emailValue) {
 
     var other_vacation_types = ""
     var messageText = ""
@@ -30,7 +30,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response,emai
             else if (other_vacation_types == "Marriage") {
                 vacation_type1 = "Marriage"
             }
-          
+
         }
         else if (response.result.parameters.working_from_home) {
             vacation_type1 = "WFH"
@@ -45,7 +45,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response,emai
         else if (response.result.parameters.sick_synonyms && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
             msg.say("Please specify the date and/or time ")
 
-
+            console.log("sick_synonyms")
             vacation_type1 = "sick"
 
         }
@@ -64,6 +64,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response,emai
         }
 
         else {
+            console.log("vacation_type1" + vacation_type1)
             if (response.result.parameters.time && response.result.parameters.number_of_hours_indicators && response.result.parameters.time_types) {
                 time = response.result.parameters.time
 
@@ -75,24 +76,24 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response,emai
                     time1 = response.result.parameters.time;
                     var arr = time1.toString().split(":")
                     var arr1 = time.toString().split(":")
-                  
+
 
 
                     arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
                     arr[1] = (Number(arr[1]) + Number(arr1[1]) + Number("00"))
                     arr[2] = (Number(arr[2]) + Number(arr1[2]) + Number("00"))
                     time1 = arr[0] + ":" + arr[1] + ":" + arr[2]
-               
+
                 }
                 else {
                     var d = new Date(); // for now
                     time1 = (Number(d.getHours()) + 3) + ":" + d.getMinutes() + ":" + d.getSeconds()
-                 
+
                     time = time1;
                     time1 = response.result.parameters.time;
                     var arr = time1.toString().split(":")
                     var arr1 = time.toString().split(":")
-                
+
 
 
                     arr[0] = (Number(arr[0]) + Number(arr1[0]) + Number("00"));
