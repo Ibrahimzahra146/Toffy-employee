@@ -32,69 +32,71 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
-                var workingDays = parseFloat(body).toFixed(2);
-                if (workingDays != 0.0) {
-                    if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
+                if (body != 1000) {
+                    var workingDays = parseFloat(body).toFixed(2);
+                    if (workingDays != 0.0) {
+                        if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
 
 
-                        var wordFromDate = new Date(fromDate).toDateString();
-                        var wordTodate = new Date(ToDate).toDateString();
-                        var arr = wordFromDate.toString().split(" ")
-                        wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-                        arr = wordTodate.toString().split(" ")
-                        wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
-                        getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
-                            var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
-                            if (type == "sick") {
-                                // msg.say("Sorry to hear that :(")
-                                holidaysNotice = ""
-                            }
-                            if (type == "WFH") {
-                                workingDays = 0
-                                holidaysNotice = ""
-                            }
-                            var text12 = {
-                                "text": "",
-                                "attachments": [
-                                    {
-                                        "text": messagetext + "" + holidaysNotice,
-                                        "callback_id": 'leave_with_vacation_confirm_reject',
-                                        "color": "#3AA3E3",
-                                        "attachment_type": "default",
-                                        "actions": [
-                                            {
-                                                "name": 'confirm',
-                                                "text": "Yes",
-                                                "style": "primary",
-                                                "type": "button",
-                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                            },
-                                            {
-                                                "name": 'reject',
-                                                "text": "No",
-                                                "style": "danger",
-                                                "type": "button",
-                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                            },
-                                            {
-                                                "name": 'yesWithComment',
-                                                "text": "Add comment",
-                                                "type": "button",
-                                                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                            }
-                                        ],
-                                    }
-                                ]
-                            }
-                            msg.say(text12)
+                            var wordFromDate = new Date(fromDate).toDateString();
+                            var wordTodate = new Date(ToDate).toDateString();
+                            var arr = wordFromDate.toString().split(" ")
+                            wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+                            arr = wordTodate.toString().split(" ")
+                            wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
+                            getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
+                                var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+                                if (type == "sick") {
+                                    // msg.say("Sorry to hear that :(")
+                                    holidaysNotice = ""
+                                }
+                                if (type == "WFH") {
+                                    workingDays = 0
+                                    holidaysNotice = ""
+                                }
+                                var text12 = {
+                                    "text": "",
+                                    "attachments": [
+                                        {
+                                            "text": messagetext + "" + holidaysNotice,
+                                            "callback_id": 'leave_with_vacation_confirm_reject',
+                                            "color": "#3AA3E3",
+                                            "attachment_type": "default",
+                                            "actions": [
+                                                {
+                                                    "name": 'confirm',
+                                                    "text": "Yes",
+                                                    "style": "primary",
+                                                    "type": "button",
+                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                },
+                                                {
+                                                    "name": 'reject',
+                                                    "text": "No",
+                                                    "style": "danger",
+                                                    "type": "button",
+                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                },
+                                                {
+                                                    "name": 'yesWithComment',
+                                                    "text": "Add comment",
+                                                    "type": "button",
+                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                }
+                                            ],
+                                        }
+                                    ]
+                                }
+                                msg.say(text12)
 
-                        })
-                    } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
+                            })
+                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
 
-                }
-                else msg.say("It's already an off day.")
-
+                    }
+                    else msg.say("It's already an off day.")
+                } else msg.say("Sorry error in server")
             })
+
 
         });
 
@@ -133,38 +135,39 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
 function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
-try {
-      toffyHelper.getIdFromEmail(email, function (Id) {
-        var vacationBody = {
-            "employee_id": Id,
-            "from": startDate,
-            "to": endDate,
-            "type": typeNum
+    try {
+        toffyHelper.getIdFromEmail(email, function (Id) {
+            var vacationBody = {
+                "employee_id": Id,
+                "from": startDate,
+                "to": endDate,
+                "type": typeNum
 
-        }
-        vacationBody = JSON.stringify(vacationBody)
-        request({
-            url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
-            },
-            body: vacationBody
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            console.log("getWorkingDays" + response.statusCode)
-            console.log("getWorkingDays" + body);
-            console.log("getWorkingDays" + JSON.stringify(body));
-            callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest)
+            }
+            vacationBody = JSON.stringify(vacationBody)
+            request({
+                url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                },
+                body: vacationBody
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                if (response.statusCode == 500) {
+                    callback(1000, "no ")
+                }
+                else
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest)
+            })
+
         })
+    } catch (error) {
+        console.log("Error:" + error)
 
-    })
-} catch (error) {
-    console.log("Error:"+error)
-    
-}
-  
+    }
+
 
 
 }
