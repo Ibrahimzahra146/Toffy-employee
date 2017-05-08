@@ -160,7 +160,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                     callback(1000, "no ")
                 }
                 else
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, reason, isContainsHolidays)
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.isContainsHolidays)
             })
 
         })
