@@ -133,8 +133,8 @@ function converDateToMilliseconds(TimeforMilliseconds, callback) {
 function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
-
-    toffyHelper.getIdFromEmail(email, function (Id) {
+try {
+      toffyHelper.getIdFromEmail(email, function (Id) {
         var vacationBody = {
             "employee_id": Id,
             "from": startDate,
@@ -160,6 +160,11 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
         })
 
     })
+} catch (error) {
+    console.log("Error:"+error)
+    
+}
+  
 
 
 }
