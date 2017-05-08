@@ -448,6 +448,8 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         var vacationType = "0"
         if (type == "sick") {
             vacationType = "4"
+        } else if (type == "WFH") {
+            vacationType = "7"
         }
 
         var vacationBody = {
@@ -564,7 +566,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
 
 
     managerApproval = JSON.parse(managerApproval)
-  
+
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
@@ -687,7 +689,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             max = shareInfoLen
         }
         while (i < max) {
-           dateHelper. getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
+            dateHelper.getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                 console.log("dayName" + dayName)
                 if (i > 0) {
                     stringMessage = stringMessage + ","

@@ -16,7 +16,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
         var timeOffCase = -1
 
         if (response.result.parameters.sick_synonyms) {
-            vacation_type1 = "sick"
+            vacation_type1 = "sick"           
         }
         else if (response.result.parameters.other_vacation_types) {
             other_vacation_types = response.result.parameters.other_vacation_types;
