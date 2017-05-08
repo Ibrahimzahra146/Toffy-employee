@@ -94,7 +94,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                     }
                     else msg.say("It's already an off day.")
-                } else msg.say("Sorry! I am a bit confused :white_frowning_face: .")
+                } else msg.say("Sorry! I am a bit confused :white_frowning_face:")
             })
 
 
