@@ -31,7 +31,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else typeNum = 0
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
-            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid) {
+            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid, reason, isContainsHolidays) {
+
                 if (body != 1000) {
                     var workingDays = parseFloat(body).toFixed(2);
                     if (workingDays != 0.0) {
@@ -90,7 +91,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 msg.say(text12)
 
                             })
-                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.")
+                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.\n Reason: " + reason)
 
                     }
                     else msg.say("It's already an off day.")
@@ -159,7 +160,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                     callback(1000, "no ")
                 }
                 else
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest)
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, reason, isContainsHolidays)
             })
 
         })
