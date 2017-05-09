@@ -204,7 +204,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
         if (timeOffcase == 1) {
-            messageText = typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
+            messageText = typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
         } else if (timeOffcase == 2) {
             messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " on " + ToDate + " and that would be " + workingDays + " working days" + ". Should I go ahead ?"
 
@@ -264,12 +264,14 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
             if (overlppedMsg != "")
                 overlppedMsg = overlppedMsg + " and "
             dateHelper.converDateToWords(overlappedVacations[i].fromDate, overlappedVacations[i].toDate, function (fromDateWord, toDateWord) {
-                overlppedMsg = overlppedMsg + " " + fromDateWord + " to " + toDateWord
+                overlppedMsg = overlppedMsg + " from " + fromDateWord + " to " + toDateWord
             })
 
             i++;
         }
         console.log("overlppedMsg::" + overlppedMsg)
+        overlppedMsg = "There is an already taken time off " + overlppedMsg + "and it will be overrittenen when you press yes"
+        callback(overlppedMsg)
     } else callback(overlppedMsg)
 
 }
