@@ -525,7 +525,7 @@ app.post('/one_day_left_sRep', (req, res) => {
 
     dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
   
-      console.log("fromDateWord" + fromDateWord)
+      console.log("fromDateWord " + fromDateWord)
       console.log("toDateWord" + toDateWord)
 
     })
