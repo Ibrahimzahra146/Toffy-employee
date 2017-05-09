@@ -170,6 +170,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 }
                 else {
                     console.log("no overllaped vacation" + JSON.stringify(body))
+                    console.log()
                     callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, "")
 
                 }
@@ -270,7 +271,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
             i++;
         }
         console.log("overlppedMsg::" + overlppedMsg)
-        overlppedMsg = "There is an already taken time off " + overlppedMsg + " and it will be overrittenen when you press yes."
+        overlppedMsg = "There is an already taken time off " + overlppedMsg + " and it will be overritten when you press yes."
         callback(overlppedMsg)
     } else callback(overlppedMsg)
 
