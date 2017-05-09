@@ -462,8 +462,8 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.say("Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
-  console.log()
+  msg.respond(msg.body.response_url, "Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
+
 })
 slapp.event('team_join', (msg) => {
   console.log('received team join event')
@@ -552,7 +552,7 @@ app.post('/one_day_left_sRep', (req, res) => {
         "text": "",
         "attachments": [
           {
-            "text": "You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ) .Otherwise it will be considered as personal vacation.",
+            "text": "[Reminder]You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation.",
             "callback_id": 'cancel_request',
             "color": "#3AA3E3",
             "attachment_type": "default",
