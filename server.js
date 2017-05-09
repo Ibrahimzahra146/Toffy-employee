@@ -23,6 +23,7 @@ var leave = require('./leave')
 var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
+var server = require('./server.js')
 const vacationWithLeave = require('./VacationEngine/VacationWithLeave.js')
 const messageSender = require('./messageSender/messageSender.js')
 const messageReplacer = require('./messageSender/messageReplacer.js')
@@ -527,27 +528,59 @@ app.post('/one_day_left_sRep', (req, res) => {
 
     console.log("fromDateWord " + fromDateWord)
     console.log("toDateWord" + toDateWord)
+    request({
+      url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
+      },
+      body: userEmail
+      //Set the body as a stringcc
+    }, function (error, response, body) {
+      var message = {
+        'type': 'message',
+        'channel': responseBody.userChannelId,
+        user: responseBody.slackUserId,
+        text: 'what is my name',
+        ts: '1482920918.000057',
+        team: responseBody.teamId,
+        event: 'direct_message'
+      };
+      var text12 = {
+        "text": "",
+        "attachments": [
+          {
+            "text": "You Have one day to submit a sick report for your vacation from " + wordFromDate + " to " + toDate + " .Otherwise it will be considered as personal vacationState",
+            "callback_id": 'cancel_request',
+            "color": "#3AA3E3",
+            "attachment_type": "default",
+            "actions": [
+              {
+                "name": "upload_sick_report",
+                "text": "Upload sick report ",
+                "type": "button",
+                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
 
-    var text12 = {
-      "text": "",
-      "attachments": [
-        {
-          "text": messageFB,
-          "callback_id": 'cancel_request',
-          "color": "#3AA3E3",
-          "attachment_type": "default",
-          "actions": [
-            {
-              "name": "upload_sick_report",
-              "text": "Upload sick report ",
-              "type": "button",
-              "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
+              }
+            ]
+          }
+        ]
+      }
+      bot.startConversation(message, function (err, convo) {
 
-            }
-          ]
+
+        if (!err) {
+
+          var stringfy = JSON.stringify(text12);
+          var obj1 = JSON.parse(stringfy);
+          server.employeeBot.reply(message, obj1);
+
         }
-      ]
-    }
+
+      });
+    })
+
 
 
   })
