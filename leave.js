@@ -165,7 +165,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                     callback(1000, "no ")
                 } else if ((JSON.parse(body)).validRequest.overlappedVacations) {
                     console.log("overllaped vacation" + JSON.stringify(body))
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, (JSON.parse(body)).overlappedVacations)
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, (JSON.parse(body)).validRequest.overlappedVacations)
 
                 }
                 else {
