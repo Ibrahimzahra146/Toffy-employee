@@ -5,7 +5,7 @@ const dateHelper = require('./DateEngine/DateHelper.js')
 const vacationOverllaping = require('././VacationOverllaping/overlappedVacations.js')
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
-    console.log("sendVacationWithLeaveConfirmation")
+    console.log("send VacationWithLeaveConfirmation")
     console.log("fromDate  " + fromDate)
     console.log("fromTime " + fromTime)
     console.log("toTime " + toTime)
