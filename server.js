@@ -453,7 +453,7 @@ End of Leave Section
   */
 //upload sick report button 
 slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
-   generalMsg = msg
+  generalMsg = msg
   console.log("upload sick report")
   var arr = value.toString().split(";")
   var email = arr[0]
@@ -484,7 +484,7 @@ app.post('/birthday', (req, res) => {
 
 });
 app.post('/uploaded_sick_report', (req, res) => {
-  
+
   console.log(" New get request  is received");
   console.log(req.body)
   var parsedBody = JSON.parse(req.body)
@@ -507,7 +507,28 @@ app.post('/uploaded_sick_report', (req, res) => {
   res.send(200)
 
 });
+/**
+ * Send notification to employe when there is one day l;eft to upload sick report
+ */
+app.post('/one_day_left_sRep', (req, res) => {
+  console.log("One day left")
+  console.log(JSON.stringify(req.body))
+  var parsedBody = JSON.parse(req.body)
+  var vacationId = parsedBody.id
 
+  var fromDate = parsedBody.fromDate
+
+  var toDate = parsedBody.toDate
+
+  var email = parsedBody.employee.email
+
+  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
+
+    console.log("fromDateWord" + fromDateWord)
+    console.log("toDateWord" + toDateWord)
+    res.send(200)
+  })
+});
 app.post('/newat', (req, res) => {
   var code = req.param('access_token');
 });
