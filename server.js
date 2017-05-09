@@ -535,7 +535,7 @@ app.post('/one_day_left_sRep', (req, res) => {
         'Content-Type': 'application/json',
         'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
       },
-      body: userEmail
+      body: email
       //Set the body as a stringcc
     }, function (error, response, body) {
       var message = {
