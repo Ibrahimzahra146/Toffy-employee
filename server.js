@@ -561,7 +561,7 @@ app.post('/one_day_left_sRep', (req, res) => {
                 "name": "upload_sick_report",
                 "text": "Upload sick report ",
                 "type": "button",
-                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
+                "value": email + ";" + vacationId + ";" + fromDateWord + ";" + toDateWord
 
               }
             ]
