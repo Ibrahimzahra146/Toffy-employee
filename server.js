@@ -523,12 +523,34 @@ app.post('/one_day_left_sRep', (req, res) => {
   var email = parsedBody.employee.email
   console.log(email)
 
-    dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
-  
-      console.log("fromDateWord " + fromDateWord)
-      console.log("toDateWord" + toDateWord)
+  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
 
-    })
+    console.log("fromDateWord " + fromDateWord)
+    console.log("toDateWord" + toDateWord)
+
+    var text12 = {
+      "text": "",
+      "attachments": [
+        {
+          "text": messageFB,
+          "callback_id": 'cancel_request',
+          "color": "#3AA3E3",
+          "attachment_type": "default",
+          "actions": [
+            {
+              "name": "upload_sick_report",
+              "text": "Upload sick report ",
+              "type": "button",
+              "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
+
+            }
+          ]
+        }
+      ]
+    }
+
+
+  })
   res.send(200)
 });
 app.post('/newat', (req, res) => {

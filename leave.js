@@ -158,7 +158,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
+                //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
                 if (response.statusCode == 500) {
                     callback(1000, "no ")
                 }
