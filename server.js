@@ -538,6 +538,7 @@ app.post('/one_day_left_sRep', (req, res) => {
       body: email
       //Set the body as a stringcc
     }, function (error, response, body) {
+      var responseBody = JSON.parse(body);
       var message = {
         'type': 'message',
         'channel': responseBody.userChannelId,
