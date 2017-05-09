@@ -267,7 +267,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
                 overlppedMsg = overlppedMsg + " " + fromDateWord + " to " + toDateWord
             })
 
-
+            i++;
         }
 
     } else callback(overlppedMsg)
