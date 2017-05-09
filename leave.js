@@ -269,7 +269,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
 
             i++;
         }
-
+        console.log("overlppedMsg::" + overlppedMsg)
     } else callback(overlppedMsg)
 
 }
