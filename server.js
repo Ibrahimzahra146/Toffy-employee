@@ -552,7 +552,7 @@ app.post('/one_day_left_sRep', (req, res) => {
         "text": "",
         "attachments": [
           {
-            "text": "You Have one day to submit a sick report for your vacation from " + wordFromDate + " to " + toDate + " .Otherwise it will be considered as personal vacationState",
+            "text": "You Have one day to submit a sick report for your vacation from " + fromDateWord + " to " + toDateWord + " .Otherwise it will be considered as personal vacationState",
             "callback_id": 'cancel_request',
             "color": "#3AA3E3",
             "attachment_type": "default",
