@@ -527,7 +527,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   
       console.log("fromDateWord" + fromDateWord)
       console.log("toDateWord" + toDateWord)
-      res.send(200)
+
     })
   res.send(200)
 });
