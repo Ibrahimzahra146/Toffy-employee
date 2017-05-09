@@ -539,16 +539,22 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        console.log("getNewSessionwithCookie:" + response.statusCode)
-        var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
-        var arr = cookies.toString().split(";")
-        res = arr[0].replace(/['"]+/g, '');
-        var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
-        var arr1 = cookies1.toString().split(";")
-        res1 = arr1[0].replace(/['"]+/g, '');
-        printLogs("final session is =========>" + res)
-        toffyHelper.sessionFlag = 1;
-        callback(res, res1);
+        if (response.statusCode == 500) {
+            server.generalMsg.say("Sorry error ins erver ")
+        } else {
+            console.log("getNewSessionwithCookie:" + response.statusCode)
+            var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
+            var arr = cookies.toString().split(";")
+            res = arr[0].replace(/['"]+/g, '');
+            var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
+            var arr1 = cookies1.toString().split(";")
+            res1 = arr1[0].replace(/['"]+/g, '');
+            printLogs("final session is =========>" + res)
+            toffyHelper.sessionFlag = 1;
+            callback(res, res1);
+        }
+
+
     });
 
 

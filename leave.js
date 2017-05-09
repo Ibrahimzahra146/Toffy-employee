@@ -13,6 +13,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     console.log("fromMilliseconds " + fromMilliseconds)
     console.log("toMilliseconds " + toMilliseconds)
     console.log("TYPEEE" + type)
+    var holidaysNotice = ""
     var typeNum = ""
     if (type == "sick") {
         typeNum = 4
@@ -31,11 +32,11 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else typeNum = 0
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
-            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid, reason, isContainsHolidays) {
+            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid, reason, containsHolidays) {
 
                 if (body != 1000) {
                     var workingDays = parseFloat(body).toFixed(2);
-                    if (workingDays != 0.0) {
+                    if (workingDays != 0.0 || containsHolidays == true) {
                         if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
 
 
@@ -46,7 +47,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             arr = wordTodate.toString().split(" ")
                             wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
                             getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, function (messagetext) {
-                                var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+                                if (containsHolidays == true)
+                                    holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
                                 if (type == "sick") {
                                     // msg.say("Sorry to hear that :(")
                                     holidaysNotice = ""
@@ -161,7 +163,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                     callback(1000, "no ")
                 }
                 else
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.isContainsHolidays)
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays)
             })
 
         })

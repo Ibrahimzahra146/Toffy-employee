@@ -48,6 +48,8 @@ var generalMsg = "";
 var salesforceCode = "";
 var leaveFlag = "";
 var count = 0;
+var generalMsg = ""
+exports.generalMsg = generalMsg
 
 exports.count = count;
 pg.defaults.ssl = true;
@@ -224,6 +226,7 @@ function getMembersList(Id, msg) {
 //*********************************************
 var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
+  generalMsg = msg
   console.log("the Ip  ====>" + IP)
   if (msg.body.event
     .user == "U4EN9UDHV") {
@@ -242,6 +245,7 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
 
 
 slapp.event('file_shared', (msg) => {
+  generalMsg = msg
   console.log("msg  " + JSON.stringify(msg));
   console.log('===========>Uploaded file');
   fromDate = "";
@@ -251,9 +255,11 @@ slapp.event('file_shared', (msg) => {
 
 
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+  generalMsg = msg
   userAction(msg, value, 0)
 })
 slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
+  generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
   var toTime = arr[1]
@@ -270,6 +276,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
   messageReplacer.undoUserComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText);
 })
 slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
+  generalMsg = msg
   userAction(msg, value, 1)
 })
 function userAction(msg, value, isComment) {
@@ -364,11 +371,13 @@ function userAction(msg, value, isComment) {
 }
 
 slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
+  generalMsg = msg
   msg.respond(msg.body.response_url, "Ok, operation aborted.")
   fromDate = "";
   toDate = "";
 })
 slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
+  generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
   var toTime = arr[1]
@@ -385,6 +394,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value
   messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
+  generalMsg = msg
   var arr = value.toString().split(";")
   var email = arr[0]
   var vacationId = arr[1]
@@ -443,6 +453,7 @@ End of Leave Section
   */
 //upload sick report button 
 slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
+   generalMsg = msg
   console.log("upload sick report")
   var arr = value.toString().split(";")
   var email = arr[0]
@@ -473,6 +484,7 @@ app.post('/birthday', (req, res) => {
 
 });
 app.post('/uploaded_sick_report', (req, res) => {
+  
   console.log(" New get request  is received");
   console.log(req.body)
   var parsedBody = JSON.parse(req.body)
