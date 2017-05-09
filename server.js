@@ -513,21 +513,22 @@ app.post('/uploaded_sick_report', (req, res) => {
 app.post('/one_day_left_sRep', (req, res) => {
   console.log("One day left")
   console.log(JSON.stringify(req.body))
- /* var parsedBody = JSON.parse(req.body)
-  var vacationId = parsedBody.id
-
-  var fromDate = parsedBody.fromDate
-
-  var toDate = parsedBody.toDate
-
-  var email = parsedBody.employee.email
-
-  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
-
-    console.log("fromDateWord" + fromDateWord)
-    console.log("toDateWord" + toDateWord)
-    res.send(200)
-  })*/
+  /* var parsedBody = JSON.parse(req.body)
+   var vacationId = parsedBody.id
+ 
+   var fromDate = parsedBody.fromDate
+ 
+   var toDate = parsedBody.toDate
+ 
+   var email = parsedBody.employee.email
+ 
+   dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
+ 
+     console.log("fromDateWord" + fromDateWord)
+     console.log("toDateWord" + toDateWord)
+     res.send(200)
+   })*/
+  res.send(200)
 });
 app.post('/newat', (req, res) => {
   var code = req.param('access_token');
