@@ -513,7 +513,7 @@ app.post('/uploaded_sick_report', (req, res) => {
 app.post('/one_day_left_sRep', (req, res) => {
   console.log("One day left")
   console.log(JSON.stringify(req.body))
-  var parsedBody = JSON.parse(req.body)
+ /* var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
 
   var fromDate = parsedBody.fromDate
@@ -527,7 +527,7 @@ app.post('/one_day_left_sRep', (req, res) => {
     console.log("fromDateWord" + fromDateWord)
     console.log("toDateWord" + toDateWord)
     res.send(200)
-  })
+  })*/
 });
 app.post('/newat', (req, res) => {
   var code = req.param('access_token');
