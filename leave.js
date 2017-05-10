@@ -205,25 +205,25 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
         if (timeOffcase == 1) {
-            messageText = typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " on " + fromDate + "  at, " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
         } else if (timeOffcase == 2) {
-            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " on " + ToDate + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " on " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
         } else if (timeOffcase == 3) {
-            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + fromDate + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to " + formattedTime + " " + midday + " at " + fromDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
         } else if (timeOffcase == 4) {
-            messageText = typeText + " on, " + fromDate + " at " + formattedFromTime + " " + middayFrom + " to the end of" + ToDate + ", and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " on, " + fromDate + " at " + formattedFromTime + " " + middayFrom + " to the end of" + ToDate + ", and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 5) {
-            messageText = + typeText + " from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + " today and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = + typeText + " from, " + formattedFromTime + " " + middayFrom + " to " + formattedTime + " " + midday + " today and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
         } else if (timeOffcase == 6) {
-            messageText = typeText + " at " + formattedFromTime + " " + middayFrom + " to 5:00: pm on " + fromDate + ", and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " at " + formattedFromTime + " " + middayFrom + " to 5:00: pm on " + fromDate + ", and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
         } else if (timeOffcase == 7) {
-            messageText = typeText + " on " + fromDate + "  at " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " on " + fromDate + "  at " + formattedFromTime + " " + middayFrom + "" + " to " + ToDate + " at " + formattedTime + " " + midday + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 8) {
@@ -232,7 +232,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
                 messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
 
             } else
-                messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days" + overlppedMsg + ". Should I go ahead ?"
+                messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 9) {
@@ -240,11 +240,11 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
                 messageText = ""
                 messageText = typeText + " on " + fromDate + ". Should I go ahead ?"
             } else
-                messageText = typeText + " on " + fromDate + " and that would be " + workingDays + " working day " + overlppedMsg + " Should I go ahead ? "
+                messageText = typeText + " on " + fromDate + " and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
 
 
         } else if (timeOffcase == 10) {
-            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day," + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
+            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day," + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 11) {
