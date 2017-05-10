@@ -133,7 +133,7 @@ function getComment(workingDays, type, callback) {
     } else if (workingDays <= 1) {
         callback("Personal", "Family emergency", "University", "")
     } else if (workingDays > 1 && workingDays <= 3) {
-        callback("Personal", "Family illness", "")
+        callback("Personal", "Family illness", "Travel", "")
     } else if (workingDays > 3) {
         callback("Personal", "Travel", "Umrah", "Honeymoon")
     }
