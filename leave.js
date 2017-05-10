@@ -95,7 +95,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 //else vacationOverllaping.determinOverllapingCase(msg, email, overlappedVacations, messagetext, holidaysNotice, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, )
 
                             })
-                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically. Please contact your manager.\n Reason: " + reason)
+                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically" + reason + ".Please contact your manager.")
 
                     }
                     else msg.say("It's already an off day.")
@@ -244,7 +244,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 
         } else if (timeOffcase == 10) {
-            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day," + " and that would be " + workingDays + " working days " + overlppedMsg +  ". Should I go ahead ?"
+            messageText = typeText + " from, " + formattedFromTime + " " + middayFrom + "" + " to the end of the day," + " and that would be " + workingDays + " working days " + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 11) {
