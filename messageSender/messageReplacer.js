@@ -20,7 +20,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
             "text": "",
             "attachments": [
                 {
-                    "text": messageText + holidaysNotice,
+                    "text": messageText ,
                     "callback_id": 'leave_with_vacation_confirm_reject',
                     "color": "#3AA3E3",
                     "attachment_type": "default",

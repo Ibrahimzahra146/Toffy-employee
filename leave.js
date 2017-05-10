@@ -57,12 +57,13 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                     workingDays = 0
                                     holidaysNotice = ""
                                 }
+                                messagetext = messagetext + "" + holidaysNotice
 
                                 var text12 = {
                                     "text": "",
                                     "attachments": [
                                         {
-                                            "text": messagetext + "" + holidaysNotice,
+                                            "text": messagetext,
                                             "callback_id": 'leave_with_vacation_confirm_reject',
                                             "color": "#3AA3E3",
                                             "attachment_type": "default",
