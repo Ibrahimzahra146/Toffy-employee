@@ -13,7 +13,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
         holidaysNotice = ""
     }
     var dont_detuct_button = ""
-    getComment(workingDays, type, function (comment1, comment2, comment3, comment4f) {
+    getComment(workingDays, type, function (comment1, comment2, comment3, comment4) {
 
 
         var messageBody = {
