@@ -14,13 +14,22 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
     }
     var dont_detuct_button = ""
     getComment(workingDays, type, function (comment1, comment2, comment3, comment4) {
+        var comment4Button = ""
+        if (comment4 != "") {
+            comment4Button = {
+                "name": 'Send_Commnet',
+                "text": comment4,
 
+                "type": "button",
+                "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + comment4
+            }
+        }
 
         var messageBody = {
             "text": "",
             "attachments": [
                 {
-                    "text": messageText ,
+                    "text": messageText,
                     "callback_id": 'leave_with_vacation_confirm_reject',
                     "color": "#3AA3E3",
                     "attachment_type": "default",
@@ -48,14 +57,8 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 
                             "type": "button",
                             "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + comment3
-                        },
-                        {
-                            "name": 'Send_Commnet',
-                            "text": comment4,
+                        }, comment4Button,
 
-                            "type": "button",
-                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + comment4
-                        },
 
                         {
                             "name": 'Undo',
@@ -144,10 +147,10 @@ module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime,
 function getComment(workingDays, type, callback) {
     if (type == "sick") {
         callback("Personal", "Flu", "Common cold", "Surgery")
-    } else if (workingDays < 1) {
-        callback("Personal", "Something urgent", "Traffic", "Bad weather")
-    } else if (workingDays >= 1 && workingDays <= 3) {
-        callback("Personal", "Family illness", "University", "Travel")
+    } else if (workingDays <= 1) {
+        callback("Personal", "Family emergency", "University", "")
+    } else if (workingDays > 1 && workingDays <= 3) {
+        callback("Personal", "Family illness", "")
     } else if (workingDays > 3) {
         callback("Personal", "Travel", "Umrah", "Honeymoon")
     }
