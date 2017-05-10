@@ -82,6 +82,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 }
 //Undo in the employee side 
 module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messagetext) {
+    var addCommnetButton = ""
     var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
     if (type == "sick") {
         // msg.say("Sorry to hear that :(")
@@ -89,6 +90,14 @@ module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime,
     }
     if (type == "WFH") {
         holidaysNotice = ""
+    }
+    if (type == "sick" || type == "personal") {
+        addCommnetButton = {
+            "name": 'yesWithComment',
+            "text": "Add comment",
+            "type": "button",
+            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+        }
     }
     var messageBody = {
         "text": "",
@@ -113,12 +122,7 @@ module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime,
                         "type": "button",
                         "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                     },
-                    {
-                        "name": 'yesWithComment',
-                        "text": "Add comment",
-                        "type": "button",
-                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                    }
+                    addCommnetButton
                 ],
             }
         ]

@@ -47,6 +47,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             arr = wordTodate.toString().split(" ")
                             wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
                             getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
+                                var addCommentButton = ""
                                 if (containsHolidays == true)
                                     holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
                                 if (type == "sick") {
@@ -56,6 +57,14 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 if (type == "WFH") {
                                     workingDays = 0
                                     holidaysNotice = ""
+                                }
+                                if (type == "sick" || type == "personal") {
+                                    addCommentButton = {
+                                        "name": 'yesWithComment',
+                                        "text": "Add comment",
+                                        "type": "button",
+                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                    }
                                 }
                                 messagetext = messagetext + "" + holidaysNotice
 
@@ -81,13 +90,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                                     "style": "danger",
                                                     "type": "button",
                                                     "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                                },
-                                                {
-                                                    "name": 'yesWithComment',
-                                                    "text": "Add comment",
-                                                    "type": "button",
-                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                                }
+                                                },addCommentButton
+
                                             ],
                                         }
                                     ]
