@@ -271,7 +271,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
             i++;
         }
         console.log("overlppedMsg::" + overlppedMsg)
-        overlppedMsg = "There is an already taken time off " + overlppedMsg + " and it will be overwritten when you press yes."
+        overlppedMsg = "There is an already taken time off " + overlppedMsg + " and it will be overwritten when you press \"Yes\"."
         callback(overlppedMsg)
     } else callback(overlppedMsg)
 
