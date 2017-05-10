@@ -67,24 +67,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
                             "style": "danger",
                             "type": "button",
                             "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messageText + ";" + "Honeymoon"
-                        },
-
-                        {
-                            "name": 'Send_Commnet',
-                            "text": "Funeral",
-
-                            "type": "button",
-                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
                         }
-                        ,
-                        {
-                            "name": 'Send_Commnet',
-                            "text": "Family affairs",
-
-                            "type": "button",
-                            "value": fromTime + "," + toTime + "," + email + "," + fromMilliseconds + "," + toMilliseconds + "," + type + "," + workingDays + "," + wordFromDate + "," + wordTodate + "," + messageText + ";" + "Umrah"
-                        }
-
 
 
 
