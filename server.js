@@ -417,7 +417,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
-      toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction,state) {
+      toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
         console.log("isThereIsAction" + isThereIsAction)
         if (isThereIsAction == false) {
           //delete vacation request
@@ -435,8 +435,11 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
 
           })
         } else {
+          if (state == "Rejected")
+            msg.respond(msg.body.response_url, "No need to cancel since its already rejected from your approvals.")
           //the managers take an action
-          msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
+          else
+            msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
 
 
         }

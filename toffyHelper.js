@@ -661,20 +661,23 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
     console.log("isManagersTakeAnAction" + JSON.stringify(managerApproval));
     var flag = false
     var i = 0;
+    var state = ""
 
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
             if (managerApproval[i].state != "Pending") {
                 flag = true
+                state = managerApproval[i].state
+                i++;
+
             }
 
             setTimeout(callback, 500);
 
         },
         function (err) {
-            callback(flag, managerApproval[i].state)
-            i++;
+            callback(flag, state)
         });
 
 }
