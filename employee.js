@@ -115,28 +115,28 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                         "fields": [
                             {
                                 "title": "Rolled over",
-                                "value": parseFloat((body).left_over).toFixed(2) + " weeks ",
+                                "value": parseFloat((body).left_over).toFixed(2) + " weeks  ( " + parseFloat(body.left_over_days).toFixed(2) + " day(s))",
                                 "short": true
                             },
                             {
                                 "title": "Used time off  ",
-                                "value": parseFloat(body.consumed_vacation_balance).toFixed(2) + " weeks ",
+                                "value": parseFloat(body.consumed_vacation_balance).toFixed(2) + " weeks (" + parseFloat(body.consumed_vacation_balance_days).toFixed(2) + " day(s))",
                                 "short": true
                             },
                             {
                                 "title": "Annual time off ",
-                                "value": parseFloat(body.deserved_vacation).toFixed(2) + " weeks ",
+                                "value": parseFloat(body.deserved_vacation).toFixed(2) + " weeks (" + parseFloat(body.deserved_vacation_days).toFixed(2) + " day(s))",
                                 "short": true
                             },
                             {
                                 "title": "Used Sick time off  ",
-                                "value": parseFloat(body.consume_sick_vacation).toFixed(2) + " weeks ",
+                                "value": parseFloat(body.consume_sick_vacation).toFixed(2) + " weeks( " + parseFloat(body.consume_sick_vacation_days).toFixed(2) + " day(s))",
                                 "short": true
                             }
                             ,
                             {
                                 "title": "Extra time off  ",
-                                "value": parseFloat(body.compensation_balance).toFixed(2) + " weeks ",
+                                "value": parseFloat(body.compensation_balance).toFixed(2) + " weeks ( " + parseFloat(body.consume_sick_vacation_days).toFixed(2) + " day(s))",
                                 "short": false
                             },
 
@@ -145,7 +145,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
                             {
                                 "title": "Balance",
-                                "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(2) + " weeks ",
+                                "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(2) + " weeks ( " + parseFloat(body.compensation_balance_days).toFixed(2) + " day(s))",
                                 "short": true
                             }
                         ],
