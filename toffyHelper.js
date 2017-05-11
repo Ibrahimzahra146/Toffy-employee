@@ -662,17 +662,14 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
     var flag = false
     var i = 0;
     var state = ""
-
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
             if (managerApproval[i].state != "Pending") {
                 flag = true
                 state = managerApproval[i].state
-                i++;
-
             }
-
+            i++;
             setTimeout(callback, 500);
 
         },
