@@ -673,7 +673,7 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
 
         },
         function (err) {
-            callback(flag)
+            callback(flag, managerApproval[i].state)
         });
 
 }

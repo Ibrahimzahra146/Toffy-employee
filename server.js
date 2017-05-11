@@ -417,7 +417,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
-      toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction) {
+      toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction,state) {
         console.log("isThereIsAction" + isThereIsAction)
         if (isThereIsAction == false) {
           //delete vacation request
@@ -431,7 +431,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
           }, function (error, response, body) {
             msg.respond(msg.body.response_url, "Request canceled")
             msg.say("Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
-            toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
+            //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
           })
         } else {
