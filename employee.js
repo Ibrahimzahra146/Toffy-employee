@@ -145,7 +145,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
                             {
                                 "title": "Balance",
-                                "value": parseFloat(body.left_over + body.compensation_balance + body.balance).toFixed(2) + " weeks ( " + parseFloat(body.compensation_balance_days).toFixed(2) + " day/s)",
+                                "value": parseFloat(body.balance).toFixed(2) + " weeks ( " + parseFloat(body.balance_days).toFixed(2) + " day/s)",
                                 "short": true
                             }
                         ],
