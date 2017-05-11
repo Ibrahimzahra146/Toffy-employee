@@ -668,12 +668,13 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
             if (managerApproval[i].state != "Pending") {
                 flag = true
             }
-            i++;
+
             setTimeout(callback, 500);
 
         },
         function (err) {
             callback(flag, managerApproval[i].state)
+            i++;
         });
 
 }
