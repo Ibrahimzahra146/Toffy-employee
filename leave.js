@@ -103,7 +103,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                         } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically.\n" + reason + ". Please contact your manager.")
 
                     }
-                    else msg.say("It's already an off day.")
+                    else msg.say("It's already a time off.")
                 } else msg.say("Sorry! I am a bit confused :white_frowning_face:")
             })
 
