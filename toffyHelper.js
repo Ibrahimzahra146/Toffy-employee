@@ -278,7 +278,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "style": "danger",
                                             "type": "button",
                                             "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
-                                        }, dont_detuct_button
+                                        }, dont_detuct_button,
+                                        {
+                                            "name": "check_state",
+                                            "text": "Check status",
+
+                                            "type": "button",
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                                        },
                                     ],
                                     "color": "#F35A00",
                                     "thumb_url": ImageUrl,
