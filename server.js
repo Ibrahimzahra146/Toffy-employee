@@ -429,8 +429,8 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
               'Cookie': remember_me_cookie + ";" + session_Id
             },
           }, function (error, response, body) {
-            msg.respond(msg.body.response_url, "Request canceled")
-            msg.say("Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
+            msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
+            msg.say()
             //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
           })

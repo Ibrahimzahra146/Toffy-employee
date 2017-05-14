@@ -258,18 +258,18 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, commentFieldInManagerMessage,
                                         {
                                             "title": "Your action ",
-                                            "value": "Pending",
+                                            "value": "Pending :speech_balloon:",
                                             "short": true
                                         }
                                         ,
                                         {
                                             "title": "Approver2 action",
-                                            "value": "Pending",
+                                            "value": "Pending :speech_balloon:",
                                             "short": true
                                         },
                                         {
                                             "title": "Final state",
-                                            "value": "PendingManagerApproval",
+                                            "value": "PendingManagerApproval :speech_balloon:",
                                             "short": true
                                         }
                                     ],
