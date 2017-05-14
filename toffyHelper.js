@@ -255,7 +255,23 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "title": "Type",
                                             "value": type,
                                             "short": true
-                                        }, commentFieldInManagerMessage
+                                        }, commentFieldInManagerMessage,
+                                        {
+                                            "title": "Your action ",
+                                            "value": "--",
+                                            "short": true
+                                        }
+                                        ,
+                                        {
+                                            "title": "Approver2 action",
+                                            "value": "--",
+                                            "short": true
+                                        },
+                                        {
+                                            "title": "Final state",
+                                            "value": "--",
+                                            "short": true
+                                        }
                                     ],
                                     "actions": [
                                         {
