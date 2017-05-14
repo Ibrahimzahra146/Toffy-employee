@@ -330,7 +330,7 @@ function userAction(msg, value, isComment) {
                 "name": "upload_sick_report",
                 "text": "Upload sick report ",
                 "type": "button",
-                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate
+                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate + ";" + messageFB
               }
             }
 
@@ -430,7 +430,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
             },
           }, function (error, response, body) {
             msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
-           
+
             //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
           })
@@ -465,7 +465,8 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
   var fromDate = arr[2]
   var toDate = arr[3]
-  msg.respond(msg.body.response_url, "Tap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
+  var messageFB = arr[4]
+  msg.respond(msg.body.response_url, messageFB + "\nTap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
 
 })
 slapp.event('team_join', (msg) => {
