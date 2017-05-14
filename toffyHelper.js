@@ -297,7 +297,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, dont_detuct_button,
                                         {
                                             "name": "check_state",
-                                            "text": "Check status",
+                                            "text": ":arrows_counterclockwise:",
 
                                             "type": "button",
                                             "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
