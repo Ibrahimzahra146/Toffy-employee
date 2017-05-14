@@ -279,28 +279,28 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                                         },
                                         {
                                             "name": "reject_with_comment",
                                             "text": "Reject with comment",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                                         }, dont_detuct_button,
                                         {
                                             "name": "check_state",
                                             "text": ":arrows_counterclockwise:",
 
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                                         },
                                     ],
                                     "color": "#F35A00",
