@@ -258,18 +258,18 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, commentFieldInManagerMessage,
                                         {
                                             "title": "Your action ",
-                                            "value": "--",
+                                            "value": "Pending",
                                             "short": true
                                         }
                                         ,
                                         {
                                             "title": "Approver2 action",
-                                            "value": "--",
+                                            "value": "Pending",
                                             "short": true
                                         },
                                         {
                                             "title": "Final state",
-                                            "value": "--",
+                                            "value": "PendingManagerApproval",
                                             "short": true
                                         }
                                     ],
@@ -279,28 +279,28 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                             "text": "Accept",
                                             "style": "primary",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
                                         },
                                         {
                                             "name": "reject",
                                             "text": "Reject",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
                                         },
                                         {
                                             "name": "reject_with_comment",
                                             "text": "Reject with comment",
                                             "style": "danger",
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
                                         }, dont_detuct_button,
                                         {
                                             "name": "check_state",
                                             "text": ":arrows_counterclockwise:",
 
                                             "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "--" + ";" + "--" + ";" + "--"
                                         },
                                     ],
                                     "color": "#F35A00",
