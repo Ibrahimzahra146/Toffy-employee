@@ -193,7 +193,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, overlappedVacations, callback) {
     var typeText = "Okay, you asked for a time off"
     if (type == "sick") {
-        typeText = " you asked for a sick" + " time off"
+        typeText = " you asked for a sick " + " time off :persevere:,"
     } else if (type == "Maternity") {
         typeText = "Congratulations! a great joy is coming. Many best wishes,"
     } else if (type == "Paternity") {
