@@ -103,7 +103,7 @@ module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime,
         "text": "",
         "attachments": [
             {
-                "text": messagetext + holidaysNotice,
+                "text": messagetext,
                 "callback_id": 'leave_with_vacation_confirm_reject',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
