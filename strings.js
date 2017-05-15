@@ -4,11 +4,11 @@
 module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {
     var messageBody = {
         "text": "",
-        "callback_id": 'preDefinedHelp',
-        "attachment_type": "default",
+
         "attachments": [
             {
-
+                "callback_id": 'preDefinedHelp',
+                "attachment_type": "default",
                 "pretext": pretext,
                 "color": "#3AA3E3",
                 "attachment_type": "default",
@@ -53,7 +53,7 @@ var staticHelpFields =
             "title": "Haj vacation on 10 June ",
             "value": "",
             "short": false
-        }, 
+        },
         {
             "title": "Tutorial video https://www.screencast.com/t/pPR0xftK",
             "value": "",
