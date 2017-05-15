@@ -91,7 +91,7 @@ exports.employeeBot = employeeBot
 /**
  * 
  */
-function SendWelcomeResponse(msg, responseText) {
+function SendWelcomeResponse(msg, responseText,flag) {
 
   // get the name from databasesss
   request({
@@ -99,6 +99,9 @@ function SendWelcomeResponse(msg, responseText) {
     json: true
   }, function (error, response, body) {
     console.log("sssss"+body.user.profile.email)
+    if(flag==1){
+      return body.user.profile.email
+    }else 
     msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
 
   });
@@ -180,7 +183,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
     else if ((response.result.action) == "input.welcome") {
-      SendWelcomeResponse(msg, responseText)
+      SendWelcomeResponse(msg, responseText,0)
     } else msg.say(responseText)
   });
 
@@ -518,8 +521,8 @@ app.post('/uploaded_sick_report', (req, res) => {
  */
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
   var stringfy = JSON.stringify(msg);
-  console.log(stringfy);
-  console.log("SHOW stats listenerr" + msg)
+  var email=SendWelcomeResponse(msg,"",1)
+  console.log("SHOW stats listenerr" + email)
 })
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
