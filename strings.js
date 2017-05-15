@@ -168,7 +168,7 @@ exports.FamilyDeathActions = FamilyDeathActions;
  */
 var holidayAction = [
     {
-        "name": "show_holidays",
+        "name": "Show_holidays",
         "text": "Show holidays",
         // "style": "primary",
         "type": "button",

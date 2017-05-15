@@ -537,7 +537,17 @@ slapp.action('preDefinedHelp', 'Show_profile', (msg, value) => {
 slapp.action('preDefinedHelp', 'Show_history', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
+
     employee.showEmployeeHistory(email, msg)
+  })
+
+})
+slapp.action('preDefinedHelp', 'Show_holidays', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+    var date = "2017-01-01";
+    var date1 = "	2017-12-30";
+    toffyHelper.showHolidays(msg, email, date, date1, "", "")
   })
 
 })
