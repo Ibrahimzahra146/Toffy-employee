@@ -323,35 +323,37 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
  */
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg) {
-    var messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.statsProfileHistoryActions,stringFile.pretext)
+    var messageBody = stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions, "")
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions,"")
+    messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.statsProfileHistoryActions, stringFile.pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.FamilyDeathActions,"")
+
+    messageBody = stringFile.helpMessageBody("", stringFile.FamilyDeathActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.holidayAction,"")
+    messageBody = stringFile.helpMessageBody("", stringFile.holidayAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.rulesAction,"")
+    messageBody = stringFile.helpMessageBody("", stringFile.WfhActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.WfhActions,"")
+    messageBody = stringFile.helpMessageBody("", stringFile.rulesAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
+
 
 
 
