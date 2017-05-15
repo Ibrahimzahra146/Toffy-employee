@@ -525,8 +525,8 @@ slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
  // var email=SendWelcomeResponse(JSON.parse(msg),"",1)
   //console.log("SHOW stats listenerr" + email)
   console.log(msg)
-  console.log(JSON.stringify(msg))
-  console.log(JSON.stringify(JSON.parse(msg)))
+ // console.log(JSON.stringify(msg))
+ // console.log(JSON.stringify(JSON.parse(msg)))
   msg.say("help")
 })
 /**
