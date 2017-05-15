@@ -1,6 +1,25 @@
 /**
  * 
  */
+module.exports.helpMessageBody = function helpMessageBody(fields, actions) {
+    var messageBody = {
+        "text": "",
+        "attachments": [
+            {
+
+                "pretext": "You can use on of the following expressions to engage with me:",
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "fields": fields,
+                "actions": actions
+
+
+            }
+        ]
+    }
+    return messageBody;
+}
+
 var staticHelpFields =
     [
         {

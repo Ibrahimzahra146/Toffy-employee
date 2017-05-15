@@ -323,21 +323,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
  */
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg) {
-    var messageBody = {
-      
-        "attachments": [
-            {
-
-                "pretext": "You can use on of the following expressions to engage with me:",
-                "color": "#3AA3E3",
-                "attachment_type": "default",
-                "fields": stringFile.staticHelpFields,
-                "actions": stringFile.statsProfileHistoryActions
-                  
-                
-            }
-        ]
-    }
+    var messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.statsProfileHistoryActions)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
