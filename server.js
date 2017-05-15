@@ -110,9 +110,13 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 }
 
 //send request to APi AI and get back with Json object and detrmine the action 
-function sendRequestToApiAi(emailValue, msg) {
+function sendRequestToApiAi(emailValue, msg, flag, text) {
+
   toffyHelper.storeUserSlackInformation(emailValue, msg);
   var msgText = msg.body.event.text;
+  if (flag == 1) {
+    msgText = text
+  }
   let apiaiRequest = apiAiService.textRequest(msgText,
     {
       sessionId: sessionId
@@ -213,7 +217,7 @@ function getMembersList(Id, msg) {
 
         if (body.members[i]["id"] == Id) {
           emailValue = body.members[i]["profile"].email;
-          sendRequestToApiAi(emailValue, msg);
+          sendRequestToApiAi(emailValue, msg, 0, "");
           break;
         }
         console.log("the email:");
@@ -559,6 +563,15 @@ slapp.action('preDefinedHelp', 'Show_rules', (msg, value) => {
   })
 
 })
+slapp.action('preDefinedHelp', 'time_off_today', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+
+  sendRequestToApiAi(email,msg,1,"today");
+  })
+
+})
+
 
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
