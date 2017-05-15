@@ -98,6 +98,7 @@ function SendWelcomeResponse(msg, responseText) {
     url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
     json: true
   }, function (error, response, body) {
+    console.log(JSON.stringify(body))
     msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
 
   });
