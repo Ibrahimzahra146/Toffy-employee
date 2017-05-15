@@ -379,12 +379,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                         "value": "",
                         "short": false
                     }
-                    ,
-                    {
-                        "title": "Show stats or profile or history ",
-                        "value": "",
-                        "short": false
-                    }
+
                     ,
                     {
                         "title": "Show holidays or next holidays ",
@@ -408,6 +403,26 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                         "title": "Tutorial video https://www.screencast.com/t/pPR0xftK",
                         "value": "",
                         "short": false
+                    }
+                ], "actions": [
+                    {
+                        "name": 'Show stats',
+                        "text": "Yes",
+                        "style": "primary",
+                        "type": "button",
+                        "value": ""
+                    }, {
+                        "name": 'Show profile',
+                        "text": "Yes",
+                        "style": "primary",
+                        "type": "button",
+                        "value": ""
+                    }, {
+                        "name": 'Show history',
+                        "text": "Yes",
+                        "style": "primary",
+                        "type": "button",
+                        "value": ""
                     }
                 ]
             }
