@@ -113,10 +113,10 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 function sendRequestToApiAi(emailValue, msg, flag, text) {
 
   toffyHelper.storeUserSlackInformation(emailValue, msg);
-  var msgText = msg.body.event.text;
+  var msgText = ""
   if (flag == 1) {
     msgText = text
-  }
+  } else msgText = msg.body.event.text;
   let apiaiRequest = apiAiService.textRequest(msgText,
     {
       sessionId: sessionId
@@ -567,7 +567,7 @@ slapp.action('preDefinedHelp', 'time_off_today', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
 
-  sendRequestToApiAi(email,msg,1,"today");
+    sendRequestToApiAi(email, msg, 1, "today");
   })
 
 })
