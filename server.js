@@ -533,6 +533,11 @@ slapp.action('preDefinedHelp', 'Show_profile', (msg, value) => {
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
     employee.showEmployeeProfile(email, msg)
   })
+  slapp.action('preDefinedHelp', 'Show_history', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+    employee.showEmployeeHistory(email, msg)
+  })
 
 })
 /**
