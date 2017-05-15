@@ -526,9 +526,14 @@ slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
     employee.showEmployeeStats(email, msg)
   })
-  //console.log(msg.body.user.id)
-  // console.log(JSON.stringify(msg))
-  // console.log(JSON.stringify(JSON.parse(msg)))
+
+})
+slapp.action('preDefinedHelp', 'Show_profile', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+    employee.showEmployeeProfile(email, msg)
+  })
+
 })
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
