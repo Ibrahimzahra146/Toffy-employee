@@ -324,7 +324,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg) {
     var messageBody = {
-        "text": "",
+      
         "attachments": [
             {
 
