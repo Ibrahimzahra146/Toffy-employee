@@ -516,8 +516,9 @@ app.post('/uploaded_sick_report', (req, res) => {
  * 
  */
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
-
-    console.log("SHOW stats listenerr"+msg)
+  var stringfy = JSON.stringify(msg);
+  console.log(stringfy);
+  console.log("SHOW stats listenerr" + msg)
 })
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
