@@ -1,4 +1,4 @@
-var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY
+/*var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY
 const express = require('express')
 const Slapp = require('slapp')
 const BeepBoopConvoStore = require('slapp-convo-beepboop')
@@ -14,4 +14,4 @@ var app = slapp.attachToExpress(express())
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
     console.log("SHOW stats listenerr")
 })
-app.listen(process.env.PORT)
+app.listen(process.env.PORT)*/
