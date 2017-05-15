@@ -1,13 +1,13 @@
 /**
  * 
  */
-module.exports.helpMessageBody = function helpMessageBody(fields, actions) {
+module.exports.helpMessageBody = function helpMessageBody(fields, actions,pretext) {
     var messageBody = {
         "text": "",
         "attachments": [
             {
 
-                "pretext": "You can use on of the following expressions to engage with me:",
+                "pretext": "pretext",
                 "color": "#3AA3E3",
                 "attachment_type": "default",
                 "fields": fields,
@@ -159,3 +159,6 @@ var timeOffPredefinedActions = [
 
 ]
 exports.timeOffPredefinedActions = timeOffPredefinedActions
+//
+var pretext="You can use on of the following expressions to engage with me:"
+exports.pretext=pretext
