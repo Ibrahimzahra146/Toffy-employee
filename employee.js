@@ -332,27 +332,9 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                 "color": "#3AA3E3",
                 "attachment_type": "default",
                 "fields": stringFile.staticHelpFields,
-                "actions": [
-                    {
-                        "name": 'Show_stats',
-                        "text": "Show stats",
-                        // "style": "primary",
-                        "type": "button",
-                        "value": ""
-                    }, {
-                        "name": 'Show_profile',
-                        "text": "Show profile",
-                        // "style": "primary",
-                        "type": "button",
-                        "value": ""
-                    }, {
-                        "name": 'Show_history',
-                        "text": "Show history",
-                        //"style": "primary",
-                        "type": "button",
-                        "value": ""
-                    }
-                ]
+                "actions": stringFile.statsProfileHistoryActions
+                  
+                
             }
         ]
     }

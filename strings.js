@@ -1,8 +1,8 @@
 /**
  * 
  */
-var staticHelpFields = 
- [
+var staticHelpFields =
+    [
         {
             "title": "Time off tomorrow ",
             "value": "",
@@ -79,3 +79,29 @@ var staticHelpFields =
     ]
 
 exports.staticHelpFields = staticHelpFields;
+/**
+ * stats profile history actions
+ */
+var statsProfileHistoryActions = [
+    {
+        "name": 'Show_stats',
+        "text": "Show stats",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }, {
+        "name": 'Show_profile',
+        "text": "Show profile",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    },
+    {
+        "name": 'Show_history',
+        "text": "Show history",
+        //"style": "primary",
+        "type": "button",
+        "value": ""
+    }
+]
+exports.statsProfileHistoryActions = statsProfileHistoryActions
