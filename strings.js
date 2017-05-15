@@ -22,26 +22,14 @@ module.exports.helpMessageBody = function helpMessageBody(fields, actions,pretex
 
 var staticHelpFields =
     [
-        {
-            "title": "Time off tomorrow ",
-            "value": "",
-            "short": false
-        },
+       
         {
             "title": "Time off or vacation from 3 may to 5 may ",
             "value": "",
             "short": false
         },
-        {
-            "title": "I want a vacation or time off tomorrow or next Monday  ",
-            "value": "",
-            "short": false
-        },
-        {
-            "title": "I am sick today or i was sick yesterday ",
-            "value": "",
-            "short": false
-        },
+       
+     
         {
             "title": "I want a maternity time off from 20 May",
             "value": "",
@@ -71,18 +59,7 @@ var staticHelpFields =
             "short": false
         }
 
-        ,
-        {
-            "title": "Show holidays or next holidays ",
-            "value": "",
-            "short": false
-        }
-        ,
-        {
-            "title": "Show time off submission rules ",
-            "value": "",
-            "short": false
-        }
+     
         ,
         {
             "title": "Work from home today or WFH from 5 May to 8 May ",
@@ -118,6 +95,21 @@ var statsProfileHistoryActions = [
     {
         "name": 'Show_history',
         "text": "Show history",
+        //"style": "primary",
+        "type": "button",
+        "value": ""
+    },
+    {
+        "name": 'Show_holidays',
+        "text": "Show holidays",
+        //"style": "primary",
+        "type": "button",
+        "value": ""
+    }
+    ,
+    {
+        "name": 'Show_Rules',
+        "text": "Show time off rules",
         //"style": "primary",
         "type": "button",
         "value": ""
