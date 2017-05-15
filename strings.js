@@ -196,7 +196,7 @@ module.exports.rulesAction = rulesAction
 var fromDateToDate = [
     {
         "name": "fromDateToDate",
-        "text": "Time off from to",
+        "text": "time off from/ to/",
         // "style": "primary",
         "type": "button",
         "value": "Submission rules"
