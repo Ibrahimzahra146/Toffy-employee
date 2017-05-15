@@ -520,7 +520,7 @@ app.post('/uploaded_sick_report', (req, res) => {
  * 
  */
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
-  var stringfy = JSON.stringify(msg);
+ // var stringfy = JSON.stringify(msg);
   var email=SendWelcomeResponse(msg,"",1)
   console.log("SHOW stats listenerr" + email)
 })
