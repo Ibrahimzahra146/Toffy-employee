@@ -112,11 +112,14 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg, flag, text) {
 
-  toffyHelper.storeUserSlackInformation(emailValue, msg);
   var msgText = ""
   if (flag == 1) {
     msgText = text
-  } else msgText = msg.body.event.text;
+  } else {
+    msgText = msg.body.event.text;
+
+    toffyHelper.storeUserSlackInformation(emailValue, msg);
+  }
   let apiaiRequest = apiAiService.textRequest(msgText,
     {
       sessionId: sessionId
