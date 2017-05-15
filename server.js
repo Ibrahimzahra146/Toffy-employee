@@ -582,6 +582,22 @@ slapp.action('preDefinedHelp', 'time_off_tomorrow', (msg, value) => {
   })
 
 })
+slapp.action('preDefinedHelp', 'sick_today', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+
+    sendRequestToApiAi(email, msg, 1, " sick today");
+  })
+
+})
+slapp.action('preDefinedHelp', 'sick_tomorrow', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+
+    sendRequestToApiAi(email, msg, 1, " sick tomorrow");
+  })
+
+})
 
 
 /**
