@@ -124,3 +124,38 @@ var statsProfileHistoryActions = [
     }
 ]
 exports.statsProfileHistoryActions = statsProfileHistoryActions
+/**
+ * Time off help menu
+ */
+var timeOffPredefinedActions = [
+    {
+        "name": 'time_off_today',
+        "text": "Time off today",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }, {
+        "name": 'time_off_tomorrow',
+        "text": "Time off tomorrow",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    },
+    {
+        "name": 'sick_today',
+        "text": "I am sick today",
+        //"style": "primary",
+        "type": "button",
+        "value": ""
+    }
+    ,
+    {
+        "name": 'sick_tomorrow',
+        "text": "I am sick tomorrow",
+        //"style": "primary",
+        "type": "button",
+        "value": ""
+    }
+
+]
+exports.timeOffPredefinedActions = timeOffPredefinedActions

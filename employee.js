@@ -327,5 +327,11 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+
 }
 
