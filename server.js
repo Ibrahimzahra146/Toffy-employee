@@ -91,7 +91,7 @@ exports.employeeBot = employeeBot
 /**
  * 
  */
-function SendWelcomeResponse(msg, responseText, flag) {
+function SendWelcomeResponse(msg, responseText, flag, callback) {
   var id = ""
   if (flag == 1) {
     id = msg.body.user.id
@@ -105,7 +105,7 @@ function SendWelcomeResponse(msg, responseText, flag) {
     console.log("sssss" + body.user.profile.email)
     if (flag == 1) {
       console.log("body.user.profile.email" + body.user.profile.email)
-      return body.user.profile.email
+      callback(body.user.profile.email)
     } else
       msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
 
@@ -527,8 +527,10 @@ app.post('/uploaded_sick_report', (req, res) => {
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
   // var stringfy = JSON.stringify(msg);
   // console.log(""+JSON.parse(msg))
-  var email = SendWelcomeResponse(msg, "", 1)
-  console.log("SHOW stats listenerr" + email)
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+    console.log("SHOW stats listenerr" + email)
+
+  })
   //console.log(msg.body.user.id)
   // console.log(JSON.stringify(msg))
   // console.log(JSON.stringify(JSON.parse(msg)))
