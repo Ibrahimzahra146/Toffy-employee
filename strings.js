@@ -7,7 +7,7 @@ module.exports.helpMessageBody = function helpMessageBody(fields, actions,pretex
         "attachments": [
             {
 
-                "pretext": "pretext",
+                "pretext": pretext,
                 "color": "#3AA3E3",
                 "attachment_type": "default",
                 "fields": fields,
