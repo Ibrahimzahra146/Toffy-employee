@@ -332,6 +332,33 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.FamilyDeathActions,"")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.holidayAction,"")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.rulesAction,"")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.WfhActions,"")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+
+
+
+
+
+
 
 }
+
 

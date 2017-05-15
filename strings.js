@@ -1,7 +1,7 @@
 /**
  * 
  */
-module.exports.helpMessageBody = function helpMessageBody(fields, actions,pretext) {
+module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {
     var messageBody = {
         "text": "",
         "attachments": [
@@ -22,14 +22,14 @@ module.exports.helpMessageBody = function helpMessageBody(fields, actions,pretex
 
 var staticHelpFields =
     [
-       
+
         {
             "title": "Time off or vacation from 3 may to 5 may ",
             "value": "",
             "short": false
         },
-       
-     
+
+
         {
             "title": "I want a maternity time off from 20 May",
             "value": "",
@@ -59,7 +59,7 @@ var staticHelpFields =
             "short": false
         }
 
-     
+
         ,
         {
             "title": "Work from home today or WFH from 5 May to 8 May ",
@@ -95,21 +95,6 @@ var statsProfileHistoryActions = [
     {
         "name": 'Show_history',
         "text": "Show history",
-        //"style": "primary",
-        "type": "button",
-        "value": ""
-    },
-    {
-        "name": 'Show_holidays',
-        "text": "Show holidays",
-        //"style": "primary",
-        "type": "button",
-        "value": ""
-    }
-    ,
-    {
-        "name": 'Show_Rules',
-        "text": "Show time off rules",
         //"style": "primary",
         "type": "button",
         "value": ""
@@ -152,5 +137,76 @@ var timeOffPredefinedActions = [
 ]
 exports.timeOffPredefinedActions = timeOffPredefinedActions
 //
-var pretext="You can use on of the following expressions to engage with me:"
-exports.pretext=pretext
+var pretext = "You can use on of the following expressions to engage with me:"
+exports.pretext = pretext
+/**
+ * 
+ */
+var WfhActions = [
+    {
+        "name": "Wfh_today",
+        "text": "Work from home today",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }, {
+        "name": 'Wfh_tomorrow',
+        "text": "Work from home tomorrow",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }
+
+]
+exports.WfhActions = WfhActions
+var FamilyDeathActions = [
+    {
+        "name": "death_today",
+        "text": "Family death today",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }, {
+        "name": 'death_yesterday',
+        "text": "Family death yesterday",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }
+
+]
+exports.FamilyDeathActions = FamilyDeathActions;
+/**
+ * 
+ */
+var holidayAction = [
+    {
+        "name": "show_holidays",
+        "text": "show holidays",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }, {
+        "name": 'next_holiday',
+        "text": "show next holiday",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    }
+
+]
+exports.holidayAction = holidayAction;
+/**
+ * 
+ */
+var rulesAction = [
+    {
+        "name": "show_rules",
+        "text": "show submission rules",
+        // "style": "primary",
+        "type": "button",
+        "value": ""
+    },
+
+]
+module.exports.rulesAction = rulesAction
