@@ -67,24 +67,24 @@ exports.staticHelpFields = staticHelpFields;
  */
 var statsProfileHistoryActions = [
     {
-        "name": 'Show_stats',
+        "name": 'helpMenu',
         "text": "Show stats",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Show stats"
     }, {
-        "name": 'Show_profile',
+        "name": 'helpMenu',
         "text": "Show profile",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Show profile"
     },
     {
-        "name": 'Show_history',
+        "name": 'helpMenu',
         "text": "Show history",
         //"style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Show history"
     }
 ]
 exports.statsProfileHistoryActions = statsProfileHistoryActions
@@ -93,32 +93,32 @@ exports.statsProfileHistoryActions = statsProfileHistoryActions
  */
 var timeOffPredefinedActions = [
     {
-        "name": 'time_off_today',
+        "name": 'helpMenu',
         "text": "Time off today",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Time off today"
     }, {
-        "name": 'time_off_tomorrow',
+        "name": 'helpMenu',
         "text": "Time off tomorrow",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Time off tomorrow"
     },
     {
-        "name": 'sick_today',
+        "name": 'helpMenu',
         "text": "I am sick today",
         //"style": "primary",
         "type": "button",
-        "value": ""
+        "value": "I am sick today"
     }
     ,
     {
-        "name": 'sick_tomorrow',
+        "name": 'helpMenu',
         "text": "I am sick tomorrow",
         //"style": "primary",
         "type": "button",
-        "value": ""
+        "value": "I am sick tomorrow"
     }
 
 ]
@@ -131,34 +131,34 @@ exports.pretext = pretext
  */
 var WfhActions = [
     {
-        "name": "Wfh_today",
+        "name": "helpMenu",
         "text": "WFH today",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "WFH today"
     }, {
-        "name": 'Wfh_tomorrow',
+        "name": 'helpMenu',
         "text": "WFH tomorrow",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "WFH tomorrow"
     }
 
 ]
 exports.WfhActions = WfhActions
 var FamilyDeathActions = [
     {
-        "name": "death_today",
+        "name": "helpMenu",
         "text": "Family death today",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Family death today"
     }, {
-        "name": 'death_yesterday',
+        "name": 'helpMenu',
         "text": "Family death yesterday",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Family death yesterday"
     }
 
 ]
@@ -168,17 +168,17 @@ exports.FamilyDeathActions = FamilyDeathActions;
  */
 var holidayAction = [
     {
-        "name": "Show_holidays",
+        "name": "helpMenu",
         "text": "Show holidays",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Show holidays"
     }, {
-        "name": 'next_holiday',
+        "name": 'helpMenu',
         "text": "Show next holiday",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Show next holiday"
     }
 
 ]
@@ -188,11 +188,11 @@ exports.holidayAction = holidayAction;
  */
 var rulesAction = [
     {
-        "name": "Show_rules",
+        "name": "helpMenu",
         "text": "Submission rules",
         // "style": "primary",
         "type": "button",
-        "value": ""
+        "value": "Submission rules"
     },
 
 ]

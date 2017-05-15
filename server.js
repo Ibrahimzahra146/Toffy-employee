@@ -528,13 +528,15 @@ app.post('/uploaded_sick_report', (req, res) => {
 /**
  * 
  */
-slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
+
+slapp.action('preDefinedHelp', 'helpMenu', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
-    employee.showEmployeeStats(email, msg)
+    sendRequestToApiAi(email, msg, 1, value);
   })
 
 })
+/*
 slapp.action('preDefinedHelp', 'Show_profile', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
@@ -597,7 +599,7 @@ slapp.action('preDefinedHelp', 'sick_tomorrow', (msg, value) => {
     sendRequestToApiAi(email, msg, 1, " sick tomorrow");
   })
 
-})
+})*/
 
 
 /**
