@@ -167,13 +167,13 @@ exports.FamilyDeathActions = FamilyDeathActions;
 var holidayAction = [
     {
         "name": "show_holidays",
-        "text": "show holidays",
+        "text": "Show holidays",
         // "style": "primary",
         "type": "button",
         "value": ""
     }, {
         "name": 'next_holiday',
-        "text": "show next holiday",
+        "text": "Show next holiday",
         // "style": "primary",
         "type": "button",
         "value": ""
@@ -187,7 +187,7 @@ exports.holidayAction = holidayAction;
 var rulesAction = [
     {
         "name": "show_rules",
-        "text": "show submission rules",
+        "text": "Submission rules",
         // "style": "primary",
         "type": "button",
         "value": ""
