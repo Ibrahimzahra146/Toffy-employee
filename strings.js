@@ -145,13 +145,13 @@ exports.pretext = pretext
 var WfhActions = [
     {
         "name": "Wfh_today",
-        "text": "Work from home today",
+        "text": "WFH today",
         // "style": "primary",
         "type": "button",
         "value": ""
     }, {
         "name": 'Wfh_tomorrow',
-        "text": "Work from home tomorrow",
+        "text": "WFH tomorrow",
         // "style": "primary",
         "type": "button",
         "value": ""
