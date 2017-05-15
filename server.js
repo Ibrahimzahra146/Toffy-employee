@@ -536,13 +536,12 @@ slapp.action('preDefinedHelp', 'helpMenu', (msg, value) => {
   })
 
 })
-/*
-slapp.action('preDefinedHelp', 'Show_profile', (msg, value) => {
 
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-    employee.showEmployeeProfile(email, msg)
-  })
+slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
+
+  msg.say("Please specify the date.")
 })
+/*
 slapp.action('preDefinedHelp', 'Show_history', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {

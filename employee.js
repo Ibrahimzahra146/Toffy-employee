@@ -322,7 +322,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
  * Send help menu for employee
  */
 
-module.exports.sendHelpOptions = function sendHelpOptions(msg,email) {
+module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     var messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.timeOffPredefinedActions, stringFile.pretext)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
@@ -350,6 +350,11 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg,email) {
     msg.say(obj1)
     //
     messageBody = stringFile.helpMessageBody("", stringFile.rulesAction, "")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.fromDateToDate, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)

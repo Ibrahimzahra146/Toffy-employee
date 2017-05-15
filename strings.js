@@ -25,11 +25,7 @@ module.exports.helpMessageBody = function helpMessageBody(fields, actions, prete
 var staticHelpFields =
     [
 
-        {
-            "title": "Time off or vacation from 3 may to 5 may ",
-            "value": "",
-            "short": false
-        },
+
 
 
         {
@@ -197,3 +193,14 @@ var rulesAction = [
 
 ]
 module.exports.rulesAction = rulesAction
+var fromDateToDate = [
+    {
+        "name": "fromDateToDate",
+        "text": "Time off from date to date",
+        // "style": "primary",
+        "type": "button",
+        "value": "Submission rules"
+    },
+
+]
+module.exports.fromDateToDate = fromDateToDate
