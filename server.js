@@ -513,6 +513,12 @@ app.post('/uploaded_sick_report', (req, res) => {
 
 });
 /**
+ * 
+ */
+slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
+    console.log("SHOW stats listenerr")
+})
+/**
  * Send notification to employe when there is one day l;eft to upload sick report
  */
 app.post('/one_day_left_sRep', (req, res) => {
