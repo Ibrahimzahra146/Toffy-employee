@@ -14,4 +14,4 @@ var app = slapp.attachToExpress(express())
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
     console.log("SHOW stats listenerr")
 })
-app.listen(3000)
+app.listen(process.env.PORT)
