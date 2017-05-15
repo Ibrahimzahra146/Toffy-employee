@@ -91,18 +91,22 @@ exports.employeeBot = employeeBot
 /**
  * 
  */
-function SendWelcomeResponse(msg, responseText,flag) {
+function SendWelcomeResponse(msg, responseText, flag) {
+  var id = ""
+  if (flag == 1) {
+    id = msg.body.user.id
 
+  } else id = msg.body.event.user
   // get the name from databasesss
   request({
-    url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + msg.body.event.user,
+    url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + id,
     json: true
   }, function (error, response, body) {
-    console.log("sssss"+body.user.profile.email)
-    if(flag==1){
+    console.log("sssss" + body.user.profile.email)
+    if (flag == 1) {
       return body.user.profile.email
-    }else 
-    msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
+    } else
+      msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
 
   });
 }
@@ -130,7 +134,7 @@ function sendRequestToApiAi(emailValue, msg) {
     //When user ask for help,response will be the menu of all things that he can do
     else if ((responseText) == "Help") {
 
-      employee.sendHelpOptions(msg,emailValue);
+      employee.sendHelpOptions(msg, emailValue);
     }
     //show enployee vacation history 
     else if ((responseText) == "showHistory") {
@@ -183,7 +187,7 @@ function sendRequestToApiAi(emailValue, msg) {
 
 
     else if ((response.result.action) == "input.welcome") {
-      SendWelcomeResponse(msg, responseText,0)
+      SendWelcomeResponse(msg, responseText, 0)
     } else msg.say(responseText)
   });
 
@@ -520,14 +524,13 @@ app.post('/uploaded_sick_report', (req, res) => {
  * 
  */
 slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
- // var stringfy = JSON.stringify(msg);
-// console.log(""+JSON.parse(msg))
- // var email=SendWelcomeResponse(JSON.parse(msg),"",1)
-  //console.log("SHOW stats listenerr" + email)
+  // var stringfy = JSON.stringify(msg);
+  // console.log(""+JSON.parse(msg))
+  var email = SendWelcomeResponse(msg, "", 1)
+  console.log("SHOW stats listenerr" + email)
   console.log(msg.body.user.id)
- // console.log(JSON.stringify(msg))
- // console.log(JSON.stringify(JSON.parse(msg)))
-  msg.say("help")
+  // console.log(JSON.stringify(msg))
+  // console.log(JSON.stringify(JSON.parse(msg)))
 })
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
