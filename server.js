@@ -104,6 +104,7 @@ function SendWelcomeResponse(msg, responseText, flag) {
   }, function (error, response, body) {
     console.log("sssss" + body.user.profile.email)
     if (flag == 1) {
+      console.log("body.user.profile.email" + body.user.profile.email)
       return body.user.profile.email
     } else
       msg.say(responseText + " " + body.user.name + "! How can I help you " + "?")
@@ -528,7 +529,7 @@ slapp.action('preDefinedHelp', 'Show_stats', (msg, value) => {
   // console.log(""+JSON.parse(msg))
   var email = SendWelcomeResponse(msg, "", 1)
   console.log("SHOW stats listenerr" + email)
-  console.log(msg.body.user.id)
+  //console.log(msg.body.user.id)
   // console.log(JSON.stringify(msg))
   // console.log(JSON.stringify(JSON.parse(msg)))
 })
