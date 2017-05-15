@@ -5,6 +5,7 @@ module.exports.helpMessageBody = function helpMessageBody(fields, actions, prete
     var messageBody = {
         "text": "",
         "callback_id": 'preDefinedHelp',
+        "attachment_type": "default",
         "attachments": [
             {
 
