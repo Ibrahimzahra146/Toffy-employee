@@ -406,21 +406,21 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg) {
                     }
                 ], "actions": [
                     {
-                        "name": 'Show stats',
-                        "text": "Yes",
-                        "style": "primary",
+                        "name": 'Show_stats',
+                        "text": "Show stats",
+                       // "style": "primary",
                         "type": "button",
                         "value": ""
                     }, {
-                        "name": 'Show profile',
-                        "text": "Yes",
-                        "style": "primary",
+                        "name": 'Show_profile',
+                        "text": "Show profile",
+                       // "style": "primary",
                         "type": "button",
                         "value": ""
                     }, {
-                        "name": 'Show history',
-                        "text": "Yes",
-                        "style": "primary",
+                        "name": 'Show_history',
+                        "text": "Show history",
+                        //"style": "primary",
                         "type": "button",
                         "value": ""
                     }
