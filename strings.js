@@ -188,7 +188,7 @@ exports.holidayAction = holidayAction;
  */
 var rulesAction = [
     {
-        "name": "show_rules",
+        "name": "Show_rules",
         "text": "Submission rules",
         // "style": "primary",
         "type": "button",

@@ -551,6 +551,15 @@ slapp.action('preDefinedHelp', 'Show_holidays', (msg, value) => {
   })
 
 })
+slapp.action('preDefinedHelp', 'Show_rules', (msg, value) => {
+
+  var email = SendWelcomeResponse(msg, "", 1, function (email) {
+
+    employee.ShowRules(email, msg)
+  })
+
+})
+
 /**
  * Send notification to employe when there is one day l;eft to upload sick report
  */
