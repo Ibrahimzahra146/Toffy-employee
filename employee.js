@@ -168,11 +168,6 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     toffyHelper.getIdFromEmail(email, function (Id) {
 
 
-
-        console.log("2-toffyHelper.general_remember_me" + toffyHelper.general_remember_me)
-        console.log("2-toffyHelper.general_session_id" + toffyHelper.general_session_id)
-
-
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
@@ -324,10 +319,15 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
 
-    //
-    var messageBody = stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
+    //stringFile.timeOffPredefinedActions
+    var messageBody = stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions, "")
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
 
@@ -356,7 +356,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.timeOffPredefinedActions, stringFile.pretext)
+    messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, "", stringFile.pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
