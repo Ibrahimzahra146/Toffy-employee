@@ -265,7 +265,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         }, commentFieldInManagerMessage,
                                         {
                                             "title": "Your action ",
-                                            "value": "Pending :hourglass_flowing_sand:",
+                                            "value": "Pending :thinking_face:",
                                             "short": true
                                         }
                                         ,
@@ -276,7 +276,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         },
                                         {
                                             "title": "Final state",
-                                            "value": "PendingManagerApproval :hourglass_flowing_sand:",
+                                            "value": "PendingManagerApproval :thinking_face:",
                                             "short": true
                                         }
                                     ],
