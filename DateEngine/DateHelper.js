@@ -21,7 +21,7 @@ module.exports.getDayNumber = function getDayNumber(date) {
  * 
  */
 module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
-    console.log("The Time is =" + time)
+    console.log("The Time issssss =" + time)
     var arr = time.toString().split(":")
     var formattedTime = ""
     var midday = "pm";
