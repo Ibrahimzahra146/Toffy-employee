@@ -49,11 +49,6 @@ var staticHelpFields =
             "title": "Haj vacation on 10 June ",
             "value": "",
             "short": false
-        },
-        {
-            "title": "Tutorial video https://www.screencast.com/t/pPR0xftK",
-            "value": "",
-            "short": false
         }
     ]
 

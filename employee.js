@@ -323,14 +323,11 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
  */
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
-    var messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.timeOffPredefinedActions, stringFile.pretext)
+
+    //
+    var messageBody = stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
-    messageBody = stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
 
@@ -358,7 +355,11 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
-
+    //
+    messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, stringFile.timeOffPredefinedActions, stringFile.pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
 
 
 
