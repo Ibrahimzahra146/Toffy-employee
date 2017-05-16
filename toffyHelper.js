@@ -151,6 +151,13 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var managerEmail = ""
     var dont_detuct_button = ""
     var commentFieldInManagerMessage = ""
+    var approver2State = "--"
+    //check if there is second approver to print it in the message  
+    if (!managerApproval[1]) {
+        approver2State = "--"
+
+    } else approver2State = "Pending :hourglass_flowing_sand:"
+
     if (comment != "") {
         commentFieldInManagerMessage = {
             "title": "Comment",
@@ -264,7 +271,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         ,
                                         {
                                             "title": "Approver2 action",
-                                            "value": "Pending :hourglass_flowing_sand:",
+                                            "value": approver2State,
                                             "short": true
                                         },
                                         {
@@ -350,7 +357,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 }
 //list all holidays with range period
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
-  
+
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
