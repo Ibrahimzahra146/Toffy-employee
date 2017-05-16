@@ -35,10 +35,10 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         console.log("formattedFromTime" + formattedFromTime)
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
-            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid, reason, containsHolidays, overlappedVacations) {
-
-                if (body != 1000) {
-                    var workingDays = parseFloat(body).toFixed(2);
+            getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (workingPeriod, isValid, reason, containsHolidays, overlappedVacations, body) {
+                getStartAndEndTime(body, formattedFromTime, formattedTime);
+                if (workingPeriod != 1000) {
+                    var workingDays = parseFloat(boworkingPerioddy).toFixed(2);
                     if (workingDays != 0.0 || containsHolidays == true) {
                         if (isValid == true || (isValid == false && type == "sick") || (isValid == false && overlappedVacations != "") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
 
@@ -168,21 +168,19 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + (JSON.parse(body)).timeSlotFrom.startSlotTimeHours)
-                console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + (JSON.parse(body)).timeSlotFrom.endSlotTimeHours)
-                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + (JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes)
+
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
                 if (response.statusCode == 500) {
                     callback(1000, "no ")
                 } else if ((JSON.parse(body)).validRequest.overlappedVacations) {
                     console.log("overllaped vacation" + JSON.stringify(body))
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, (JSON.parse(body)).validRequest.overlappedVacations)
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, (JSON.parse(body)).validRequest.overlappedVacations, (JSON.parse(body)))
 
                 }
                 else {
                     console.log("no overllaped vacation" + JSON.stringify(body))
                     console.log()
-                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, "")
+                    callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, "", (JSON.parse(body)))
 
                 }
             })
@@ -285,5 +283,14 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
         overlppedMsg = "\n[Note]: There is an already taken time off " + overlppedMsg + " and it will be overwritten when you press \"Yes\"."
         callback(overlppedMsg)
     } else callback(overlppedMsg)
+
+}
+function getStartAndEndTime(body, startTime, EndTime) {
+    console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
+    console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)
+    console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + body.timeSlotFrom.startSlotTimeMinutes)
+    console.log("startTime" + startTime)
+    console.log("EndTime" + EndTime)
+
 
 }
