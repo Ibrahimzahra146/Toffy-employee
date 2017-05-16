@@ -156,7 +156,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     if (!managerApproval[1]) {
         approver2State = "--"
 
-    } else approver2State = "Pending :hourglass_flowing_sand:"
+    } else approver2State = "Pending :thinking_face:"
 
     if (comment != "") {
         commentFieldInManagerMessage = {
