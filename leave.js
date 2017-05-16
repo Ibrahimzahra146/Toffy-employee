@@ -30,7 +30,10 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else if (type == "Marriage")
         typeNum = 8
     else typeNum = 0
+    console.log("fromTime" + fromTime)
+    console.log("toTime" + toTime)
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+        console.log("formattedFromTime" + formattedFromTime)
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (body, isValid, reason, containsHolidays, overlappedVacations) {
 
@@ -90,7 +93,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                                     "style": "danger",
                                                     "type": "button",
                                                     "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                                },addCommentButton
+                                                }, addCommentButton
 
                                             ],
                                         }
@@ -165,9 +168,9 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours"+(JSON.parse(body)).timeSlotFrom.startSlotTimeHours)
-                console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours"+(JSON.parse(body)).timeSlotFrom.endSlotTimeHours)
-                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes"+(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes)
+                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + (JSON.parse(body)).timeSlotFrom.startSlotTimeHours)
+                console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + (JSON.parse(body)).timeSlotFrom.endSlotTimeHours)
+                console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + (JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes)
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
                 if (response.statusCode == 500) {
                     callback(1000, "no ")
