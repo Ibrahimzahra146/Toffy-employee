@@ -9,14 +9,15 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
     var other_vacation_types = ""
     var messageText = ""
     dateHelper.getTodayDate(function (today) {
-        var time1 = "17:00:00";
+
         var time = "8:00:00";
+        var time1 = "17:00:00";
         var date = today
         var date1 = today
         var timeOffCase = -1
 
         if (response.result.parameters.sick_synonyms) {
-            vacation_type1 = "sick"           
+            vacation_type1 = "sick"
         }
         else if (response.result.parameters.other_vacation_types) {
             other_vacation_types = response.result.parameters.other_vacation_types;
