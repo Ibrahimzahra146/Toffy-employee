@@ -541,64 +541,6 @@ slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
 
   msg.say("Please specify the date.")
 })
-/*
-slapp.action('preDefinedHelp', 'Show_history', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    employee.showEmployeeHistory(email, msg)
-  })
-
-})
-slapp.action('preDefinedHelp', 'Show_holidays', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-    var date = "2017-01-01";
-    var date1 = "	2017-12-30";
-    toffyHelper.showHolidays(msg, email, date, date1, "", "")
-  })
-
-})
-slapp.action('preDefinedHelp', 'Show_rules', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    employee.ShowRules(email, msg)
-  })
-
-})
-slapp.action('preDefinedHelp', 'time_off_today', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    sendRequestToApiAi(email, msg, 1, "today");
-  })
-
-})
-slapp.action('preDefinedHelp', 'time_off_tomorrow', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    sendRequestToApiAi(email, msg, 1, "tomorrow");
-  })
-
-})
-slapp.action('preDefinedHelp', 'sick_today', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    sendRequestToApiAi(email, msg, 1, " sick today");
-  })
-
-})
-slapp.action('preDefinedHelp', 'sick_tomorrow', (msg, value) => {
-
-  var email = SendWelcomeResponse(msg, "", 1, function (email) {
-
-    sendRequestToApiAi(email, msg, 1, " sick tomorrow");
-  })
-
-})*/
 
 
 /**
