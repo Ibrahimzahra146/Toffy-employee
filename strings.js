@@ -211,7 +211,7 @@ module.exports.commentFieldInManagerMessageFunction = function commentFieldInMan
     return commentFieldInManagerMessage;
 }
 
-module.exports.dont_detuct_button_Function = function dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, employee, startDate, endDate, type, workingDays, ImageUrl) {
+module.exports.dont_detuct_button_Function = function dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl) {
     var dont_detuct_button = {
         "name": "dont_detuct",
         "text": "Don’t Deduct ",
@@ -240,7 +240,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
 module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
 
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, employee, startDate, endDate, type, workingDays, ImageUrl);
-    var commentFieldInManagerMessage = commentFieldInManagerMessageFunction(comment);
+    var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
         "text": "This folk has pending time off request:",
         "attachments": [

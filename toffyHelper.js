@@ -203,7 +203,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         }
                         if (type != "WFH") {//change 3
                            
-                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail,vacationId,approvalId,managerEmail,employee,startDate,endDate,type,workingDays,ImageUrl);
+                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail,vacationId,approvalId,managerEmail,startDate,endDate,type,workingDays,ImageUrl);
                         }
 
 
