@@ -187,7 +187,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     Approver1 = body.manager[0].name
                 }
 
-                Approver2 = body.manager[1].name;
+               // Approver2 = body.manager[1].name;
 
             } else Approver1 = body.manager[0].name
 
@@ -221,7 +221,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                             },
                             {
                                 "title": "Approver 1",
-                                "value": body.manager[0].name,
+                                "value": Approver1,
                                 "short": true
                             },
 
