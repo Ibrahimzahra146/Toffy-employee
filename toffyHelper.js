@@ -15,7 +15,7 @@ exports.general_remember_me = general_remember_me
 general_session_id = "";
 exports.general_session_id = general_session_id;
 const dateHelper = require('./DateEngine/DateHelper.js')
-
+const stringFile = require('./strings.js')
 
 
 
@@ -141,11 +141,10 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 
     callback(formattedTime, midday)
 }
-
-//*************************************************************************************************
+//*
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
-    var message12 = ""
+    var message12 = ""                                               
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
@@ -159,11 +158,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     } else approver2State = "Pending :thinking_face:"
 
     if (comment != "") {
-        commentFieldInManagerMessage = {
-            "title": "Comment",
-            "value": comment,
-            "short": true
-        }
+       var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
     }
     if (type == "sickLeave") {
         type = "sick"
@@ -202,112 +197,20 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         if (approvarType == "Manager") {
                             printLogs("Manager Role ")
                             var timeststamp = new Date().getTime()
-                            message12 = {
-                                'type': 'message',
-                                'channel': jsonResponse.managerChannelId,
-                                user: jsonResponse.slackUserId,
-                                text: 'what is my name',
-
-                                team: jsonResponse.teamId,
-                                event: 'direct_message',
-                                as_user: true
-
-                            }
+                            //change 2
+                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId,jsonResponse.slackUserId,jsonResponse.teamId);
 
                         }
-                        if (type != "WFH") {
-                            dont_detuct_button = {
-                                "name": "dont_detuct",
-                                "text": "Don’t Deduct ",
-                                "type": "button",
-                                "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
-                            }
+                        if (type != "WFH") {//change 3
+                           
+                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail,vacationId,approvalId,managerEmail,employee,startDate,endDate,type,workingDays,ImageUrl);
                         }
 
 
 
-
-                        var messageBody = {
-                            "text": "This folk has pending time off request:",
-                            "attachments": [
-                                {
-                                    "attachment_type": "default",
-                                    "callback_id": "manager_confirm_reject",
-                                    "text": userEmail,
-                                    "fallback": "ReferenceError",
-                                    "fields": [
-                                        {
-                                            "title": "From",
-                                            "value": startDate,
-                                            "short": true
-                                        },
-                                        {
-                                            "title": "Days/Time ",
-                                            "value": workingDays + " day",
-                                            "short": true
-                                        },
-                                        {
-                                            "title": "to",
-                                            "value": endDate,
-                                            "short": true
-                                        },
-                                        {
-                                            "title": "Type",
-                                            "value": type,
-                                            "short": true
-                                        }, commentFieldInManagerMessage,
-                                        {
-                                            "title": "Your action ",
-                                            "value": "Pending :thinking_face:",
-                                            "short": true
-                                        }
-                                        ,
-                                        {
-                                            "title": "Approver2 action",
-                                            "value": approver2State,
-                                            "short": true
-                                        },
-                                        {
-                                            "title": "Final state",
-                                            "value": "PendingManagerApproval :thinking_face:",
-                                            "short": true
-                                        }
-                                    ],
-                                    "actions": [
-                                        {
-                                            "name": "confirm",
-                                            "text": "Accept",
-                                            "style": "primary",
-                                            "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
-                                        },
-                                        {
-                                            "name": "reject",
-                                            "text": "Reject",
-                                            "style": "danger",
-                                            "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
-                                        },
-                                        {
-                                            "name": "reject_with_comment",
-                                            "text": "Reject with comment",
-                                            "style": "danger",
-                                            "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
-                                        }, dont_detuct_button,
-                                        {
-                                            "name": "check_state",
-                                            "text": ":arrows_counterclockwise:",
-
-                                            "type": "button",
-                                            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
-                                        },
-                                    ],
-                                    "color": "#F35A00",
-                                    "thumb_url": ImageUrl,
-                                }
-                            ]
-                        }
+                        // needs import (StringFile)
+                        //change 4
+                        var messageBody = stringFile.sendVacationToManagerFunction(comment,ImageUrl,userEmail,startDate,workingDays,endDate,type,approver2State,vacationId,approvalId,managerEmail);
                         if (approvarType == "Manager") {
                             currentBot = server.bot;
                             currentBot.startConversation(message12, function (err, convo) {
@@ -346,7 +249,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             // 5 seconds have passed
         });
 }
+
 //list all holidays with range period
+
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
 
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
