@@ -207,7 +207,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 //get all information about team users like email ,name ,user id ...sssss
 //**********************************************************************************************
 function getMembersList(Id, msg) {
-  console.log("SLACK_ACCESS_TOKEN=====>   " + SLACK_ACCESS_TOKEN)
+  console.log("SLACK_ACCESS_TOKEN=====>    " + SLACK_ACCESS_TOKEN)
   var emailValue = "";
   request({
     url: Constants.SLACK_MEMBERS_LIST_URL + "" + SLACK_ACCESS_TOKEN,

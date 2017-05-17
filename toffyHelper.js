@@ -173,7 +173,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
 
 
-    console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
     async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
@@ -181,14 +180,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-                console.log("Arrive after get emailFromId:: " + i)
 
                 approvalId = managerApproval[i].id
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-                console.log("Second i" + i)
-                console.log("managerEmailsss" + managerEmail)
+            
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -199,16 +196,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     body: managerEmail
                     //Set the body as a stringcc
                 }, function (error, response, body) {
-                    console.log("JSON.stringify(body)" + JSON.stringify(body));
                     getUserImage(userEmail, function (ImageUrl) {
-                        console.log("ImageUrl" + ImageUrl)
-                        console.log("ImageUrl" + JSON.stringify(ImageUrl))
+                
                         var jsonResponse = JSON.parse(body);
-                        console.log("approvarType:::" + approvarType)
                         if (approvarType == "Manager") {
                             printLogs("Manager Role ")
                             var timeststamp = new Date().getTime()
-                            console.log("timeststamp" + timeststamp)
                             message12 = {
                                 'type': 'message',
                                 'channel': jsonResponse.managerChannelId,
@@ -325,10 +318,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
-                                        console.log("manager message response ")
-                                        console.log(response)
-                                        console.log("manager message response ")
-                                        console.log(JSON.stringify(response))
+                                        
+                                     
 
                                     });
 

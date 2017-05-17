@@ -286,11 +286,20 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
 
 }
 function getStartAndEndTime(body, startTime, EndTime) {
+    var startSlotTimeHours = body.timeSlotFrom.startSlotTimeHours
+    var endSlotTimeHours = body.timeSlotFrom.endSlotTimeHours
+    var startSlotTimeMinutes = body.timeSlotFrom.startSlotTimeMinutes
+    var endSlotTimeMinutes = body.timeSlotFrom.endSlotTimeMinutes
+    var date = new Date(startSlotTimeHours + ":" + startSlotTimeHours)
+
+
+
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + body.timeSlotFrom.startSlotTimeMinutes)
     console.log("startTime" + startTime)
     console.log("EndTime" + EndTime)
+  
 
 
 }
