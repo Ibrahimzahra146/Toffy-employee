@@ -239,7 +239,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
 
 module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
 
-    var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, employee, startDate, endDate, type, workingDays, ImageUrl);
+    var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail,startDate, endDate, type, workingDays, ImageUrl);
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
         "text": "This folk has pending time off request:",
