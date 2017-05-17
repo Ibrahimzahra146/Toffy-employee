@@ -227,7 +227,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
 
                             {
-                                "title": "Employment date",
+                                "title": "Hire date",
                                 "value": body.hireDate,
                                 "short": true
                             },
