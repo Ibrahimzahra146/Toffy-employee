@@ -177,11 +177,21 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                 'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
             },
         }, function (error, response, body) {
-            console.log("3-" + response.statusCode)
+            var Approver1 = ""
             if (body.manager[1]) {
+                if (body.manager[0].rank == 2) {
+                    Approver2 = body.manager[0].name
+                    Approver1 = body.manager[1].name
+                } else {
+                    Approver2 = body.manager[1].name
+                    Approver1 = body.manager[0].name
+                }
+
                 Approver2 = body.manager[1].name;
 
-            }
+            } else Approver1 = body.manager[0].name
+
+
 
             printLogs("show profile bod" + JSON.stringify(body))
             printLogs("show profile bod" + response.statusCode)
