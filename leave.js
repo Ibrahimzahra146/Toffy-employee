@@ -292,7 +292,7 @@ function getStartAndEndTime(body, startTime, EndTime) {
     var endSlotTimeMinutes = body.timeSlotFrom.endSlotTimeMinutes
     var date = new Date(startSlotTimeHours + ":" + startSlotTimeHours)
 
-
+dateHelper.convertTimeFormat
 
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)

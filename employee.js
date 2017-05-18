@@ -12,6 +12,7 @@ var async = require('async');
 var currentBot = server.bot;
 var hrRole = 0;
 var remember_me = "initial";
+const dateHelper = require('./DateEngine/DateHelper.js')
 
 /****** 
 Show employee vacation history
@@ -42,47 +43,46 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                     while ((JSON.parse(body)[i])) {
                         var stringMessage = "["
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
-                        fromDate = fromDate.toString().split("GMT")
-                        fromDate = fromDate[0]
-                        var toDate = new Date((JSON.parse(body))[i].toDate)
-                        toDate = toDate.toString().split("GMT")
-                        toDate = toDate[0]
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
-                        stringMessage = stringMessage + ","
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
-                        stringMessage = stringMessage + ","
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
-                        var typeOfVacation = ""
-                        if ((JSON.parse(body))[i].type == 0)
-                            typeOfVacation = "Time off"
-                        else if ((JSON.parse(body))[i].type == 4)
-                            typeOfVacation = "Sick time off"
-                        printLogs("stringMessage::" + stringMessage);
-                        stringMessage = stringMessage + "]"
-                        var messageBody = {
-                            "text": "*" + typeOfVacation + "*",
-                            "attachments": [
-                                {
-                                    "attachment_type": "default",
-                                    "text": " ",
-                                    "fallback": "ReferenceError",
-                                    "fields": stringMessage,
-                                    "color": "#F35A00"
-                                }
-                            ]
-                        }
-                        printLogs("messageBody" + messageBody)
-                        var stringfy = JSON.stringify(messageBody);
+                        dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, function (fromDateWord, toDateWord) {
 
-                        printLogs("stringfy" + stringfy)
-                        stringfy = stringfy.replace(/\\/g, "")
-                        stringfy = stringfy.replace(/]\"/, "]")
-                        stringfy = stringfy.replace(/\"\[/, "[")
-                        stringfy = JSON.parse(stringfy)
+                            var fromDate = fromDateWord
+                            var toDate = toDateWord
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + ","
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
+                            stringMessage = stringMessage + ","
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
+                            var typeOfVacation = ""
+                            if ((JSON.parse(body))[i].type == 0)
+                                typeOfVacation = "Time off"
+                            else if ((JSON.parse(body))[i].type == 4)
+                                typeOfVacation = "Sick time off"
+                            printLogs("stringMessage::" + stringMessage);
+                            stringMessage = stringMessage + "]"
+                            var messageBody = {
+                                "text": "*" + typeOfVacation + "*",
+                                "attachments": [
+                                    {
+                                        "attachment_type": "default",
+                                        "text": " ",
+                                        "fallback": "ReferenceError",
+                                        "fields": stringMessage,
+                                        "color": "#F35A00"
+                                    }
+                                ]
+                            }
+                            printLogs("messageBody" + messageBody)
+                            var stringfy = JSON.stringify(messageBody);
 
-                        msg.say(stringfy)
-                        i++;
+                            printLogs("stringfy" + stringfy)
+                            stringfy = stringfy.replace(/\\/g, "")
+                            stringfy = stringfy.replace(/]\"/, "]")
+                            stringfy = stringfy.replace(/\"\[/, "[")
+                            stringfy = JSON.parse(stringfy)
 
+                            msg.say(stringfy)
+                            i++;
+                        })
                     }
 
                 }
@@ -187,7 +187,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                     Approver1 = body.manager[0].name
                 }
 
-               // Approver2 = body.manager[1].name;
+                // Approver2 = body.manager[1].name;
 
             } else Approver1 = body.manager[0].name
 
