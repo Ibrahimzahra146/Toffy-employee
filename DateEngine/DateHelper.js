@@ -63,7 +63,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
         else if (arr[0] == "19" || arr[0] == "07" || arr[0] == "7") {
             formattedTime = "07:" + arr[1];
             midday = "am"
-            TimeforMilliseconds = "7:" + arr[1]
+            TimeforMilliseconds = "19:" + arr[1]
 
         }
         else if (arr[0] == "20" || arr[0] == "08" || arr[0] == "8") {
