@@ -211,26 +211,28 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         // needs import (StringFile)
                         //change 4
                         var messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-                        if (approvarType == "Manager") {
-                            currentBot = server.bot;
-                            currentBot.startConversation(message12, function (err, convo) {
+                        if (approvarType == "Manager")
+                            currentBot = server.bot
+                        else currentBot = server.hRbot;
+
+                        currentBot.startConversation(message12, function (err, convo) {
 
 
-                                if (!err) {
+                            if (!err) {
 
-                                    var stringfy = JSON.stringify(messageBody);
-                                    var obj1 = JSON.parse(stringfy);
-                                    currentBot.reply(message12, obj1, function (err, response) {
+                                var stringfy = JSON.stringify(messageBody);
+                                var obj1 = JSON.parse(stringfy);
+                                currentBot.reply(message12, obj1, function (err, response) {
 
 
 
-                                    });
+                                });
 
-                                }
+                            }
 
-                            });
+                        });
 
-                        }
+
 
                         flagForWhileCallbacks = 1
 

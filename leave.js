@@ -42,64 +42,74 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                     if (workingDays != 0.0 || containsHolidays == true) {
                         if (isValid == true || (isValid == false && type == "sick") || (isValid == false && overlappedVacations != "") || (isValid == false && type == "Wedding") || (isValid == false && type == "Paternity")) {
 
+                            var fromDateServer = new Date(body.timeSlotFrom.date)
+                            fromDateServer.setHours(body.timeSlotFrom.hour)
+                            fromDateServer.setMinutes(body.timeSlotFrom.minute)
+                            //
+                            var toDateWordServer = new Date(body.toTimeSlot.date)
+                            toDateWordServer.setHours(body.toTimeSlot.hour)
+                            toDateWordServer.setMinutes(body.toTimeSlot.minute)
+                            /* var wordFromDate = new Date(fromDate).toDateString();
+                             var wordTodate = new Date(ToDate).toDateString();
+                             var arr = wordFromDate.toString().split(" ")
+                             wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
+                             arr = wordTodate.toString().split(" ")
+                             wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]*/
+                            dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
-                            var wordFromDate = new Date(fromDate).toDateString();
-                            var wordTodate = new Date(ToDate).toDateString();
-                            var arr = wordFromDate.toString().split(" ")
-                            wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-                            arr = wordTodate.toString().split(" ")
-                            wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]
-                            getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
-                                var addCommentButton = ""
-                                if (containsHolidays == true)
-                                    holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
-                                if (type == "sick") {
-                                    // msg.say("Sorry to hear that :(")
-                                    holidaysNotice = ""
-                                }
-                                if (type == "WFH") {
-                                    workingDays = 0
-                                    holidaysNotice = ""
-                                }
-                                if (type == "sick" || type == "personal") {
-                                    addCommentButton = {
-                                        "name": 'yesWithComment',
-                                        "text": "Add comment",
-                                        "type": "button",
-                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+
+                                getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
+                                    var addCommentButton = ""
+                                    if (containsHolidays == true)
+                                        holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+                                    if (type == "sick") {
+                                        // msg.say("Sorry to hear that :(")
+                                        holidaysNotice = ""
                                     }
-                                }
-                                messagetext = messagetext + "" + holidaysNotice
-
-                                var text12 = {
-                                    "text": "",
-                                    "attachments": [
-                                        {
-                                            "text": messagetext,
-                                            "callback_id": 'leave_with_vacation_confirm_reject',
-                                            "color": "#3AA3E3",
-                                            "attachment_type": "default",
-                                            "actions": [
-                                                {
-                                                    "name": 'confirm',
-                                                    "text": "Yes",
-                                                    "style": "primary",
-                                                    "type": "button",
-                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                                },
-                                                {
-                                                    "name": 'reject',
-                                                    "text": "No",
-                                                    "style": "danger",
-                                                    "type": "button",
-                                                    "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
-                                                }, addCommentButton
-
-                                            ],
+                                    if (type == "WFH") {
+                                        workingDays = 0
+                                        holidaysNotice = ""
+                                    }
+                                    if (type == "sick" || type == "personal") {
+                                        addCommentButton = {
+                                            "name": 'yesWithComment',
+                                            "text": "Add comment",
+                                            "type": "button",
+                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                         }
-                                    ]
-                                }
-                                msg.say(text12)
+                                    }
+                                    messagetext = messagetext + "" + holidaysNotice
+
+                                    var text12 = {
+                                        "text": "",
+                                        "attachments": [
+                                            {
+                                                "text": messagetext,
+                                                "callback_id": 'leave_with_vacation_confirm_reject',
+                                                "color": "#3AA3E3",
+                                                "attachment_type": "default",
+                                                "actions": [
+                                                    {
+                                                        "name": 'confirm',
+                                                        "text": "Yes",
+                                                        "style": "primary",
+                                                        "type": "button",
+                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                    },
+                                                    {
+                                                        "name": 'reject',
+                                                        "text": "No",
+                                                        "style": "danger",
+                                                        "type": "button",
+                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                    }, addCommentButton
+
+                                                ],
+                                            }
+                                        ]
+                                    }
+                                    msg.say(text12)
+                                })
                                 //else vacationOverllaping.determinOverllapingCase(msg, email, overlappedVacations, messagetext, holidaysNotice, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, )
 
                             })
