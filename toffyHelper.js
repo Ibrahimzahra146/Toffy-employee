@@ -619,54 +619,50 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             max = shareInfoLen
         }
         while (i < max) {
-            dateHelper.getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-                dateHelper.getDayNameOfDate((JSON.parse(body))[i].toDate, function (toDateName) {
-                    console.log("dayName" + dayName)
-                    if (i > 0) {
-                        stringMessage = stringMessage + ","
-                    }
-                    console.log("(JSON.parse(body))[i].fromDate " + (JSON.parse(body))[i].fromDate)
-                    console.log("(JSON.parse(body))[i].toDate" + (JSON.parse(body))[i].toDate)
-                    if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
 
-                    } else {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )-" + (JSON.parse(body))[i].toDate + " ( " + toDateName + " )" + "\"" + ",\"short\":true}"
-
-                    }
-                    i++;
+            console.log("dayName" + dayName)
+            if (i > 0) {
+                stringMessage = stringMessage + ","
+            }
+            dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
-                })
+
+                if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
+                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
+
+                } else {
+                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " to " + toDateWord + "" + "\"" + ",\"short\":true}"
+
+                }
             })
+            i++;
+
+
+
 
         }
     } else {
         while ((JSON.parse(body)[i])) {
-            dateHelper.getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-                dateHelper.getDayNameOfDate((JSON.parse(body))[i].toDate, function (toDateName) {
-                    console.log("toDateNames" + (JSON.parse(body))[i].toDate + "" + " ( " + toDateName + " ) -")
-                    if (i > 0) {
-                        stringMessage = stringMessage + ","
-                    }
-                    console.log("(JSON.parse(body))[i].fromDate" + (JSON.parse(body))[i].fromDate)
-                    console.log((JSON.parse(body))[i].toDate == (JSON.parse(body))[i].fromDate)
-                    console.log("(JSON.parse(body))[i].toDate" + (JSON.parse(body))[i].toDate)
-                    dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
+
+            if (i > 0) {
+                stringMessage = stringMessage + ","
+            }
+
+            dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
 
-                        if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
+                if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
+                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
 
-                        } else {
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " to " + toDateWord + "" + "\"" + ",\"short\":true}"
+                } else {
+                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " to " + toDateWord + "" + "\"" + ",\"short\":true}"
 
-                        }
-                    })
-
-                })
+                }
             })
+
+
             i++;
 
 
