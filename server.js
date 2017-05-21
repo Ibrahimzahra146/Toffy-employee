@@ -319,12 +319,12 @@ function userAction(msg, value, isComment) {
 
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
-            fromDate = fromDate + " at " + formattedTime + " " + midday
-          } else fromDate = fromDate + " at 08:00 am ";
+            fromDate = fromDate 
+          } else fromDate = fromDate 
 
           if (arr[1] && (arr[1] != undefined)) {
-            toDate = toDate + " at " + formattedTime1 + " " + midday1
-          } else toDate = toDate + " at 05:00 pm ";
+            toDate = toDate 
+          } else toDate = toDate
 
 
           if (!managerApproval[0]) {
