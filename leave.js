@@ -40,7 +40,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                 if (workingPeriod != 1000) {
                     var workingDays = parseFloat(workingPeriod).toFixed(2);
                     if (workingDays != 0.0 || containsHolidays == true) {
-                        if (isValid == true || (isValid == false && type == "sick") || (isValid == false && overlappedVacations != "") || (isValid == false && type == "Wedding") || (isValid == false && type == "Paternity")) {
+                        if (isValid == true || (isValid == false && type == "sick")|| (isValid == false && type == "Wedding") || (isValid == false && type == "Paternity")) {
 
                             var fromDateServer = new Date(body.timeSlotFrom.date)
                             fromDateServer.setHours(body.timeSlotFrom.hour)
