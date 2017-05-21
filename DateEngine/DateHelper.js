@@ -54,6 +54,12 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
             formattedTime = "05:" + arr[1];
             TimeforMilliseconds = "17:" + arr[1]
         }
+        else if (arr[0] == "18" || arr[0] == "06" || arr[0] == "6") {
+            formattedTime = "06:" + arr[1];
+            midday = "pm"
+            TimeforMilliseconds = "6:" + arr[1]
+
+        }
         else if (arr[0] == "19" || arr[0] == "07" || arr[0] == "7") {
             formattedTime = "07:" + arr[1];
             midday = "am"
