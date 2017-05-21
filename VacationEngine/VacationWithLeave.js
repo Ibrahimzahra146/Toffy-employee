@@ -213,7 +213,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     } else if (response.result.parameters.other_vacation_types == "Paternity") {
                         numberOfDaysToAdd = 3
                     }
-                    else if (response.result.parameters.other_vacation_types == "Marriage") {
+                    else if (response.result.parameters.other_vacation_types == "Wedding") {
                         numberOfDaysToAdd = 3
                     }
                     else if (response.result.parameters.other_vacation_types == "death") {
