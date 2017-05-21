@@ -147,7 +147,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
             }
 
-            else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1) {
+            else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date != "" && response.result.parameters.date1 != "") {
                 time = response.result.parameters.time
 
                 date = response.result.parameters.date
