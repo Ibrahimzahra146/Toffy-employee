@@ -645,7 +645,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
         while ((JSON.parse(body)[i])) {
             dateHelper.getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
                 dateHelper.getDayNameOfDate((JSON.parse(body))[i].toDate, function (toDateName) {
-                    console.log("toDateName" + (JSON.parse(body))[i].toDate + + " ( " + toDateName + " ) -" )
+                    console.log("toDateNames" + (JSON.parse(body))[i].toDate +"s"+ " ( " + toDateName + " ) -" )
                     if (i > 0) {
                         stringMessage = stringMessage + ","
                     }
