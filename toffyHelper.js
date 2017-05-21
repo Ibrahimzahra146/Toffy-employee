@@ -654,16 +654,16 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                     console.log("(JSON.parse(body))[i].toDate" + (JSON.parse(body))[i].toDate)
                     dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, function (fromDateWord, toDateWord) {
 
+
+
+                        if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
+
+                        } else {
+                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "" + toDateWord + "" + "\"" + ",\"short\":true}"
+
+                        }
                     })
-
-                    if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
-
-                    } else {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "" + toDateWord + "" + "\"" + ",\"short\":true}"
-
-                    }
-
 
                 })
             })
