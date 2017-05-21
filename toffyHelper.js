@@ -620,7 +620,6 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
         }
         while (i < max) {
 
-            console.log("dayName" + dayName)
             if (i > 0) {
                 stringMessage = stringMessage + ","
             }
