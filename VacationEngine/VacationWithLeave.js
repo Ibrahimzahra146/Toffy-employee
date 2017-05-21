@@ -182,8 +182,9 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 7
 
             }
-            else if (response.result.parameters.date && response.result.parameters.date1) {
-                date = response.result.parameters.date
+            else if (response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date1 != ""&& response.result.parameters.date != "") {
+                if ()
+                    date = response.result.parameters.date
                 date1 = response.result.parameters.date1
                 timeOffCase = 8
 
