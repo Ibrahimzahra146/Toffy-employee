@@ -207,7 +207,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     date1 = arr[1]
                 }
                 if (response.result.parameters.other_vacation_types) {
-                    if (vacation_type1 == "Wedding") {
+                    if (vacation_type1 == "Maternity") {
                         numberOfDaysToAdd = 70
 
                     } else if (response.result.parameters.other_vacation_types == "Paternity") {
