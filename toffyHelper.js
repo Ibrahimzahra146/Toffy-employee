@@ -652,16 +652,15 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                     console.log("(JSON.parse(body))[i].fromDate" + (JSON.parse(body))[i].fromDate)
                     console.log((JSON.parse(body))[i].toDate == (JSON.parse(body))[i].fromDate)
                     console.log("(JSON.parse(body))[i].toDate" + (JSON.parse(body))[i].toDate)
-                    var fromDate = new Date((JSON.parse(body))[i].fromDate)
-                    fromDate = fromDate.getDay() + "-" + fromDate.getMonth();
-                    var toDate = new Date((JSON.parse(body))[i].toDate)
-                    toDate = toDate.getDay() + "-" + toDate.getMonth();
+                    dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, function (fromDateWord, toDateWord) {
+
+                    })
 
                     if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
 
                     } else {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDate + " ( " + dayName + " ) - " + toDate + "" + " ( " + toDateName + " )" + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " ( " + dayName + " ) - " + toDate + "" + " ( " + toDateWord + " )" + "\"" + ",\"short\":true}"
 
                     }
 
