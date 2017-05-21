@@ -657,10 +657,10 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                     })
 
                     if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
 
                     } else {
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " ( " + dayName + " ) - " + toDate + "" + " ( " + toDateWord + " )" + "\"" + ",\"short\":true}"
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "" + toDateWord + "" + "\"" + ",\"short\":true}"
 
                     }
 
