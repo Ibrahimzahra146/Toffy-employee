@@ -40,7 +40,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                 if (workingPeriod != 1000) {
                     var workingDays = parseFloat(workingPeriod).toFixed(2);
                     if (workingDays != 0.0 || containsHolidays == true) {
-                        if (isValid == true || (isValid == false && type == "sick") || (isValid == false && overlappedVacations != "") || (isValid == false && type == "Maternity") || (isValid == false && type == "Paternity")) {
+                        if (isValid == true || (isValid == false && type == "sick") || (isValid == false && overlappedVacations != "") || (isValid == false && type == "Wedding") || (isValid == false && type == "Paternity")) {
 
 
                             var wordFromDate = new Date(fromDate).toDateString();
@@ -206,7 +206,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
         typeText = "Okay, you asked to work from home"
     else if (type == "death")
         typeText = "Sorry about your loss, our deepest condolences, "
-    else if (type == "Marriage")
+    else if (type == "Wedding")
         typeText = "Congratulations on your marriage,"
     var messageText = ""
     generateOverllapedVacationsMessae(overlappedVacations, function (overlppedMsg) {
@@ -292,14 +292,14 @@ function getStartAndEndTime(body, startTime, EndTime) {
     var endSlotTimeMinutes = body.timeSlotFrom.endSlotTimeMinutes
     var date = new Date(startSlotTimeHours + ":" + startSlotTimeHours)
 
-dateHelper.convertTimeFormat
+    dateHelper.convertTimeFormat
 
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + body.timeSlotFrom.startSlotTimeMinutes)
     console.log("startTime" + startTime)
     console.log("EndTime" + EndTime)
-  
+
 
 
 }
