@@ -27,7 +27,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
     var midday = "pm";
     var TimeforMilliseconds = ""
     if (arr[1] == undefined) {
-        callback(1000,1000,1000)
+        callback(1000, 1000, 1000)
     } else {
         var n = arr[1].length;
         if (n == 1) {
@@ -134,7 +134,7 @@ module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
     callback(weekday[d.getDay()]);
 }
 //convert Date to word 
-module.exports.converDateToWords = function converDateToWords(fromDate, toDate, callback) {
+module.exports.converDateToWords = function converDateToWords(fromDate, toDate, flag, callback) {
 
     var wordFromDate = new Date(fromDate).toDateString()
     var arr = wordFromDate.toString().split(" ")
@@ -150,23 +150,27 @@ module.exports.converDateToWords = function converDateToWords(fromDate, toDate, 
         var wordToDate = new Date(toDate).toDateString()
         var arr = wordToDate.toString().split(" ")
         wordToDate = arr[0] + ", " + arr[1] + " " + arr[2]
-        hours = new Date(toDate).getHours() + 3
-        minutes = new Date(toDate).getMinutes()
-        if (minutes == 0)
-            minutes = "00"
-
-
-
-        dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime1, midday1, TimeforMilliseconds1) {
-            wordFromDate = wordFromDate + " at " + formattedTime + " " + midday;
-
-            //toDateho
-
-
-            wordToDate = wordToDate + " at " + formattedTime1 + " " + midday1;
+        if (flag == 1) {
             callback(wordFromDate, wordToDate)
-        })
+        } else {
+            hours = new Date(toDate).getHours() + 3
+            minutes = new Date(toDate).getMinutes()
+            if (minutes == 0)
+                minutes = "00"
 
+
+
+            dateHelper.convertTimeFormat(hours + ":" + minutes, function (formattedTime1, midday1, TimeforMilliseconds1) {
+                wordFromDate = wordFromDate + " at " + formattedTime + " " + midday;
+
+                //toDateho
+
+
+                wordToDate = wordToDate + " at " + formattedTime1 + " " + midday1;
+                callback(wordFromDate, wordToDate)
+            })
+        }
     })
+
 
 }

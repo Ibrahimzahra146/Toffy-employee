@@ -652,7 +652,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                     console.log("(JSON.parse(body))[i].fromDate" + (JSON.parse(body))[i].fromDate)
                     console.log((JSON.parse(body))[i].toDate == (JSON.parse(body))[i].fromDate)
                     console.log("(JSON.parse(body))[i].toDate" + (JSON.parse(body))[i].toDate)
-                    dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, function (fromDateWord, toDateWord) {
+                    dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
 

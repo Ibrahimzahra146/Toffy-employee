@@ -517,7 +517,7 @@ app.post('/uploaded_sick_report', (req, res) => {
   var managerApproval = parsedBody.managerApproval
   var profilePicture = parsedBody.employee.profilePicture
   var workingDays = parseFloat(parsedBody.days).toFixed(2);
-  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
+  dateHelper.converDateToWords(fromDate, toDate,0, function (fromDateWord, toDateWord) {
     if (type == 0) type = "personal"
     if (type == 4) type = "sick"
     messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "", profilePicture, attachmentsUrl)
@@ -559,7 +559,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   var email = parsedBody.employee.email
   console.log(email)
 
-  dateHelper.converDateToWords(fromDate, toDate, function (fromDateWord, toDateWord) {
+  dateHelper.converDateToWords(fromDate, toDate,0, function (fromDateWord, toDateWord) {
 
     console.log("fromDateWord " + fromDateWord)
     console.log("toDateWord" + toDateWord)

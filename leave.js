@@ -273,7 +273,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
         while (overlappedVacations[i]) {
             if (overlppedMsg != "")
                 overlppedMsg = overlppedMsg + " and "
-            dateHelper.converDateToWords(overlappedVacations[i].fromDate, overlappedVacations[i].toDate, function (fromDateWord, toDateWord) {
+            dateHelper.converDateToWords(overlappedVacations[i].fromDate, overlappedVacations[i].toDate, 0, function (fromDateWord, toDateWord) {
                 overlppedMsg = overlppedMsg + " from " + fromDateWord + " to " + toDateWord
             })
 

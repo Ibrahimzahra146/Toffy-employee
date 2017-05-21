@@ -43,7 +43,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                     while ((JSON.parse(body)[i])) {
                         var stringMessage = "["
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
-                        dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, function (fromDateWord, toDateWord) {
+                        dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 0, function (fromDateWord, toDateWord) {
 
                             var fromDate = fromDateWord
                             var toDate = toDateWord
