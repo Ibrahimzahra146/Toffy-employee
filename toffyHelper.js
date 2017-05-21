@@ -144,7 +144,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
 //*
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
-    var message12 = ""                                               
+    var message12 = ""
     var approvarType = ""
     var approvalId = ""
     var managerEmail = ""
@@ -158,7 +158,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     } else approver2State = "Pending :thinking_face:"
 
     if (comment != "") {
-       var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
+        var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
     }
     if (type == "sickLeave") {
         type = "sick"
@@ -180,7 +180,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-            
+
                 request({
                     url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                     method: 'POST',
@@ -192,25 +192,25 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     //Set the body as a stringcc
                 }, function (error, response, body) {
                     getUserImage(userEmail, function (ImageUrl) {
-                
+
                         var jsonResponse = JSON.parse(body);
                         if (approvarType == "Manager") {
                             printLogs("Manager Role ")
                             var timeststamp = new Date().getTime()
                             //change 2
-                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId,jsonResponse.slackUserId,jsonResponse.teamId);
+                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
 
                         }
                         if (type != "WFH") {//change 3
-                           
-                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail,vacationId,approvalId,managerEmail,startDate,endDate,type,workingDays,ImageUrl);
+
+                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
                         }
 
 
 
                         // needs import (StringFile)
                         //change 4
-                        var messageBody = stringFile.sendVacationToManagerFunction(comment,ImageUrl,userEmail,startDate,workingDays,endDate,type,approver2State,vacationId,approvalId,managerEmail);
+                        var messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
                         if (approvarType == "Manager") {
                             currentBot = server.bot;
                             currentBot.startConversation(message12, function (err, convo) {
@@ -221,8 +221,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
-                                        
-                                     
+
+
 
                                     });
 
@@ -302,7 +302,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
                         msg.say(stringfy)
                     })
                 }
-            }
+            } else msg.say("Sorry,there is a problem, please try later!")
         })
     })
 }
@@ -620,13 +620,22 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
         }
         while (i < max) {
             dateHelper.getDayNameOfDate((JSON.parse(body))[i].fromDate, function (dayName) {
-                console.log("dayName" + dayName)
-                if (i > 0) {
-                    stringMessage = stringMessage + ","
-                }
-                stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
-                i++;
+                dateHelper.getDayNameOfDate((JSON.parse(body))[i].toDate, function (toDateName) {
+                    console.log("dayName" + dayName)
+                    if (i > 0) {
+                        stringMessage = stringMessage + ","
+                    }
+                    if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " )" + "\"" + ",\"short\":true}"
+                       
+                    } else {
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " ) - " + (JSON.parse(body))[i].toDate + + " ( " + toDateName + " ) -" + "\"" + ",\"short\":true}"
+                       
+                    }
+                     i++;
 
+
+                })
             })
 
         }
