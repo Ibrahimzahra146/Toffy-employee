@@ -665,11 +665,11 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             })
             i++;
 
-        })
 
+
+        }
     }
-}
-callback(stringMessage)
+    callback(stringMessage)
 }
 
 function getUserImage(email, callback) {
