@@ -27,7 +27,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
         typeNum = 7
     else if (type == "death")
         typeNum = 4
-    else if (type == "Marriage")
+    else if (type == "Wedding")
         typeNum = 8
     else typeNum = 0
     console.log("fromTime" + fromTime)
