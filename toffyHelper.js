@@ -660,7 +660,6 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                         stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].fromDate + " ( " + dayName + " ) - " + (JSON.parse(body))[i].toDate + + " ( " + toDateName + " ) -" + "\"" + ",\"short\":true}"
 
                     }
-                    i++;
 
 
                 })
