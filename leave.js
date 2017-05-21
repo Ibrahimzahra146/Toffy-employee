@@ -259,7 +259,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
                 messageText = ""
                 messageText = typeText + " on " + fromDate + ". Should I go ahead ?"
             } else
-                messageText = typeText + " on " + fromDate + " to " + ToDate" and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
+                messageText = typeText + " on " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
 
 
         } else if (timeOffcase == 10) {
