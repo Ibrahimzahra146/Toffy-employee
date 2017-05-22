@@ -336,16 +336,10 @@ module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(
             {
                 "attachment_type": "default",
                 "callback_id": "manager_confirm_reject",
-                "text": userEmail,
+                "text": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
                 "fallback": "ReferenceError",
-                "fields": [
-                    {
-                        "title": "Sick time off",
-                        "value": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
-                        "short": true
-                    }
-
-                ],
+              
+               
             }
         ]
     }
