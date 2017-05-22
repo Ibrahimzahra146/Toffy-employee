@@ -191,7 +191,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     body: managerEmail
                     //Set the body as a stringcc
                 }, function (error, response, body) {
+                    console.log("HIii"+JSON.stringify(body))
                     getUserImage(userEmail, function (ImageUrl) {
+                        var messageBody = ""
 
                         var jsonResponse = JSON.parse(body);
                         if (approvarType == "Manager") {
@@ -199,6 +201,16 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             var timeststamp = new Date().getTime()
                             //change 2
                             message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                            messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+
+
+                        } else if (approvarType == "HR") {
+                            printLogs("HR Role ")
+                           // var timeststamp = new Date().getTime()
+                            //change 2
+                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                            messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+
 
                         }
                         if (type != "WFH") {//change 3
@@ -210,7 +222,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                         // needs import (StringFile)
                         //change 4
-                        var messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
                         if (approvarType == "Manager")
                             currentBot = server.bot
                         else currentBot = server.hRbot;
