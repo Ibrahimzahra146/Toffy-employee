@@ -328,69 +328,12 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
     return messageBody;
 }
 //HR notification on sick  vacation
-module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail)  {
+module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
-        "text": "This folk has pending time off request:",
-        "attachments": [
-            {
-                "attachment_type": "default",
-                "callback_id": "manager_confirm_reject",
-                "text": userEmail,
-                "fallback": "ReferenceError",
-                "fields": [
-                    {
-                        "title": "From",
-                        "value": startDate,
-                        "short": true
-                    },
-                    {
-                        "title": "Days/Time ",
-                        "value": workingDays + " day",
-                        "short": true
-                    },
-                    {
-                        "title": "to",
-                        "value": endDate,
-                        "short": true
-                    },
-                    {
-                        "title": "Type",
-                        "value": type,
-                        "short": true
-                    }, commentFieldInManagerMessage,
-                    {
-                        "title": "Your action ",
-                        "value": "Pending :thinking_face:",
-                        "short": true
-                    }
-                    ,
-                    {
-                        "title": "Approver2 action",
-                        "value": approver2State,
-                        "short": true
-                    },
-                    {
-                        "title": "Final state",
-                        "value": "PendingManagerApproval :thinking_face:",
-                        "short": true
-                    }
-                ],
-                "actions": [
-                
-                    {
-                        "name": "check_state",
-                        "text": ":arrows_counterclockwise:",
-
-                        "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
-                    },
-                ],
-                "color": "#F35A00",
-                "thumb_url": ImageUrl,
-            }
-        ]
+        "text": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
     }
+
     return messageBody;
 }
 
