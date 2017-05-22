@@ -331,9 +331,24 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
 module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
-        "text": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
-    }
+        "text": "",
+        "attachments": [
+            {
+                "attachment_type": "default",
+                "callback_id": "manager_confirm_reject",
+                "text": userEmail,
+                "fallback": "ReferenceError",
+                "fields": [
+                    {
+                        "title": "Sick time off",
+                        "value": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
+                        "short": true
+                    }
 
+                ],
+            }
+        ]
+    }
     return messageBody;
 }
 
