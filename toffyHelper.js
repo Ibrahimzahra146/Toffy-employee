@@ -208,7 +208,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             printLogs("HR Role ")
                            // var timeststamp = new Date().getTime()
                             //change 2
-                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                            message12 = stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
                             messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
 
