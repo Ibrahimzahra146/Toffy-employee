@@ -36,8 +36,9 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
         console.log("formattedFromTime" + formattedFromTime)
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (workingPeriod, isValid, reason, containsHolidays, overlappedVacations, body) {
-                getStartAndEndTime(body, formattedFromTime, formattedTime);
                 if (workingPeriod != 1000) {
+                    getStartAndEndTime(body, formattedFromTime, formattedTime);
+
                     var workingDays = parseFloat(workingPeriod).toFixed(2);
                     if (workingDays != 0.0 || containsHolidays == true) {
                         console.log("overlappedVacations" + overlappedVacations == null)
@@ -185,8 +186,8 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 if (response.statusCode == 500) {
                     callback(1000, "no ")
                 } else if (response.statusCode == 400)
-                  callback(1000, "no ")
-                 else if ((JSON.parse(body)).validRequest.overlappedVacations) {
+                    callback(1000, "no ")
+                else if ((JSON.parse(body)).validRequest.overlappedVacations) {
                     console.log("overllaped vacation" + JSON.stringify(body))
                     callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, (JSON.parse(body)).validRequest.overlappedVacations, (JSON.parse(body)))
 
@@ -285,7 +286,7 @@ function getStartAndEndTime(body, startTime, EndTime) {
     var endSlotTimeMinutes = body.timeSlotFrom.endSlotTimeMinutes
     var date = new Date(startSlotTimeHours + ":" + startSlotTimeHours)
 
-    dateHelper.convertTimeFormat
+    //dateHelper.convertTimeFormat
 
     console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
     console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)
