@@ -111,95 +111,103 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg, flag, text) {
-
-  var msgText = ""
-  if (flag == 1) {
-    msgText = text
-  } else {
-    msgText = msg.body.event.text;
-
-    toffyHelper.storeUserSlackInformation(emailValue, msg);
-  }
-  let apiaiRequest = apiAiService.textRequest(msgText,
-    {
-      sessionId: sessionId
-    });
-
-  apiaiRequest.on('response', (response) => {
-    let responseText = response.result.fulfillment.speech;
-    //user ask for new personal vacation with from to dates
-
-    //Vacation with leave scenarios
-    if (responseText == "vacationWithLeave") {
-      vacationWithLeave.vacationWithLeave(msg, response, emailValue)
+  toffyHelper.isActivated(emailValue, function (isActivated) {
+    if (isActivated == false) {
+      msg.say("You are no longer able to use this system.")
 
     }
 
+    else {
+      var msgText = ""
+      if (flag == 1) {
+        msgText = text
+      } else {
+        msgText = msg.body.event.text;
 
-    //When user ask for help,response will be the menu of all things that he can do
-    else if ((responseText) == "Help") {
+        toffyHelper.storeUserSlackInformation(emailValue, msg);
+      }
+      let apiaiRequest = apiAiService.textRequest(msgText,
+        {
+          sessionId: sessionId
+        });
 
-      employee.sendHelpOptions(msg, emailValue);
-    }
-    //show enployee vacation history 
-    else if ((responseText) == "showHistory") {
-      employee.showEmployeeHistory(emailValue, msg);
-    }
-    else if ((responseText) == "showStats") {
-      employee.showEmployeeStats(emailValue, msg);
-    }
-    else if ((responseText) == "showRules") {
-      employee.ShowRules(emailValue, msg);
-    }
-    else if ((responseText) == "showProfile") {
-      employee.showEmployeeProfile(emailValue, msg);
-    }
-    else if ((responseText) == "showHolidays") {
-      var date;
-      var date1;
-      var holidayRequestType = "";
-      dateHelper.getTodayDate(function (today) {
+      apiaiRequest.on('response', (response) => {
+        let responseText = response.result.fulfillment.speech;
+        //user ask for new personal vacation with from to dates
 
-        if (!(response.result.parameters.date != "")) {
-          console.log("not equal")
+        //Vacation with leave scenarios
+        if (responseText == "vacationWithLeave") {
+          vacationWithLeave.vacationWithLeave(msg, response, emailValue)
+
         }
-        if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
-          date = "2017-01-01";
-          date1 = "	2017-12-30";
-        } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
-          console.log("1")
-          date = today
-          date1 = "	2017-12-30"
-          holidayRequestType = 2;
-        } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && (response.result.parameters.number)) {
-          date = today
-          date1 = "	2017-12-30"
-          holidayRequestType = 3;
+
+
+        //When user ask for help,response will be the menu of all things that he can do
+        else if ((responseText) == "Help") {
+
+          employee.sendHelpOptions(msg, emailValue);
         }
-        else {
-          date = response.result.parameters.date;
-          date1 = response.result.parameters.date1;
+        //show enployee vacation history 
+        else if ((responseText) == "showHistory") {
+          employee.showEmployeeHistory(emailValue, msg);
         }
-        toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType, response);
+        else if ((responseText) == "showStats") {
+          employee.showEmployeeStats(emailValue, msg);
+        }
+        else if ((responseText) == "showRules") {
+          employee.ShowRules(emailValue, msg);
+        }
+        else if ((responseText) == "showProfile") {
+          employee.showEmployeeProfile(emailValue, msg);
+        }
+        else if ((responseText) == "showHolidays") {
+          var date;
+          var date1;
+          var holidayRequestType = "";
+          dateHelper.getTodayDate(function (today) {
 
-      })
-    }
-    else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
-      var date = "2017-01-01";
-      var date1 = "	2017-12-30";
-      toffyHelper.showHolidays(msg, emailValue, date, date1);
-    }
+            if (!(response.result.parameters.date != "")) {
+              console.log("not equal")
+            }
+            if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+              date = "2017-01-01";
+              date1 = "	2017-12-30";
+            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+              console.log("1")
+              date = today
+              date1 = "	2017-12-30"
+              holidayRequestType = 2;
+            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && (response.result.parameters.number)) {
+              date = today
+              date1 = "	2017-12-30"
+              holidayRequestType = 3;
+            }
+            else {
+              date = response.result.parameters.date;
+              date1 = response.result.parameters.date1;
+            }
+            toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType, response);
+
+          })
+        }
+        else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
+          var date = "2017-01-01";
+          var date1 = "	2017-12-30";
+          toffyHelper.showHolidays(msg, emailValue, date, date1);
+        }
 
 
-    else if ((response.result.action) == "input.welcome") {
-      SendWelcomeResponse(msg, responseText, 0)
-    } else msg.say(responseText)
-  });
+        else if ((response.result.action) == "input.welcome") {
+          SendWelcomeResponse(msg, responseText, 0)
+        } else msg.say(responseText)
+      });
 
-  fromDate = ""
-  toDate = ""
-  apiaiRequest.on('error', (error) => console.error(error));
-  apiaiRequest.end();
+      fromDate = ""
+      toDate = ""
+      apiaiRequest.on('error', (error) => console.error(error));
+      apiaiRequest.end();
+    })
+}
 }
 
 
@@ -319,11 +327,11 @@ function userAction(msg, value, isComment) {
 
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
-            fromDate = fromDate 
-          } else fromDate = fromDate 
+            fromDate = fromDate
+          } else fromDate = fromDate
 
           if (arr[1] && (arr[1] != undefined)) {
-            toDate = toDate 
+            toDate = toDate
           } else toDate = toDate
 
 
@@ -517,7 +525,7 @@ app.post('/uploaded_sick_report', (req, res) => {
   var managerApproval = parsedBody.managerApproval
   var profilePicture = parsedBody.employee.profilePicture
   var workingDays = parseFloat(parsedBody.days).toFixed(2);
-  dateHelper.converDateToWords(fromDate, toDate,0, function (fromDateWord, toDateWord) {
+  dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
     if (type == 0) type = "personal"
     if (type == 4) type = "sick"
     messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "", profilePicture, attachmentsUrl)
@@ -559,7 +567,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   var email = parsedBody.employee.email
   console.log(email)
 
-  dateHelper.converDateToWords(fromDate, toDate,0, function (fromDateWord, toDateWord) {
+  dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
 
     console.log("fromDateWord " + fromDateWord)
     console.log("toDateWord" + toDateWord)

@@ -191,7 +191,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     body: managerEmail
                     //Set the body as a stringcc
                 }, function (error, response, body) {
-                    console.log("HIii"+JSON.stringify(body))
+                    console.log("HIii" + JSON.stringify(body))
                     getUserImage(userEmail, function (ImageUrl) {
                         var messageBody = ""
 
@@ -206,7 +206,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                         } else if (approvarType == "HR") {
                             printLogs("HR Role ")
-                           // var timeststamp = new Date().getTime()
+                            // var timeststamp = new Date().getTime()
                             //change 2
                             message12 = stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
                             messageBody = stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
@@ -705,5 +705,30 @@ function getUserImage(email, callback) {
             callback(body)
         })
 
+    })
+}
+//Check if the user is deactivited
+
+module.exports.isActivated = function isActivated(email, callback) {
+    printLogs("Getting roles")
+    var flag = true;
+    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        request({
+            url: 'http://' + IP + '/api/v1/employee/roles', //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + session_Id
+
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            if (JSON.parse(body).activated == false) {
+                callback(false);
+            } else
+                callback(true)
+
+        })
     })
 }
