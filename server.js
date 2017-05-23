@@ -24,6 +24,7 @@ var vacation = require('./vacations')
 var toffyHelper = require('./toffyHelper')
 var employee = require('./employee.js');
 var server = require('./server.js')
+var stringFile = require('./strings.js')
 const vacationWithLeave = require('./VacationEngine/VacationWithLeave.js')
 const messageSender = require('./messageSender/messageSender.js')
 const messageReplacer = require('./messageSender/messageReplacer.js')
@@ -113,7 +114,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 function sendRequestToApiAi(emailValue, msg, flag, text) {
   toffyHelper.isActivated(emailValue, function (isActivated) {
     if (isActivated == false) {
-      msg.say("You are no longer able to use this system.")
+      msg.say(stringFile.deactivatedMsg)
 
     }
 

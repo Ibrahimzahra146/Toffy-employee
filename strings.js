@@ -2,6 +2,10 @@
  * 
  */
 const stringFile = require('./strings.js')
+/**Deactivated message */
+const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
+exports.deactivatedMsg = deactivatedMsg
+
 module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {
     var messageBody = {
         "text": "",
@@ -338,8 +342,8 @@ module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(
                 "callback_id": "manager_confirm_reject",
                 "text": userEmail + " has requested a sick time off from  " + startDate + " to " + endDate,
                 "fallback": "ReferenceError",
-              
-               
+
+
             }
         ]
     }
