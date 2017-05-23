@@ -74,7 +74,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                             printLogs("messageBody" + messageBody)
                             var stringfy = JSON.stringify(messageBody);
 
-                            printLogs("stringfy" + stringfy)
+                            printLogs("stringfy " + stringfy)
                             stringfy = stringfy.replace(/\\/g, "")
                             stringfy = stringfy.replace(/]\"/, "]")
                             stringfy = stringfy.replace(/\"\[/, "[")
