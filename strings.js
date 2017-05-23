@@ -4,6 +4,8 @@
 const stringFile = require('./strings.js')
 /**Deactivated message */
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
+const sickMessageAfterConfirmation = "Sick time off request has been submitted to your managers and HR admin.\n You have to submit a sick report within one week maximum.\n Otherwise, it will be considered as a personal time off. "
+exports.sickMessageAfterConfirmation = sickMessageAfterConfirmation
 exports.deactivatedMsg = deactivatedMsg
 
 module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {

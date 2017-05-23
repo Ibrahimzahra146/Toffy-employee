@@ -343,7 +343,7 @@ function userAction(msg, value, isComment) {
             toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
-              messageFB = "Sick time off request has been submitted to your managers and HR admin.\n You have to submit a sick report within one week maximum.\n Otherwise, it will be considered as a personal time off. "
+              messageFB = stringFile.sickMessageAfterConfirmation
 
             }
             else
