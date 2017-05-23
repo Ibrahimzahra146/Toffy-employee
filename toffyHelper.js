@@ -476,7 +476,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         //Set the body as a stringcc
     }, function (error, response, body) {
         if (response.statusCode == 500) {
-            server.generalMsg.say("Sorry error ins erver ")
+            callback(1000, 1000)
         } else {
             console.log("getNewSessionwithCookie:" + response.statusCode)
             var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
@@ -713,22 +713,27 @@ module.exports.isActivated = function isActivated(email, callback) {
     printLogs("Getting roles")
     var flag = true;
     toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        request({
-            url: 'http://' + IP + '/api/v1/employee/roles', //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
+        if (remember_me_cookie == 1000) {
+            callback(false)
+        } else {
 
-            },
-            body: email
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            if (JSON.parse(body).activated == false) {
-                callback(false);
-            } else
-                callback(true)
+            request({
+                url: 'http://' + IP + '/api/v1/employee/roles', //URL to hitDs
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': remember_me_cookie + ";" + session_Id
 
-        })
+                },
+                body: email
+                //Set the body as a stringcc
+            }, function (error, response, body) {
+                if (JSON.parse(body).activated == false) {
+                    callback(false);
+                } else
+                    callback(true)
+
+            })
+        }
     })
 }
