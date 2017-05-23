@@ -206,8 +206,9 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
       toDate = ""
       apiaiRequest.on('error', (error) => console.error(error));
       apiaiRequest.end();
-    })
-}
+
+    }
+  })
 }
 
 
