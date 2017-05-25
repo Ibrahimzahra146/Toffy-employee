@@ -247,7 +247,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
 }
 
 module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage) {
-
+    console.log("sendVacationToManagerFunction" + managerApprovalMessage)
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
