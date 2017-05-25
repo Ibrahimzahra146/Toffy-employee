@@ -322,12 +322,14 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
             }
         ]
     }
-    messageBody = messageBody.replace(/\\/g, "")
-    messageBody = messageBody.replace(/}\"/, "}")
-    messageBody = messageBody.replace(/\"\{/, "{")
+    var stringfy = JSON.stringify(messageBody)
+    stringfy = stringfy.replace(/\\/, "")
+    stringfy = stringfy.replace(/}\"/, "}")
+    stringfy = stringfy.replace(/\"\{/, "{")
+    stringfy = JSON.parse(stringfy)
 
-    console.log(":::::::::messageBody" +messageBody)
-    return messageBody;
+    console.log(":::::::::messageBody" + stringfy)
+    return stringfy;
 }
 //HR notification on sick  vacation
 module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
