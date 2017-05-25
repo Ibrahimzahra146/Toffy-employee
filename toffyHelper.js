@@ -387,7 +387,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         } else if (type == "WFH") {
             vacationType = "7"
         }
-
+        
         var vacationBody = {
             "employee_id": Id,
             "from": from,
