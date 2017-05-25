@@ -333,8 +333,8 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
   // stringfy = stringfy.replace(/\\/, "")
     // stringfy = JSON.parse(stringfy)
 
-    console.log(":::::::::messageBody" + stringfy)
-    return stringfy;
+    
+    return JSON.parse(stringfy);
 }
 //HR notification on sick  vacation
 module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
