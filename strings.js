@@ -324,10 +324,13 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
     }
     var stringfy = JSON.stringify(messageBody)
     stringfy = stringfy.replace(/\\/, "")
-    
+
     stringfy = stringfy.replace(/\\/, "")
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
+    stringfy = stringfy.replace(/\\/, "")
+
+    stringfy = stringfy.replace(/\\/, "")
     // stringfy = JSON.parse(stringfy)
 
     console.log(":::::::::messageBody" + stringfy)
