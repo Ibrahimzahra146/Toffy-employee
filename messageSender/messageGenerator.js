@@ -17,13 +17,15 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         messageBody = messageBody + ","
         i++
     }
+    console.log("arrive1" + messageBody)
     var stringfy = JSON.stringify(messageBody)
-
+    console.log("arrive2" + stringfy)
 
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
-    stringfy = JSON.parse(stringfy)
+   // stringfy = JSON.parse(stringfy)
+    console.log("arrive3" + stringfy)
     callback(stringfy)
 
 
