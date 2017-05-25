@@ -19,7 +19,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     }
     var stringfy = JSON.stringify(messageBody);
 
-    printLogs("stringfy " + stringfy)
+    
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/]\"/, "]")
     stringfy = stringfy.replace(/\"\[/, "[")
