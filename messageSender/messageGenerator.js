@@ -11,14 +11,20 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     console.log("generateManagerApprovelsSection" + managerApproval[0].state)
     var i = 0
     var size = Object.keys(managerApproval).length
-    var message = ""
+    var messageBody = ""
     while (i < size) {
-        message = message + "{" + "\"title\":" + "\"" + "Approver " + i + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
-        message = message + ","
+        messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + i + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
+        messageBody = messageBody + ","
         i++
     }
-    console.log("message:: " + message)
-    callback(message)
+    var stringfy = JSON.stringify(messageBody);
+
+    printLogs("stringfy " + stringfy)
+    stringfy = stringfy.replace(/\\/g, "")
+    stringfy = stringfy.replace(/]\"/, "]")
+    stringfy = stringfy.replace(/\"\[/, "[")
+    stringfy = JSON.parse(stringfy)
+    callback(stringfy)
 
 
 
