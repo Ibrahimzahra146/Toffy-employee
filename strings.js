@@ -286,7 +286,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                     {
                         "title": "Final state",
                         "value": "PendingManagerApproval :thinking_face:",
-                        "short": true
+                        "short": false
                     }
                 ],
                 "actions": [
