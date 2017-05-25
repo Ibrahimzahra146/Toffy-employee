@@ -23,7 +23,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
-    stringfy = JSON.parse(stringfy)
+    //stringfy = JSON.parse(stringfy)
     callback(stringfy)
 
 
