@@ -12,8 +12,11 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     var i = 0
     var size = Object.keys(managerApproval).length
     var messageBody = ""
+    managerApproval.sort(function (a, b) {
+        return a.rank - b.rank;
+    });
     while (i < size) {
-        messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + i + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
+        messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
         messageBody = messageBody + ","
         i++
     }
@@ -24,7 +27,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
-   // stringfy = JSON.parse(stringfy)
+    // stringfy = JSON.parse(stringfy)
     console.log("arrive3" + stringfy)
     callback(stringfy)
 
