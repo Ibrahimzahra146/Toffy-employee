@@ -274,12 +274,14 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "title": "to",
                         "value": endDate,
                         "short": true
-                    }, managerApprovalMessage,
+                    },
                     {
                         "title": "Type",
                         "value": type,
                         "short": true
-                    }, commentFieldInManagerMessage,
+                    },
+                    managerApprovalMessage,
+                    commentFieldInManagerMessage,
 
                     {
                         "title": "Final state",
@@ -330,10 +332,10 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
     stringfy = stringfy.replace(/\"\{/, "{")
     stringfy = stringfy.replace(/\\/g, "")
 
-  // stringfy = stringfy.replace(/\\/, "")
+    // stringfy = stringfy.replace(/\\/, "")
     // stringfy = JSON.parse(stringfy)
 
-    
+
     return JSON.parse(stringfy);
 }
 //HR notification on sick  vacation
