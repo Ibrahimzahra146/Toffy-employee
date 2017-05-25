@@ -8,9 +8,12 @@ var IP = process.env.SLACK_IP
  */
 module.exports.generateManagerApprovelsSection = function generateManagerApprovelsSection(managerApproval, callback) {
     console.log("generateManagerApprovelsSection" + JSON.stringify(managerApproval))
-    console.log("generateManagerApprovelsSection" + managerApproval)
+    console.log("generateManagerApprovelsSection" + managerApproval[0].state)
     var i = 0
-    console.log("Object.keys(obj).lengths" + Object.keys(managerApproval).length)
+    var size = Object.keys(managerApproval).length
+
+
+
 
 
 
