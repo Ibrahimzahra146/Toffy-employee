@@ -273,7 +273,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "title": "to",
                         "value": endDate,
                         "short": true
-                    }, sendVacationToManagerFunction,
+                    }, managerApprovalMessage,
                     {
                         "title": "Type",
                         "value": type,
