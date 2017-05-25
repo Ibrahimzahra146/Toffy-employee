@@ -15,6 +15,7 @@ exports.general_remember_me = general_remember_me
 general_session_id = "";
 exports.general_session_id = general_session_id;
 const dateHelper = require('./DateEngine/DateHelper.js')
+const messageGenerator = require('./messageSender/messageGenerator.js')
 const stringFile = require('./strings.js')
 
 
@@ -163,6 +164,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     if (type == "sickLeave") {
         type = "sick"
     }
+    messageGenerator.generateManagerApprovelsSection(managerApproval, function () {
+
+    })
+
+
 
     var i = 0
     var j = 0
@@ -387,7 +393,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         } else if (type == "WFH") {
             vacationType = "7"
         }
-        
+
         var vacationBody = {
             "employee_id": Id,
             "from": from,
