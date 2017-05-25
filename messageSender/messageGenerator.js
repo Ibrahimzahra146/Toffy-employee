@@ -19,7 +19,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     }
     var stringfy =messageBody
 
-
+    
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
