@@ -16,7 +16,11 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         return a.rank - b.rank;
     });
     while (i < size) {
-        messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
+        var flag = true
+        if ((i + 1) == size) {
+            flag == false
+        }
+        messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":" + flag + "}"
         messageBody = messageBody + ","
         i++
     }
