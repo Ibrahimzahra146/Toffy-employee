@@ -273,13 +273,13 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "title": "to",
                         "value": endDate,
                         "short": true
-                    },
+                    }, sendVacationToManagerFunction,
                     {
                         "title": "Type",
                         "value": type,
                         "short": true
                     }, commentFieldInManagerMessage,
-                    managerApprovalMessage,
+
                     {
                         "title": "Final state",
                         "value": "PendingManagerApproval :thinking_face:",
@@ -321,6 +321,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
             }
         ]
     }
+    console.log(":::::::::messageBody" + messageBody)
     return messageBody;
 }
 //HR notification on sick  vacation
