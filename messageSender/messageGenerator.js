@@ -24,7 +24,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     stringfy = stringfy.replace(/}\"/, "}")
     stringfy = stringfy.replace(/\"\{/, "{")
     stringfy = JSON.parse(stringfy)
-    callback(messageBody)
+    callback(stringfy)
 
 
 
