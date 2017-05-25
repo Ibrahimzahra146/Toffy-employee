@@ -11,6 +11,13 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     console.log("generateManagerApprovelsSection" + managerApproval[0].state)
     var i = 0
     var size = Object.keys(managerApproval).length
+    var message = ""
+    while (i < size) {
+        message = message + "{" + "\"title\":" + "\"" + "Approver " + i + "\"" + ",\"value\":" + "\"" + managerApproval[0].state + "\"" + ",\"short\":true}"
+        message = message + ","
+
+    }
+    console.log("message:: " + message)
 
 
 
