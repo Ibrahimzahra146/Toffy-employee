@@ -246,7 +246,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
     return message12;
 }
 
-module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail) {
+module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage) {
 
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
@@ -279,17 +279,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "value": type,
                         "short": true
                     }, commentFieldInManagerMessage,
-                    {
-                        "title": "Your action ",
-                        "value": "Pending :thinking_face:",
-                        "short": true
-                    }
-                    ,
-                    {
-                        "title": "Approver2 action",
-                        "value": approver2State,
-                        "short": true
-                    },
+                    managerApprovalMessage,
                     {
                         "title": "Final state",
                         "value": "PendingManagerApproval :thinking_face:",

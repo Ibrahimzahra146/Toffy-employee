@@ -18,6 +18,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         i++
     }
     console.log("message:: " + message)
+    callback(message)
 
 
 

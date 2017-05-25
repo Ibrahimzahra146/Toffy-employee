@@ -164,109 +164,110 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     if (type == "sickLeave") {
         type = "sick"
     }
-    messageGenerator.generateManagerApprovelsSection(managerApproval, function () {
-
-    })
+    messageGenerator.generateManagerApprovelsSection(managerApproval, function (managerApprovalMessage) {
 
 
 
-    var i = 0
-    var j = 0
 
 
-    async.whilst(
-        function () { return managerApproval[i]; },
-        function (callback) {
+        var i = 0
+        var j = 0
 
 
-
-            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-
-                approvalId = managerApproval[i].id
-                approvarType = managerApproval[i].type
-                managerEmail = emailFromId.replace(/\"/, "")
-                managerEmail = managerEmail.replace(/\"/, "")
-
-                request({
-                    url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-
-                    },
-                    body: managerEmail
-                    //Set the body as a stringcc
-                }, function (error, response, body) {
-                    console.log("HIii" + JSON.stringify(body))
-                    getUserImage(userEmail, function (ImageUrl) {
-                        var messageBody = ""
-
-                        var jsonResponse = JSON.parse(body);
-                        if (approvarType == "Manager") {
-                            printLogs("Manager Role ")
-                            var timeststamp = new Date().getTime()
-                            //change 2
-                            message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                            messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-
-
-                        } else if (approvarType == "HR") {
-                            printLogs("HR Role ")
-                            // var timeststamp = new Date().getTime()
-                            //change 2
-                            message12 = stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                            messageBody = stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-
-
-                        }
-                        if (type != "WFH") {//change 3
-
-                            dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
-                        }
+        async.whilst(
+            function () { return managerApproval[i]; },
+            function (callback) {
 
 
 
-                        // needs import (StringFile)
-                        //change 4
-                        if (approvarType == "Manager")
-                            currentBot = server.bot
-                        else currentBot = server.hRbot;
+                var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
-                        currentBot.startConversation(message12, function (err, convo) {
+                    approvalId = managerApproval[i].id
+                    approvarType = managerApproval[i].type
+                    managerEmail = emailFromId.replace(/\"/, "")
+                    managerEmail = managerEmail.replace(/\"/, "")
+
+                    request({
+                        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+
+                        },
+                        body: managerEmail
+                        //Set the body as a stringcc
+                    }, function (error, response, body) {
+                        console.log("HIii" + JSON.stringify(body))
+                        getUserImage(userEmail, function (ImageUrl) {
+                            var messageBody = ""
+
+                            var jsonResponse = JSON.parse(body);
+                            if (approvarType == "Manager") {
+                                printLogs("Manager Role ")
+                                var timeststamp = new Date().getTime()
+                                //change 2
+                                message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail,managerApprovalMessage );
 
 
-                            if (!err) {
+                            } else if (approvarType == "HR") {
+                                printLogs("HR Role ")
+                                // var timeststamp = new Date().getTime()
+                                //change 2
+                                message12 = stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
-                                var stringfy = JSON.stringify(messageBody);
-                                var obj1 = JSON.parse(stringfy);
-                                currentBot.reply(message12, obj1, function (err, response) {
-
-
-
-                                });
 
                             }
+                            if (type != "WFH") {//change 3
+
+                                dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                            }
+
+
+
+                            // needs import (StringFile)
+                            //change 4
+                            if (approvarType == "Manager")
+                                currentBot = server.bot
+                            else currentBot = server.hRbot;
+
+                            currentBot.startConversation(message12, function (err, convo) {
+
+
+                                if (!err) {
+
+                                    var stringfy = JSON.stringify(messageBody);
+                                    var obj1 = JSON.parse(stringfy);
+                                    currentBot.reply(message12, obj1, function (err, response) {
+
+
+
+                                    });
+
+                                }
+
+                            });
+
+
+
+                            flagForWhileCallbacks = 1
 
                         });
 
-
-
-                        flagForWhileCallbacks = 1
-
-                    });
-
-                    i++;
+                        i++;
+                    })
                 })
-            })
 
 
 
-            setTimeout(callback, 2500);
+                setTimeout(callback, 2500);
 
-        },
-        function (err) {
-            // 5 seconds have passed
-        });
+            },
+            function (err) {
+                // 5 seconds have passed
+            });
+    })
 }
 
 //list all holidays with range period
