@@ -321,7 +321,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
             }
         ]
     }
-    console.log(":::::::::messageBody" + messageBody)
+    console.log(":::::::::messageBody" + JSON.stringify(messageBody))
     return messageBody;
 }
 //HR notification on sick  vacation
