@@ -10,6 +10,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     console.log("generateManagerApprovelsSection" + JSON.stringify(managerApproval))
     console.log("generateManagerApprovelsSection" + managerApproval)
     var i = 0
+    console.log("Object.keys(obj).length" + Object.keys(obj).length)
 
 
 
