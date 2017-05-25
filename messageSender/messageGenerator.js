@@ -17,14 +17,14 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         messageBody = messageBody + ","
         i++
     }
-    var stringfy = JSON.stringify(messageBody);
-
-
-    stringfy = stringfy.replace(/\\/g, "")
-    stringfy = stringfy.replace(/}\"/, "}")
-    stringfy = stringfy.replace(/\"\{/, "{")
-    //stringfy = JSON.parse(stringfy)
-    callback(stringfy)
+    /*  var stringfy = JSON.stringify(messageBody);
+  
+  
+      stringfy = stringfy.replace(/\\/g, "")
+      stringfy = stringfy.replace(/}\"/, "}")
+      stringfy = stringfy.replace(/\"\{/, "{")
+      //stringfy = JSON.parse(stringfy)*/
+    callback(messageBody)
 
 
 
