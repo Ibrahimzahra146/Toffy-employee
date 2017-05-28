@@ -20,10 +20,11 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         if ((i + 1) == size) {
             flag == "false }"
         }
+        var arr = managerApproval[i].managerEmail.toString().split("@")
         console.log("managerApproval[i].managerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
         if (managerApproval[i].managerEmail != managerEmail) {
 
-            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver emad.wahbeh" + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag
+            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver ( " + ar[0] + " )\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag
             messageBody = messageBody + ","
         }
 
