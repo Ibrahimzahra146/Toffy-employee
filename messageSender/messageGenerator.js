@@ -23,17 +23,17 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         if (managerApproval[i].managerEmail != managerEmail) {
 
             messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag + "}"
-             messageBody = messageBody + ","
+            messageBody = messageBody + ","
         }
 
         i++
     }
-    var stringfy = JSON.stringify(messageBody)
+    /* var stringfy = JSON.stringify(messageBody)
 
     console.log("generateManagerApprovelsSection" + stringfy)
     stringfy = stringfy.replace(/\\/g, "")
-    stringfy = stringfy.replace(/}\"/g, "}")
-    stringfy = stringfy.replace(/\"\{/g, "{")
+   stringfy = stringfy.replace(/}\"/g, "}")
+   stringfy = stringfy.replace(/\"\{/g, "{")*/
     callback(stringfy)
 }
 module.exports.generateYourActionSection = function generateYourActionSection(managerApproval, managerEmail, callback) {
@@ -51,18 +51,18 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
         if (managerApproval[i].managerEmail == managerEmail) {
 
             messageBody = "{" + "\"title\":" + "\"" + "Your Action " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":true }"
-           
+
         }
 
         i++
     }
-    var stringfy = JSON.stringify(messageBody)
+    /*  var stringfy = JSON.stringify(messageBody)
 
     console.log("generateYourActionSection" + stringfy)
 
     stringfy = stringfy.replace(/\\/g, "")
     stringfy = stringfy.replace(/}\"/, "}")
-    stringfy = stringfy.replace(/\"\{/, "{")
+    stringfy = stringfy.replace(/\"\{/, "{")*/
     callback(stringfy)
 
 }
