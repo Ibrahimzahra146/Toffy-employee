@@ -246,7 +246,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
     return message12;
 }
 
-module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage) {
+module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage) {
     console.log("sendVacationToManagerFunction" + managerApprovalMessage)
     //  managerApprovalMessage = JSON.parse(managerApprovalMessage)
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
@@ -279,7 +279,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "title": "Type",
                         "value": type,
                         "short": true
-                    },
+                    }, YourActionMessage,
                     managerApprovalMessage,
                     commentFieldInManagerMessage,
 
