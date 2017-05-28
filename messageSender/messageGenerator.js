@@ -15,6 +15,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     managerApproval.sort(function (a, b) {
         return a.rank - b.rank;
     });
+    console.log("managerApproval.sort" + JSON.stringify(managerApproval))
     while (i < size) {
         var flag = true
         if ((i + 1) == size) {
