@@ -263,7 +263,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 })
            })
 
-            setTimeout(callback, 7000);
+            setTimeout(callback, 10000);
 
         },
         function (err) {
