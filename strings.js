@@ -328,7 +328,6 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
     console.log("stringfy11" + stringfy)
     stringfy = stringfy.replace(/\\/, "")
 
-    stringfy = stringfy.replace(/\\/, "")
     stringfy = stringfy.replace(/}\"/g, "}")
     stringfy = stringfy.replace(/\"\{/g, "{")
     stringfy = stringfy.replace(/\\/g, "")
