@@ -23,7 +23,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         console.log("managerApproval[i].managerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
         if (managerApproval[i].managerEmail != managerEmail) {
 
-            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag
+            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver emad.wahbeh" + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag
             messageBody = messageBody + ","
         }
 
