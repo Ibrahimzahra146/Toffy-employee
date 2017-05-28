@@ -186,7 +186,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-               // messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                         request({
                             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -261,7 +261,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     })
 
                 })
-          //  })
+           })
 
             setTimeout(callback, 4000);
 
