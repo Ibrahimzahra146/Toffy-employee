@@ -16,14 +16,14 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         return a.rank - b.rank;
     });
     while (i < size) {
-        var flag = true
+        var flag = "true }"
         if ((i + 1) == size) {
-            flag == false
+            flag == "false }"
         }
         console.log("managerApproval[i].managerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
         if (managerApproval[i].managerEmail != managerEmail) {
 
-            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag + "}"
+            messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag
             messageBody = messageBody + ","
         }
 
