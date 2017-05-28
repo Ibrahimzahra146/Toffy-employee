@@ -186,6 +186,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
+                console.log("Oreder of manages" + i + ":" + managerEmail)
                 messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                         request({
