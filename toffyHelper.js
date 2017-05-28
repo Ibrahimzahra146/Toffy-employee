@@ -164,29 +164,29 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     if (type == "sickLeave") {
         type = "sick"
     }
-    messageGenerator.generateManagerApprovelsSection(managerApproval, function (managerApprovalMessage) {
 
 
 
 
 
-        var i = 0
-        var j = 0
+
+    var i = 0
+    var j = 0
 
 
-        async.whilst(
-            function () { return managerApproval[i]; },
-            function (callback) {
+    async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
 
 
 
-                var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
-                    approvalId = managerApproval[i].id
-                    approvarType = managerApproval[i].type
-                    managerEmail = emailFromId.replace(/\"/, "")
-                    managerEmail = managerEmail.replace(/\"/, "")
-
+                approvalId = managerApproval[i].id
+                approvarType = managerApproval[i].type
+                managerEmail = emailFromId.replace(/\"/, "")
+                managerEmail = managerEmail.replace(/\"/, "")
+                messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     request({
                         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                         method: 'POST',
@@ -207,7 +207,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 var timeststamp = new Date().getTime()
                                 //change 2
                                 message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail,managerApprovalMessage );
+                                messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage);
 
 
                             } else if (approvarType == "HR") {
@@ -259,15 +259,15 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     })
                 })
 
+            })
 
+            setTimeout(callback, 2500);
 
-                setTimeout(callback, 2500);
+        },
+        function (err) {
+            // 5 seconds have passed
+        });
 
-            },
-            function (err) {
-                // 5 seconds have passed
-            });
-    })
 }
 
 //list all holidays with range period
