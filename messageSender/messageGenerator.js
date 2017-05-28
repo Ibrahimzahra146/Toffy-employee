@@ -20,7 +20,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         if ((i + 1) == size) {
             flag == false
         }
-        if (managerApproval[i].email != managerEmail) {
+        if (managerApproval[i].managerEmail != managerEmail) {
 
             messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag + "}"
             messageBody = messageBody + ","
@@ -47,8 +47,8 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
     });
     while (i < size) {
         var flag = true
-        console.log("managerApproval[i].email" + managerApproval[i].email)
-        if (managerApproval[i].email == managerEmail) {
+        console.log("managerApproval[i].email" + managerApproval[i].managerEmail)
+        if (managerApproval[i].managerEmail == managerEmail) {
 
             messageBody = "{" + "\"title\":" + "\"" + "Your Action " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + true + "}"
             messageBody = ","
