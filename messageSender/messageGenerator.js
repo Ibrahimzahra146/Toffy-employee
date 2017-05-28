@@ -32,8 +32,8 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
 
     console.log("generateManagerApprovelsSection" + stringfy)
     stringfy = stringfy.replace(/\\/g, "")
-    stringfy = stringfy.replace(/}\"/, "}")
-    stringfy = stringfy.replace(/\"\{/, "{")
+    stringfy = stringfy.replace(/}\"/g, "}")
+    stringfy = stringfy.replace(/\"\{/g, "{")
     callback(stringfy)
 }
 module.exports.generateYourActionSection = function generateYourActionSection(managerApproval, managerEmail, callback) {
