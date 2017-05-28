@@ -10,7 +10,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
 
     var i = 0
     var size = Object.keys(managerApproval).length
-    var messageBody = ""
+    var messageBody = "\""
     //Sorting Managers Approver based on rank
     managerApproval.sort(function (a, b) {
         return a.rank - b.rank;
