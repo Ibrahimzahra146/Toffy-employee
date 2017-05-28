@@ -37,6 +37,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     callback(stringfy)
 }
 module.exports.generateYourActionSection = function generateYourActionSection(managerApproval, managerEmail, callback) {
+    console.log("managerEmail" + managerEmail)
     var i = 0
     var size = Object.keys(managerApproval).length
     var messageBody = ""
@@ -46,9 +47,7 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
     });
     while (i < size) {
         var flag = true
-        if ((i + 1) == size) {
-            flag == false
-        }
+        console.log("managerApproval[i].email" + managerApproval[i].email)
         if (managerApproval[i].email == managerEmail) {
 
             messageBody = "{" + "\"title\":" + "\"" + "Your Action " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + true + "}"
