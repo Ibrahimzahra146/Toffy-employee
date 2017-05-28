@@ -205,10 +205,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 var jsonResponse = JSON.parse(body);
                                 if (approvarType == "Manager") {
                                     printLogs("Manager Role ")
+                                    console.log("startConversation1:" + managerEmail)
                                     var timeststamp = new Date().getTime()
                                     //change 2
                                     message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage,YourActionMessage);
+                                    messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
 
 
                                 } else if (approvarType == "HR") {
@@ -232,7 +233,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 if (approvarType == "Manager")
                                     currentBot = server.bot
                                 else currentBot = server.hRbot;
-
+                                console.log("startConversation:" + managerEmail)
                                 currentBot.startConversation(message12, function (err, convo) {
 
 
@@ -261,7 +262,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     })
 
                 })
-           })
+            })
 
             setTimeout(callback, 10000);
 
