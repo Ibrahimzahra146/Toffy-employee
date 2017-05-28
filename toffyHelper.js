@@ -265,7 +265,10 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 })
             })
 
-            setTimeout(callback, 15000);
+            setTimeout(callback, 15000
+
+
+            );
 
         },
         function (err) {
@@ -526,7 +529,7 @@ module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedB
         function (callback) {
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-
+                console.log("iemailFromId" + i + "" + emailFromId)
                 approvalId = managerApproval[i].id
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
