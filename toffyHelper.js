@@ -360,7 +360,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
 
 }
-
+//Get the managers for specific ecmployees
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
 
 
@@ -386,13 +386,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
     // printLogs("JSON.parse(body)====>" + JSON.parse(body));
 }
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, callback) {
-    printLogs("Sending vacation post request")
-    printLogs("Email:" + email)
-    printLogs("arrive at va")
-    printLogs("from" + from);
-    printLogs("to======>" + to);
-    printLogs("employee_id======>" + toffyHelper.userIdInHr);
-    printLogs("type======>" + type);
+
     toffyHelper.getIdFromEmail(email, function (Id) {
         console.log("::::" + "::" + email + "::" + Id)
         var vacationType = "0"
@@ -412,7 +406,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         }
         vacationBody = JSON.stringify(vacationBody)
         var uri = 'http://' + IP + '/api/v1/vacation'
-        printLogs("Uri " + uri)
         request({
             url: uri, //URL to hitDs
             method: 'POST',
@@ -425,14 +418,10 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             //Set the body as a stringcc
         }, function (error, response, body) {
             console.log(JSON.stringify(body))
-            printLogs("the vacation have been posted " + response.statusCode)
-            printLogs(error)
+            printLogs("the vacation statusCode:" + response.statusCode)
             // printLogs(response.message)
             var vacationId = (JSON.parse(body)).id;
             var managerApproval = (JSON.parse(body)).managerApproval
-            printLogs("Vacaction ID---->" + (JSON.parse(body)).id)
-            printLogs("managerApproval --->" + managerApproval)
-            printLogs("managerApproval --->" + JSON.stringify(managerApproval))
             callback(vacationId, managerApproval);
 
         })
@@ -510,103 +499,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
 
 
 }
-//Send cancel feedback to managers()
-module.exports.sendCancelationFeedBackToManagers = function sendCancelationFeedBackToManagers(fromDate, toDate, userEmail, vacationId, managerApproval, type) {
-    var message12 = ""
-    var approvarType = ""
-    var approvalId = ""
-    var managerEmail = ""
 
-
-    var i = 0
-    var j = 0
-
-
-    managerApproval = JSON.parse(managerApproval)
-
-    async.whilst(
-        function () { return managerApproval[i]; },
-        function (callback) {
-
-            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-                console.log("iemailFromId" + i + "" + emailFromId)
-                approvalId = managerApproval[i].id
-                approvarType = managerApproval[i].type
-                managerEmail = emailFromId.replace(/\"/, "")
-                managerEmail = managerEmail.replace(/\"/, "")
-
-                request({
-                    url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-
-                    },
-                    body: managerEmail
-                    //Set the body as a stringcc
-                }, function (error, response, body) {
-
-                    var jsonResponse = JSON.parse(body);
-                    if (approvarType == "Manager") {
-                        var timeststamp = new Date().getTime()
-                        console.log("timeststamp" + timeststamp)
-                        message12 = {
-                            'type': 'message',
-                            'channel': jsonResponse.managerChannelId,
-                            user: jsonResponse.slackUserId,
-                            text: 'what is my name',
-                            ts: timeststamp,
-                            team: jsonResponse.teamId,
-                            event: 'direct_message',
-                            as_user: true
-
-                        }
-
-                    } else {
-                        hrRole = 1
-                        message12 = {
-                            'type': 'message',
-                            'channel': jsonResponse.hrChannelId,
-                            user: jsonResponse.slackUserId,
-                            text: 'what is my name',
-                            ts: "1294e8475",
-                            team: jsonResponse.teamId,
-                            event: 'direct_message'
-                        }
-
-                    }
-
-                    if (approvarType == "Manager") {
-                        currentBot = server.bot;
-
-                    } else {
-
-                        currentBot = server.hRbot
-                    }
-                    currentBot.startConversation(message12, function (err, convo) {
-
-
-                        if (!err) {
-
-
-                            currentBot.reply(message12, userEmail + " has canceled his " + type + " time off request (" + fromDate + " - " + toDate + ")");
-
-                        }
-                    });
-
-                });
-                i++;
-
-            })
-            setTimeout(callback, 2000);
-
-        },
-        function (err) {
-            // 5 seconds have passed
-        }
-
-    );
-}
 //Function to ckeack if any manager take an action 
 module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerApproval, callback) {
     console.log("isManagersTakeAnAction" + JSON.stringify(managerApproval));

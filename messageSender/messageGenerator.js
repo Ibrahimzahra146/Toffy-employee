@@ -52,7 +52,7 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
         console.log("managerApproval[i].email" + managerApproval[i].managerEmail)
         if (managerApproval[i].managerEmail == managerEmail) {
 
-            messageBody = "{" + "\"title\":" + "\"" + "Your Action " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":true }"
+            messageBody = "{" + "\"title\":" + "\"" + "Your Action " + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":true }"
 
         }
 
