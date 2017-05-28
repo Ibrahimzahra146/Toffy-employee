@@ -23,7 +23,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
         if (managerApproval[i].managerEmail != managerEmail) {
 
             messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":" + flag + "}"
-            
+             messageBody = messageBody + ","
         }
 
         i++
@@ -51,7 +51,7 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
         if (managerApproval[i].managerEmail == managerEmail) {
 
             messageBody = "{" + "\"title\":" + "\"" + "Your Action " + (i + 1) + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + "\"" + ",\"short\":true }"
-            messageBody = messageBody + ","
+           
         }
 
         i++
