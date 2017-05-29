@@ -359,4 +359,33 @@ module.exports.sendNotificationToHrOnSick = function sendNotificationToHrOnSick(
     }
     return messageBody;
 }
+//One day left message 
+module.exports.oneDayLeftSickJsonMessage = function oneDayLeftSickJsonMessage(messageFB, email, vacationId, fromDateWord, toDateWord) {
+    var message = {
+        "text": "",
+        "attachments": [
+            {
+                "text": messageFB,
+                "callback_id": 'cancel_request',
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "name": "upload_sick_report",
+                        "text": "Upload sick report ",
+                        "type": "button",
+                        "value": email + ";" + vacationId + ";" + fromDateWord + ";" + toDateWord + ";" + messageFB
+
+                    }
+                ]
+            }
+        ]
+    }
+    return message
+}
+//One dat left info message 
+module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWord, toDateWord) {
+    var message = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."
+    return message
+}
 

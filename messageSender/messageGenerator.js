@@ -30,12 +30,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
 
         i++
     }
-    /* var stringfy = JSON.stringify(messageBody)
 
-    console.log("generateManagerApprovelsSection" + stringfy)
-    stringfy = stringfy.replace(/\\/g, "")
-   stringfy = stringfy.replace(/}\"/g, "}")
-   stringfy = stringfy.replace(/\"\{/g, "{")*/
     callback(messageBody)
 }
 module.exports.generateYourActionSection = function generateYourActionSection(managerApproval, managerEmail, callback) {
@@ -58,13 +53,6 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
 
         i++
     }
-    /*  var stringfy = JSON.stringify(messageBody)
-
-    console.log("generateYourActionSection" + stringfy)
-
-    stringfy = stringfy.replace(/\\/g, "")
-    stringfy = stringfy.replace(/}\"/, "}")
-    stringfy = stringfy.replace(/\"\{/, "{")*/
     callback(messageBody)
 
 }

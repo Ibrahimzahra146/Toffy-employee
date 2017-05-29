@@ -265,7 +265,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 })
             })
 
-            setTimeout(callback, 15000
+            setTimeout(callback, 5000
 
 
             );
@@ -433,6 +433,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
 }
 module.exports.getEmailById = function getEmailById(Path, email, callback) {
+    console.log("getEmailById" + getEmailById)
     makeGetRequest(Path, email, function (response, body) {
 
         callback(body)

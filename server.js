@@ -567,12 +567,8 @@ app.post('/one_day_left_sRep', (req, res) => {
   var toDate = parsedBody.toDate
 
   var email = parsedBody.employee.email
-  console.log(email)
-
   dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
 
-    console.log("fromDateWord " + fromDateWord)
-    console.log("toDateWord" + toDateWord)
     request({
       url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
       method: 'POST',
@@ -584,44 +580,17 @@ app.post('/one_day_left_sRep', (req, res) => {
       //Set the body as a stringcc
     }, function (error, response, body) {
       var responseBody = JSON.parse(body);
-      var message = {
-        'type': 'message',
-        'channel': responseBody.userChannelId,
-        user: responseBody.slackUserId,
-        text: 'what is my name',
-        ts: '1482920918.000057',
-        team: responseBody.teamId,
-        event: 'direct_message'
-      };
-      var messageFB = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."
-      var text12 = {
-        "text": "",
-        "attachments": [
-          {
-            "text": messageFB,
-            "callback_id": 'cancel_request',
-            "color": "#3AA3E3",
-            "attachment_type": "default",
-            "actions": [
-              {
-                "name": "upload_sick_report",
-                "text": "Upload sick report ",
-                "type": "button",
-                "value": email + ";" + vacationId + ";" + fromDateWord + ";" + toDateWord + ";" + messageFB
-
-              }
-            ]
-          }
-        ]
-      }
-      bot.startConversation(message, function (err, convo) {
+      var slackMsg = stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserIdresponseBody.teamId);
+      var messageFB = stringFile.oneDayLeftInfoMessage(fromDateWord, toDateWord)
+      var text12 = stringFile.oneDayLeftSickJsonMessage(messageFB, email, vacationId, fromDateWord, toDateWord)
+      bot.startConversation(slackMsg, function (err, convo) {
 
 
         if (!err) {
 
           var stringfy = JSON.stringify(text12);
           var obj1 = JSON.parse(stringfy);
-          server.employeeBot.reply(message, obj1);
+          server.employeeBot.reply(slackMsg, obj1);
 
         }
 
