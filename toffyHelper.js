@@ -385,7 +385,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
 
     // printLogs("JSON.parse(body)====>" + JSON.parse(body));
 }
-module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, callback) {
+module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, comment, callback) {
 
     toffyHelper.getIdFromEmail(email, function (Id) {
         console.log("::::" + "::" + email + "::" + Id)
@@ -401,7 +401,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             "from": from,
             "to": to,
             "type": vacationType,
-            "comments": "From ibrahim"
+            "comments": comment
 
         }
         vacationBody = JSON.stringify(vacationBody)
