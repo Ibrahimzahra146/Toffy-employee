@@ -174,7 +174,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
     var size = Object.keys(managerApproval).length;
     var managerApproval1 = managerApproval
-    for (var i = 0; i < size; i++) {
+    for (var i = 0; managerApproval[i] != undefined; i++) {
         console.log("i" + i)
         console.log("nextTick" + JSON.stringify(managerApproval1))
 
@@ -189,7 +189,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("Oreder of manages" + i + ":" + managerEmail)
                 messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                    messageGenerator.generateYourActionSection(managerApproval1, managerEmail, function (YourActionMessage) {
                         request({
                             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                             method: 'POST',
