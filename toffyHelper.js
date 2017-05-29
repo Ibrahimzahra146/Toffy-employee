@@ -173,20 +173,23 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var i = 0
     var j = 0
 
-
+    var managerApproval1 = managerApproval
     for (var i = 0; managerApproval[i]; i++) {
+        console.log("i" + i)
+        console.log("nextTick" + JSON.stringify(managerApproval1))
+
         process.nextTick(function () {
 
 
-            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+            var x = toffyHelper.getEmailById('employee/email/' + managerApproval1[i].manager, userEmail, function (emailFromId) {
 
-                approvalId = managerApproval[i].id
-                approvarType = managerApproval[i].type
+                approvalId = managerApproval1[i].id
+                approvarType = managerApproval1[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("Oreder of manages" + i + ":" + managerEmail)
-                messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                messageGenerator.generateManagerApprovelsSection(managerApproval1, managerEmail, function (managerApprovalMessage) {
+                    messageGenerator.generateYourActionSection(managerApproval1, managerEmail, function (YourActionMessage) {
                         request({
                             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                             method: 'POST',
