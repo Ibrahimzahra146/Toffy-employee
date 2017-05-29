@@ -433,7 +433,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
 }
 module.exports.getEmailById = function getEmailById(Path, email, callback) {
-    console.log("getEmailById" + getEmailById)
+    console.log("getEmailById" + Path)
     makeGetRequest(Path, email, function (response, body) {
 
         callback(body)
