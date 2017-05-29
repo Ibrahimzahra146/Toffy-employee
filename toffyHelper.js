@@ -174,7 +174,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
 
     var managerApproval1 = managerApproval
-    for (var i = 0; managerApproval[i]; i++) {
+    for (var i = 0; managerApproval[i+1]; i++) {
         console.log("i" + i)
         console.log("nextTick" + JSON.stringify(managerApproval1))
 
