@@ -234,10 +234,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 if (approvarType == "Manager")
                                     currentBot = server.bot
                                 else currentBot = server.hRbot;
-                                console.log("startConversation:" + managerEmail)
                                 currentBot.startConversation(message12, function (err, convo) {
-
-
                                     if (!err) {
 
                                         var stringfy = JSON.stringify(messageBody);
