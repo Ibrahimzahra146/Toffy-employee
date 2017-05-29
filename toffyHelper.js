@@ -172,13 +172,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
     var i = 0
     var j = 0
-    var size = Object.keys(managerApproval).length;
-    var managerApproval1 = managerApproval
-    for (var i = 0; managerApproval[i] != undefined; i++) {
-        console.log("i" + i)
-        console.log("nextTick" + JSON.stringify(managerApproval1))
 
-        process.nextTick(function () {
+
+    async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
+
 
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
@@ -189,7 +188,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("Oreder of manages" + i + ":" + managerEmail)
                 messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    messageGenerator.generateYourActionSection(managerApproval1, managerEmail, function (YourActionMessage) {
+                    messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                         request({
                             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                             method: 'POST',
@@ -259,15 +258,23 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                             });
 
-                            //i++;
+                            i++;
                         })
                     })
 
                 })
             })
 
-        })
-    }
+            setTimeout(callback, 5000
+
+
+            );
+
+        },
+        function (err) {
+            // 5 seconds have passed
+        });
+
 }
 
 //list all holidays with range period
