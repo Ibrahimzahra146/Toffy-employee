@@ -174,9 +174,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
 
 
-    for (var i = 0; i < 1024 * 1024; i++) {
+    for (var i = 0; managerApproval[i]; i++) {
         process.nextTick(function () {
-           
+
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
