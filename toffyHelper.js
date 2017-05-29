@@ -174,11 +174,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
 
 
-    async.whilst(
-        function () { return managerApproval[i]; },
-        function (callback) {
-
-
+    for (var i = 0; i < 1024 * 1024; i++) {
+        process.nextTick(function () {
+           
 
             var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
@@ -258,23 +256,15 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                             });
 
-                            i++;
+                            //i++;
                         })
                     })
 
                 })
             })
 
-            setTimeout(callback, 5000
-
-
-            );
-
-        },
-        function (err) {
-            // 5 seconds have passed
-        });
-
+        })
+    }
 }
 
 //list all holidays with range period
