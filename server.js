@@ -593,11 +593,12 @@ app.post('/one_day_left_sRep', (req, res) => {
         team: responseBody.teamId,
         event: 'direct_message'
       };
+      var messageFB = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."
       var text12 = {
         "text": "",
         "attachments": [
           {
-            "text": "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation.",
+            "text": messageFB,
             "callback_id": 'cancel_request',
             "color": "#3AA3E3",
             "attachment_type": "default",
@@ -606,7 +607,7 @@ app.post('/one_day_left_sRep', (req, res) => {
                 "name": "upload_sick_report",
                 "text": "Upload sick report ",
                 "type": "button",
-                "value": email + ";" + vacationId + ";" + fromDateWord + ";" + toDateWord
+                "value": email + ";" + vacationId + ";" + fromDateWord + ";" + toDateWord + ";" + messageFB
 
               }
             ]
