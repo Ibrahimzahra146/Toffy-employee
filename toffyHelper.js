@@ -477,7 +477,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 500) {
+        if (response.statusCode == 451) {
             callback(1000, 1000)
         } else {
             console.log("getNewSessionwithCookie:" + response.statusCode)
