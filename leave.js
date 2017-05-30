@@ -153,7 +153,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
             }
             vacationBody = JSON.stringify(vacationBody)
-            request({
+            env.request({
                 url: "http://" + IP + "/api/v1/vacation/working-days", //URL to hitDs
                 method: 'POST',
                 headers: {
