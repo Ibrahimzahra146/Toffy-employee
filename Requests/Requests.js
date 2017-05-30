@@ -7,7 +7,7 @@ const env = require('.././Public/configrations.js')
  */
 module.exports.getSlackRecord = function getSlackRecord(email, callback) {
     env.request({
-        url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+        url: 'http://' + env.IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ module.exports.getSlackRecord = function getSlackRecord(email, callback) {
 module.exports.getVacationInfo = function getVacationInfo(email, vacationId, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         //get vacation state
-        var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
+        var uri = 'http://' + env.IP + '/api/v1/vacation/' + vacationId
         env.request({
             url: uri, //URL to hitDs
             method: 'GET',
@@ -58,7 +58,7 @@ module.exports.getSlackMembers = function getSlackMembers(callback) {
  */
 module.exports.deleteVacation = function deleteVacation(vacationId, email, callback) {
     env.request({
-        url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
+        url: 'http://' + env.IP + '/api/v1/vacation/' + vacationId,
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
