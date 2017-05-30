@@ -315,7 +315,7 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   var fromDate = arr[3]
   var toDate = arr[4]
   var type = arr[5]
-  toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+  env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
     //get vacation state
     var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
     request({
