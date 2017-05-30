@@ -101,47 +101,6 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 //**************************************************************************************************
 
 //****************************************** ********************************************************
-module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
-    var arr = time.toString().split(":")
-    var formattedTime = ""
-    var midday = "pm";
-    if (arr[0] == "13" || arr[0] == "01")
-        formattedTime = "01:" + arr[1];
-    else if (arr[0] == "14" || arr[0] == "02")
-        formattedTime = "02:" + arr[1];
-    else if (arr[0] == "15" || arr[0] == "03")
-        formattedTime = "03:" + arr[1];
-    else if (arr[0] == "16" || arr[0] == "04")
-        formattedTime = "04:" + arr[1];
-    else if (arr[0] == "17" || arr[0] == "05")
-        formattedTime = "05:" + arr[1];
-    else if (arr[0] == "20") {
-        formattedTime = "08:" + arr[1];
-        midday = "am"
-    }
-    else if (arr[0] == "21" || arr[0] == "09") {
-        formattedTime = "09:" + arr[1];
-        midday = "am"
-    }
-    else if (arr[0] == "22" || arr[0] == "10") {
-        formattedTime = "10:" + arr[1];
-        midday = "am"
-    }
-    else if (arr[0] == "23" || arr[0] == "11") {
-        formattedTime = "11:" + arr[1];
-        midday = "am"
-    }
-    else if (arr[0] == "00" || arr[0] == "12") {
-        formattedTime = "12:" + arr[1];
-        midday = "am"
-    }
-    else {
-        formattedTime = arr[0] + ":" + arr[1];
-        midday = "am";
-    }
-
-    callback(formattedTime, midday)
-}
 //*
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
@@ -164,12 +123,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     if (type == "sickLeave") {
         type = "sick"
     }
-
-
-
-
-
-
     var i = 0
     var j = 0
 
@@ -380,8 +333,11 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
 
     })
 
-    // printLogs("JSON.parse(body)====>" + JSON.parse(body));
 }
+/**
+ * Post vacation in the DB
+ * 
+ */
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, comment, callback) {
 
     toffyHelper.getIdFromEmail(email, function (Id) {
@@ -465,9 +421,7 @@ function printLogs(msg) {
 }
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
-    console.log("getNewSessionwithCookie:" + email)
     var uri = 'http://' + IP + '/api/v1/employee/login'
-    console.log("getNewSessionwithCookie:" + uri)
     request({
         url: uri, //URL to hitDs
         method: 'POST',
@@ -520,6 +474,9 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
         });
 
 }
+/**
+ * Genrate Holiday message based on type ,So when employee ask for all holidays or next number of holidays
+ */
 function getHolidayMessage(body, holidayRequestType, response, callback) {
     var max = ""
 
@@ -589,7 +546,9 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
     }
     callback(stringMessage)
 }
-
+/**
+ * Get image URL for specifiv emp-loyee
+ */
 function getUserImage(email, callback) {
 
     toffyHelper.getIdFromEmail(email, function (Id) {

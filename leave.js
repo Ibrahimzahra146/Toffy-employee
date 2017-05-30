@@ -5,14 +5,6 @@ const dateHelper = require('./DateEngine/DateHelper.js')
 const vacationOverllaping = require('././VacationOverllaping/overlappedVacations.js')
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
-    console.log("send VacationWithLeaveConfirmation")
-    console.log("fromDate  " + fromDate)
-    console.log("fromTime " + fromTime)
-    console.log("toTime " + toTime)
-    console.log("ToDate " + ToDate)
-    console.log("fromMilliseconds " + fromMilliseconds)
-    console.log("toMilliseconds " + toMilliseconds)
-    console.log("TYPEEE" + type)
     var holidaysNotice = ""
     var typeNum = ""
     if (type == "sick") {
@@ -30,8 +22,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else if (type == "Wedding")
         typeNum = 8
     else typeNum = 0
-    console.log("fromTime" + fromTime)
-    console.log("toTime" + toTime)
+ 
     dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         console.log("formattedFromTime" + formattedFromTime)
         dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
@@ -51,12 +42,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             var toDateWordServer = new Date(body.toTimeSlot.date)
                             toDateWordServer.setHours(body.toTimeSlot.hour)
                             toDateWordServer.setMinutes(body.toTimeSlot.minute)
-                            /* var wordFromDate = new Date(fromDate).toDateString();
-                             var wordTodate = new Date(ToDate).toDateString();
-                             var arr = wordFromDate.toString().split(" ")
-                             wordFromDate = arr[0] + ", " + arr[1] + " " + arr[2]
-                             arr = wordTodate.toString().split(" ")
-                             wordTodate = arr[0] + ", " + arr[1] + " " + arr[2]*/
+
                             dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
 
@@ -277,23 +263,5 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
         overlppedMsg = "\n[Note]: There is an already taken time off " + overlppedMsg + " and it will be overwritten when you press \"Yes\"."
         callback(overlppedMsg)
     } else callback(overlppedMsg)
-
-}
-function getStartAndEndTime(body, startTime, EndTime) {
-    var startSlotTimeHours = body.timeSlotFrom.startSlotTimeHours
-    var endSlotTimeHours = body.timeSlotFrom.endSlotTimeHours
-    var startSlotTimeMinutes = body.timeSlotFrom.startSlotTimeMinutes
-    var endSlotTimeMinutes = body.timeSlotFrom.endSlotTimeMinutes
-    var date = new Date(startSlotTimeHours + ":" + startSlotTimeHours)
-
-    //dateHelper.convertTimeFormat
-
-    console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeHours" + body.timeSlotFrom.startSlotTimeHours)
-    console.log("(JSON.parse(body)).timeSlotFrom.endSlotTimeHours" + body.timeSlotFrom.endSlotTimeHours)
-    console.log("(JSON.parse(body)).timeSlotFrom.startSlotTimeMinutes" + body.timeSlotFrom.startSlotTimeMinutes)
-    console.log("startTime" + startTime)
-    console.log("EndTime" + EndTime)
-
-
 
 }
