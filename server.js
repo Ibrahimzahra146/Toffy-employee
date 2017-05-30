@@ -40,7 +40,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
       }
       let apiaiRequest = env.apiAiService.textRequest(msgText,
         {
-         sessionId:  env.sessionId
+          sessionId: env.sessionId
         });
 
       apiaiRequest.on('response', (response) => {
@@ -129,7 +129,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 //**********************************************************************************************
 function getMembersList(Id, msg) {
   var emailValue = "";
- env.mRequests.getSlackMembers(function (error, response, body) {
+  env.mRequests.getSlackMembers(function (error, response, body) {
 
     if (!error && response.statusCode === 200) {
       var i = 0;
@@ -300,7 +300,7 @@ env.slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, v
   var messageText = arr[9]
   console.log("Value" + value)
   console.log("messageText" + messageText)
-  messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
+  env.messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   env.generalMsg = msg
