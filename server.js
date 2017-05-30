@@ -40,7 +40,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
       }
       let apiaiRequest = env.apiAiService.textRequest(msgText,
         {
-          sessionId: sessionId
+         sessionId:  env.sessionId
         });
 
       apiaiRequest.on('response', (response) => {
