@@ -159,8 +159,8 @@ function getMembersList(Id, msg) {
 
 
 //*********************************************
-var app = slapp.attachToExpress(express())
-slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
+var app = env.slapp.attachToExpress(express())
+env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   env.generalMsg = msg
   if (msg.body.event.user == "U4EN9UDHV") {
 
@@ -169,11 +169,11 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   }
 })
 
-slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
+env.slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   env.generalMsg = msg
   userAction(msg, value, 0)
 })
-slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
+env.slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
   env.generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
@@ -188,7 +188,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
   var messageText = arr[9]
   env.messageReplacer.undoUserComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText);
 })
-slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
+env.slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
   generalMsg = msg
   userAction(msg, value, 1)
 })
@@ -283,13 +283,13 @@ function userAction(msg, value, isComment) {
 
 }
 
-slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
+env.slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
   env.generalMsg = msg
   msg.respond(msg.body.response_url, "Ok, operation aborted.")
   fromDate = "";
   toDate = "";
 })
-slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
+env.slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
   env.generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
@@ -306,7 +306,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value
   console.log("messageText" + messageText)
   messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
-slapp.action('cancel_request', 'cancel', (msg, value) => {
+env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   env.generalMsg = msg
   var arr = value.toString().split(";")
   var email = arr[0]
@@ -368,7 +368,7 @@ End of Leave Section
   -------------____________________________________________________---------------------
   */
 //upload sick report button 
-slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
+env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   env.generalMsg = msg
   console.log("upload sick report")
   var arr = value.toString().split(";")
@@ -381,7 +381,7 @@ slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   msg.respond(msg.body.response_url, messageFB + "\nTap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
 
 })
-slapp.event('team_join', (msg) => {
+env.slapp.event('team_join', (msg) => {
   console.log('received team join event')
 });
 
@@ -402,8 +402,6 @@ app.post('/birthday', (req, res) => {
 });
 app.post('/uploaded_sick_report', (req, res) => {
 
-  console.log(" New get request  is received");
-  console.log(req.body)
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
   var type = parsedBody.type
@@ -428,7 +426,7 @@ app.post('/uploaded_sick_report', (req, res) => {
  * 
  */
 
-slapp.action('preDefinedHelp', 'helpMenu', (msg, value) => {
+env.slapp.action('preDefinedHelp', 'helpMenu', (msg, value) => {
 
   var email = SendWelcomeResponse(msg, "", 1, function (email) {
     sendRequestToApiAi(email, msg, 1, value);
@@ -436,7 +434,7 @@ slapp.action('preDefinedHelp', 'helpMenu', (msg, value) => {
 
 })
 
-slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
+env.slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
 
   msg.say("Please specify the date.")
 })
