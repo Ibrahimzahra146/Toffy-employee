@@ -225,70 +225,58 @@ function printLogs(msg) {
  * Show time off  rules for employee from server 
  */
 module.exports.ShowRules = function showEmployeeStats(email, msg) {
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        var url = "http://" + IP + "/api/v1/vacation/rules";
+    env.mRequests.getEmployeeBalance(email, function (error, response, body) {
 
-        request({
-            url: url,
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
+        var i = 0;
+        var stringMessage = "["
+        if (!error && response.statusCode === 200) {
+            if (!(body)[i]) {
+                msg.say("There are no rules  with that balnce.");
             }
-        }, function (error, response, body) {
-            console.log(JSON.stringify(body))
-            console.log("Rule:   " + body[0])
-            var i = 0;
-            var stringMessage = "["
-            if (!error && response.statusCode === 200) {
-                if (!(body)[i]) {
-                    msg.say("There are no employees with that balnce.");
-                }
-                else {
-                    //build message Json result to send it to slack
-                    while (body[i]) {
+            else {
+                //build message Json result to send it to slack
+                while (body[i]) {
 
-                        if (i > 0) {
-                            stringMessage = stringMessage + ","
+                    if (i > 0) {
+                        stringMessage = stringMessage + ","
+                    }
+                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "\"" + ",\"value\":" + "\"" + body[i] + ".\"" + ",\"short\":false}"
+                    i++;
+
+
+
+                }
+                printLogs("stringMessage::" + stringMessage);
+
+                stringMessage = stringMessage + "]"
+                var messageBody = {
+                    "text": "Time off submission rules:",
+                    "attachments": [
+                        {
+                            "attachment_type": "default",
+                            "text": " ",
+                            "fallback": "ReferenceError",
+                            "fields": stringMessage,
+                            "color": "#F35A00"
                         }
-                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "\"" + ",\"value\":" + "\"" + body[i] + ".\"" + ",\"short\":false}"
-                        i++;
-
-
-
-                    }
-                    printLogs("stringMessage::" + stringMessage);
-
-                    stringMessage = stringMessage + "]"
-                    var messageBody = {
-                        "text": "Time off submission rules:",
-                        "attachments": [
-                            {
-                                "attachment_type": "default",
-                                "text": " ",
-                                "fallback": "ReferenceError",
-                                "fields": stringMessage,
-                                "color": "#F35A00"
-                            }
-                        ]
-                    }
-                    printLogs("messageBody " + messageBody)
-                    var stringfy = JSON.stringify(messageBody);
-
-                    printLogs("stringfy " + stringfy)
-                    //    stringfy = stringfy.
-                    stringfy = stringfy.replace(/\\/g, "")
-
-                    stringfy = stringfy.replace(/]\"/, "]")
-                    stringfy = stringfy.replace(/\"\[/, "[")
-                    stringfy = JSON.parse(stringfy)
-
-                    msg.say(stringfy)
+                    ]
                 }
+                printLogs("messageBody " + messageBody)
+                var stringfy = JSON.stringify(messageBody);
+
+                printLogs("stringfy " + stringfy)
+                //    stringfy = stringfy.
+                stringfy = stringfy.replace(/\\/g, "")
+
+                stringfy = stringfy.replace(/]\"/, "]")
+                stringfy = stringfy.replace(/\"\[/, "[")
+                stringfy = JSON.parse(stringfy)
+
+                msg.say(stringfy)
             }
-        })
+        }
     })
+
 
 
 }

@@ -103,7 +103,7 @@ module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
     })
 }
 /**
- * 
+ * get employee History
  */
 module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
 
@@ -117,5 +117,26 @@ module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
         },
     }, function (error, response, body) {
         callback(error, response, body)
+    })
+}
+/**
+ * 
+ * Get time pff rules
+ * 
+ */
+module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        var url = "http://" + IP + "/api/v1/vacation/rules";
+
+        request({
+            url: url,
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + session_Id
+            }
+        }, function (error, response, body) {
+        })
     })
 }
