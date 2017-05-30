@@ -4,7 +4,7 @@ var requestify = require('requestify');
 var userIdInHr = "initial";
 
 
-var currentBot =  env.bot;
+var currentBot = env.bot;
 var hrRole = 0;
 var general_remember_me = "";
 exports.general_remember_me = general_remember_me
@@ -19,15 +19,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     printLogs("Store user slack info :::")
 
 
-    request({
-        url: "http://" + IP + "/api/v1/toffy/get-record", //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
+    env.mRequests.getSlackRecord(email, function (body) {
 
         if (response.statusCode == 404) {
             printLogs("the employee not found ")
@@ -127,51 +119,37 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
 
-            var x =  env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+            var x = env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
                 approvalId = managerApproval[i].id
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("Oreder of manages" + i + ":" + managerEmail)
-                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        request({
-                            url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-
-                            },
-                            body: managerEmail
-                            //Set the body as a stringcc
-                        }, function (error, response, body) {
+                        env.mRequests.getSlackRecord(managerEmail, function (body) {
                             console.log("HIii" + JSON.stringify(body))
                             getUserImage(userEmail, function (ImageUrl) {
                                 var messageBody = ""
 
                                 var jsonResponse = JSON.parse(body);
                                 if (approvarType == "Manager") {
-                                    printLogs("Manager Role ")
-                                    console.log("startConversation1:" + managerEmail)
-                                    var timeststamp = new Date().getTime()
                                     //change 2
-                                    message12 =  env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody =  env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
+                                    message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                    messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
 
 
                                 } else if (approvarType == "HR") {
-                                    printLogs("HR Role ")
-                                    // var timeststamp = new Date().getTime()
-                                    //change 2
-                                    message12 =  env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody =  env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+                               
+                                    message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                    messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
 
                                 }
                                 if (type != "WFH") {//change 3
 
-                                    dont_detuct_button =  env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                                    dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
                                 }
 
 
@@ -436,7 +414,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
             var arr1 = cookies1.toString().split(";")
             res1 = arr1[0].replace(/['"]+/g, '');
             printLogs("final session is =========>" + res)
-        
+
             callback(res, res1);
         }
 

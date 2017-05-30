@@ -110,7 +110,7 @@ var slapp = Slapp({
     convo_store: BeepBoopConvoStore(),
     context: BeepBoopContext()
 })
-var Botkit = require('./lib/Botkit.js');
+var Botkit = require('.././lib/Botkit.js');
 var controller = Botkit.slackbot({
     debug: true,
 });
