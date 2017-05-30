@@ -314,51 +314,39 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   var fromDate = arr[3]
   var toDate = arr[4]
   var type = arr[5]
-  env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-    //get vacation state
-    var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
-    request({
-      url: uri, //URL to hitDs
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': remember_me_cookie + ";" + session_Id
+  env.mRequests.getSlackRecord(email, vacationId, function (body) {
+    env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
+      console.log("isThereIsAction" + isThereIsAction)
+      if (isThereIsAction == false) {
+        //delete vacation request
+        request({
+          url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Cookie': remember_me_cookie + ";" + session_Id
+          },
+        }, function (error, response, body) {
+          msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
+
+          //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
+
+        })
+      } else {
+        if (state == "Rejected")
+          msg.respond(msg.body.response_url, "No need to cancel since its already rejected from your approvals.")
+        //the managers take an action
+        else
+          msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
+
 
       }
-      //Set the body as a stringcc
-    }, function (error, response, body) {
-      env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
-        console.log("isThereIsAction" + isThereIsAction)
-        if (isThereIsAction == false) {
-          //delete vacation request
-          request({
-            url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              'Cookie': remember_me_cookie + ";" + session_Id
-            },
-          }, function (error, response, body) {
-            msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
-
-            //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
-
-          })
-        } else {
-          if (state == "Rejected")
-            msg.respond(msg.body.response_url, "No need to cancel since its already rejected from your approvals.")
-          //the managers take an action
-          else
-            msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
-
-
-        }
-      })
-
     })
 
   })
+
 })
+
 
 
 /*--------------___________________________________________________----------------------

@@ -6,7 +6,7 @@ const env = require('.././Public/configrations.js')
  * 
  */
 module.exports.getSlackRecord = function getSlackRecord(email, callback) {
-    request({
+    env.request({
         url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
         headers: {
@@ -23,11 +23,11 @@ module.exports.getSlackRecord = function getSlackRecord(email, callback) {
  * 
  * Get vacation info
  */
-module.exports.getVacationInfo = function getVacationInfo(email, vacationId) {
+module.exports.getVacationInfo = function getVacationInfo(email, vacationId, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         //get vacation state
         var uri = 'http://' + IP + '/api/v1/vacation/' + vacationId
-        request({
+        env.request({
             url: uri, //URL to hitDs
             method: 'GET',
             headers: {

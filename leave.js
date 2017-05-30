@@ -1,6 +1,5 @@
 const env = require('./Public/configrations.js')
 
-const vacationOverllaping = require('././VacationOverllaping/overlappedVacations.js')
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
     var holidaysNotice = ""
