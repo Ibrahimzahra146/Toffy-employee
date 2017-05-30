@@ -40,3 +40,15 @@ module.exports.getVacationInfo = function getVacationInfo(email, vacationId, cal
         })
     })
 }
+/**
+ * 
+ * Slack memberss list
+ */
+module.exports.getSlackMembers = function getSlackMembers(callback) {
+    request({
+        url: env.Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
+        json: true
+    }, function (error, response, body) {
+        callback(error,response,body)
+    })
+}

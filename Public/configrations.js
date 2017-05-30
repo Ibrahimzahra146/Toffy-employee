@@ -48,6 +48,9 @@ exports.mRequests = mRequests
 var stringFile = require('.././strings.js')
 exports.stringFile = stringFile
 
+var Constants = require('.././Constants.js');
+exports.Constants = Constants
+
 const vacationWithLeave = require('.././VacationEngine/VacationWithLeave.js')
 exports.vacationWithLeave = vacationWithLeave
 
@@ -98,7 +101,7 @@ const opn = require('opn');
 var sessionId = uuid.v1();
 var requestify = require('requestify');
 var pg = require('pg');
-var Constants = require('.././Constants.js');
+
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
