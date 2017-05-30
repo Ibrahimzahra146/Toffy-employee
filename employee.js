@@ -231,7 +231,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
         var stringMessage = "["
         if (!error && response.statusCode === 200) {
             if (!(body)[i]) {
-                msg.say("There are no rules  with that balnce.");
+                msg.say("There are no rules.");
             }
             else {
                 //build message Json result to send it to slack

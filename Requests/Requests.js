@@ -141,3 +141,23 @@ module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
         })
     })
 }
+/**
+ * 
+ * 
+ */
+module.exports.getEmployeeProfile = function getEmployeeProfile(email, callback) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+
+        request({
+            url: "http://" + IP + "/api/v1/employee/" + Id,
+            json: true,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+            },
+        }, function (error, response, body) {
+            callback(error, response, body)
+        })
+    })
+}
