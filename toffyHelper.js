@@ -204,7 +204,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
 
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        request({
+        env.request({
             url: 'http://' + env.IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
             method: 'GET',
             headers: {
@@ -263,7 +263,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
         env.toffyHelper.general_remember_me = remember_me_cookie
         env.toffyHelper.general_session_id = sessionId
 
-        request({
+        env.request({
             url: "http://" +  env.IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
             headers: {
@@ -290,7 +290,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
 
         env.toffyHelper.generalCookies = cookies
 
-        request({
+        env.request({
             url: "http://" +  env.IP + "/api/v1/employee/" + userId + "/managers",
             json: true,
             method: 'GET',
@@ -331,7 +331,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         }
         vacationBody = JSON.stringify(vacationBody)
         var uri = 'http://' +  env.IP + '/api/v1/vacation'
-        request({
+        env.request({
             url: uri, //URL to hitDs
             method: 'POST',
             headers: {
@@ -370,7 +370,7 @@ function makeGetRequest(path, email, callback) {
         var uri = 'http://' + env.IP + '/api/v1/' + path
         printLogs("uri " + uri)
 
-        request({
+        env.request({
             url: uri, //URL to hitDs
             method: 'GET',
             headers: {
@@ -394,7 +394,7 @@ function printLogs(msg) {
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
     var uri = 'http://' +  env.IP + '/api/v1/employee/login'
-    request({
+    env.request({
         url: uri, //URL to hitDs
         method: 'POST',
         headers: {
@@ -527,7 +527,7 @@ function getUserImage(email, callback) {
         var uri = 'http://' +  env.IP + '/api/v1/employee/' + Id + '/image'
         printLogs("uri " + uri)
 
-        request({
+        env.request({
             url: uri, //URL to hitDs
             method: 'GET',
             headers: {
@@ -553,7 +553,7 @@ module.exports.isActivated = function isActivated(email, callback) {
             callback(false)
         } else {
 
-            request({
+            env.request({
                 url: 'http://' +  env.IP + '/api/v1/employee/roles', //URL to hitDs
                 method: 'POST',
                 headers: {
