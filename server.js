@@ -206,7 +206,7 @@ function userAction(msg, value, isComment) {
     var uploadSickReportButton = ""
 
 
-    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval) {
+    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval) {
 
       env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 

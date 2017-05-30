@@ -127,7 +127,6 @@ module.exports.getTodayDate = function getTodayDate(callback) {
  */
 
 module.exports.getDayNameOfDate = function getDayNameOfDate(date, callback) {
-    console.log("arrive getDayNameOfDat e" + date)
     var weekday = new Array(7);
     weekday[1] = "Monday";
     weekday[2] = "Tuesday";

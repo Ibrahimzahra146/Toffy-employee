@@ -2,7 +2,7 @@ const env = require('./Public/configrations.js')
 
 var requestify = require('requestify');
 var userIdInHr = "initial";
-
+exports.userIdInHr=userIdInHr
 
 var currentBot = env.bot;
 var hrRole = 0;
