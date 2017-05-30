@@ -108,7 +108,7 @@ module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
 module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
 
     var uri = 'http://' + env.IP + '/api/v1/employee/' + Id + '/vacations/2017'
-    request({
+    env.request({
         url: uri,
         method: 'GET',
         headers: {
