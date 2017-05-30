@@ -86,7 +86,7 @@ module.exports.getUserIdByEmail = function getUserIdByEmail(callback) {
 }
 
 /**
- * 
+ * get employee balance
  */
 module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
     env.request({
@@ -100,5 +100,22 @@ module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
     }, function (error, response, body) {
         callback(error, response, body)
 
+    })
+}
+/**
+ * 
+ */
+module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
+
+    var uri = 'http://' + env.IP + '/api/v1/employee/' + Id + '/vacations/2017'
+    request({
+        url: uri,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+    }, function (error, response, body) {
+        callback(error, response, body)
     })
 }
