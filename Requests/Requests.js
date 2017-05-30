@@ -88,7 +88,7 @@ module.exports.getUserIdByEmail = function getUserIdByEmail(callback) {
 /**
  * 
  */
-module.exports.getEmployeeBalance = function getEmployeeBalance(Id) {
+module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
     env.request({
         url: "http://" + env.IP + "/api/v1/employee/" + Id + "/balance",
         json: true,
