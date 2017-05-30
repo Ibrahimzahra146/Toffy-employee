@@ -139,17 +139,8 @@ Show employee profile (employee basic employee)
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     var Approver2 = "---";
     env.toffyHelper.getIdFromEmail(email, function (Id) {
+        env.mRequests.getEmployeeProfile(email, Id, function (error, response, body) {
 
-
-        request({
-            url: "http://" + IP + "/api/v1/employee/" + Id,
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
-            },
-        }, function (error, response, body) {
             var Approver1 = ""
             if (body.manager[1]) {
                 if (body.manager[0].rank == 2) {

@@ -145,10 +145,10 @@ module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
  * 
  * 
  */
-module.exports.getEmployeeProfile = function getEmployeeProfile(email, callback) {
+module.exports.getEmployeeProfile = function getEmployeeProfile(email,Id, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
 
-        request({
+        env.request({
             url: "http://" + IP + "/api/v1/employee/" + Id,
             json: true,
             method: 'GET',
