@@ -137,6 +137,7 @@ module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
                 'Cookie': remember_me_cookie + ";" + session_Id
             }
         }, function (error, response, body) {
+            callback(error, response, body)
         })
     })
 }

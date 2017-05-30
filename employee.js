@@ -225,7 +225,7 @@ function printLogs(msg) {
  * Show time off  rules for employee from server 
  */
 module.exports.ShowRules = function showEmployeeStats(email, msg) {
-    env.mRequests.getEmployeeBalance(email, function (error, response, body) {
+    env.mRequests.getTimeOffRules(email, function (error, response, body) {
 
         var i = 0;
         var stringMessage = "["
