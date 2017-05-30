@@ -129,9 +129,10 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 //**********************************************************************************************
 function getMembersList(Id, msg) {
   var emailValue = "";
-  env.mRequests.getSlackMembers(function (error, response, body) {
-
-
+  request({
+    url: Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
+    json: true
+  }, function (error, response, body) {
 
     if (!error && response.statusCode === 200) {
       var i = 0;
@@ -313,19 +314,12 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   var fromDate = arr[3]
   var toDate = arr[4]
   var type = arr[5]
-  env.mRequests.getSlackRecord(email, vacationId, function (body) {
+  env.mRequests.getVacationInfo(email, vacationId, function (body) {
     env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
       console.log("isThereIsAction" + isThereIsAction)
       if (isThereIsAction == false) {
         //delete vacation request
-        request({
-          url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            'Cookie': remember_me_cookie + ";" + session_Id
-          },
-        }, function (error, response, body) {
+        env.mRequests.deleteVacation(email, vacationId, function (body) {
           msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
 
           //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
@@ -345,7 +339,6 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   })
 
 })
-
 
 
 /*--------------___________________________________________________----------------------

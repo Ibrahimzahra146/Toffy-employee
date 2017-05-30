@@ -56,7 +56,7 @@ module.exports.getSlackMembers = function getSlackMembers(callback) {
 /**
  * Delete vacation
  */
-module.exports.deleteVacation = function deleteVacation(vacationId, email, callback) {
+module.exports.deleteVacation = function deleteVacation(email, vacationId, callback) {
     env.request({
         url: 'http://' + env.IP + '/api/v1/vacation/' + vacationId,
         method: 'DELETE',
@@ -64,6 +64,22 @@ module.exports.deleteVacation = function deleteVacation(vacationId, email, callb
             'Content-Type': 'application/json',
             'Cookie': env.toffyHelper.remember_me_cookie + ";" + env.toffyHelper.session_Id
         },
+    }, function (error, response, body) {
+    })
+}
+/**
+ * get user Id By email
+ */
+module.exports.getUserIdByEmail = function getUserIdByEmail(callback) {
+    request({
+        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': remember_me_cookie + ";" + sessionId
+        },
+        body: email
+        //Set the body as a stringcc
     }, function (error, response, body) {
     })
 }
