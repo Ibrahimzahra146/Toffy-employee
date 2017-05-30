@@ -129,10 +129,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 //**********************************************************************************************
 function getMembersList(Id, msg) {
   var emailValue = "";
-  request({
-    url: Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
-    json: true
-  }, function (error, response, body) {
+ env.mRequests.getSlackMembers(function (error, response, body) {
 
     if (!error && response.statusCode === 200) {
       var i = 0;
