@@ -388,4 +388,9 @@ module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWo
     var message = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."
     return message
 }
+/**
+ * Np approvers message
+ */
+var noApproversMessage = "You dont have any approver right now "
+exports.noApproversMessage = noApproversMessage
 

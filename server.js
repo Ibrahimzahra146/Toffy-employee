@@ -1,92 +1,4 @@
-'use strict'
-var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY
-const express = require('express')
-const Slapp = require('slapp')
-const BeepBoopConvoStore = require('slapp-convo-beepboop')
-const BeepBoopContext = require('slapp-context-beepboop')
-const bodyParser = require('body-parser');
-const uuid = require('node-uuid');
-const request = require('request');
-const JSONbig = require('json-bigint');
-const async = require('async');
-const apiai = require('apiai');
-const APIAI_LANG = 'en';
-const opn = require('opn');
-var sessionId = uuid.v1();
-var db = require('node-localdb');
-var requestify = require('requestify');
-var pg = require('pg');
-var userdb = db('./userDetails1.json')
-var Constants = require('./Constants.js');
-var fs = require('fs');
-var leave = require('./leave')
-var toffyHelper = require('./toffyHelper')
-var employee = require('./employee.js');
-var server = require('./server.js')
-var stringFile = require('./strings.js')
-const vacationWithLeave = require('./VacationEngine/VacationWithLeave.js')
-const messageSender = require('./messageSender/messageSender.js')
-const messageReplacer = require('./messageSender/messageReplacer.js')
-const dateHelper = require('./DateEngine/DateHelper.js')
-var apiAiService = apiai(APIAI_ACCESS_TOKEN);
-var IP = process.env.SLACK_IP;
-var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
-var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
-var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
-var SLACK_HR_TOKEN = process.env.SLACK_HR_ACCESS_KEY;
-var SLACK_EMPLOYEE_BOT_ACCESS_KEY = process.env.SLACK_EMPLOYEE_BOT_ACCESS_KEY
-var sickFlag = "";
-var userId = "U3FNW74JD"
-var managerChannel = "D3RR2RE68"
-var typeOfVacation = "";
-var fromDate = ""
-var toDate = "";
-var state = "init"
-var session = "";
-var token = "";
-var generalId = "";
-var generalMsg = "";
-var salesforceCode = "";
-var leaveFlag = "";
-var count = 0;
-var generalMsg = ""
-exports.generalMsg = generalMsg
-
-exports.count = count;
-pg.defaults.ssl = true;
-
-if (!process.env.PORT) throw Error('PORT missing but required')
-var slapp = Slapp({
-  convo_store: BeepBoopConvoStore(),
-  context: BeepBoopContext()
-})
-var Botkit = require('./lib/Botkit.js');
-var controller = Botkit.slackbot({
-  debug: true,
-});
-var controller1 = Botkit.slackbot({
-  debug: true,
-});
-var bot = controller.spawn({
-  token: SLACK_BOT_TOKEN
-
-}).startRTM();
-exports.bot = bot
-var hRbot = controller1.spawn({
-  token: SLACK_HR_TOKEN
-
-}).startRTM();
-exports.hRbot = hRbot;
-//
-var controller2 = Botkit.slackbot({
-  debug: true,
-});
-var employeeBot = controller2.spawn({
-  token: SLACK_EMPLOYEE_BOT_ACCESS_KEY
-
-}).startRTM();
-exports.employeeBot = employeeBot
-
+const env = require('./Public/configrations.js')
 
 /**
  * 
@@ -111,7 +23,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg, flag, text) {
-  toffyHelper.isActivated(emailValue, function (isActivated) {
+  env.toffyHelper.isActivated(emailValue, function (isActivated) {
     if (isActivated == false) {
       msg.say(stringFile.deactivatedMsg)
 
@@ -126,7 +38,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 
         toffyHelper.storeUserSlackInformation(emailValue, msg);
       }
-      let apiaiRequest = apiAiService.textRequest(msgText,
+      let apiaiRequest = env.apiAiService.textRequest(msgText,
         {
           sessionId: sessionId
         });
@@ -137,7 +49,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 
         //Vacation with leave scenarios
         if (responseText == "vacationWithLeave") {
-          vacationWithLeave.vacationWithLeave(msg, response, emailValue)
+          env.vacationWithLeave.vacationWithLeave(msg, response, emailValue)
 
         }
 
@@ -145,26 +57,26 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
         //When user ask for help,response will be the menu of all things that he can do
         else if ((responseText) == "Help") {
 
-          employee.sendHelpOptions(msg, emailValue);
+          env.employee.sendHelpOptions(msg, emailValue);
         }
         //show enployee vacation history 
         else if ((responseText) == "showHistory") {
-          employee.showEmployeeHistory(emailValue, msg);
+          env.employee.showEmployeeHistory(emailValue, msg);
         }
         else if ((responseText) == "showStats") {
-          employee.showEmployeeStats(emailValue, msg);
+          env.employee.showEmployeeStats(emailValue, msg);
         }
         else if ((responseText) == "showRules") {
-          employee.ShowRules(emailValue, msg);
+          env.employee.ShowRules(emailValue, msg);
         }
         else if ((responseText) == "showProfile") {
-          employee.showEmployeeProfile(emailValue, msg);
+          env.employee.showEmployeeProfile(emailValue, msg);
         }
         else if ((responseText) == "showHolidays") {
           var date;
           var date1;
           var holidayRequestType = "";
-          dateHelper.getTodayDate(function (today) {
+          env.dateHelper.getTodayDate(function (today) {
 
             if (!(response.result.parameters.date != "")) {
               console.log("not equal")
@@ -186,14 +98,14 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
               date = response.result.parameters.date;
               date1 = response.result.parameters.date1;
             }
-            toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType, response);
+            env.toffyHelper.showHolidays(msg, emailValue, date, date1, holidayRequestType, response);
 
           })
         }
         else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
           var date = "2017-01-01";
           var date1 = "	2017-12-30";
-          toffyHelper.showHolidays(msg, emailValue, date, date1);
+          env.toffyHelper.showHolidays(msg, emailValue, date, date1);
         }
 
 
@@ -249,10 +161,9 @@ function getMembersList(Id, msg) {
 //*********************************************
 var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
-  generalMsg = msg
+  env.generalMsg = msg
   console.log("the Ip  ====>" + IP)
-  if (msg.body.event
-    .user == "U4EN9UDHV") {
+  if (msg.body.event.user == "U4EN9UDHV") {
     console.log("=============>message from  bot ")
 
   } else {
@@ -266,23 +177,12 @@ slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
 
 })
 
-
-slapp.event('file_shared', (msg) => {
-  generalMsg = msg
-  console.log("msg  " + JSON.stringify(msg));
-  console.log('===========>Uploaded file');
-  fromDate = "";
-  toDate = "";
-})
-
-
-
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   userAction(msg, value, 0)
 })
 slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
   var toTime = arr[1]
@@ -294,16 +194,14 @@ slapp.action('leave_with_vacation_confirm_reject', 'Undo', (msg, value) => {
   var wordFromDate = arr[7]
   var wordToDate = arr[8]
   var messageText = arr[9]
-  console.log("Value" + value)
-  console.log("messageText" + messageText)
-  messageReplacer.undoUserComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText);
+  env.messageReplacer.undoUserComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText);
 })
 slapp.action('leave_with_vacation_confirm_reject', 'Send_Commnet', (msg, value) => {
   generalMsg = msg
   userAction(msg, value, 1)
 })
 function userAction(msg, value, isComment) {
-  dateHelper.getTodayDate(function (todayDate) {
+  env.dateHelper.getTodayDate(function (todayDate) {
     var arr = value.toString().split(";");
     var type = arr[5]
     var email = arr[2];
@@ -320,11 +218,11 @@ function userAction(msg, value, isComment) {
     var uploadSickReportButton = ""
 
 
-    toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval) {
+    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval) {
 
-      dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+      env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
-        dateHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
+        env.dateHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
 
           toDate = toDate
           if (arr[0] && (arr[0] != undefined)) {
@@ -337,9 +235,9 @@ function userAction(msg, value, isComment) {
 
 
           if (!managerApproval[0]) {
-            msg.say("You dont have any approver right now ");
+            msg.say(env.stringFile.noApproversMessage);
           } else {
-            toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
+            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
               messageFB = stringFile.sickMessageAfterConfirmation
@@ -394,13 +292,13 @@ function userAction(msg, value, isComment) {
 }
 
 slapp.action('leave_with_vacation_confirm_reject', 'reject', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   msg.respond(msg.body.response_url, "Ok, operation aborted.")
   fromDate = "";
   toDate = "";
 })
 slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   var arr = value.toString().split(";");
   var fromTime = arr[0]
   var toTime = arr[1]
@@ -417,7 +315,7 @@ slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, value
   messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 slapp.action('cancel_request', 'cancel', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   var arr = value.toString().split(";")
   var email = arr[0]
   var vacationId = arr[1]
@@ -439,7 +337,7 @@ slapp.action('cancel_request', 'cancel', (msg, value) => {
       //Set the body as a stringcc
     }, function (error, response, body) {
       console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
-      toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
+      env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
         console.log("isThereIsAction" + isThereIsAction)
         if (isThereIsAction == false) {
           //delete vacation request
@@ -479,7 +377,7 @@ End of Leave Section
   */
 //upload sick report button 
 slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
-  generalMsg = msg
+  env.generalMsg = msg
   console.log("upload sick report")
   var arr = value.toString().split(";")
   var email = arr[0]
@@ -506,7 +404,7 @@ app.post('/birthday', (req, res) => {
   console.log(req.body);
 
   var email = JSON.parse(req.body)[0].email
-  messageSender.sendMessageSpecEmployee(email, "With all the best")
+  env.messageSender.sendMessageSpecEmployee(email, "With all the best")
   res.send("200");
 
 });
@@ -526,10 +424,10 @@ app.post('/uploaded_sick_report', (req, res) => {
   var managerApproval = parsedBody.managerApproval
   var profilePicture = parsedBody.employee.profilePicture
   var workingDays = parseFloat(parsedBody.days).toFixed(2);
-  dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
+  env.dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
     if (type == 0) type = "personal"
     if (type == 4) type = "sick"
-    messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "", profilePicture, attachmentsUrl)
+    env.messageSender.sendVacationToHR(fromDateWord, toDateWord, email, type, vacationId, managerApproval, "", workingDays, "", profilePicture, attachmentsUrl)
   })
   res.send(200)
 
@@ -556,8 +454,6 @@ slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
  * Send notification to employe when there is one day l;eft to upload sick report
  */
 app.post('/one_day_left_sRep', (req, res) => {
-  console.log("One day left")
-  console.log(JSON.stringify(req.body))
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
 
@@ -566,7 +462,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   var toDate = parsedBody.toDate
 
   var email = parsedBody.employee.email
-  dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
+  env.dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
 
     request({
       url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -579,17 +475,17 @@ app.post('/one_day_left_sRep', (req, res) => {
       //Set the body as a stringcc
     }, function (error, response, body) {
       var responseBody = JSON.parse(body);
-      var slackMsg = stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserIdresponseBody.teamId);
-      var messageFB = stringFile.oneDayLeftInfoMessage(fromDateWord, toDateWord)
-      var text12 = stringFile.oneDayLeftSickJsonMessage(messageFB, email, vacationId, fromDateWord, toDateWord)
-      bot.startConversation(slackMsg, function (err, convo) {
+      var slackMsg = env.stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserIdresponseBody.teamId);
+      var messageFB = env.stringFile.oneDayLeftInfoMessage(fromDateWord, toDateWord)
+      var text12 = env.stringFile.oneDayLeftSickJsonMessage(messageFB, email, vacationId, fromDateWord, toDateWord)
+      env.bot.startConversation(slackMsg, function (err, convo) {
 
 
         if (!err) {
 
           var stringfy = JSON.stringify(text12);
           var obj1 = JSON.parse(stringfy);
-          server.employeeBot.reply(slackMsg, obj1);
+          env.employeeBot.reply(slackMsg, obj1);
 
         }
 

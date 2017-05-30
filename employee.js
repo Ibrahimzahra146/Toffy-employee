@@ -1,18 +1,10 @@
+const env = require('./Public/configrations.js')
 var requestify = require('requestify');
-const request = require('request');
-var server = require('./server')
 var generalCookies = "initial"
 exports.generalCookies = generalCookies;
-var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
 exports.userIdInHr = userIdInHr
-var toffyHelper = require('./toffyHelper')
-const stringFile = require('./strings.js')
-var async = require('async');
-var currentBot = server.bot;
-var hrRole = 0;
-var remember_me = "initial";
-const dateHelper = require('./DateEngine/DateHelper.js')
+
 
 /****** 
 Show employee vacation history
@@ -20,16 +12,14 @@ Show employee vacation history
 
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
-    printLogs("Show employee history")
-    printLogs("email::" + email)
-    toffyHelper.getIdFromEmail(email, function (Id) {
+    env.toffyHelper.getIdFromEmail(email, function (Id) {
         var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
         request({
             url: uri,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
             },
         }, function (error, response, body) {
             var i = 0;
@@ -43,7 +33,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                     while ((JSON.parse(body)[i])) {
                         var stringMessage = "["
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
-                        dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 0, function (fromDateWord, toDateWord) {
+                        env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 0, function (fromDateWord, toDateWord) {
 
                             var fromDate = fromDateWord
                             var toDate = toDateWord
@@ -57,7 +47,6 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                                 typeOfVacation = "Time off"
                             else if ((JSON.parse(body))[i].type == 4)
                                 typeOfVacation = "Sick time off"
-                            printLogs("stringMessage::" + stringMessage);
                             stringMessage = stringMessage + "]"
                             var messageBody = {
                                 "text": "*" + typeOfVacation + "*",
@@ -96,14 +85,14 @@ Show Employee stats like annual vacation and etc..
 *****/
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
     printLogs("showEmployeeStats")
-    toffyHelper.getIdFromEmail(email, function (Id) {
+    env.toffyHelper.getIdFromEmail(email, function (Id) {
         request({
             url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
             json: true,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
             }
         }, function (error, response, body) {
             var messageBody = {
@@ -165,7 +154,7 @@ Show employee profile (employee basic employee)
 *****/
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     var Approver2 = "---";
-    toffyHelper.getIdFromEmail(email, function (Id) {
+    env.toffyHelper.getIdFromEmail(email, function (Id) {
 
 
         request({
@@ -174,7 +163,7 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
             },
         }, function (error, response, body) {
             var Approver1 = ""
@@ -191,10 +180,6 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
 
             } else Approver1 = body.manager[0].name
 
-
-
-            printLogs("show profile bod" + JSON.stringify(body))
-            printLogs("show profile bod" + response.statusCode)
             var imageUrl = body.profilePicture.replace(/ /, "%20")
             var messageBody = {
                 "text": "Your profile details",
@@ -256,7 +241,7 @@ function printLogs(msg) {
  * Show time off  rules for employee from server 
  */
 module.exports.ShowRules = function showEmployeeStats(email, msg) {
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         var url = "http://" + IP + "/api/v1/vacation/rules";
 
         request({
@@ -330,43 +315,43 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
 
     //stringFile.timeOffPredefinedActions
-    var messageBody = stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions, stringFile.pretext)
+    var messageBody = env.stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions, stringFile.pretext)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
+    messageBody = env.stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
 
-    messageBody = stringFile.helpMessageBody("", stringFile.FamilyDeathActions, "")
+    messageBody = env.stringFile.helpMessageBody("", stringFile.FamilyDeathActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.holidayAction, "")
+    messageBody = env.stringFile.helpMessageBody("", stringFile.holidayAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.WfhActions, "")
+    messageBody = env.stringFile.helpMessageBody("", stringFile.WfhActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.rulesAction, "")
+    messageBody = env.tringFile.helpMessageBody("", stringFile.rulesAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody("", stringFile.fromDateToDate, "")
+    messageBody = env.stringFile.helpMessageBody("", stringFile.fromDateToDate, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = stringFile.helpMessageBody(stringFile.staticHelpFields, "", "")
+    messageBody = env.stringFile.helpMessageBody(stringFile.staticHelpFields, "", "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)

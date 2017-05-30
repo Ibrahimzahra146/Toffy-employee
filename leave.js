@@ -1,7 +1,5 @@
-var request = require('request')
-var IP = process.env.SLACK_IP
-var toffyHelper = require('./toffyHelper')
-const dateHelper = require('./DateEngine/DateHelper.js')
+const env = require('./Public/configrations.js')
+
 const vacationOverllaping = require('././VacationOverllaping/overlappedVacations.js')
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
@@ -22,10 +20,10 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else if (type == "Wedding")
         typeNum = 8
     else typeNum = 0
- 
-    dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
+
+    env.dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         console.log("formattedFromTime" + formattedFromTime)
-        dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
+        env.dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (workingPeriod, isValid, reason, containsHolidays, overlappedVacations, body) {
                 if (workingPeriod != 1000) {
                     getStartAndEndTime(body, formattedFromTime, formattedTime);
@@ -43,7 +41,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             toDateWordServer.setHours(body.toTimeSlot.hour)
                             toDateWordServer.setMinutes(body.toTimeSlot.minute)
 
-                            dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
+                            env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
 
                                 getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
@@ -147,7 +145,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
     try {
-        toffyHelper.getIdFromEmail(email, function (Id) {
+        env.toffyHelper.getIdFromEmail(email, function (Id) {
             var vacationBody = {
                 "employee_id": Id,
                 "from": startDate,
@@ -161,12 +159,11 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                    'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
                 },
                 body: vacationBody
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("::JSON.stringify::", JSON.stringify(body))
 
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
                 if (response.statusCode == 500) {
@@ -253,7 +250,7 @@ function generateOverllapedVacationsMessae(overlappedVacations, callback) {
         while (overlappedVacations[i]) {
             if (overlppedMsg != "")
                 overlppedMsg = overlppedMsg + " and "
-            dateHelper.converDateToWords(overlappedVacations[i].fromDate, overlappedVacations[i].toDate, 0, function (fromDateWord, toDateWord) {
+            env.dateHelper.converDateToWords(overlappedVacations[i].fromDate, overlappedVacations[i].toDate, 0, function (fromDateWord, toDateWord) {
                 overlppedMsg = overlppedMsg + " from " + fromDateWord + " to " + toDateWord
             })
 

@@ -1,22 +1,16 @@
+const env = require('./Public/configrations.js')
+
 var requestify = require('requestify');
-const request = require('request');
-var server = require('./server')
-var IP = process.env.SLACK_IP
 var userIdInHr = "initial";
-exports.userIdInHr = userIdInHr
-var toffyHelper = require('./toffyHelper')
-var sessionFlag = 0;
-exports.sessionFlag = sessionFlag;
-var async = require('async');
-var currentBot = server.bot;
+
+
+var currentBot =  env.bot;
 var hrRole = 0;
 var general_remember_me = "";
 exports.general_remember_me = general_remember_me
 general_session_id = "";
 exports.general_session_id = general_session_id;
-const dateHelper = require('./DateEngine/DateHelper.js')
-const messageGenerator = require('./messageSender/messageGenerator.js')
-const stringFile = require('./strings.js')
+
 
 
 
@@ -127,21 +121,21 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var j = 0
 
 
-    async.whilst(
+    env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
 
 
 
-            var x = toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+            var x =  env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
 
                 approvalId = managerApproval[i].id
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
                 console.log("Oreder of manages" + i + ":" + managerEmail)
-                messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                    env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                         request({
                             url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
                             method: 'POST',
@@ -162,22 +156,22 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     console.log("startConversation1:" + managerEmail)
                                     var timeststamp = new Date().getTime()
                                     //change 2
-                                    message12 = stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody = stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
+                                    message12 =  env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                    messageBody =  env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
 
 
                                 } else if (approvarType == "HR") {
                                     printLogs("HR Role ")
                                     // var timeststamp = new Date().getTime()
                                     //change 2
-                                    message12 = stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody = stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+                                    message12 =  env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                    messageBody =  env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
 
                                 }
                                 if (type != "WFH") {//change 3
 
-                                    dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                                    dont_detuct_button =  env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
                                 }
 
 
@@ -185,8 +179,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 // needs import (StringFile)
                                 //change 4
                                 if (approvarType == "Manager")
-                                    currentBot = server.bot
-                                else currentBot = server.hRbot;
+                                    currentBot = env.bot
+                                else currentBot = env.hRbot;
                                 currentBot.startConversation(message12, function (err, convo) {
                                     if (!err) {
 
@@ -231,7 +225,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
 
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         request({
             url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
             method: 'GET',
@@ -287,9 +281,9 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
 
 module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
-        toffyHelper.general_remember_me = remember_me_cookie
-        toffyHelper.general_session_id = sessionId
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
+        env.toffyHelper.general_remember_me = remember_me_cookie
+        env.toffyHelper.general_session_id = sessionId
 
         request({
             url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
@@ -314,9 +308,9 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
 
 
-    toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
 
-        toffyHelper.generalCookies = cookies
+        env.toffyHelper.generalCookies = cookies
 
         request({
             url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
@@ -340,7 +334,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
  */
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, comment, callback) {
 
-    toffyHelper.getIdFromEmail(email, function (Id) {
+    env.toffyHelper.getIdFromEmail(email, function (Id) {
         console.log("::::" + "::" + email + "::" + Id)
         var vacationType = "0"
         if (type == "sick") {
@@ -364,7 +358,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
             },
 
             body: vacationBody
@@ -394,7 +388,7 @@ module.exports.getEmailById = function getEmailById(Path, email, callback) {
 
 }
 function makeGetRequest(path, email, callback) {
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         var uri = 'http://' + IP + '/api/v1/' + path
         printLogs("uri " + uri)
 
@@ -442,7 +436,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
             var arr1 = cookies1.toString().split(";")
             res1 = arr1[0].replace(/['"]+/g, '');
             printLogs("final session is =========>" + res)
-            toffyHelper.sessionFlag = 1;
+        
             callback(res, res1);
         }
 
@@ -458,7 +452,7 @@ module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerA
     var flag = false
     var i = 0;
     var state = ""
-    async.whilst(
+    env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
             if (managerApproval[i].state != "Pending") {
@@ -484,7 +478,6 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
     var stringMessage = "["
     var obj = JSON.parse(body);
     var shareInfoLen = Object.keys(obj).length;
-    console.log("shareInfoLen" + shareInfoLen)
 
     if (holidayRequestType == 2 || holidayRequestType == 3) {
         if (holidayRequestType == 2)
@@ -499,7 +492,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             if (i > 0) {
                 stringMessage = stringMessage + ","
             }
-            dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
+            env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
 
@@ -524,7 +517,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
                 stringMessage = stringMessage + ","
             }
 
-            dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
+            env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
 
@@ -551,7 +544,7 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
  */
 function getUserImage(email, callback) {
 
-    toffyHelper.getIdFromEmail(email, function (Id) {
+    env.toffyHelper.getIdFromEmail(email, function (Id) {
 
         var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/image'
         printLogs("uri " + uri)
@@ -561,7 +554,7 @@ function getUserImage(email, callback) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Cookie': toffyHelper.general_remember_me + ";" + toffyHelper.general_session_id
+                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
 
             }
             //Set the body as a stringcc
@@ -577,7 +570,7 @@ function getUserImage(email, callback) {
 module.exports.isActivated = function isActivated(email, callback) {
     printLogs("Getting roles")
     var flag = true;
-    toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         if (remember_me_cookie == 1000) {
             callback(false)
         } else {
