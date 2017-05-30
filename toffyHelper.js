@@ -104,7 +104,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     } else approver2State = "Pending :thinking_face:"
 
     if (comment != "") {
-        var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
+        var commentFieldInManagerMessage = env.stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
     }
     if (type == "sickLeave") {
         type = "sick"
