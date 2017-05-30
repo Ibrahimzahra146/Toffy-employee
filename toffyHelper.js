@@ -24,7 +24,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         if (response.statusCode == 404) {
             printLogs("the employee not found ")
 
-            requestify.post("http://" + IP + "/api/v1/toffy", {
+            requestify.post("http://" + env.IP + "/api/v1/toffy", {
                 "email": email,
                 "hrChannelId": "",
                 "managerChannelId": "",
@@ -45,7 +45,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
 
                 env.request({
-                    url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
+                    url: "http://" + env.IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     printLogs("DELETED");
 
                 });
-                requestify.post("http://" + IP + "/api/v1/toffy", {
+                requestify.post("http://" + env.IP + "/api/v1/toffy", {
                     "email": email,
                     "hrChannelId": hrChId,
                     "managerChannelId": managerChId,
@@ -205,7 +205,7 @@ module.exports.showHolidays = function showHolidays(msg, email, date, date1, hol
 
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         request({
-            url: 'http://' + IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
+            url: 'http://' + env.IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -264,7 +264,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
         env.toffyHelper.general_session_id = sessionId
 
         request({
-            url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
+            url: "http://" +  env.IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -291,7 +291,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
         env.toffyHelper.generalCookies = cookies
 
         request({
-            url: "http://" + IP + "/api/v1/employee/" + userId + "/managers",
+            url: "http://" +  env.IP + "/api/v1/employee/" + userId + "/managers",
             json: true,
             method: 'GET',
             headers: {
@@ -330,7 +330,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
-        var uri = 'http://' + IP + '/api/v1/vacation'
+        var uri = 'http://' +  env.IP + '/api/v1/vacation'
         request({
             url: uri, //URL to hitDs
             method: 'POST',
@@ -367,7 +367,7 @@ module.exports.getEmailById = function getEmailById(Path, email, callback) {
 }
 function makeGetRequest(path, email, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        var uri = 'http://' + IP + '/api/v1/' + path
+        var uri = 'http://' + env.IP + '/api/v1/' + path
         printLogs("uri " + uri)
 
         request({
@@ -393,7 +393,7 @@ function printLogs(msg) {
 }
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
-    var uri = 'http://' + IP + '/api/v1/employee/login'
+    var uri = 'http://' +  env.IP + '/api/v1/employee/login'
     request({
         url: uri, //URL to hitDs
         method: 'POST',
@@ -524,7 +524,7 @@ function getUserImage(email, callback) {
 
     env.toffyHelper.getIdFromEmail(email, function (Id) {
 
-        var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/image'
+        var uri = 'http://' +  env.IP + '/api/v1/employee/' + Id + '/image'
         printLogs("uri " + uri)
 
         request({
@@ -554,7 +554,7 @@ module.exports.isActivated = function isActivated(email, callback) {
         } else {
 
             request({
-                url: 'http://' + IP + '/api/v1/employee/roles', //URL to hitDs
+                url: 'http://' +  env.IP + '/api/v1/employee/roles', //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
