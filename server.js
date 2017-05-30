@@ -328,7 +328,6 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
       }
       //Set the body as a stringcc
     }, function (error, response, body) {
-      console.log("(JSON.parse(body)).vacationState " + (JSON.parse(body)).vacationState)
       env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
         console.log("isThereIsAction" + isThereIsAction)
         if (isThereIsAction == false) {
@@ -388,7 +387,7 @@ env.slapp.event('team_join', (msg) => {
 app.get('/', function (req, res) {
   res.send('Hello')
 })
-app.use(bodyParser.text({ type: 'application/json' }));
+app.use(env.bodyParser.text({ type: 'application/json' }));
 
 app.post('/birthday', (req, res) => {
   console.log("New get request is received");
