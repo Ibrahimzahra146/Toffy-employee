@@ -25,7 +25,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 function sendRequestToApiAi(emailValue, msg, flag, text) {
   env.toffyHelper.isActivated(emailValue, function (isActivated) {
     if (isActivated == false) {
-      msg.say(stringFile.deactivatedMsg)
+      msg.say(env.stringFile.deactivatedMsg)
 
     }
 
@@ -36,7 +36,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
       } else {
         msgText = msg.body.event.text;
 
-        toffyHelper.storeUserSlackInformation(emailValue, msg);
+        env.toffyHelper.storeUserSlackInformation(emailValue, msg);
       }
       let apiaiRequest = env.apiAiService.textRequest(msgText,
         {
@@ -162,19 +162,11 @@ function getMembersList(Id, msg) {
 var app = slapp.attachToExpress(express())
 slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   env.generalMsg = msg
-  console.log("the Ip  ====>" + IP)
   if (msg.body.event.user == "U4EN9UDHV") {
-    console.log("=============>message from  bot ")
 
   } else {
-    console.log("I am not the bot")
-    var stringfy = JSON.stringify(msg);
-    console.log(stringfy);
     getMembersList(msg.body.event.user, msg)
-
-
   }
-
 })
 
 slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
@@ -240,7 +232,7 @@ function userAction(msg, value, isComment) {
             env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
-              messageFB = stringFile.sickMessageAfterConfirmation
+              messageFB = env.stringFile.sickMessageAfterConfirmation
 
             }
             else
@@ -464,16 +456,9 @@ app.post('/one_day_left_sRep', (req, res) => {
   var email = parsedBody.employee.email
   env.dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
 
-    request({
-      url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': 'JSESSIONID=24D8D542209A0B2FF91AB2A333C8FA70'
-      },
-      body: email
-      //Set the body as a stringcc
-    }, function (error, response, body) {
+    env.mRequests.getSlackRecord(email, function (body) {
+
+
       var responseBody = JSON.parse(body);
       var slackMsg = env.stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserIdresponseBody.teamId);
       var messageFB = env.stringFile.oneDayLeftInfoMessage(fromDateWord, toDateWord)
@@ -491,12 +476,10 @@ app.post('/one_day_left_sRep', (req, res) => {
 
       });
     })
-
-
-
   })
   res.send(200)
 });
+
 app.post('/newat', (req, res) => {
   var code = req.param('access_token');
 });

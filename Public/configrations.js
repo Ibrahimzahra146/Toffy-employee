@@ -43,7 +43,8 @@ exports.employee = employee
 
 var server = require('.././server.js')
 exports.server = server
-
+const mRequests = require('.././Requests/Requests.js')
+exports.mRequests = mRequests
 var stringFile = require('.././strings.js')
 exports.stringFile = stringFile
 
@@ -94,7 +95,7 @@ const opn = require('opn');
 var sessionId = uuid.v1();
 var requestify = require('requestify');
 var pg = require('pg');
-var Constants = require('./Constants.js');
+var Constants = require('.././Constants.js');
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
 var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
