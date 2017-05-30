@@ -342,9 +342,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             body: vacationBody
             //Set the body as a stringcc
         }, function (error, response, body) {
-            console.log(JSON.stringify(body))
-            printLogs("the vacation statusCode:" + response.statusCode)
-            // printLogs(response.message)
             var vacationId = (JSON.parse(body)).id;
             var managerApproval = (JSON.parse(body)).managerApproval
             callback(vacationId, managerApproval);
