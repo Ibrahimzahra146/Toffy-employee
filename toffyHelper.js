@@ -2,7 +2,7 @@ const env = require('./Public/configrations.js')
 
 var requestify = require('requestify');
 var userIdInHr = "initial";
-exports.userIdInHr=userIdInHr
+exports.userIdInHr = userIdInHr
 
 var currentBot = env.bot;
 var hrRole = 0;
@@ -128,7 +128,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 console.log("Oreder of manages" + i + ":" + managerEmail)
                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        env.mRequests.getSlackRecord(managerEmail, function (body) {
+                        env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
                             console.log("HIii" + JSON.stringify(body))
                             getUserImage(userEmail, function (ImageUrl) {
                                 var messageBody = ""
