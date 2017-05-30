@@ -49,6 +49,21 @@ module.exports.getSlackMembers = function getSlackMembers(callback) {
         url: env.Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
         json: true
     }, function (error, response, body) {
-        callback(error,response,body)
+        callback(error, response, body)
+    })
+}
+
+/**
+ * Delete vacation
+ */
+module.exports.deleteVacation = function deleteVacation(vacationId, email, callback) {
+    env.request({
+        url: 'http://' + IP + '/api/v1/vacation/' + vacationId,
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.remember_me_cookie + ";" + env.toffyHelper.session_Id
+        },
+    }, function (error, response, body) {
     })
 }
