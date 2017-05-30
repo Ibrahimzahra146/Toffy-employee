@@ -149,7 +149,7 @@ module.exports.getEmployeeProfile = function getEmployeeProfile(email,Id, callba
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
 
         env.request({
-            url: "http://" + IP + "/api/v1/employee/" + Id,
+            url: "http://" + env.IP + "/api/v1/employee/" + Id,
             json: true,
             method: 'GET',
             headers: {
