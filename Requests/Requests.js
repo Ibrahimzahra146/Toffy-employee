@@ -126,7 +126,7 @@ module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
  */
 module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        var url = "http://" + IP + "/api/v1/vacation/rules";
+        var url = "http://" + env.IP + "/api/v1/vacation/rules";
 
         request({
             url: url,
