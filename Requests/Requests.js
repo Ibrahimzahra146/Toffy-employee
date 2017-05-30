@@ -16,7 +16,7 @@ module.exports.getSlackRecord = function getSlackRecord(email, callback) {
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        callback(body)
+        callback(error, response, body)
     })
 }
 /**

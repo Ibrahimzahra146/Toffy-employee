@@ -19,7 +19,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
     printLogs("Store user slack info :::")
 
 
-    env.mRequests.getSlackRecord(email, function (body) {
+    env.mRequests.getSlackRecord(email, function (error, response, body) {
 
         if (response.statusCode == 404) {
             printLogs("the employee not found ")
@@ -141,7 +141,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
                                 } else if (approvarType == "HR") {
-                               
+
                                     message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
                                     messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
@@ -264,7 +264,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
         env.toffyHelper.general_session_id = sessionId
 
         env.request({
-            url: "http://" +  env.IP + "/api/v1/employee/get-id", //URL to hitDs
+            url: "http://" + env.IP + "/api/v1/employee/get-id", //URL to hitDs
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -291,7 +291,7 @@ module.exports.getUserManagers = function getUserManagers(userId, email, manager
         env.toffyHelper.generalCookies = cookies
 
         env.request({
-            url: "http://" +  env.IP + "/api/v1/employee/" + userId + "/managers",
+            url: "http://" + env.IP + "/api/v1/employee/" + userId + "/managers",
             json: true,
             method: 'GET',
             headers: {
@@ -330,7 +330,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
         }
         vacationBody = JSON.stringify(vacationBody)
-        var uri = 'http://' +  env.IP + '/api/v1/vacation'
+        var uri = 'http://' + env.IP + '/api/v1/vacation'
         env.request({
             url: uri, //URL to hitDs
             method: 'POST',
@@ -393,7 +393,7 @@ function printLogs(msg) {
 }
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
-    var uri = 'http://' +  env.IP + '/api/v1/employee/login'
+    var uri = 'http://' + env.IP + '/api/v1/employee/login'
     env.request({
         url: uri, //URL to hitDs
         method: 'POST',
@@ -524,7 +524,7 @@ function getUserImage(email, callback) {
 
     env.toffyHelper.getIdFromEmail(email, function (Id) {
 
-        var uri = 'http://' +  env.IP + '/api/v1/employee/' + Id + '/image'
+        var uri = 'http://' + env.IP + '/api/v1/employee/' + Id + '/image'
         printLogs("uri " + uri)
 
         env.request({
@@ -554,7 +554,7 @@ module.exports.isActivated = function isActivated(email, callback) {
         } else {
 
             env.request({
-                url: 'http://' +  env.IP + '/api/v1/employee/roles', //URL to hitDs
+                url: 'http://' + env.IP + '/api/v1/employee/roles', //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
