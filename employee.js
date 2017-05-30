@@ -13,7 +13,7 @@ Show employee vacation history
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
     env.toffyHelper.getIdFromEmail(email, function (Id) {
-        var uri = 'http://' + IP + '/api/v1/employee/' + Id + '/vacations/2017'
+        var uri = 'http://' + env.IP + '/api/v1/employee/' + Id + '/vacations/2017'
         request({
             url: uri,
             method: 'GET',
@@ -84,17 +84,9 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 Show Employee stats like annual vacation and etc..
 *****/
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
-    printLogs("showEmployeeStats")
+
     env.toffyHelper.getIdFromEmail(email, function (Id) {
-        request({
-            url: "http://" + IP + "/api/v1/employee/" + Id + "/balance",
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
-            }
-        }, function (error, response, body) {
+        env.mRequests.getEmployeeBalance(Id, function (error, response, body) {
             var messageBody = {
                 "text": "Your stats and anuual time off details",
                 "attachments": [
