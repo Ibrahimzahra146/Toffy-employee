@@ -44,7 +44,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                 var hrChId = JSON.parse(body).hrChannelId;
 
 
-                request({
+                env.request({
                     url: "http://" + IP + "/api/v1/toffy/" + JSON.parse(body).id, //URL to hitDs
                     method: 'DELETE',
                     headers: {

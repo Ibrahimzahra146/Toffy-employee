@@ -9,7 +9,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
     id = msg.body.user.id
 
   } else id = msg.body.event.user
-  request({
+  env.request({
     url: "https://slack.com/api/users.info?token=" + env.SLACK_ACCESS_TOKEN + "&user=" + id,
     json: true
   }, function (error, response, body) {
