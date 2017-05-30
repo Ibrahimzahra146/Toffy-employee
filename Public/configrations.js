@@ -72,6 +72,9 @@ exports.apiAiService = apiAiService
 var IP = process.env.SLACK_IP;
 exports.IP = IP
 
+var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
+exports.SLACK_ACCESS_TOKEN = SLACK_ACCESS_TOKEN
+
 var sickFlag = "";
 exports.sickFlag = sickFlag
 var typeOfVacation = "";
@@ -97,7 +100,7 @@ var requestify = require('requestify');
 var pg = require('pg');
 var Constants = require('.././Constants.js');
 var APIAI_ACCESS_TOKEN = process.env.APIAI_ACCESS_KEY;
-var SLACK_ACCESS_TOKEN = process.env.SLACK_APP_ACCESS_KEY;
+
 var SLACK_BOT_TOKEN = process.env.SLACK_BOT_ACCESS_KEY;
 var SLACK_HR_TOKEN = process.env.SLACK_HR_ACCESS_KEY;
 var SLACK_EMPLOYEE_BOT_ACCESS_KEY = process.env.SLACK_EMPLOYEE_BOT_ACCESS_KEY

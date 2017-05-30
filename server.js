@@ -10,7 +10,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 
   } else id = msg.body.event.user
   request({
-    url: "https://slack.com/api/users.info?token=" + SLACK_ACCESS_TOKEN + "&user=" + id,
+    url: "https://slack.com/api/users.info?token=" + env.SLACK_ACCESS_TOKEN + "&user=" + id,
     json: true
   }, function (error, response, body) {
     if (flag == 1) {
@@ -128,10 +128,9 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 //get all information about team users like email ,name ,user id ...sssss
 //**********************************************************************************************
 function getMembersList(Id, msg) {
-  console.log("SLACK_ACCESS_TOKEN=====>    " + SLACK_ACCESS_TOKEN)
   var emailValue = "";
   request({
-    url: Constants.SLACK_MEMBERS_LIST_URL + "" + SLACK_ACCESS_TOKEN,
+    url: Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
     json: true
   }, function (error, response, body) {
 
