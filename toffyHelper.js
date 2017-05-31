@@ -117,7 +117,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = emailFromId.replace(/\"/, "")
                 managerEmail = managerEmail.replace(/\"/, "")
-                console.log("Oreder of manages" + i + ":" + managerEmail)
+                console.log("Oreder o f manages" + i + ":" + managerEmail)
                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                         env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
