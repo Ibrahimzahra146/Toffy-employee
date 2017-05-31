@@ -533,7 +533,7 @@ function getUserImage(email, callback) {
 //Check if the user is deactivited
 
 module.exports.isActivated = function isActivated(email, callback) {
-    printLogs("Getting roles")
+    printLogs("Getting roles ")
     var flag = true;
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         if (remember_me_cookie == 1000) {
@@ -560,101 +560,4 @@ module.exports.isActivated = function isActivated(email, callback) {
         }
     })
 }
-/**
- * 
- * 
- */
-function sendToManagers(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment, i) {
-    var message12 = ""
-    var approvarType = ""
-    var approvalId = ""
-    var managerEmail = ""
-    var dont_detuct_button = ""
-    var commentFieldInManagerMessage = ""
-    var approver2State = "--"
-    //check if there is second approver to print it in the message  
-    if (!managerApproval[1]) {
-        approver2State = "--"
 
-    } else approver2State = "Pending :thinking_face:"
-
-    if (comment != "") {
-        var commentFieldInManagerMessage = env.stringFile.commentFieldInManagerMessageFunction(comment);// change 1 
-    }
-    if (type == "sickLeave") {
-        type = "sick"
-    }
-
-
-
-
-
-    var x = env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-
-        approvalId = managerApproval[i].id
-        approvarType = managerApproval[i].type
-        managerEmail = emailFromId.replace(/\"/, "")
-        managerEmail = managerEmail.replace(/\"/, "")
-        console.log("Oreder o f manages" + i + ":" + managerEmail)
-        env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-            env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
-                    console.log("HIii" + JSON.stringify(body))
-                    getUserImage(userEmail, function (ImageUrl) {
-                        var messageBody = ""
-
-                        var jsonResponse = JSON.parse(body);
-                        if (approvarType == "Manager") {
-                            //change 2
-                            message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                            messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
-
-
-                        } else if (approvarType == "HR") {
-
-                            message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                            messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-
-
-                        }
-                        if (type != "WFH") {//change 3
-
-                            dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
-                        }
-
-
-
-                        // needs import (StringFile)
-                        //change 4
-                        if (approvarType == "Manager")
-                            currentBot = env.bot
-                        else currentBot = env.hRbot;
-                        currentBot.startConversation(message12, function (err, convo) {
-                            if (!err) {
-
-                                var stringfy = JSON.stringify(messageBody);
-                                var obj1 = JSON.parse(stringfy);
-                                currentBot.reply(message12, obj1, function (err, response) {
-
-
-
-                                });
-
-                            }
-
-                        });
-
-
-
-                        flagForWhileCallbacks = 1
-
-                    });
-
-
-
-                })
-            })
-
-        })
-    })
-}
