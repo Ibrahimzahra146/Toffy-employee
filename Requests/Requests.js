@@ -142,7 +142,7 @@ module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
     })
 }
 /**
- * 
+ * Get employee profile
  * 
  */
 module.exports.getEmployeeProfile = function getEmployeeProfile(email,Id, callback) {

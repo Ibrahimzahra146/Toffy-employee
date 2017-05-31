@@ -78,15 +78,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
 
 }
-//if the user exist but may be added or not at toffy record
 
-
-
-
-
-//**************************************************************************************************
-
-//****************************************** ********************************************************
 //*
 //send vacation notification to the managers to approve or reject
 module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
@@ -181,16 +173,14 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             });
 
                             i++;
+                            callback()
                         })
                     })
 
                 })
             })
 
-            setTimeout(callback, 5000
-
-
-            );
+         
 
         },
         function (err) {
