@@ -240,7 +240,7 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
         text: 'what is my name',
         team: teamId,
         event: 'direct_message',
-        as_user: true
+        as_user: false
 
     }
     return message12;
