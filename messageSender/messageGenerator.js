@@ -21,7 +21,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
             flag == "false }"
         }
         var arr = managerApproval[i].managerEmail.toString().split("@")
-        console.log("managerApproval[i].mana gerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
+        console.log("managerApproval[i].mangerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
         if (managerApproval[i].managerEmail != managerEmail) {
 
 
