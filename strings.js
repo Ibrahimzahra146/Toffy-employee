@@ -17,6 +17,9 @@ exports.message_already_action_from_manager = message_already_action_from_manage
 //
 var pretext = "You can use on of the following expressions to engage with me:"
 exports.pretext = pretext
+//Holiday nodtice 
+var holiday_notice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+exports.holiday_notice = holiday_notice
 
 
 

@@ -1,10 +1,9 @@
-const request = require('request');
-var toffyHelper = require('.././toffyHelper.js')
-var server = require('.././server.js')
+var env = require('.././Public/configrations.js');
+var env = require('.././Public/configrations.js');
 var sessionFlag = 0;
 var IP = process.env.SLACK_IP
 module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messageText) {
-    var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+    var holidaysNotice = env.stringFile.holiday_notice
     if (type == "sick") {
         // msg.say("Sorry to hear that :(")
         holidaysNotice = ""
@@ -83,7 +82,7 @@ module.exports.replaceWithComment = function replaceWithComment(msg, fromTime, t
 //Undo in the employee side 
 module.exports.undoUserComment = function undoUserComment(msg, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, wordFromDate, wordTodate, messagetext) {
     var addCommnetButton = ""
-    var holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+    var holidaysNotice = env.stringFile.holiday_notice
     if (type == "sick") {
         // msg.say("Sorry to hear that :(")
         holidaysNotice = ""
