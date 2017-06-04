@@ -76,7 +76,7 @@ module.exports.upload_sick_report_messsage = function upload_sick_report_messsag
 
 
 //cancel button 
-module.exports.cancelationButton = function cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton) {
+module.exports.cancelationButton = function cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton,messageFB) {
     var message = {
         "text": "",
         "attachments": [

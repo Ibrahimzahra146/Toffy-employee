@@ -238,7 +238,7 @@ function userAction(msg, value, isComment) {
               uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
 
-            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton)
+            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton,messageFB)
 
             msg.respond(msg.body.response_url, message_feedback_toEmp_after_confirmation)
 
