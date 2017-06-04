@@ -169,15 +169,15 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     if (type == "sick") {
         typeText = " you asked for a sick" + " time off :persevere:,"
     } else if (type == "Maternity") {
-        typeText = "Congratulations! a great joy is coming. Many best wishes,"
+        typeText = env.stringFile.maternity_message
     } else if (type == "Paternity") {
-        typeText = "Congratulations on your baby’s paternity,"
+        typeText = env.stringFile.paternity_message
     } else if (type == "WFH")
-        typeText = "Okay, you asked to work from home"
+        typeText = env.stringFile.WFH_message
     else if (type == "death")
-        typeText = "Sorry about your loss, our deepest condolences, "
+        typeText = env.stringFile.death_message
     else if (type == "Wedding")
-        typeText = "Congratulations on your marriage,"
+        typeText = env.stringFile.wedding_message
     var messageText = ""
     generateOverllapedVacationsMessae(overlappedVacations, function (overlppedMsg) {
 

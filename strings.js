@@ -20,7 +20,21 @@ exports.pretext = pretext
 //Holiday nodtice 
 var holiday_notice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
 exports.holiday_notice = holiday_notice
-
+//paternity message
+var paternity_message = "Congratulations on your baby’s paternity"
+exports.paternity_message = paternity_message
+//maternity message
+var maternity_message = "Congratulations! a great joy is coming. Many best wishes,"
+exports.maternity_message = maternity_message
+//death message
+var death_message = "Sorry about your loss, our deepest condolences,"
+exports.death_message = death_message
+//Wedding message
+var wedding_message = "Congratulations on your marriage,"
+exports.wedding_message = wedding_message
+// work from home message
+var WFH_message = "Okay, you asked to work from home"
+exports.WFH_message = WFH_message
 
 
 
