@@ -278,43 +278,43 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
 
     //stringFile.timeOffPredefinedActions
-    var messageBody = env.stringFile.helpMessageBody("", stringFile.timeOffPredefinedActions, stringFile.pretext)
+    var messageBody = env.stringFile.helpMessageBody("", env.stringFile.timeOffPredefinedActions,  env.stringFile.pretext)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", stringFile.statsProfileHistoryActions, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.statsProfileHistoryActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
 
-    messageBody = env.stringFile.helpMessageBody("", stringFile.FamilyDeathActions, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.FamilyDeathActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", stringFile.holidayAction, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.holidayAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", stringFile.WfhActions, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.WfhActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.tringFile.helpMessageBody("", stringFile.rulesAction, "")
+    messageBody = env.tringFile.helpMessageBody("",  env.stringFile.rulesAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", stringFile.fromDateToDate, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.fromDateToDate, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody(stringFile.staticHelpFields, "", "")
+    messageBody = env.stringFile.helpMessageBody( env.stringFile.staticHelpFields, "", "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)

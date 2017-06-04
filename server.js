@@ -292,14 +292,14 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
       if (isThereIsAction == false) {
         //delete vacation request
         env.mRequests.deleteVacation(email, vacationId, function (body) {
-          msg.respond(msg.body.response_url, "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled")
+          msg.respond(msg.body.response_url, env.stringFile.messageAfterCancelation)
 
           //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
         })
       } else {
         if (state == "Rejected")
-          msg.respond(msg.body.response_url, "No need to cancel since its already rejected from your approvals.")
+          msg.respond(msg.body.response_url, env.stringFile.message_after_cancelation_rejected_timeoff)
         //the managers take an action
         else
           msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")

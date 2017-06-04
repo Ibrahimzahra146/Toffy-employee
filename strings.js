@@ -5,8 +5,14 @@ const stringFile = require('./strings.js')
 /**Deactivated message */
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
 exports.deactivatedMsg = deactivatedMsg
+//
 const sickMessageAfterConfirmation = "Sick time off request has been submitted to your managers and HR admin.\n You have to submit a sick report within one week maximum.\n Otherwise, it will be considered as a personal time off. "
 exports.sickMessageAfterConfirmation = sickMessageAfterConfirmation
+//message after cancelation for already rejected vacation
+const message_after_cancelation_rejected_timeoff = "No need to cancel since its already rejected from your approvals."
+exports.message_after_cancelation_rejected_timeoff = message_after_cancelation_rejected_timeoff
+//message when employee cancel request but managers already tak an action]
+
 //personal message after confirmation
 module.exports.personalMessageAfterConfirmation = function (fromDate, toDate) {
     var message = "Your request ( " + fromDate + " to " + toDate + " ) has been submitted and is awaiting your managers approval."
@@ -45,6 +51,11 @@ module.exports.cancelationButton = function cancelationButton(email, vacationId,
             }
         ]
     }
+}
+//message after cancel vacation
+module.exports.messageAfterCancelation = function messageAfterCancelation(type, fromDate, toDate) {
+    var message = "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled"
+    return message
 }
 
 
