@@ -14,12 +14,31 @@ exports.message_after_cancelation_rejected_timeoff = message_after_cancelation_r
 //message when employee cancel request but managers already tak an actions
 const message_already_action_from_manager = "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them"
 exports.message_already_action_from_manager = message_already_action_from_manager
+//
+var pretext = "You can use on of the following expressions to engage with me:"
+exports.pretext = pretext
+
+
+
+
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
+//sick report on click
+
 
 //personal message after confirmation
 module.exports.personalMessageAfterConfirmation = function (fromDate, toDate) {
     var message = "Your request ( " + fromDate + " to " + toDate + " ) has been submitted and is awaiting your managers approval."
     return message;
 }
+
+
 //upload_sick_report button
 module.exports.uploadSickReportButton = function uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB) {
     var message = {
@@ -30,6 +49,15 @@ module.exports.uploadSickReportButton = function uploadSickReportButton(email, v
     }
     return message;
 }
+
+
+//upload sick report message on click
+module.exports.upload_sick_report_messsage = function upload_sick_report_messsage(messageFB, vacationId) {
+    var message = messageFB + "\nTap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>"
+    return message;
+}
+
+
 //cancel button 
 module.exports.cancelationButton = function cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton) {
     var message = {
@@ -54,6 +82,7 @@ module.exports.cancelationButton = function cancelationButton(email, vacationId,
         ]
     }
 }
+
 //message after cancel vacation
 module.exports.messageAfterCancelation = function messageAfterCancelation(type, fromDate, toDate) {
     var message = "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled"
@@ -61,6 +90,14 @@ module.exports.messageAfterCancelation = function messageAfterCancelation(type, 
 }
 
 
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {
     var messageBody = {
         "text": "",
@@ -175,8 +212,7 @@ var timeOffPredefinedActions = [
 ]
 exports.timeOffPredefinedActions = timeOffPredefinedActions
 //
-var pretext = "You can use on of the following expressions to engage with me:"
-exports.pretext = pretext
+
 /**
  * 
  */
@@ -233,6 +269,15 @@ var holidayAction = [
     }
 
 ]
+
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 exports.holidayAction = holidayAction;
 /**
  * 
@@ -247,6 +292,15 @@ var rulesAction = [
     },
 
 ]
+
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.rulesAction = rulesAction
 var fromDateToDate = [
     {
@@ -259,8 +313,16 @@ var fromDateToDate = [
 
 ]
 module.exports.fromDateToDate = fromDateToDate
-//
-//****************************************************************************************************************************************
+
+
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.commentFieldInManagerMessageFunction = function commentFieldInManagerMessageFunction(comment) {
     var commentFieldInManagerMessage = ""
     if (comment != "") {
@@ -273,6 +335,14 @@ module.exports.commentFieldInManagerMessageFunction = function commentFieldInMan
     return commentFieldInManagerMessage;
 }
 
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.dont_detuct_button_Function = function dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl) {
     var dont_detuct_button = {
         "name": "dont_detuct",
@@ -285,6 +355,14 @@ module.exports.dont_detuct_button_Function = function dont_detuct_button_Functio
 }
 
 
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerChannelId, slackUserId, teamId) {
     var message12 = {
         'type': 'message',
@@ -299,6 +377,14 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
     return message12;
 }
 
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
 module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage) {
     console.log("sendVacationToManagerFunction" + managerApprovalMessage)
     //  managerApprovalMessage = JSON.parse(managerApprovalMessage)

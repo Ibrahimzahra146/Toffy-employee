@@ -328,7 +328,7 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   var fromDate = arr[2]
   var toDate = arr[3]
   var messageFB = arr[4]
-  msg.respond(msg.body.response_url, messageFB + "\nTap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>");
+  msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage);
 
 })
 env.slapp.event('team_join', (msg) => {
@@ -341,10 +341,6 @@ app.get('/', function (req, res) {
 app.use(env.bodyParser.text({ type: 'application/json' }));
 
 app.post('/birthday', (req, res) => {
-  console.log("New get request is received");
-  // work /var state= req.param('code')
-  console.log(req.body);
-
   var email = JSON.parse(req.body)[0].email
   env.messageSender.sendMessageSpecEmployee(email, "With all the best")
   res.send("200");
