@@ -380,6 +380,7 @@ function printLogs(msg) {
 }
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
+    console.log("getNewSessionwithCookieemaiol" + email)
     var uri = 'http://' + env.IP + '/api/v1/employee/login'
     env.request({
         url: uri, //URL to hitDs
