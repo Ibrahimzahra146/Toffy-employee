@@ -215,7 +215,6 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
 
 }
 function generateOverllapedVacationsMessae(overlappedVacations, callback) {
-    console.log("JSON.stringify(overlappedVacations)" + JSON.stringify(overlappedVacations))
     var overlppedMsg = ""
     if (overlappedVacations != "") {
         var i = 0

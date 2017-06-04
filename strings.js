@@ -4,9 +4,49 @@
 const stringFile = require('./strings.js')
 /**Deactivated message */
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
+exports.deactivatedMsg = deactivatedMsg
 const sickMessageAfterConfirmation = "Sick time off request has been submitted to your managers and HR admin.\n You have to submit a sick report within one week maximum.\n Otherwise, it will be considered as a personal time off. "
 exports.sickMessageAfterConfirmation = sickMessageAfterConfirmation
-exports.deactivatedMsg = deactivatedMsg
+//personal message after confirmation
+module.exports.personalMessageAfterConfirmation = function (fromDate, toDate) {
+    var message = "Your request ( " + fromDate + " to " + toDate + " ) has been submitted and is awaiting your managers approval."
+    return message;
+}
+//upload_sick_report button
+module.exports.uploadSickReportButton = function uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB) {
+    var message = {
+        "name": "upload_sick_report",
+        "text": "Upload sick report ",
+        "type": "button",
+        "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate + ";" + messageFB
+    }
+    return message;
+}
+//cancel button 
+module.exports.cancelationButton = function cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton) {
+    var message = {
+        "text": "",
+        "attachments": [
+            {
+                "text": messageFB,
+                "callback_id": 'cancel_request',
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "name": 'cancel',
+                        "text": "Cancel Request",
+                        "style": "danger",
+                        "type": "button",
+                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate + ";" + type
+
+                    }, uploadSickReportButton
+                ]
+            }
+        ]
+    }
+}
+
 
 module.exports.helpMessageBody = function helpMessageBody(fields, actions, pretext) {
     var messageBody = {

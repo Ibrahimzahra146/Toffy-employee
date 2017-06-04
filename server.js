@@ -232,40 +232,14 @@ function userAction(msg, value, isComment) {
 
             }
             else
-              messageFB = "Your request ( " + fromDate + " to " + toDate + " ) has been submitted and is awaiting your managers approval "
+              messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, fromDate)
             if (type == "sick") {
-              uploadSickReportButton = {
-                "name": "upload_sick_report",
-                "text": "Upload sick report ",
-                "type": "button",
-                "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate + ";" + messageFB
-              }
+              uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
 
-            var text12 = {
-              "text": "",
-              "attachments": [
-                {
-                  "text": messageFB,
-                  "callback_id": 'cancel_request',
-                  "color": "#3AA3E3",
-                  "attachment_type": "default",
-                  "actions": [
-                    {
-                      "name": 'cancel',
-                      "text": "Cancel Request",
-                      "style": "danger",
-                      "type": "button",
-                      "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate + ";" + type
+            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton)
 
-                    }, uploadSickReportButton
-                  ]
-                }
-              ]
-            }
-            console.log("cancel_request1" + JSON.stringify(managerApproval))
-
-            msg.respond(msg.body.response_url, text12)
+            msg.respond(msg.body.response_url, message_feedback_toEmp_after_confirmation)
 
           }
         });
