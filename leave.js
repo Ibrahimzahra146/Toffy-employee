@@ -111,32 +111,6 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     })
 }
 
-function converDateToMilliseconds(TimeforMilliseconds, callback) {
-    console.log("arrive at converDateToMilliseconds" + TimeforMilliseconds)
-    var arr = TimeforMilliseconds.toString().split(":")
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
-
-    today + " " + TimeforMilliseconds
-    y = new Date(today)
-    y.setHours((arr[0] - 2))
-    y.setMinutes(arr[1])
-    var milliSeconds = y.getTime()
-    callback(milliSeconds)
-}
 
 
 function getWorkingDays(startDate, endDate, email, typeNum, callback) {
