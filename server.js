@@ -302,7 +302,7 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
           msg.respond(msg.body.response_url, env.stringFile.message_after_cancelation_rejected_timeoff)
         //the managers take an action
         else
-          msg.respond(msg.body.response_url, "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them")
+          msg.respond(msg.body.response_url, env.stringFile.message_already_action_from_manager)
 
 
       }

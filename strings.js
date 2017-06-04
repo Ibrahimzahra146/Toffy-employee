@@ -11,7 +11,9 @@ exports.sickMessageAfterConfirmation = sickMessageAfterConfirmation
 //message after cancelation for already rejected vacation
 const message_after_cancelation_rejected_timeoff = "No need to cancel since its already rejected from your approvals."
 exports.message_after_cancelation_rejected_timeoff = message_after_cancelation_rejected_timeoff
-//message when employee cancel request but managers already tak an action]
+//message when employee cancel request but managers already tak an actions
+const message_already_action_from_manager = "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them"
+exports.message_already_action_from_manager = message_already_action_from_manager
 
 //personal message after confirmation
 module.exports.personalMessageAfterConfirmation = function (fromDate, toDate) {
