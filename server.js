@@ -233,7 +233,7 @@ function userAction(msg, value, isComment) {
 
             }
             else
-              messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, fromDate)
+              messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, toDate)
             if (type == "sick") {
               uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
