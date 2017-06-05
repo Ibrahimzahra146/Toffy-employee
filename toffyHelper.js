@@ -177,19 +177,20 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                 i++;
                                 setTimeout(callback, 4000);
-                            })
-                    }
+                            }
+                        })
+
                     })
 
+                })
             })
-        })
 
 
 
-},
-    function (err) {
-        // 5 seconds have passed
-    });
+        },
+        function (err) {
+            // 5 seconds have passed
+        });
 
 }
 
