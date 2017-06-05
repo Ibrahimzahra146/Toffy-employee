@@ -238,7 +238,7 @@ function userAction(msg, value, isComment) {
               uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
 
-            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton,messageFB)
+            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton, messageFB)
 
             msg.respond(msg.body.response_url, message_feedback_toEmp_after_confirmation)
 
@@ -328,7 +328,7 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   var fromDate = arr[2]
   var toDate = arr[3]
   var messageFB = arr[4]
-  msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage);
+  msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage(messageFB, vacationId));
 
 })
 env.slapp.event('team_join', (msg) => {
