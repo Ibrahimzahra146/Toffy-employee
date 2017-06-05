@@ -124,7 +124,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             console.log("HIii" + JSON.stringify(body))
                             getUserImage(userEmail, function (ImageUrl) {
                                 var messageBody = ""
-
+                                    
                                 var jsonResponse = JSON.parse(body);
                                 if (approvarType == "Manager") {
                                     //change 2

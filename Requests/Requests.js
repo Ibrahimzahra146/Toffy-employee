@@ -6,6 +6,7 @@ const env = require('.././Public/configrations.js')
  * 
  */
 module.exports.getSlackRecord = function getSlackRecord(email, callback) {
+    console.log("getSlackRecord" + email)
     env.request({
         url: 'http://' + env.IP + '/api/v1/toffy/get-record', //URL to hitDs
         method: 'POST',
@@ -46,7 +47,7 @@ module.exports.getVacationInfo = function getVacationInfo(email, vacationId, cal
  * Slack memberss list
  */
 module.exports.getSlackMembers = function getSlackMembers(callback) {
-    console.log("env.SLACK_ACCESS_TOKEN,"+env.SLACK_ACCESS_TOKEN)
+    console.log("env.SLACK_ACCESS_TOKEN," + env.SLACK_ACCESS_TOKEN)
     env.request({
         url: env.Constants.SLACK_MEMBERS_LIST_URL + "" + env.SLACK_ACCESS_TOKEN,
         json: true
@@ -146,7 +147,7 @@ module.exports.getTimeOffRules = function getTimeOffRules(email, callback) {
  * Get employee profile
  * 
  */
-module.exports.getEmployeeProfile = function getEmployeeProfile(email,Id, callback) {
+module.exports.getEmployeeProfile = function getEmployeeProfile(email, Id, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
 
         env.request({
