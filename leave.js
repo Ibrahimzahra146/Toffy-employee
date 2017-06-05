@@ -49,10 +49,9 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                         console.log("holidaysNotice" + holidaysNotice)
 
                                     }
-                                    holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
                                     if (type == "sick") {
                                         // msg.say("Sorry to hear that :(")
-                                        holidaysNotice = ""
+                                       // holidaysNotice = ""
                                     }
                                     if (type == "WFH") {
                                         workingDays = 0
