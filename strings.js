@@ -405,8 +405,19 @@ module.exports.Slack_Channel_Function = function Slack_Channel_Function(managerC
  *****************/
 module.exports.sendVacationToManagerFunction = function sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage) {
     console.log("sendVacationToManagerFunction" + managerApprovalMessage)
+
     //  managerApprovalMessage = JSON.parse(managerApprovalMessage)
+
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+    var actions_based_on_type = dont_detuct_button
+    if (type == "sick")
+        actions_based_on_type = {
+            "name": "accept_with_report",
+            "text": "Accept with report",
+            "style": "danger",
+            "type": "button",
+            "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+        }
     var commentFieldInManagerMessage = stringFile.commentFieldInManagerMessageFunction(comment);
     var messageBody = {
         "text": "This folk has pending time off request:",
@@ -452,28 +463,28 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "text": "Accept",
                         "style": "primary",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                     },
                     {
                         "name": "reject",
                         "text": "Reject",
                         "style": "danger",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                     },
                     {
-                        "name": "accept_with_report",
-                        "text": "Accept with report",
+                        "name": "reject_with_comment",
+                        "text": "Reject with comment",
                         "style": "danger",
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
-                    }, dont_detuct_button,
+                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
+                    }, actions_based_on_type,
                     {
                         "name": "check_state",
                         "text": ":arrows_counterclockwise:",
 
                         "type": "button",
-                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
+                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
                     },
                 ],
                 "color": "#F35A00",
