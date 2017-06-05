@@ -16,14 +16,11 @@ exports.general_session_id = general_session_id;
 
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
-    printLogs("Store user slack info :::")
 
 
     env.mRequests.getSlackRecord(email, function (error, response, body) {
 
         if (response.statusCode == 404) {
-            printLogs("the employee not found ")
-
             requestify.post("http://" + env.IP + "/api/v1/toffy", {
                 "email": email,
                 "hrChannelId": "",
@@ -104,28 +101,28 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var i = 0
     var j = 0
 
-
-    env.async.whilst(
-        function () { return managerApproval[i]; },
-        function (callback) {
-
-
-
-            var x = env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-
-                approvalId = managerApproval[i].id
-                approvarType = managerApproval[i].type
-                managerEmail = emailFromId.replace(/\"/, "")
-                managerEmail = managerEmail.replace(/\"/, "")
-                console.log("Oreder o f manages" + i + ":" + managerEmail)
-                env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
-                            if (body != 1000) {
+    getUserImage(userEmail, function (ImageUrl) {
+        env.async.whilst(
+            function () { return managerApproval[i]; },
+            function (callback) {
 
 
-                                console.log("HIii" + JSON.stringify(body))
-                                getUserImage(userEmail, function (ImageUrl) {
+
+                var x = env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
+
+                    approvalId = managerApproval[i].id
+                    approvarType = managerApproval[i].type
+                    managerEmail = emailFromId.replace(/\"/, "")
+                    managerEmail = managerEmail.replace(/\"/, "")
+                    console.log("Oreder o f manages" + i + ":" + managerEmail)
+                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                        env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                            env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
+                                if (body != 1000) {
+
+
+                                    console.log("HIii" + JSON.stringify(body))
+
                                     var messageBody = ""
 
                                     var jsonResponse = JSON.parse(body);
@@ -173,21 +170,21 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                     flagForWhileCallbacks = 1
 
-                                });
 
-                                i++;
-                                setTimeout(callback, 4000);
-                            }
+
+                                    i++;
+                                    setTimeout(callback, 4000);
+                                }
+                            })
+
                         })
-
-                    })
-
+                    });
                 })
             })
 
 
 
-        },
+    },
         function (err) {
             // 5 seconds have passed
         });
