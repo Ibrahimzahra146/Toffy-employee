@@ -45,13 +45,13 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
                                     var addCommentButton = ""
                                     if (containsHolidays == true) {
-                                        holidaysNotice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
+                                        holidaysNotice = env.stringFile.holiday_notice
                                         console.log("holidaysNotice" + holidaysNotice)
 
                                     }
                                     if (type == "sick") {
                                         // msg.say("Sorry to hear that :(")
-                                       // holidaysNotice = ""
+                                        // holidaysNotice = ""
                                     }
                                     if (type == "WFH") {
                                         workingDays = 0
