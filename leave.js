@@ -62,7 +62,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                             "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                         }
                                     }
-                                    console.log("holidaysNotice" + holidaysNotice)
+                                    console.log("holidaysNotice" + containsHolidays)
                                     messagetext = messagetext + "" + holidaysNotice
 
                                     var text12 = {
