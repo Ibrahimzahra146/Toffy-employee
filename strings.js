@@ -414,7 +414,7 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
         actions_based_on_type = {
             "name": "accept_with_report",
             "text": "Accept with report",
-            "style": "danger",
+           
             "type": "button",
             "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
         }
