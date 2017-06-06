@@ -77,7 +77,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
 
 
     console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
-    async.whilst(
+    env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
             approvalId = managerApproval[i].id
@@ -85,8 +85,8 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
             emailFromId = managerApproval[i].managerEmail
             managerEmail = emailFromId.replace(/\"/, "")
             managerEmail = managerEmail.replace(/\"/, "")
-            request({
-                url: 'http://' + IP + '/api/v1/toffy/get-record', //URL to hitDs
+            env.request({
+                url: 'http://' + env.IP + '/api/v1/toffy/get-record', //URL to hitDs
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,7 +95,6 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                 body: managerEmail
                 //Set the body as a stringcc
             }, function (error, response, body) {
-                console.log("JSON.stringify(body)" + JSON.stringify(body));
 
 
                 var jsonResponse = JSON.parse(body);
