@@ -1,19 +1,6 @@
-const request = require('request');
-var toffyHelper = require('.././toffyHelper.js')
-var server = require('.././server.js')
-var sessionFlag = 0;
-var generalCookies = "initial"
-var IP = process.env.SLACK_IP
-const express = require('express')
-const Slapp = require('slapp')
-const BeepBoopConvoStore = require('slapp-convo-beepboop')
-const BeepBoopContext = require('slapp-context-beepboop')
-const bodyParser = require('body-parser');
-const uuid = require('node-uuid');
-const JSONbig = require('json-bigint');
-const async = require('async');
-const apiai = require('apiai');
+const env = require('.././Public/configrations.js')
 
+var requestify = require('requestify');
 /*   
 This function send atext message to the employee without any atthachments 
 
@@ -207,11 +194,11 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                     ]
                 }
                 if (approvarType == "Manager") {
-                    currentBot = server.bot;
+                  
 
                 } else {
 
-                    currentBot = server.hRbot
+                    currentBot = env.hRbot
                 }
                 currentBot.startConversation(message12, function (err, convo) {
 
