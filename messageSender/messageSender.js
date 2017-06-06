@@ -1,6 +1,7 @@
 const env = require('.././Public/configrations.js')
 
 var requestify = require('requestify');
+var currentBot = env.bot;
 /*   
 This function send atext message to the employee without any atthachments 
 
@@ -193,7 +194,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                     ]
                 }
                 if (approvarType == "Manager") {
-                  
+
 
                 } else {
 
