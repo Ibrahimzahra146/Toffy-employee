@@ -153,17 +153,18 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                                         "title": "to",
                                         "value": endDate,
                                         "short": true
+                                    }, {
+                                        "title": "Type",
+                                        "value": type,
+                                        "short": true
                                     },
+
                                     {
                                         "title": "Your action",
                                         "value": "Pending",
                                         "short": true
                                     },
-                                    {
-                                        "title": "Type",
-                                        "value": type,
-                                        "short": true
-                                    }, managerApprovalMessage,
+                                    managerApprovalMessage,
                                     commentFieldInManagerMessage,
                                     {
                                         "title": "Sick report",
