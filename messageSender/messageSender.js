@@ -192,7 +192,14 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                                         "text": "Reject with comment",
                                         "style": "danger",
                                         "type": "button",
-                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl + ";" + "Pending" + ";" + "Pending" + ";" + "Pending"
+                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl 
+                                    },
+                                    {
+                                        "name": "check_state",
+                                        "text": ":arrows_counterclockwise:",
+
+                                        "type": "button",
+                                        "value": userEmail + ";" + vacationId + ";" + approvalId + ";" + managerEmail + ";employee" + ";" + startDate + ";" + endDate + ";" + type + ";" + workingDays + ";" + ImageUrl
                                     },
                                 ],
                                 "color": "#F35A00",
