@@ -217,21 +217,22 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                     } else {
 
                         currentBot = env.hRbot
+
+                        currentBot.startConversation(message12, function (err, convo) {
+
+
+                            if (!err) {
+
+                                var stringfy = JSON.stringify(messageBody);
+                                var obj1 = JSON.parse(stringfy);
+                                currentBot.reply(message12, obj1, function (err, response) {
+                                });
+
+                            }
+
+
+                        });
                     }
-                    currentBot.startConversation(message12, function (err, convo) {
-
-
-                        if (!err) {
-
-                            var stringfy = JSON.stringify(messageBody);
-                            var obj1 = JSON.parse(stringfy);
-                            currentBot.reply(message12, obj1, function (err, response) {
-                            });
-
-                        }
-
-                    });
-
 
 
                     i++;
