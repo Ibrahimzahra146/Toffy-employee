@@ -224,7 +224,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
 
 
                     } else {
-
+                            console.log("HR Admin"+managerEmail)
                         currentBot = env.hRbot
 
                         currentBot.startConversation(message12, function (err, convo) {
