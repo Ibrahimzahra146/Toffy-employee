@@ -243,7 +243,6 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 10
 
             }
-            console.log("-------timeOffCase" + timeOffCase)
 
 
             if (vacation_type1 == "") {

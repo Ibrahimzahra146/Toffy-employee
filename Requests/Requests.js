@@ -83,11 +83,12 @@ module.exports.getUserIdByEmail = function getUserIdByEmail(callback) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': remember_me_cookie + ";" + sessionId
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
         },
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
+        callback(error, response, body)
     })
 }
 

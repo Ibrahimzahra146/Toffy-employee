@@ -456,7 +456,13 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
                         "title": "Type",
                         "value": type,
                         "short": true
-                    }, YourActionMessage,
+                    },
+                    {
+                        "title": "Your action",
+                        "value": "Pending",
+                        "short": true
+                    }
+                    ,
                     managerApprovalMessage,
                     commentFieldInManagerMessage,
 

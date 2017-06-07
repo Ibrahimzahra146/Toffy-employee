@@ -31,7 +31,7 @@ const async = require('async');
 exports.async = async
 
 const apiai = require('apiai');
-
+exports.apiai=apiai
 var leave = require('.././leave.js')
 exports.leave = leave
 

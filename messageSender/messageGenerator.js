@@ -21,7 +21,6 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
             flag == "false }"
         }
         var arr = managerApproval[i].managerEmail.toString().split("@")
-        console.log("managerApproval[i].mangerEmail != managerEmail" + managerApproval[i].managerEmail != managerEmail)
         if (managerApproval[i].managerEmail != managerEmail) {
 
 
@@ -35,7 +34,6 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
     callback(messageBody)
 }
 module.exports.generateYourActionSection = function generateYourActionSection(managerApproval, managerEmail, callback) {
-    console.log("managerEmail" + managerEmail)
     var i = 0
     var size = Object.keys(managerApproval).length
     var messageBody = ""
@@ -45,7 +43,6 @@ module.exports.generateYourActionSection = function generateYourActionSection(ma
     });
     while (i < size) {
         var flag = true
-        console.log("managerApproval[i].email" + managerApproval[i].managerEmail)
         if (managerApproval[i].managerEmail == managerEmail) {
 
             messageBody = "{" + "\"title\":" + "\"" + "Your Action " + "\"" + ",\"value\":" + "\"" + managerApproval[i].state + ":thinking_face:" + "\"" + ",\"short\":true }"

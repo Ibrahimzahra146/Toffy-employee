@@ -395,17 +395,14 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         //Set the body as a stringcc
     }, function (error, response, body) {
         if (response.statusCode == 451) {
-            console.log("getNewSessionwithCookie11" + response.statusCode)
             callback(1000, 1000)
         } else {
-            console.log("getNewSessionwithCookie:" + response.statusCode)
             var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
             var arr = cookies.toString().split(";")
             res = arr[0].replace(/['"]+/g, '');
             var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
             var arr1 = cookies1.toString().split(";")
             res1 = arr1[0].replace(/['"]+/g, '');
-            printLogs("final session is =========>" + res)
 
             callback(res, res1);
         }
@@ -418,7 +415,6 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
 
 //Function to ckeack if any manager take an action 
 module.exports.isManagersTakeAnAction = function isManagersTakeAnAction(managerApproval, callback) {
-    console.log("isManagersTakeAnAction" + JSON.stringify(managerApproval));
     var flag = false
     var i = 0;
     var state = ""
