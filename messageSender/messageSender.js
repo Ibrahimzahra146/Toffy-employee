@@ -211,6 +211,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                     stringfy = stringfy.replace(/,\",/g, ",")
                     stringfy = stringfy.replace(/\"\"\",/g, "")
                     stringfy = stringfy.replace(/\"\{/g, "{")
+                    stringfy = JSON.parse(stringfy);
                     if (approvarType == "Manager") {
 
 
