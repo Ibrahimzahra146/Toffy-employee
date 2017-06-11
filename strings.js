@@ -6,7 +6,7 @@ const stringFile = require('./strings.js')
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
 exports.deactivatedMsg = deactivatedMsg
 //
-const sickMessageAfterConfirmation = "Sick time off request has been submitted to your managers and HR admin.\n You have to submit a sick report within one week maximum.\n Otherwise, it will be considered as a personal time off. "
+const sickMessageAfterConfirmation = "Sick time off request has been submitted to your managers and HR admin.\n You may be asked to submit a sick report, I will inform you about this. "
 exports.sickMessageAfterConfirmation = sickMessageAfterConfirmation
 //message after cancelation for already rejected vacation
 const message_after_cancelation_rejected_timeoff = "No need to cancel since its already rejected from your approvals."

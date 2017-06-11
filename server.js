@@ -235,7 +235,7 @@ function userAction(msg, value, isComment) {
             else
               messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, toDate)
             if (type == "sick") {
-              uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
+              //  uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
 
             var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton, messageFB)
