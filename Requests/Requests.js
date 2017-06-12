@@ -73,6 +73,7 @@ module.exports.deleteVacation = function deleteVacation(email, vacationId, callb
             'Cookie': env.toffyHelper.remember_me_cookie + ";" + env.toffyHelper.session_Id
         },
     }, function (error, response, body) {
+        console.log("deleteVacation:: "+response.statusCode)
         callback(error, response, body)
     })
 }
