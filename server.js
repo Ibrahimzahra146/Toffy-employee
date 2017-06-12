@@ -207,7 +207,7 @@ function userAction(msg, value, isComment) {
     var uploadSickReportButton = ""
 
 
-    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval,employee) {
+    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval, employee) {
 
       env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
@@ -226,7 +226,7 @@ function userAction(msg, value, isComment) {
           if (!managerApproval[0]) {
             msg.say(env.stringFile.noApproversMessage);
           } else {
-            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval,employee, "Manager", workingDays, comment)
+            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, employee, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
               messageFB = env.stringFile.sickMessageAfterConfirmation
@@ -235,7 +235,7 @@ function userAction(msg, value, isComment) {
             else
               messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, toDate)
             if (type == "sick") {
-             // uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
+              // uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
             }
 
             var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton, messageFB)
@@ -291,7 +291,7 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
       console.log("isThereIsAction" + isThereIsAction)
       if (isThereIsAction == false) {
         //delete vacation request
-        env.mRequests.deleteVacation(email, vacationId, function (body) {
+        env.mRequests.deleteVacation(email, vacationId, function (error, response, body) {
           msg.respond(msg.body.response_url, env.stringFile.messageAfterCancelation)
 
           //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)

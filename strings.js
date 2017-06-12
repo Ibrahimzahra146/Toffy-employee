@@ -104,7 +104,7 @@ module.exports.cancelationButton = function cancelationButton(email, vacationId,
 //message after cancel vacation
 module.exports.messageAfterCancelation = function messageAfterCancelation(type, fromDate, toDate) {
     var message = "Your " + type + " time off request from ( " + fromDate + "-" + toDate + " ) has been canceled"
-    return message
+    return message;
 }
 
 
