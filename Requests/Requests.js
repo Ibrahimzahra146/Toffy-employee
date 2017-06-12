@@ -65,16 +65,22 @@ module.exports.getSlackMembers = function getSlackMembers(callback) {
  * Delete vacation
  */
 module.exports.deleteVacation = function deleteVacation(email, vacationId, callback) {
-    env.request({
-        url: 'http://' + env.IP + '/api/v1/vacation/' + vacationId,
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': env.toffyHelper.remember_me_cookie + ";" + env.toffyHelper.session_Id
-        },
-    }, function (error, response, body) {
-        console.log("deleteVacation:: "+response.statusCode)
-        callback(error, response, body)
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        env.toffyHelper.remember_me_cookie = remember_me_cookie
+        env.toffyHelper.session_Id = session_Id
+
+
+        env.request({
+            url: 'http://' + env.IP + '/api/v1/vacation/' + vacationId,
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': env.toffyHelper.remember_me_cookie + ";" + env.toffyHelper.session_Id
+            },
+        }, function (error, response, body) {
+            console.log("deleteVacation:: " + response.statusCode)
+            callback(error, response, body)
+        })
     })
 }
 /**
