@@ -208,44 +208,47 @@ function userAction(msg, value, isComment) {
 
 
     env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval, employee) {
+      if (employee == 1000) {
+        msg.say("Something went wrong,please try again. :cry:")
+      } else {
+        env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
-      env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
+          env.dateHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
 
-        env.dateHelper.convertTimeFormat(arr[1], function (formattedTime1, midday1) {
-
-          toDate = toDate
-          if (arr[0] && (arr[0] != undefined)) {
-            fromDate = fromDate
-          } else fromDate = fromDate
-
-          if (arr[1] && (arr[1] != undefined)) {
             toDate = toDate
-          } else toDate = toDate
+            if (arr[0] && (arr[0] != undefined)) {
+              fromDate = fromDate
+            } else fromDate = fromDate
+
+            if (arr[1] && (arr[1] != undefined)) {
+              toDate = toDate
+            } else toDate = toDate
 
 
-          if (!managerApproval[0]) {
-            msg.say(env.stringFile.noApproversMessage);
-          } else {
-            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, employee, "Manager", workingDays, comment)
-            var messageFB = ""
-            if (type == "sick") {
-              messageFB = env.stringFile.sickMessageAfterConfirmation
+            if (!managerApproval[0]) {
+              msg.say(env.stringFile.noApproversMessage);
+            } else {
+              env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, employee, "Manager", workingDays, comment)
+              var messageFB = ""
+              if (type == "sick") {
+                messageFB = env.stringFile.sickMessageAfterConfirmation
+
+              }
+              else
+                messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, toDate)
+              if (type == "sick") {
+                // uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
+              }
+
+              var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton, messageFB)
+
+              msg.respond(msg.body.response_url, message_feedback_toEmp_after_confirmation)
 
             }
-            else
-              messageFB = env.stringFile.personalMessageAfterConfirmation(fromDate, toDate)
-            if (type == "sick") {
-              // uploadSickReportButton = env.stringFile.uploadSickReportButton(email, vacationId, fromDate, toDate, messageFB);
-            }
+          });
 
-            var message_feedback_toEmp_after_confirmation = env.stringFile.cancelationButton(email, vacationId, managerApproval, fromDate, toDate, type, uploadSickReportButton, messageFB)
-
-            msg.respond(msg.body.response_url, message_feedback_toEmp_after_confirmation)
-
-          }
         });
-
-      });
+      }
 
     });
   })
