@@ -17,7 +17,7 @@ module.exports.getSlackRecord = function getSlackRecord(email, callback) {
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 500) {
+        if (response.statusCode == 500 || response.statusCode == 404) {
             callback(1000, 1000, 1000)
 
         }
