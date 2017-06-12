@@ -23,10 +23,7 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg, flag, text) {
-  env.toffyHelper.isActiva
-  
-  
-  ted(emailValue, function (isActivated) {
+  env.toffyHelper.isActivated(emailValue, function (isActivated) {
     console.log("isActivated" + isActivated)
     if (isActivated == false) {
       msg.say(env.stringFile.deactivatedMsg)
