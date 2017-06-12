@@ -398,7 +398,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 451) {
+        if (response.statusCode == 451||response.statusCode ==500) {
             callback(1000, 1000)
         } else {
             var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
