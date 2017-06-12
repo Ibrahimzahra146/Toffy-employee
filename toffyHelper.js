@@ -155,6 +155,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
 
+                                        i++;
+                                        setTimeout(callback, 5000);
 
 
                                     });
@@ -169,8 +171,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
 
-                            i++;
-                            setTimeout(callback, 3000);
                         }
                     })
 
