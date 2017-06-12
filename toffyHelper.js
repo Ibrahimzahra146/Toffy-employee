@@ -150,7 +150,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             else currentBot = env.hRbot;
                             currentBot.startConversation(message12, function (err, convo) {
                                 if (!err) {
-
+                                    console.log("startConversation" + managerEmail)
+                                    console.log("startConversation" + i)
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
@@ -162,6 +163,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     });
 
                                 } else {
+                                    console.log("Error Conversation" + managerEmail)
+                                    console.log("Error Conversation" + i)
                                     setTimeout(callback, 4000);
                                     i++;
                                 }
