@@ -78,7 +78,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
 //*
 //send vacation notification to the managers to approve or reject
-module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, toWho, workingDays, comment) {
+module.exports.sendVacationToManager = function sendVacationToManager(startDate, endDate, userEmail, type, vacationId, managerApproval, employee, toWho, workingDays, comment) {
     var message12 = ""
     var approvarType = ""
     var approvalId = ""
@@ -100,96 +100,93 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     }
     var i = 0
     var j = 0
+    var emailFromId;
 
-    getUserImage(userEmail, function (ImageUrl) {
-        env.async.whilst(
-            function () { return managerApproval[i]; },
-            function (callback) {
-
-
-
-                var x = env.toffyHelper.getEmailById('employee/email/' + managerApproval[i].manager, userEmail, function (emailFromId) {
-
-                    approvalId = managerApproval[i].id
-                    approvarType = managerApproval[i].type
-                    managerEmail = emailFromId.replace(/\"/, "")
-                    managerEmail = managerEmail.replace(/\"/, "")
-                    console.log("Oreder o f manages" + i + ":" + managerEmail)
-                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                        env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                            env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
-                                if (body != 1000) {
-
-
-                                    console.log("HIii" + JSON.stringify(body))
-
-                                    var messageBody = ""
-
-                                    var jsonResponse = JSON.parse(body);
-                                    if (approvarType == "Manager") {
-                                        //change 2
-                                        message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                        messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
-
-
-                                    } else if (approvarType == "HR") {
-
-                                        message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                        messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-
-
-                                    }
-                                    if (type != "WFH") {//change 3
-
-                                        dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
-                                    }
+    var ImageUrl = employee.profilePicture
+    env.async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
 
 
 
-                                    // needs import (StringFile)
-                                    //change 4
-                                    if (approvarType == "Manager")
-                                        currentBot = env.bot
-                                    else currentBot = env.hRbot;
-                                    currentBot.startConversation(message12, function (err, convo) {
-                                        if (!err) {
-
-                                            var stringfy = JSON.stringify(messageBody);
-                                            var obj1 = JSON.parse(stringfy);
-                                            currentBot.reply(message12, obj1, function (err, response) {
+            approvalId = managerApproval[i].id
+            approvarType = managerApproval[i].type
+            managerEmail = managerApproval[i].managerEmail
+            console.log("Oreder o f manages" + i + ":" + managerEmail)
+            env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                    env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
+                        if (body != 1000) {
 
 
 
-                                            });
+                            var messageBody = ""
 
-                                        }
+                            var jsonResponse = JSON.parse(body);
+                            if (approvarType == "Manager") {
+                                //change 2
+                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
+
+
+                            } else if (approvarType == "HR") {
+
+                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+
+
+                            }
+                            if (type != "WFH") {//change 3
+
+                                dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                            }
+
+
+
+                            // needs import (StringFile)
+                            //change 4
+                            if (approvarType == "Manager")
+                                currentBot = env.bot
+                            else currentBot = env.hRbot;
+                            currentBot.startConversation(message12, function (err, convo) {
+                                if (!err) {
+
+                                    var stringfy = JSON.stringify(messageBody);
+                                    var obj1 = JSON.parse(stringfy);
+                                    currentBot.reply(message12, obj1, function (err, response) {
+
+
 
                                     });
 
-
-
-                                    flagForWhileCallbacks = 1
-
-
-
-                                    i++;
-                                    setTimeout(callback, 5500);
                                 }
-                            })
 
-                        })
-                    });
+                            });
+
+
+
+                            flagForWhileCallbacks = 1
+
+
+
+                            i++;
+                            setTimeout(callback, 3000);
+                        }
+                    })
+
                 })
-            })
+            });
+
+        })
 
 
 
-    },
-        function (err) {
-            // 5 seconds have passed
-        });
+},
+    function (err) {
+        // 5 seconds have passed
 
-}
+
+    }
 
 //list all holidays with range period
 
@@ -334,11 +331,11 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             body: vacationBody
             //Set the body as a stringcc
         }, function (error, response, body) {
-            console.log("JSON.stringify" +body)
+            console.log("JSON.stringify" + body)
             console.log("sendVacationPostRequest" + response.statusCode)
             var vacationId = (JSON.parse(body)).id;
             var managerApproval = (JSON.parse(body)).managerApproval
-            callback(vacationId, managerApproval);
+            callback(vacationId, managerApproval, (JSON.parse(body)).employee);
 
         })
 

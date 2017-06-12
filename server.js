@@ -207,7 +207,7 @@ function userAction(msg, value, isComment) {
     var uploadSickReportButton = ""
 
 
-    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval) {
+    env.toffyHelper.sendVacationPostRequest(/*from  */fromDateInMilliseconds, toDateInMilliseconds, env.toffyHelper.userIdInHr, email, type, comment, function (vacationId, managerApproval,employee) {
 
       env.dateHelper.convertTimeFormat(arr[0], function (formattedTime, midday) {
 
@@ -226,7 +226,7 @@ function userAction(msg, value, isComment) {
           if (!managerApproval[0]) {
             msg.say(env.stringFile.noApproversMessage);
           } else {
-            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, "Manager", workingDays, comment)
+            env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval,employee, "Manager", workingDays, comment)
             var messageFB = ""
             if (type == "sick") {
               messageFB = env.stringFile.sickMessageAfterConfirmation
