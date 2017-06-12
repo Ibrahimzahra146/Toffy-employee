@@ -177,7 +177,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
 
-                        }else i++;
+                        } else {
+                            console.log("This manager not found in slack:" + managerEmail)
+                            setTimeout(callback, 4000);
+                            i++;
+                        } i
                     })
 
                 })
@@ -398,7 +402,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
-        if (response.statusCode == 451||response.statusCode ==500) {
+        if (response.statusCode == 451 || response.statusCode == 500) {
             callback(1000, 1000)
         } else {
             var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
