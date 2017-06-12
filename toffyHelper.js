@@ -151,7 +151,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             currentBot.startConversation(message12, function (err, convo) {
                                 if (!err) {
                                     console.log("startConversation" + managerEmail)
-                                    console.log("startConversation" + i)
+                                    console.log("startConversation" + i + "" + managerApproval[i].type)
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
