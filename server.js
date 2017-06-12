@@ -295,7 +295,7 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
       if (isThereIsAction == false) {
         //delete vacation request
         env.mRequests.deleteVacation(email, vacationId, function (error, response, body) {
-          msg.respond(msg.body.response_url, env.stringFile.messageAfterCancelation)
+          msg.respond(msg.body.response_url, "Your vacation has been caneled")
 
           //toffyHelper.sendCancelationFeedBackToManagers(fromDate, toDate, email, vacationId, managerApproval, type)
 
