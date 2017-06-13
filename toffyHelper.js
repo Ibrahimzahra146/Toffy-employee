@@ -169,7 +169,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         currentBot.reply(message12, obj1, function (err, response) {
                                             i++;
                                             incrementFlag = true
-                                            setTimeout(callback, timeOut);
 
 
 
@@ -181,7 +180,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     } else {
                                         i++;
                                         incrementFlag = true
-                                        setTimeout(callback, timeOut);
 
 
 
@@ -205,15 +203,17 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                     })
                 });
             } else {
-                setTimeout(callback, 100);
             }
         })
+
+    setTimeout(callback, 5000);
 
 
 
 
 },
     function (err) {
+
         // 5 seconds have passed
 
 
