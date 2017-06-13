@@ -158,7 +158,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
-                                    setTimeout(callback, timeOut);
 
                                     currentBot.reply(message12, obj1, function (err, response) {
 
