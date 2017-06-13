@@ -339,7 +339,7 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
     } else if (JSON.parse(body).vacationState == "Rejected") {
       msg.respond(msg.body.response_url, "No need to upload sick report since this time off request was rejected.")
     } else if (JSON.parse(body).needsSickReport == false) {
-      msg.respond(msg.body.response_url, "No need to upload sick report.No manager need a sick report from you.They changed their mind :stuck_out_tongue_winking_eye:")
+      msg.respond(msg.body.response_url, "No need to upload sick report. No manager need a sick report from you.They changed their mind:stuck_out_tongue_winking_eye:")
     }
 
   })

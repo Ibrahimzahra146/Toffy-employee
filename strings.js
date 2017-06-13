@@ -70,7 +70,7 @@ module.exports.uploadSickReportButton = function uploadSickReportButton(email, v
 
 //upload sick report message on click
 module.exports.upload_sick_report_messsage = function upload_sick_report_messsage(messageFB, vacationId) {
-    var message = messageFB + "\nTap the follownig link to upload your <http://172.30.204.243:9090/sick-report?vId=" + vacationId + "|sick report>"
+    var message = messageFB + "\n<http://hr-server.exalt.ps:9090/sick-report?vId=" + vacationId + "|Upload your sick report>"
     return message;
 }
 
