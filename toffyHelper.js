@@ -155,7 +155,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             if (approvarType == "Manager")
                                 currentBot = env.bot
                             else currentBot = env.hRbot;
-                            setTimeout(callback, timeOut);
+                            //setTimeout(callback, timeOut);
 
                             currentBot.startConversation(message12, function (err, convo) {
                                 if (!err) {
