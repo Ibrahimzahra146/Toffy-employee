@@ -151,16 +151,19 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             if (approvarType == "Manager")
                                 currentBot = env.bot
                             else currentBot = env.hRbot;
+                            setTimeout(callback, timeOut);
+
                             currentBot.startConversation(message12, function (err, convo) {
                                 if (!err) {
 
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
+                                    setTimeout(callback, timeOut);
+
                                     currentBot.reply(message12, obj1, function (err, response) {
 
                                         i++;
 
-                                        setTimeout(callback, timeOut);
 
 
 
@@ -170,7 +173,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                     i++;
 
-                                    setTimeout(callback, timeOut);
                                 }
 
                             });
@@ -184,7 +186,6 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         } else {
                             i++;
 
-                            setTimeout(callback, timeOut);
                         }
                     })
 
