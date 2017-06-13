@@ -113,86 +113,81 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvarType = managerApproval[i].type
             managerEmail = managerApproval[i].managerEmail
             console.log("Oreder o f manages" + i + ":" + managerEmail)
-            if (approvarType != "HR") {
-                env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
-                            if (body != 1000) {
+            env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                    env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
+                        if (body != 1000) {
 
 
 
-                                var messageBody = ""
+                            var messageBody = ""
 
-                                var jsonResponse = JSON.parse(body);
-                                if (approvarType == "Manager") {
-                                    //change 2
-                                    message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
-
-
-                                } else if (approvarType == "HR") {
-
-                                    message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                    messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+                            var jsonResponse = JSON.parse(body);
+                            if (approvarType == "Manager") {
+                                //change 2
+                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
 
 
-                                }
-                                if (type != "WFH") {//change 3
+                            } else if (approvarType == "HR") {
 
-                                    dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
-                                }
-
+                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
 
 
-                                // needs import (StringFile)
-                                //change 4
-                                if (approvarType == "Manager")
-                                    currentBot = env.bot
-                                else currentBot = env.hRbot;
-                                currentBot.startConversation(message12, function (err, convo) {
-                                    if (!err) {
-                                        console.log("startConversation" + managerEmail)
-                                        console.log("startConversation" + i + "" + managerApproval[i].type)
-                                        var stringfy = JSON.stringify(messageBody);
-                                        var obj1 = JSON.parse(stringfy);
-                                        currentBot.reply(message12, obj1, function (err, response) {
-                                            i++;
+                            }
+                            if (type != "WFH") {//change 3
 
-                                            setTimeout(callback, 4000);
+                                dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                            }
 
 
 
-                                        });
-
-                                    } else {
-                                        console.log("Error Conversation" + managerEmail)
-                                        console.log("Error Conversation" + i)
+                            // needs import (StringFile)
+                            //change 4
+                            if (approvarType == "Manager")
+                                currentBot = env.bot
+                            else currentBot = env.hRbot;
+                            currentBot.startConversation(message12, function (err, convo) {
+                                if (!err) {
+                                    console.log("startConversation" + managerEmail)
+                                    console.log("startConversation" + i + "" + managerApproval[i].type)
+                                    var stringfy = JSON.stringify(messageBody);
+                                    var obj1 = JSON.parse(stringfy);
+                                    currentBot.reply(message12, obj1, function (err, response) {
                                         i++;
 
-                                        setTimeout(callback, 4000);
-                                    }
-
-                                });
+                                        setTimeout(callback, 5000);
 
 
 
-                                flagForWhileCallbacks = 1
+                                    });
+
+                                } else {
+                                    console.log("Error Conversation" + managerEmail)
+                                    console.log("Error Conversation" + i)
+                                    i++;
+                                    setTimeout(callback, 5000);
+                                }
+
+                            });
 
 
 
-                            } else {
-                                console.log("This manager not found in slack:" + managerEmail)
-                                i++;
-                                setTimeout(callback, 4000);
-                            }
-                        })
+                            flagForWhileCallbacks = 1
 
+
+
+                        } else {
+                            console.log("This manager not found in slack:" + managerEmail)
+                            i++;
+
+                            setTimeout(callback, 5000);
+                        }
                     })
-                });
-            } else {
-                i++;
-                setTimeout(callback, 4000);
-            }
+
+                })
+            });
 
         })
 
