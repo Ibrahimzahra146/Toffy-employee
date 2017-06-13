@@ -134,6 +134,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 var messageBody = ""
 
                                 var jsonResponse = JSON.parse(body);
+                                console.log("approvarType::")
                                 if (approvarType == "Manager") {
                                     //change 2
                                     message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
