@@ -101,7 +101,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         timeOut = 2500
 
     }
-    var i = -1
+    var i = 0
     var j = 0
     var emailFromId;
     var previousI = 0;
