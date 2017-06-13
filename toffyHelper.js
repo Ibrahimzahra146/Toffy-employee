@@ -114,7 +114,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             console.log("J=" + j)
             console.log("managerApproval" + JSON.stringify(managerApproval))
             if (incrementFlag == true && i > j) {
-
+                managerApproval.sort(function (a, b) {
+                    return a.id - b.id;
+                });
 
 
                 approvalId = managerApproval[i].id
@@ -134,7 +136,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 var messageBody = ""
 
                                 var jsonResponse = JSON.parse(body);
-                                console.log("approvarType::")
+                                console.log("approvarType::" + approvarType)
                                 if (approvarType == "Manager") {
                                     //change 2
                                     message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
@@ -168,7 +170,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         var obj1 = JSON.parse(stringfy);
 
                                         currentBot.reply(message12, obj1, function (err, response) {
-                                       
+
 
 
 
@@ -178,7 +180,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         });
 
                                     } else {
-                                   
+
 
 
                                     }
@@ -199,6 +201,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                     })
                 });
+                
             } else {
             }
             i++;
