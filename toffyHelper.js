@@ -123,9 +123,10 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 incrementFlag = false
                 j = i
                 console.log("Oreder o f manages" + i + ":" + managerApproval[i].managerEmail)
-                env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
-                    env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
+                env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
+
+                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                        env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                             if (body != 1000) {
 
 
