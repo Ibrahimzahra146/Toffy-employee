@@ -110,9 +110,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
-            console.log("I=" + i)
-            console.log("J=" + j)
-            console.log("managerApproval" + JSON.stringify(managerApproval))
+       
             if (incrementFlag == true && i > j) {
                 managerApproval.sort(function (a, b) {
                     return a.id - b.id;
