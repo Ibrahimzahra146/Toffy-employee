@@ -112,7 +112,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function (callback) {
             console.log("I=" + i)
             console.log("J=" + j)
-            console.log("managerApproval" + managerApproval)
+            console.log("managerApproval" + JSON.stringify(managerApproval))
             if (incrementFlag == true && i > j) {
 
 
