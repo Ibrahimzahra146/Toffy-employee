@@ -86,12 +86,8 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
             emailFromId = managerApproval[i].managerEmail
             managerEmail = emailFromId.replace(/\"/, "")
             managerEmail = managerEmail.replace(/\"/, "")
+            if (approvarType == "HR") {
 
-            if (approvarType == "Manager") {
-
-                i++;
-                setTimeout(callback, 2500);
-            } else {
                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     env.request({
                         url: 'http://' + env.IP + '/api/v1/toffy/get-record', //URL to hitDs
@@ -239,7 +235,8 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                                 var stringfy = JSON.stringify(messageBody);
                                 var obj1 = JSON.parse(stringfy);
                                 currentBot.reply(message12, obj1, function (err, response) {
-
+                                    i++;
+                                    setTimeout(callback, 5000);
                                 });
 
                             }
@@ -257,6 +254,9 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                     function (err) {
                         // 5 seconds have passed
                     });
+            } else {
+                i++;
+                setTimeout(callback, 5000);
             }
         })
 
