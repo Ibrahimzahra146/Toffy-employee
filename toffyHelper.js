@@ -200,7 +200,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                     })
                 });
-            }
+            }else
         })
 
 
