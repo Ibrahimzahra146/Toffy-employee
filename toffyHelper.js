@@ -167,8 +167,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         var obj1 = JSON.parse(stringfy);
 
                                         currentBot.reply(message12, obj1, function (err, response) {
-                                            i++;
-                                            incrementFlag = true
+                                       
 
 
 
@@ -178,9 +177,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         });
 
                                     } else {
-                                        i++;
-                                        incrementFlag = true
-
+                                   
 
 
                                     }
@@ -194,8 +191,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
                             } else {
-                                i++;
-                                incrementFlag = true
+
 
                             }
                         })
@@ -204,6 +200,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 });
             } else {
             }
+            i++;
+            incrementFlag = true
             setTimeout(callback, 5000);
 
         })
