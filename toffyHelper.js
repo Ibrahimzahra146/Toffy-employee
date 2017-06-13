@@ -108,7 +108,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var ImageUrl = employee.profilePicture
     var incrementFlag = true
     var length = Object.keys(managerApproval).length;
-    console.log("Object.keys(managerApproval).length;"+length)
+    console.log("Object.keys(managerApproval).length:"+length)
     while (i < length) {
 
         if (incrementFlag == true) {
