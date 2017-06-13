@@ -117,6 +117,9 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerApproval.sort(function (a, b) {
                     return a.id - b.id;
                 });
+                console.log(" Ranked managerApproval:" + JSON.stringify(managerApproval))
+
+
 
 
                 approvalId = managerApproval[i].id
@@ -201,7 +204,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                     })
                 });
-                
+
             } else {
             }
             i++;
