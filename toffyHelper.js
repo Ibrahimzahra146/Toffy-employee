@@ -157,7 +157,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     currentBot.reply(message12, obj1, function (err, response) {
                                         i++;
 
-                                        setTimeout(callback, 5000);
+                                        setTimeout(callback, 2000);
 
 
 
@@ -167,7 +167,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     console.log("Error Conversation" + managerEmail)
                                     console.log("Error Conversation" + i)
                                     i++;
-                                    setTimeout(callback, 5000);
+                                    setTimeout(callback, 2000);
                                 }
 
                             });
@@ -182,7 +182,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                             console.log("This manager not found in slack:" + managerEmail)
                             i++;
 
-                            setTimeout(callback, 5000);
+                            setTimeout(callback, 2000);
                         }
                     })
 
