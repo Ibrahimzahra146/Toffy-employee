@@ -86,6 +86,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var dont_detuct_button = ""
     var commentFieldInManagerMessage = ""
     var approver2State = "--"
+    var timeOut=1000
     //check if there is second approver to print it in the message  
     if (!managerApproval[1]) {
         approver2State = "--"
@@ -97,6 +98,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     }
     if (type == "sickLeave") {
         type = "sick"
+        timeOut=2500
+
     }
     var i = 0
     var j = 0
@@ -155,7 +158,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
                                         i++;
-                                        setTimeout(callback, 1000);
+                                        setTimeout(callback, timeOut);
 
 
 
@@ -164,7 +167,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                 } else {
 
                                     i++;
-                                    setTimeout(callback, 1000);
+                                    setTimeout(callback, timeOut);
                                 }
 
                             });
@@ -178,7 +181,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                         } else {
                             console.log("This manager not found in slack:" + managerEmail)
                             i++;
-                            setTimeout(callback, 2000);
+                            setTimeout(callback, timeOut);
                         }
                     })
 
