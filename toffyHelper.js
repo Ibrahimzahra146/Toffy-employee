@@ -102,7 +102,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
     }
     var i = 0
-    var j = 0
+    var j = -1
     var emailFromId;
     var previousI = 0;
     var ImageUrl = employee.profilePicture
@@ -111,7 +111,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function () { return managerApproval[i]; },
         function (callback) {
 
-            if (incrementFlag == true) {
+            if (incrementFlag == true && i > j) {
 
 
 
@@ -119,6 +119,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 approvarType = managerApproval[i].type
                 managerEmail = managerApproval[i].managerEmail
                 incrementFlag = false
+                j = i
                 console.log("Oreder o f manages" + i + ":" + managerApproval[i].managerEmail)
                 env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                     env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
