@@ -101,7 +101,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var i = 0
     var j = 0
     var emailFromId;
-
+    var previousI = 0;
     var ImageUrl = employee.profilePicture
     env.async.whilst(
         function () { return managerApproval[i]; },

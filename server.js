@@ -289,7 +289,7 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   var fromDate = arr[3]
   var toDate = arr[4]
   var type = arr[5]
-  env.mRequests.getVacationInfo(email, vacationId, function (body) {
+  env.mRequests.getVacationInfo(email, vacationId, function (error, response, body) {
     env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
       console.log("isThereIsAction" + isThereIsAction)
       if (isThereIsAction == false) {
@@ -332,6 +332,17 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   var fromDate = arr[2]
   var toDate = arr[3]
   var messageFB = arr[4]
+  env.mRequests.getVacationInfo(email, vacationId, function (error, response, body) {
+    if (response.statusCode == 404) {
+      msg.respond(msg.body.response_url, "Sorry!you can't upload report, since this vacation has been caneled.")
+
+    } else if (JSON.parse(body).vacationState == "Rejected") {
+      msg.respond(msg.body.response_url, "No need to upload sick report since this time off request was rejected.")
+    } else if (JSON.parse(body).needsSickReport == false) {
+      msg.respond(msg.body.response_url, "No need to upload sick report.No manager need a sick report from you.They changed their mind :stuck_out_tongue_winking_eye:")
+    }
+
+  })
   msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage(messageFB, vacationId));
 
 })

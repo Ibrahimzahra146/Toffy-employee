@@ -43,7 +43,7 @@ module.exports.getVacationInfo = function getVacationInfo(email, vacationId, cal
             }
             //Set the body as a stringcc
         }, function (error, response, body) {
-            callback(body)
+            callback(error, response, body)
         })
     })
 }
