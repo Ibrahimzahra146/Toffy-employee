@@ -110,13 +110,12 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
         function () { return managerApproval[i]; },
         function (callback) {
 
-            i++;
 
 
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
             managerEmail = managerApproval[i].managerEmail
-            console.log("Oreder o f manages" + i + ":" +  managerApproval[i].managerEmail)
+            console.log("Oreder o f manages" + i + ":" + managerApproval[i].managerEmail)
             env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                 env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                     env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
@@ -158,7 +157,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var stringfy = JSON.stringify(messageBody);
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
-                                        
+
+                                        i++;
 
                                         setTimeout(callback, timeOut);
 
@@ -167,6 +167,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     });
 
                                 } else {
+
+                                    i++;
 
                                     setTimeout(callback, timeOut);
                                 }
@@ -180,7 +182,8 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
 
                         } else {
-                            console.log("This manager not found in slack:" + managerEmail)
+                            i++;
+
                             setTimeout(callback, timeOut);
                         }
                     })
