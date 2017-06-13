@@ -116,7 +116,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
             approvalId = managerApproval[i].id
             approvarType = managerApproval[i].type
             managerEmail = managerApproval[i].managerEmail
-            console.log("Oreder o f manages" + i + ":" + managerEmail)
+            console.log("Oreder o f manages" + i + ":" +  managerApproval[i].managerEmail)
             env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
                 env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                     env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
@@ -159,7 +159,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     var obj1 = JSON.parse(stringfy);
                                     currentBot.reply(message12, obj1, function (err, response) {
                                         
-                                        
+
                                         setTimeout(callback, timeOut);
 
 
