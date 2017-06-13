@@ -86,7 +86,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var dont_detuct_button = ""
     var commentFieldInManagerMessage = ""
     var approver2State = "--"
-    var timeOut = 1000
+    var timeOut = 3000
     //check if there is second approver to print it in the message  
     if (!managerApproval[1]) {
         approver2State = "--"
