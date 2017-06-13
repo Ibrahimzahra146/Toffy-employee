@@ -122,7 +122,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 managerEmail = managerApproval[i].managerEmail
                 incrementFlag = false
                 j = i
-                console.log("Manager #:" + i + ":"+ approvarType+":" + managerApproval[i].managerEmail)
+                console.log("Manager #:" + i + ":" + approvarType + ":" + managerApproval[i].managerEmail)
                 env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
 
                     env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
@@ -167,10 +167,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         var obj1 = JSON.parse(stringfy);
 
                                         currentBot.reply(message12, obj1, function (err, response) {
-                                            setTimeout(callback, timeOut);
-
                                             i++;
                                             incrementFlag = true
+                                            setTimeout(callback, timeOut);
+
+
 
 
 
@@ -178,10 +179,11 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                         });
 
                                     } else {
-                                        setTimeout(callback, timeOut);
-
                                         i++;
                                         incrementFlag = true
+                                        setTimeout(callback, timeOut);
+
+
 
                                     }
 
