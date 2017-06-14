@@ -160,7 +160,7 @@ var app = env.slapp.attachToExpress(env.express())
 env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   console.log("Recieved")
   env.generalMsg = msg
-  if (msg.body.event.user == "B5TJH6AS1") {
+  if (msg.body.event.user == "U5TJH6BJ9") {
 
   } else {
     console.log("The message is  " + JSON.stringify(msg))
