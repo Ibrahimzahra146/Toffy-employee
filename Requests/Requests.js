@@ -177,3 +177,34 @@ module.exports.getEmployeeProfile = function getEmployeeProfile(email, Id, callb
         })
     })
 }
+/**
+ * 
+ * 
+ * Add slack record
+ */
+module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChannelId, managerChannelId, hrChannelId, teamId,callback) {
+    var vacationBody = {
+        "email": email,
+        "hrChannelId": "",
+        "managerChannelId": "",
+        "slackUserId": msg.body.event.user,
+        "teamId": msg.body.team_id,
+        "userChannelId": msg.body.event.channel
+
+    }
+    vacationBody = JSON.stringify(vacationBody)
+    var uri = 'http://" + env.IP + "/api/v1/toffy'
+    env.request({
+        url: uri, //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+
+        body: vacationBody
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        callback(error, response, body)
+    })
+}

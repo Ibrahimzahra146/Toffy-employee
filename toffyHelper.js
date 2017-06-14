@@ -22,21 +22,11 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
         console.log("slack record " + JSON.stringify(body))
         console.log("slack record" + response.statusCode)
         if (response.statusCode == 404) {
-            requestify.post("http://" + env.IP + "/api/v1/toffy", {
-                "email": email,
-                "hrChannelId": "",
-                "managerChannelId": "",
-                "slackUserId": msg.body.event.user,
-                "teamId": msg.body.team_id,
-                "userChannelId": msg.body.event.channel
-            })
-                .then(function (response) {
-                    console.log(response.statusCode)
-                    console.log("Added")
+            env.mRequests.addSlackRecord(email, msg.body.event.user, msg.body.event.channel, "", "", msg.body.team_id, function (error, response, body) {
 
-                    // Get the response body
-                    response.getBody();
-                });
+            })
+
+
         }
         else if (response.statusCode == 200) {
             if (((JSON.parse(body)).userChannelId) != (msg.body.event.channel)) {
