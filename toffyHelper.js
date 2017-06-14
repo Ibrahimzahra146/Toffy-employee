@@ -17,9 +17,10 @@ exports.general_session_id = general_session_id;
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
-
+    console.log("storeUserSlackInformation")
     env.mRequests.getSlackRecord(email, function (error, response, body) {
-
+        console.log("slack record" + JSON.stringify(body))
+        console.log("slack record" + response.statusCode)
         if (response.statusCode == 404) {
             requestify.post("http://" + env.IP + "/api/v1/toffy", {
                 "email": email,
@@ -30,6 +31,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                 "userChannelId": msg.body.event.channel
             })
                 .then(function (response) {
+
                     // Get the response body
                     response.getBody();
                 });
@@ -63,7 +65,8 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     "userChannelId": msg.body.event.channel
                 })
                     .then(function (response) {
-                        printLogs("=====>arrive4")
+                        console.log("Add s;ack recoed" + response.statusCode)
+
 
                         // Get the response body
                         response.getBody();
