@@ -110,7 +110,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
-       
+
             if (incrementFlag == true && i > j) {
                 managerApproval.sort(function (a, b) {
                     return a.id - b.id;
@@ -128,7 +128,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 console.log("Manager #:" + i + ":" + approvarType + ":" + managerApproval[i].managerEmail)
                 env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
 
-                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, function (managerApprovalMessage) {
+                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, false, function (managerApprovalMessage) {
                         env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                             if (body != 1000) {
 
