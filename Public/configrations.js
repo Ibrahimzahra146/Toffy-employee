@@ -126,12 +126,12 @@ var controller = Botkit.slackbot({
 var controller1 = Botkit.slackbot({
     debug: true,
 });
-/*var bot = controller.spawn({
+var bot = controller.spawn({
     token: SLACK_BOT_TOKEN
 
 }).startRTM();
 exports.bot = bot
-var hRbot = controller1.spawn({
+/*var hRbot = controller1.spawn({
     token: SLACK_HR_TOKEN
 
 }).startRTM();
