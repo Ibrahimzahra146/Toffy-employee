@@ -21,7 +21,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
             flag == "false }"
         }
         var arr = managerApproval[i].managerEmail.toString().split("@")
-        if (managerApproval[i].managerEmail != managerEmail&&managerApproval[i].type!="HR") {
+        if (managerApproval[i].managerEmail != managerEmail && managerApproval[i].type != "HR" || managerApproval[i].managerEmail == managerEmail && managerApproval[i].type != "Manager") {
 
 
             messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver ( " + arr[0] + " )\"" + ",\"value\":" + "\"" + managerApproval[i].state + ":thinking_face:" + "\"" + ",\"short\":" + flag
