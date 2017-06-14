@@ -163,7 +163,7 @@ env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   if (msg.body.event.user == "B5TJH6AS1") {
 
   } else {
-    console.log("The message is " + JSON.stringify(msg))
+    console.log("The message is  " + JSON.stringify(msg))
     getMembersList(msg.body.event.user, msg)
   }
 })
