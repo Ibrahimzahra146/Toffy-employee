@@ -183,6 +183,7 @@ module.exports.getEmployeeProfile = function getEmployeeProfile(email, Id, callb
  * Add slack record
  */
 module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChannelId, managerChannelId, hrChannelId, teamId, callback) {
+    console.log("Adding slack ID")
     var vacationBody = {
         "email": email,
         "hrChannelId": hrChannelId,
@@ -193,7 +194,8 @@ module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChan
 
     }
     vacationBody = JSON.stringify(vacationBody)
-    var uri = 'http://" + env.IP + "/api/v1/toffy'
+    console.log("vacationBody" + vacationBody)
+    var uri = 'http://' + env.IP + '/api/v1/toffy'
     env.request({
         url: uri, //URL to hitDs
         method: 'POST',
