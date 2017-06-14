@@ -50,6 +50,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     body: email
                     //Set the body as a stringcc
                 }, function (error, response, body) {
+                    console.log(response.statusCode)
                     printLogs("DELETED");
 
                 });
