@@ -207,6 +207,7 @@ module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChan
         body: vacationBody
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("Adding slack record" + JSON.stringify(body))
         callback(error, response, body)
     })
 }
