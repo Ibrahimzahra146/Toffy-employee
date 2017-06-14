@@ -431,6 +431,7 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         if (response.statusCode == 451 || response.statusCode == 500) {
             callback(1000, 1000)
         } else {
+            console.log("response.headers)" + response.headers["set-cookie"])
             if (response.headers["set-cookie"] == undefined) {
                 callback(env.toffyHelper.general_remember_me, env.toffyHelper.general_session_id)
             }
