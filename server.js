@@ -345,10 +345,10 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
       msg.respond(msg.body.response_url, "No need to upload sick report since this time off request was rejected.")
     } else if (JSON.parse(body).needsSickReport == false) {
       msg.respond(msg.body.response_url, "No need to upload sick report. No manager need a sick report from you.They changed their mind:stuck_out_tongue_winking_eye:")
-    }
+    } else msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage(messageFB, vacationId));
 
   })
-  msg.respond(msg.body.response_url, env.stringFile.upload_sick_report_messsage(messageFB, vacationId));
+
 
 })
 env.slapp.event('team_join', (msg) => {
