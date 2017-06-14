@@ -126,7 +126,7 @@ var controller = Botkit.slackbot({
 var controller1 = Botkit.slackbot({
     debug: true,
 });
-var bot = controller.spawn({
+/*var bot = controller.spawn({
     token: SLACK_BOT_TOKEN
 
 }).startRTM();
@@ -144,4 +144,4 @@ var employeeBot = controller2.spawn({
     token: SLACK_EMPLOYEE_BOT_ACCESS_KEY
 
 }).startRTM();
-exports.employeeBot = employeeBot
+exports.employeeBot = employeeBot*/
