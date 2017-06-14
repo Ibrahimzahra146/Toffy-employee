@@ -431,7 +431,8 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         if (response.statusCode == 451 || response.statusCode == 500) {
             callback(1000, 1000)
         } else {
-            console.log("cookies" + (response.headers["set-cookie"])[1])
+           
+            console.log("cookies" + (response.headers["set-cookie"]))
 
             var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
             var arr = cookies.toString().split(";")
