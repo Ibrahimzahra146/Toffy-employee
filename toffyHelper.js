@@ -31,6 +31,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                 "userChannelId": msg.body.event.channel
             })
                 .then(function (response) {
+                    console.log("Added")
 
                     // Get the response body
                     response.getBody();
