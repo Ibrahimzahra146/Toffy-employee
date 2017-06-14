@@ -131,7 +131,7 @@ var bot = controller.spawn({
 
 }).startRTM();
 exports.bot = bot
-/*var hRbot = controller1.spawn({
+var hRbot = controller1.spawn({
     token: SLACK_HR_TOKEN
 
 }).startRTM();
@@ -144,4 +144,4 @@ var employeeBot = controller2.spawn({
     token: SLACK_EMPLOYEE_BOT_ACCESS_KEY
 
 }).startRTM();
-exports.employeeBot = employeeBot*/
+exports.employeeBot = employeeBot
