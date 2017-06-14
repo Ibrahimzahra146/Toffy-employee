@@ -335,7 +335,10 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   var toDate = arr[3]
   var messageFB = arr[4]
   env.mRequests.getVacationInfo(email, vacationId, function (error, response, body) {
-    if (response.statusCode == 404) {
+    if (JSON.parse(body).sickCovertedToPersonal == true) {
+      msg.respond(msg.body.response_url, "This time off has been converted to personal time off ,since your approvers rejected it :sweat:")
+    }
+    else if (response.statusCode == 404) {
       msg.respond(msg.body.response_url, "Sorry!you can't upload report, since this vacation has been caneled.")
 
     } else if (JSON.parse(body).vacationState == "Rejected") {
