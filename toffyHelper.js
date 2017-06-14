@@ -431,18 +431,21 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         if (response.statusCode == 451 || response.statusCode == 500) {
             callback(1000, 1000)
         } else {
-           
-            console.log("cookies" + (response.headers["set-cookie"]))
+            if (response.headers["set-cookie"] == undefined) {
+                callback(env.toffyHelper.general_remember_me, env.toffyHelper.general_session_id)
+            }
+            else {
+                var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
+                var arr = cookies.toString().split(";")
+                res = arr[0].replace(/['"]+/g, '');
+                var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
+                var arr1 = cookies1.toString().split(";")
+                res1 = arr1[0].replace(/['"]+/g, '');
 
-            var cookies = JSON.stringify((response.headers["set-cookie"])[1]);
-            var arr = cookies.toString().split(";")
-            res = arr[0].replace(/['"]+/g, '');
-            var cookies1 = JSON.stringify((response.headers["set-cookie"])[0]);
-            var arr1 = cookies1.toString().split(";")
-            res1 = arr1[0].replace(/['"]+/g, '');
-
-            callback(res, res1);
+                callback(res, res1);
+            }
         }
+
 
 
     });
