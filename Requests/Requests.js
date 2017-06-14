@@ -182,14 +182,14 @@ module.exports.getEmployeeProfile = function getEmployeeProfile(email, Id, callb
  * 
  * Add slack record
  */
-module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChannelId, managerChannelId, hrChannelId, teamId,callback) {
+module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChannelId, managerChannelId, hrChannelId, teamId, callback) {
     var vacationBody = {
         "email": email,
-        "hrChannelId": "",
-        "managerChannelId": "",
-        "slackUserId": msg.body.event.user,
-        "teamId": msg.body.team_id,
-        "userChannelId": msg.body.event.channel
+        "hrChannelId": hrChannelId,
+        "managerChannelId": managerChannelId,
+        "slackUserId": user_id,
+        "teamId": teamId,
+        "userChannelId": userChannelId
 
     }
     vacationBody = JSON.stringify(vacationBody)
