@@ -19,7 +19,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
 
     console.log("storeUserSlackInformation")
     env.mRequests.getSlackRecord(email, function (error, response, body) {
-        console.log("slack record" + JSON.stringify(body))
+        console.log("slack record " + JSON.stringify(body))
         console.log("slack record" + response.statusCode)
         if (response.statusCode == 404) {
             requestify.post("http://" + env.IP + "/api/v1/toffy", {
