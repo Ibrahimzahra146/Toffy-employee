@@ -17,10 +17,8 @@ exports.general_session_id = general_session_id;
 //store the user slack information in database
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
-    console.log("storeUserSlackInformation")
     env.mRequests.getSlackRecord(email, function (error, response, body) {
-        console.log("slack record " + JSON.stringify(body))
-        console.log("slack record" + response.statusCode)
+    
         if (response.statusCode == 404) {
             env.mRequests.addSlackRecord(email, msg.body.event.user, msg.body.event.channel, "", "", msg.body.team_id, function (error, response, body) {
 
@@ -365,8 +363,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             if (response.statusCode == 500) {
                 callback(1000, 1000, 100)
             } else {
-                console.log("JSON.stringify" + body)
-                console.log("sendVacationPostRequest" + response.statusCode)
+        
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
                 callback(vacationId, managerApproval, (JSON.parse(body)).employee);
@@ -417,7 +414,6 @@ function printLogs(msg) {
 }
 
 module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email, callback) {
-    console.log("getNewSessionwithCookieemaiol" + email)
     var uri = 'http://' + env.IP + '/api/v1/employee/login'
     env.request({
         url: uri, //URL to hitDs

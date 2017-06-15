@@ -218,14 +218,7 @@ var timeOffPredefinedActions = [
         "type": "button",
         "value": "I am sick today"
     }
-    ,
-    {
-        "name": 'helpMenu',
-        "text": "I am sick tomorrow",
-        //"style": "primary",
-        "type": "button",
-        "value": "I am sick tomorrow"
-    }
+   
 
 ]
 exports.timeOffPredefinedActions = timeOffPredefinedActions

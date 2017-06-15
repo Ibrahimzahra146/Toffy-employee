@@ -304,7 +304,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.tringFile.helpMessageBody("",  env.stringFile.rulesAction, "")
+    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.rulesAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
@@ -314,7 +314,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody( env.stringFile.staticHelpFields, "", "")
+    messageBody = env.stringFile.helpMessageBody(env.stringFile.staticHelpFields, "", "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
