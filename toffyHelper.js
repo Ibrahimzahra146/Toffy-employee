@@ -364,10 +364,11 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             if (response.statusCode == 500) {
                 callback(1000, 1000, 100)
             } else {
-                console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
 
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
+                console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
+
                 callback(vacationId, managerApproval, (JSON.parse(body)).employee);
 
             }
