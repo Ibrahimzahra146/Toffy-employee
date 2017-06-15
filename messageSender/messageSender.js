@@ -95,7 +95,7 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
                 j = i
                 if (approvarType == "HR") {
 
-                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, true, function (managerApprovalMessage) {
+                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, type,true, function (managerApprovalMessage) {
                         env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
                             if (body != 1000) {
 

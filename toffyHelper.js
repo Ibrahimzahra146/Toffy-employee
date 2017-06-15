@@ -18,7 +18,7 @@ exports.general_session_id = general_session_id;
 module.exports.storeUserSlackInformation = function storeUserSlackInformation(email, msg) {
 
     env.mRequests.getSlackRecord(email, function (error, response, body) {
-    
+
         if (response.statusCode == 404) {
             env.mRequests.addSlackRecord(email, msg.body.event.user, msg.body.event.channel, "", "", msg.body.team_id, function (error, response, body) {
 
@@ -122,7 +122,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                 console.log("Manager #:" + i + ":" + approvarType + ":" + managerApproval[i].managerEmail)
                 env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
 
-                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, false, function (managerApprovalMessage) {
+                    env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, type, false, function (managerApprovalMessage) {
                         env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
                             if (body != 1000) {
 
@@ -363,7 +363,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             if (response.statusCode == 500) {
                 callback(1000, 1000, 100)
             } else {
-        
+
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
                 callback(vacationId, managerApproval, (JSON.parse(body)).employee);
