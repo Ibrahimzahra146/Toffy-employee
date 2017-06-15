@@ -190,28 +190,28 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
         messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
 
 
-        if (timeOffcase == 8) {
-            if (type == "WFH") {
-                messageText = ""
-                messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
-
-            } else
-                messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
-
-
-        } else if (timeOffcase == 9) {
-            if (type == "WFH") {
-                messageText = ""
-                messageText = typeText + " on " + fromDate + ". Should I go ahead ?"
-            } else
-                messageText = typeText + " on " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
-
-
-        } else if (timeOffcase == 11) {
-
-        } else if (timeOffcase == 12) {
-
-        }
+        /* if (timeOffcase == 8) {
+             if (type == "WFH") {
+                 messageText = ""
+                 messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
+ 
+             } else
+                 messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
+ 
+ 
+         } else if (timeOffcase == 9) {
+             if (type == "WFH") {
+                 messageText = ""
+                 messageText = typeText + " on " + fromDate + ". Should I go ahead ?"
+             } else
+                 messageText = typeText + " on " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
+ 
+ 
+         } else if (timeOffcase == 11) {
+ 
+         } else if (timeOffcase == 12) {
+ 
+         }*/
 
         callback(messageText)
     })
