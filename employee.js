@@ -154,8 +154,9 @@ module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
                 // Approver2 = body.manager[1].name;
 
             } else Approver1 = body.manager[0].name
-
-            var imageUrl = body.profilePicture.replace(/ /, "%20")
+            var imageUrl = ""
+            if (body.profilePicture != undefined)
+                imageUrl = body.profilePicture.replace(/ /, "%20")
             var messageBody = {
                 "text": "Your profile details",
                 "attachments": [
@@ -278,38 +279,38 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
 
     //stringFile.timeOffPredefinedActions
-    var messageBody = env.stringFile.helpMessageBody("", env.stringFile.timeOffPredefinedActions,  env.stringFile.pretext)
+    var messageBody = env.stringFile.helpMessageBody("", env.stringFile.timeOffPredefinedActions, env.stringFile.pretext)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.statsProfileHistoryActions, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.statsProfileHistoryActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
 
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.FamilyDeathActions, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.FamilyDeathActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.holidayAction, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.holidayAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.WfhActions, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.WfhActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.rulesAction, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.rulesAction, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("",  env.stringFile.fromDateToDate, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.fromDateToDate, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
