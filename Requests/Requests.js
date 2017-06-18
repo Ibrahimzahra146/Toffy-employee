@@ -114,6 +114,9 @@ module.exports.getEmployeeBalance = function getEmployeeBalance(Id, callback) {
             'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
         }
     }, function (error, response, body) {
+        console.log("Response.statuse" + response.statusCode)
+        console.log(" JSON.stringify(body)" + JSON.stringify(body))
+
         callback(error, response, body)
 
     })
