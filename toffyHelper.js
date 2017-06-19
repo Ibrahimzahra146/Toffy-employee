@@ -348,6 +348,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             "comments": comment
 
         }
+        console.log("sendVacationPostRequest: " + vacationBody)
         vacationBody = JSON.stringify(vacationBody)
         var uri = 'http://' + env.IP + '/api/v1/vacation'
         env.request({
@@ -368,6 +369,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
                 console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
+                console.log
 
                 callback(vacationId, managerApproval, (JSON.parse(body)).employee);
 
