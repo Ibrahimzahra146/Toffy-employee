@@ -62,7 +62,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                             "name": 'yesWithComment',
                                             "text": "Add comment",
                                             "type": "button",
-                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                            "value": fromTime + ";" + toTime + ";" + email + ";" + fromDateServer.getTime() + ";" + toDateWordServer.getTime() + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                         }
                                     }
                                     messagetext = messagetext + "" + holidaysNotice
@@ -81,14 +81,14 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                                         "text": "Yes",
                                                         "style": "primary",
                                                         "type": "button",
-                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromDateServer.getTime() + ";" + toDateWordServer.getTime() + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                                     },
                                                     {
                                                         "name": 'reject',
                                                         "text": "No",
                                                         "style": "danger",
                                                         "type": "button",
-                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromMilliseconds + ";" + toMilliseconds + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
+                                                        "value": fromTime + ";" + toTime + ";" + email + ";" + fromDateServer.getTime() + ";" + toDateWordServer.getTime() + ";" + type + ";" + workingDays + ";" + wordFromDate + ";" + wordTodate + ";" + messagetext
                                                     }, addCommentButton
 
                                                 ],
