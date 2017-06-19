@@ -280,7 +280,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     if (validPreviousDate == 1) {
                         leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
                         vacation_type1 = ""
-                    } else msg.say("Not valid date")
+                    } else msg.say("Please try again with this foramt mm dd yyyy. I am a bit confused whether you want a vacation in the current year or in 2018.")
                 })
 
             })
