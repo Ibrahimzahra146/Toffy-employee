@@ -35,6 +35,7 @@ exports.wedding_message = wedding_message
 // work from home message
 var WFH_message = "Okay, you asked to work from home"
 exports.WFH_message = WFH_message
+var server_error="oops! "
 
 
 

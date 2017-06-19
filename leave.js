@@ -129,7 +129,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
             }
             console.log("getWorkingDays" + JSON.stringify(vacationBody))
-
+            vacationBody = JSON.stringify(vacationBody)
             env.request({
                 url: "http://" + env.IP + "/api/v1/vacation/working-days", //URL to hitDs
                 method: 'POST',
@@ -142,7 +142,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
             }, function (error, response, body) {
 
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
-                if (response == undefined || response.statusCode == 500) {
+                if (response.statusCode == 500) {
                     callback(1000, "no ")
                 } else if (response.statusCode == 400)
                     callback(1000, "no ")
