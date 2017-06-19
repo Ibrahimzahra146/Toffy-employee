@@ -21,7 +21,6 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     else typeNum = 0
 
     env.dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
-        console.log("formattedFromTime" + formattedFromTime)
         env.dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
             getWorkingDays(fromMilliseconds, toMilliseconds, email, typeNum, function (workingPeriod, isValid, reason, containsHolidays, overlappedVacations, body) {
                 if (workingPeriod != 1000) {

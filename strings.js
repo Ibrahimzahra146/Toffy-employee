@@ -35,7 +35,8 @@ exports.wedding_message = wedding_message
 // work from home message
 var WFH_message = "Okay, you asked to work from home"
 exports.WFH_message = WFH_message
-var server_error="oops! "
+var server_error = "Oops! Server has encountered an internal error.Please try again."
+exports.server_error = server_error
 
 
 
@@ -219,7 +220,7 @@ var timeOffPredefinedActions = [
         "type": "button",
         "value": "I am sick today"
     }
-   
+
 
 ]
 exports.timeOffPredefinedActions = timeOffPredefinedActions

@@ -338,7 +338,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
         } else if (type == "WFH") {
             vacationType = "7"
         }
-        console.log("sendVacationPostRequest" + vacationType)
 
         var vacationBody = {
             "employee_id": Id,
@@ -369,7 +368,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
                 var vacationId = (JSON.parse(body)).id;
                 var managerApproval = (JSON.parse(body)).managerApproval
                 console.log("JSON.stringify(managerApproval)" + JSON.stringify(managerApproval))
-                console.log
 
                 callback(vacationId, managerApproval, (JSON.parse(body)).employee);
 

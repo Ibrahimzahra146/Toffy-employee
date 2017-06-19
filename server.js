@@ -229,7 +229,7 @@ function userAction(msg, value, isComment) {
             } else toDate = toDate
 
             if (managerApproval == undefined) {
-              msg.say("Sorry,there is an error please try later.")
+              msg.say(env.stringFile.server_error)
 
             } else if (!managerApproval[0]) {
               msg.say(env.stringFile.noApproversMessage);
