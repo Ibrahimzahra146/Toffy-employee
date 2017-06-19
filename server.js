@@ -23,8 +23,9 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
 
 //send request to APi AI and get back with Json object and detrmine the action 
 function sendRequestToApiAi(emailValue, msg, flag, text) {
+  console.log("Message from :" + emailValue)
+  console.log("The message is :" + text)
   env.toffyHelper.isActivated(emailValue, function (isActivated) {
-    console.log("isActivated" + isActivated)
     if (isActivated == false) {
       msg.say(env.stringFile.deactivatedMsg)
 
@@ -141,8 +142,8 @@ function getMembersList(Id, msg) {
           sendRequestToApiAi(emailValue, msg, 0, "");
           break;
         }
-        console.log("the email:");
-        console.log(body.members[i]["profile"].email);
+        /* console.log("the email:");
+         console.log(body.members[i]["profile"].email);*/
 
         i++;
       }
@@ -163,7 +164,7 @@ env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   if (msg.body.event.user == "U5TJH6BJ9") {
 
   } else {
-    console.log("The message is  " + JSON.stringify(msg))
+    //console.log("The message is  " + JSON.stringify(msg))
     getMembersList(msg.body.event.user, msg)
   }
 })
