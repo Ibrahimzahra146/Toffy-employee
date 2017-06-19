@@ -228,8 +228,10 @@ function userAction(msg, value, isComment) {
               toDate = toDate
             } else toDate = toDate
 
+            if (managerApproval == undefined) {
+              msg.say("Sorry,there is an error please try later.")
 
-            if (!managerApproval[0]) {
+            } else if (!managerApproval[0]) {
               msg.say(env.stringFile.noApproversMessage);
             } else {
               env.toffyHelper.sendVacationToManager(fromDate, toDate, arr[2], type, vacationId, managerApproval, employee, "Manager", workingDays, comment)
