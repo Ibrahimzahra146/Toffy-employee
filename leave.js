@@ -142,7 +142,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
             }, function (error, response, body) {
 
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
-                if (response.statusCode == 500) {
+                if (response == undefined || response.statusCode == 500) {
                     callback(1000, "no ")
                 } else if (response.statusCode == 400)
                     callback(1000, "no ")
