@@ -55,7 +55,7 @@ module.exports.storeUserSlackInformation = function storeUserSlackInformation(em
                     "userChannelId": msg.body.event.channel
                 })
                     .then(function (response) {
-                        console.log("Add s;ack recoed" + response.statusCode)
+                        console.log("Add slack recoed" + response.statusCode)
 
 
                         // Get the response body

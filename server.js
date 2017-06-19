@@ -37,6 +37,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
         msgText = text
       } else {
         msgText = msg.body.event.text;
+        console.log("The message is :" + text)
 
         env.toffyHelper.storeUserSlackInformation(emailValue, msg);
       }
