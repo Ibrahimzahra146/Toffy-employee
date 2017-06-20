@@ -124,7 +124,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                             }, {
                                 "title": "Balance (expected by year end)",
                                 "value": parseFloat(body.expectedBalance).toFixed(2) + " weeks ",
-                                "short": true
+                                "short": false
                             }
                             
                         ],
