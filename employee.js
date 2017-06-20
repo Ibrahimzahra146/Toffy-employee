@@ -121,7 +121,12 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                 "title": "Balance (earned to date)",
                                 "value": parseFloat(body.balance).toFixed(2) + " weeks ( " + parseFloat(body.balance_days).toFixed(2) + " day/s)",
                                 "short": true
+                            }, {
+                                "title": "Balance (expected by year end)",
+                                "value": parseFloat(body.expectedBalance).toFixed(2) + " weeks ",
+                                "short": true
                             }
+                            
                         ],
                         "color": "#F35A00"
                     }
