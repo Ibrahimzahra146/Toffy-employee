@@ -243,7 +243,7 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
 
                 }
-                printLogs("stringMessage::" + stringMessage);
+                printLogs("stringMessage:: " + stringMessage);
 
                 stringMessage = stringMessage + "]"
                 var messageBody = {
