@@ -84,10 +84,10 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
             if (!(response.result.parameters.date != "")) {
               console.log("not equal")
             }
-            if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+            if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date || response.result.parameters.date != "") && !(response.result.parameters.date1 || response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
               date = "2017-01-01";
               date1 = "	2017-12-30";
-            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date && response.result.parameters.date != "") && !(response.result.parameters.date1) && !(response.result.parameters.number)) {
+            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date || response.result.parameters.date != "") && !(response.result.parameters.date1|| response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
               console.log("1")
               date = today
               date1 = "	2017-12-30"
