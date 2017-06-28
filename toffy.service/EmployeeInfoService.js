@@ -1,4 +1,5 @@
-const env = require('./Public/configrations.js')
+const env = require('.././Public/configrations.js')
+
 var requestify = require('requestify');
 var generalCookies = "initial"
 exports.generalCookies = generalCookies;
