@@ -261,10 +261,8 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
                         }
                     ]
                 }
-                printLogs("messageBody " + messageBody)
                 var stringfy = JSON.stringify(messageBody);
 
-                printLogs("stringfy " + stringfy)
                 //    stringfy = stringfy.
                 stringfy = stringfy.replace(/\\/g, "")
 

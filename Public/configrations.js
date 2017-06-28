@@ -66,7 +66,8 @@ exports.messageGenerator = messageGenerator
 const vacationOverllaping = require('../././VacationOverllaping/overlappedVacations.js')
 exports.vacationOverllaping = vacationOverllaping
 
-const dateHelper = require('.././DateEngine/DateHelper.js')
+const dateHelper = require('.././toffy.service/DateService.js')
+
 exports.dateHelper = dateHelper;
 
 var apiAiService = apiai(APIAI_ACCESS_TOKEN);

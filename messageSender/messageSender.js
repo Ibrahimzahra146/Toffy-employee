@@ -79,7 +79,6 @@ module.exports.sendVacationToHR = function sendVacationToHR(startDate, endDate, 
     var j = -1
 
 
-    console.log("Mnaagers approvals ::::" + JSON.stringify(managerApproval))
     env.async.whilst(
         function () { return managerApproval[i]; },
         function (callback) {
