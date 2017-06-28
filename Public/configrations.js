@@ -63,8 +63,6 @@ exports.messageReplacer = messageReplacer
 const messageGenerator = require('.././messageSender/messageGenerator.js')
 exports.messageGenerator = messageGenerator
 
-const vacationOverllaping = require('../././VacationOverllaping/overlappedVacations.js')
-exports.vacationOverllaping = vacationOverllaping
 
 const dateHelper = require('.././toffy.service/DateService.js')
 
