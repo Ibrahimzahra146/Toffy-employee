@@ -227,3 +227,21 @@ module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChan
 module.exports.getPendingVacation = function getPendingVacation(email, callback) {
 
 }
+/**
+ * 
+ * Get holidays
+ */
+module.exports.getHolidays = function getHolidays(email, date, date1) {
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
+        env.request({
+            url: 'http://' + env.IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + session_Id
+            },
+        }, function (error, response, body) {
+            callback(error, response, body)
+        })
+    })
+}

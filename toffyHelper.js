@@ -222,84 +222,54 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 module.exports.showHolidays = function showHolidays(msg, email, date, date1, holidayRequestType, response11) {
     console.log("date" + date)
     console.log("date1" + date1)
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        env.request({
-            url: 'http://' + env.IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
-            },
-        }, function (error, response, body) {
-
-            if (!error && response.statusCode === 200) {
-                console.log("Response.statuscode" + response.statusCode)
-                console.log(JSON.stringify(body))
-                if (!(JSON.parse(body)[0])) {
-                    msg.say("There are no holidays, sorry!");
-                }
-                else {
-                    //build message Json result to send it to slack
-                    getHolidayMessage(body, holidayRequestType, response11, function (stringMessage) {
+    env.mRequests.getHolidays(email, date, date1, function (error, response, body) {
 
 
-                        printLogs("stringMessage::" + stringMessage);
 
-                        stringMessage = stringMessage + "]"
-                        var messageBody = {
-                            "text": "The holidays are:",
-                            "attachments": [
-                                {
-                                    "attachment_type": "default",
-                                    "text": " ",
-                                    "fallback": "ReferenceError",
-                                    "fields": stringMessage,
-                                    "color": "#F35A00"
-                                }
-                            ]
-                        }
-                        printLogs("messageBody" + messageBody)
-                        var stringfy = JSON.stringify(messageBody);
+        if (!error && response.statusCode === 200) {
+            console.log("Response.statuscode" + response.statusCode)
+            console.log(JSON.stringify(body))
+            if (!(JSON.parse(body)[0])) {
+                msg.say("There are no holidays, sorry!");
+            }
+            else {
+                //build message Json result to send it to slack
+                getHolidayMessage(body, holidayRequestType, response11, function (stringMessage) {
 
-                        printLogs("stringfy " + stringfy)
-                        stringfy = stringfy.replace(/\\/g, "")
-                        stringfy = stringfy.replace(/]\"/, "]")
-                        stringfy = stringfy.replace(/\"\[/, "[")
-                        stringfy = JSON.parse(stringfy)
 
-                        msg.say(stringfy)
-                    })
-                }
-            } else msg.say("Sorry,there is a problem, please try later!")
-        })
+                    printLogs("stringMessage::" + stringMessage);
+
+                    stringMessage = stringMessage + "]"
+                    var messageBody = {
+                        "text": "The holidays are:",
+                        "attachments": [
+                            {
+                                "attachment_type": "default",
+                                "text": " ",
+                                "fallback": "ReferenceError",
+                                "fields": stringMessage,
+                                "color": "#F35A00"
+                            }
+                        ]
+                    }
+                    printLogs("messageBody" + messageBody)
+                    var stringfy = JSON.stringify(messageBody);
+
+                    printLogs("stringfy " + stringfy)
+                    stringfy = stringfy.replace(/\\/g, "")
+                    stringfy = stringfy.replace(/]\"/, "]")
+                    stringfy = stringfy.replace(/\"\[/, "[")
+                    stringfy = JSON.parse(stringfy)
+
+                    msg.say(stringfy)
+                })
+            }
+        } else msg.say("Sorry,there is a problem, please try later!")
     })
-}
-
-
-module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
-
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
-        env.toffyHelper.general_remember_me = remember_me_cookie
-        env.toffyHelper.general_session_id = sessionId
-
-        env.request({
-            url: "http://" + env.IP + "/api/v1/employee/get-id", //URL to hitDs
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + sessionId
-            },
-            body: email
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            callback(body)
-
-        })
-    });
-
-
 
 }
+
+
 
 /**
  * Post vacation in the DB
