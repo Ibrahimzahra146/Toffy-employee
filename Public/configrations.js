@@ -32,8 +32,6 @@ exports.async = async
 
 const apiai = require('apiai');
 exports.apiai=apiai
-var leave = require('.././leave.js')
-exports.leave = leave
 
 var toffyHelper = require('.././toffyHelper')
 exports.toffyHelper = toffyHelper
@@ -53,6 +51,8 @@ exports.Constants = Constants
 
 const vacationWithLeave = require('.././toffy.service/TimeOffService.js')
 exports.vacationWithLeave = vacationWithLeave
+var leave = require('.././toffy.service/ConfirmationService.js')
+exports.leave = leave
 
 const messageSender = require('.././messageSender/messageSender.js')
 exports.messageSender = messageSender
