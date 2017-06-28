@@ -87,18 +87,24 @@ module.exports.deleteVacation = function deleteVacation(email, vacationId, callb
  * get user Id By email
  */
 module.exports.getUserIdByEmail = function getUserIdByEmail(email, callback) {
-    env.request({
-        url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
-        },
-        body: email
-        //Set the body as a stringcc
-    }, function (error, response, body) {
-        callback(error, response, body)
-    })
+    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, sessionId) {
+        env.toffyHelper.general_remember_me = remember_me_cookie
+        env.toffyHelper.general_session_id = sessionId
+
+        env.request({
+            url: "http://" + env.IP + "/api/v1/employee/get-id", //URL to hitDs
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': remember_me_cookie + ";" + sessionId
+            },
+            body: email
+            //Set the body as a stringcc
+        }, function (error, response, body) {
+            callback(error, response, body)
+
+        })
+    });
 }
 
 /**

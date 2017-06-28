@@ -292,7 +292,6 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
             body: email
             //Set the body as a stringcc
         }, function (error, response, body) {
-            userIdInHr = JSON.parse(body);
             callback(body)
 
         })
