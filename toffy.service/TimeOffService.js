@@ -1,9 +1,4 @@
 const env = require('.././Public/configrations.js')
-
-const leave = require('.././leave.js')
-
-
-
 var vacation_type1 = ""
 module.exports.vacationWithLeave = function vacationWithLeave(msg, response, emailValue) {
 
@@ -279,7 +274,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     var dateMilliSeconds = toDate.getTime();
                     dateMilliSeconds = dateMilliSeconds - (3 * 60 * 60 * 1000)
                     if (validPreviousDate == 1) {
-                        leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
+                        env.leave.sendVacationWithLeaveConfirmation(msg, convertedTime, date, convertedTime1, date1, timeMilliseconds, dateMilliSeconds, emailValue, vacation_type1, timeOffCase)
                         vacation_type1 = ""
                     } else msg.say("Please try again with this foramt mm dd yyyy. I am a bit confused whether you want a vacation in the current year or in next one.")
                 })
