@@ -37,8 +37,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             var toDateWordServer = new Date(body.toTimeSlot.date)
                             toDateWordServer.setHours(body.toTimeSlot.hour)
                             toDateWordServer.setMinutes(body.toTimeSlot.minute)
-                            console.log("toDateWordServer" + toDateWordServer)
-                            console.log("toMilliseconds" + toMilliseconds)
+
                             env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
 
@@ -46,7 +45,6 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                     var addCommentButton = ""
                                     if (containsHolidays == true) {
                                         holidaysNotice = env.stringFile.holiday_notice
-                                        console.log("holidaysNotice" + holidaysNotice)
 
                                     }
                                     if (type == "sick") {
@@ -130,16 +128,9 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
             }
             console.log("getWorkingDays" + JSON.stringify(vacationBody))
             vacationBody = JSON.stringify(vacationBody)
-            env.request({
-                url: "http://" + env.IP + "/api/v1/vacation/working-days", //URL to hitDs
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
-                },
-                body: vacationBody
-                //Set the body as a stringcc
-            }, function (error, response, body) {
+            env.mRequests.getWorkingDays(vacationBody, function (error, response, body) {
+
+
 
                 //console.log(" (JSON.parse(body)).validRequest.reason" + (JSON.parse(body)).validRequest.reason)
                 if (response.statusCode == 500) {

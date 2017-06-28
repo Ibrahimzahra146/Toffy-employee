@@ -245,3 +245,23 @@ module.exports.getHolidays = function getHolidays(email, date, date1) {
         })
     })
 }
+/**
+ * 
+ * Get working days for an employye time off
+ */
+module.exports.getWorkingDays = function getWorkingDays(vacationBody, callback) {
+    env.request({
+        url: "http://" + env.IP + "/api/v1/vacation/working-days", //URL to hitDs
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+        body: vacationBody
+        //Set the body as a stringcc
+    }, function (error, response, body) {
+        callback(error, response, body)
+    })
+
+
+}
