@@ -301,30 +301,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
 
 
 }
-//Get the managers for specific ecmployees
-module.exports.getUserManagers = function getUserManagers(userId, email, managerApproval, callback) {
 
-
-    env.toffyHelper.getNewSessionwithCookie(email, function (cookies, session_Id) {
-
-        env.toffyHelper.generalCookies = cookies
-
-        env.request({
-            url: "http://" + env.IP + "/api/v1/employee/" + userId + "/managers",
-            json: true,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': cookies + ";" + session_Id
-            },
-        }, function (error, response, body) {
-            callback(body)
-
-        })
-
-    })
-
-}
 /**
  * Post vacation in the DB
  * 
@@ -382,36 +359,7 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
 
 
 }
-module.exports.getEmailById = function getEmailById(Path, email, callback) {
-    console.log("getEmailById" + Path)
-    makeGetRequest(Path, email, function (response, body) {
 
-        callback(body)
-    })
-
-}
-function makeGetRequest(path, email, callback) {
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        var uri = 'http://' + env.IP + '/api/v1/' + path
-        printLogs("uri " + uri)
-
-        env.request({
-            url: uri, //URL to hitDs
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
-
-            }
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            printLogs("email:" + body)
-            callback(response, body)
-        })
-
-    })
-
-}
 
 function printLogs(msg) {
     console.log("msg:========>:" + msg)
@@ -546,32 +494,8 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
     }
     callback(stringMessage)
 }
-/**
- * Get image URL for specifiv emp-loyee
- */
-function getUserImage(email, callback) {
 
-    env.toffyHelper.getIdFromEmail(email, function (Id) {
 
-        var uri = 'http://' + env.IP + '/api/v1/employee/' + Id + '/image'
-        printLogs("uri " + uri)
-
-        env.request({
-            url: uri, //URL to hitDs
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
-
-            }
-            //Set the body as a stringcc
-        }, function (error, response, body) {
-            printLogs("email:" + body)
-            callback(body)
-        })
-
-    })
-}
 //Check if the user is deactivited
 
 module.exports.isActivated = function isActivated(email, callback) {

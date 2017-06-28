@@ -214,3 +214,10 @@ module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChan
         callback(error, response, body)
     })
 }
+/**
+ * 
+ * Get all pending request for an employee
+ */
+module.exports.getPendingVacation = function getPendingVacation(email, callback) {
+
+}

@@ -38,7 +38,7 @@ exports.leave = leave
 var toffyHelper = require('.././toffyHelper')
 exports.toffyHelper = toffyHelper
 
-var employee = require('.././employee.js');
+var employee = require('.././toffy.service/EmployeeInfoService.js');
 exports.employee = employee
 
 var server = require('.././server.js')
@@ -51,7 +51,7 @@ exports.stringFile = stringFile
 var Constants = require('.././Constants.js');
 exports.Constants = Constants
 
-const vacationWithLeave = require('.././toffy.service/VacationWithLeave.js')
+const vacationWithLeave = require('.././toffy.service/TimeOffService.js')
 exports.vacationWithLeave = vacationWithLeave
 
 const messageSender = require('.././messageSender/messageSender.js')
