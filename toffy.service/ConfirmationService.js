@@ -1,4 +1,4 @@
-const env = require('./Public/configrations.js')
+const env = require('.././Public/configrations.js')
 
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
