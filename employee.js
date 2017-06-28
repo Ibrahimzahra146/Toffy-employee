@@ -39,6 +39,8 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                                 typeOfVacation = "Time off"
                             else if ((JSON.parse(body))[i].type == 4)
                                 typeOfVacation = "Sick time off"
+                            else if ((JSON.parse(body))[i].type == 7)
+                                typeOfVacation = "Work from home"
                             stringMessage = stringMessage + "]"
                             var messageBody = {
                                 "text": "*" + typeOfVacation + "*",
@@ -126,7 +128,7 @@ module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
                                 "value": parseFloat(body.expectedBalance).toFixed(2) + " weeks ",
                                 "short": false
                             }
-                            
+
                         ],
                         "color": "#F35A00"
                     }
