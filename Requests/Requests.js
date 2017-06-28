@@ -87,7 +87,7 @@ module.exports.deleteVacation = function deleteVacation(email, vacationId, callb
  * get user Id By email
  */
 module.exports.getUserIdByEmail = function getUserIdByEmail(email, callback) {
-    request({
+    env.request({
         url: "http://" + IP + "/api/v1/employee/get-id", //URL to hitDs
         method: 'POST',
         headers: {
