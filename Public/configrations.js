@@ -51,7 +51,7 @@ exports.stringFile = stringFile
 var Constants = require('.././Constants.js');
 exports.Constants = Constants
 
-const vacationWithLeave = require('.././VacationEngine/VacationWithLeave.js')
+const vacationWithLeave = require('.././toffy.service/VacationWithLeave.js')
 exports.vacationWithLeave = vacationWithLeave
 
 const messageSender = require('.././messageSender/messageSender.js')
