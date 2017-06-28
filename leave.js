@@ -120,7 +120,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
     try {
-        env.toffyHelper.getIdFromEmail(email, function (Id) {
+        env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
             var vacationBody = {
                 "employee_id": Id,
                 "from": startDate,

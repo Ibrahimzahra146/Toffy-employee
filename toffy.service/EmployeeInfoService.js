@@ -13,7 +13,7 @@ Show employee vacation history
 
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
 
-    env.toffyHelper.getIdFromEmail(email, function (Id) {
+    env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         env.mRequests.getEmployeeHistory(Id, function (error, response, body) {
             var i = 0;
             //check if no holidays ,so empty response
@@ -80,7 +80,7 @@ Show Employee stats like annual vacation and etc..
 *****/
 module.exports.showEmployeeStats = function showEmployeeStats(email, msg) {
 
-    env.toffyHelper.getIdFromEmail(email, function (Id) {
+    env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         env.mRequests.getEmployeeBalance(Id, function (error, response, body) {
             var messageBody = {
                 "text": "Your stats and anuual time off details",
@@ -146,7 +146,7 @@ Show employee profile (employee basic employee)
 *****/
 module.exports.showEmployeeProfile = function showEmployeeProfile(email, msg) {
     var Approver2 = "---";
-    env.toffyHelper.getIdFromEmail(email, function (Id) {
+    env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         env.mRequests.getEmployeeProfile(email, Id, function (error, response, body) {
 
             var Approver1 = ""
