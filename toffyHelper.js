@@ -308,7 +308,7 @@ module.exports.getIdFromEmail = function getIdFromEmail(email, callback) {
  */
 module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, to, employee_id, email, type, comment, callback) {
 
-    env.toffyHelper.getIdFromEmail(email, function (Id) {
+    env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         console.log("::::" + "::" + email + "::" + Id)
         var vacationType = "0"
         if (type == "sick") {
