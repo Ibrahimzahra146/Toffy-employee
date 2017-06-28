@@ -1,4 +1,5 @@
-const dateHelper = require('.././DateEngine/DateHelper.js')
+const env = require('.././Public/configrations.js')
+
 const leave = require('.././leave.js')
 
 
@@ -8,7 +9,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
     var other_vacation_types = ""
     var messageText = ""
-    dateHelper.getTodayDate(function (today) {
+    env.dateHelper.getTodayDate(function (today) {
 
         var time = "8:00:00";
         var time1 = "17:00:00";
@@ -249,8 +250,8 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 vacation_type1 = "personal"
             }
             //get the milliseconds for the  end of the vacation 
-            dateHelper.convertTimeFormat(time, function (x, y, convertedTime) {
-                dateHelper.convertTimeFormat(time1, function (x, y, convertedTime1) {
+            env.dateHelper.convertTimeFormat(time, function (x, y, convertedTime) {
+                env.dateHelper.convertTimeFormat(time1, function (x, y, convertedTime1) {
                     var toDate = date1 + " " + convertedTime1
 
                     var fromDate = date + " " + convertedTime;
@@ -260,7 +261,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     if (timeMilliseconds.getFullYear() == 2018) {
                         // toDate.setFullYear(2017)
 
-                        var res = dateHelper.getDayNumber(timeMilliseconds)
+                        var res = env.dateHelper.getDayNumber(timeMilliseconds)
                         if (res < 7 && res >= 0) {
                             timeMilliseconds.setFullYear(2017)
                         } else validPreviousDate = 0
@@ -270,7 +271,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                     toDate = new Date(toDate);
                     if (toDate.getFullYear() == 2018) {
                         // toDate.setFullYear(2017)
-                        var res = dateHelper.getDayNumber(toDate)
+                        var res = env.dateHelper.getDayNumber(toDate)
                         if (res < 7 && res >= 0) {
                             toDate.setFullYear(2017)
                         } else validPreviousDate = 0
