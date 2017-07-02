@@ -98,7 +98,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 //else vacationOverllaping.determinOverllapingCase(msg, email, overlappedVacations, messagetext, holidaysNotice, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, )
 
                             })
-                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest has been rejected automatically.\n" + reason + ". Please contact your manager.")
+                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest  has been rejected automatically.\n" + reason + ". Please contact your manager.")
 
                     }
                     else msg.say("It's already a time off.")
@@ -143,8 +143,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
                 }
                 else {
-                    console.log("no overllaped vacation" + JSON.stringify(body))
-                    console.log()
+                  
                     callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, "", (JSON.parse(body)))
 
                 }
