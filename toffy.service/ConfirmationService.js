@@ -3,6 +3,8 @@ const env = require('.././Public/configrations.js')
 
 module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpecDayConfirmation(msg, fromTime, fromDate, toTime, ToDate, fromMilliseconds, toMilliseconds, email, type, timeOffcase) {
     var holidaysNotice = ""
+    var fWord = ""
+    var tWord = ""
     var typeNum = ""
     if (type == "sick") {
         typeNum = 4
@@ -40,7 +42,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                             env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
-
+                        
                                 getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
                                     var addCommentButton = ""
                                     if (containsHolidays == true) {
@@ -98,7 +100,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                                 //else vacationOverllaping.determinOverllapingCase(msg, email, overlappedVacations, messagetext, holidaysNotice, fromTime, toTime, email, fromMilliseconds, toMilliseconds, type, workingDays, )
 
                             })
-                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest  has been rejected automatically.\n" + reason + ". Please contact your manager.")
+                        } else msg.say("Sorry! According to the time off submition rules. Your time off reuquest from has been rejected automatically.\n" + reason + ". Please contact your manager.")
 
                     }
                     else msg.say("It's already a time off.")
@@ -143,7 +145,7 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
                 }
                 else {
-                  
+
                     callback((JSON.parse(body)).workingPeriod, (JSON.parse(body)).validRequest.isValid, (JSON.parse(body)).validRequest.reason, (JSON.parse(body)).validRequest.containsHolidays, "", (JSON.parse(body)))
 
                 }
