@@ -109,7 +109,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
                 timeOffCase = 5
             }
-            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date1 != "") {
+            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date1 != "" && response.result.parameters.time1 != "") {
 
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
@@ -121,7 +121,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 1
 
             }
-            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date1 && response.result.parameters.date1 != "") {
+            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "" && response.result.parameters.date1 && response.result.parameters.date1 != "") {
 
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
