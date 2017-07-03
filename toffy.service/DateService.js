@@ -89,7 +89,7 @@ module.exports.convertTimeFormat = function convertTimeFormat(time, callback) {
         }
         else if (arr[0] == "00" || arr[0] == "12") {
             formattedTime = "12:" + arr[1];
-            midday = "am"
+            midday = "pm"
             TimeforMilliseconds = "12:" + arr[1]
         }
 
