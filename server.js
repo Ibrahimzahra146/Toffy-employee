@@ -1,7 +1,8 @@
+//all modules  in configrations file
 const env = require('./Public/configrations.js')
 
 /**
- * 
+ * welcome function,by getting  the user name from slack api
  */
 function SendWelcomeResponse(msg, responseText, flag, callback) {
   var id = ""
@@ -21,8 +22,12 @@ function SendWelcomeResponse(msg, responseText, flag, callback) {
   });
 }
 
-//send request to APi AI and get back with Json object and detrmine the action 
+/**
+ * send request to APi AI and get back with Json object and detrmine the action 
+ * 
+ */
 function sendRequestToApiAi(emailValue, msg, flag, text) {
+  //catch user email and user text
   console.log("Message from :" + emailValue)
   console.log("The message is :" + text)
   env.toffyHelper.isActivated(emailValue, function (isActivated) {
@@ -48,7 +53,6 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 
       apiaiRequest.on('response', (response) => {
         let responseText = response.result.fulfillment.speech;
-        //user ask for new personal vacation with from to dates
 
         //Vacation with leave scenarios
         if (responseText == "vacationWithLeave") {
@@ -62,7 +66,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 
           env.employee.sendHelpOptions(msg, emailValue);
         }
-        //show enployee vacation history 
+        //show enployee vacation info section 
         else if ((responseText) == "showHistory") {
           env.employee.showEmployeeHistory(emailValue, msg);
         }
@@ -82,14 +86,11 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
           env.dateHelper.getTodayDate(function (today) {
 
             if (!(response.result.parameters.date != "")) {
-              console.log("not equal")
             }
-            if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !( response.result.parameters.date != "") && !( response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
-              console.log("Arrive 122")
+            if (response.result.parameters.holiday_synonymes && !(response.result.parameters.next_synonymes) && !(response.result.parameters.date != "") && !(response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
               date = "2017-01-01";
               date1 = "	2017-12-30";
-            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date || response.result.parameters.date != "") && !(response.result.parameters.date1|| response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
-              console.log("1")
+            } else if (response.result.parameters.holiday_synonymes && (response.result.parameters.next_synonymes) && !(response.result.parameters.date || response.result.parameters.date != "") && !(response.result.parameters.date1 || response.result.parameters.date1 != "") && !(response.result.parameters.number)) {
               date = today
               date1 = "	2017-12-30"
               holidayRequestType = 2;
@@ -107,6 +108,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
           })
         }
         else if ((responseText) == "ShowAllHolidaysInCurrentyear") {
+          //@Todo set the year automatically
           var date = "2017-01-01";
           var date1 = "	2017-12-30";
           env.toffyHelper.showHolidays(msg, emailValue, date, date1);
@@ -129,9 +131,14 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
 
 
 
-//get all information about team users like email ,name ,user id ...sssss
-//**********************************************************************************************
+/*
+get all information about team users like email ,name ,user id ...sssss
+This method used to get the user email automatically ,so the user is authenticated by using slack access token 
+to get his info.
+*/
+
 function getMembersList(Id, msg) {
+
   var emailValue = "";
   env.mRequests.getSlackMembers(function (error, response, body) {
 
@@ -144,21 +151,17 @@ function getMembersList(Id, msg) {
           sendRequestToApiAi(emailValue, msg, 0, "");
           break;
         }
-        /* console.log("the email:");
-         console.log(body.members[i]["profile"].email);*/
+  
 
         i++;
       }
     }
   });
 }
-//*************************************************************************************************
 
-//**************************************************************************************************
-
-
-
-//*********************************************
+/**
+ * Listen for messeges using slapp
+ */
 var app = env.slapp.attachToExpress(env.express())
 env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   console.log("Recieved ")
@@ -166,11 +169,13 @@ env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
   if (msg.body.event.user == "U5TJH6BJ9") {
 
   } else {
-    //console.log("The message is  " + JSON.stringify(msg))
+    //authorize the user by get his email
     getMembersList(msg.body.event.user, msg)
   }
 })
-
+/**
+ * Listen for slack buttons 
+ */
 env.slapp.action('leave_with_vacation_confirm_reject', 'confirm', (msg, value) => {
   env.generalMsg = msg
   userAction(msg, value, 0)
@@ -283,8 +288,7 @@ env.slapp.action('leave_with_vacation_confirm_reject', 'yesWithComment', (msg, v
   var wordFromDate = arr[7]
   var wordToDate = arr[8]
   var messageText = arr[9]
-  console.log("Value" + value)
-  console.log("messageText" + messageText)
+
   env.messageReplacer.replaceWithComment(msg, fromTime, toTime, email, fromDateInMilliseconds, toDateInMilliseconds, type, workingDays, wordFromDate, wordToDate, messageText)
 })
 env.slapp.action('cancel_request', 'cancel', (msg, value) => {
@@ -298,7 +302,6 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
   var type = arr[5]
   env.mRequests.getVacationInfo(email, vacationId, function (error, response, body) {
     env.toffyHelper.isManagersTakeAnAction(JSON.parse(body).managerApproval, function (isThereIsAction, state) {
-      console.log("isThereIsAction" + isThereIsAction)
       if (isThereIsAction == false) {
         //delete vacation request
         env.mRequests.deleteVacation(email, vacationId, function (error, response, body) {
@@ -323,11 +326,6 @@ env.slapp.action('cancel_request', 'cancel', (msg, value) => {
 
 })
 
-
-/*--------------___________________________________________________----------------------
-End of Leave Section
-  -------------____________________________________________________---------------------
-  */
 //upload sick report button 
 env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
   env.generalMsg = msg
@@ -356,21 +354,21 @@ env.slapp.action('cancel_request', 'upload_sick_report', (msg, value) => {
 
 
 })
-env.slapp.event('team_join', (msg) => {
-  console.log('received team join event')
-});
+
 
 app.get('/', function (req, res) {
   res.send('Hello')
 })
 app.use(env.bodyParser.text({ type: 'application/json' }));
 
+//api to get when the a user birthday happen
 app.post('/birthday', (req, res) => {
   var email = JSON.parse(req.body)[0].email
   env.messageSender.sendMessageSpecEmployee(email, "With all the best")
   res.send("200");
 
 });
+//when an approver ask for a sick report ,so we send a vacation request for HR
 app.post('/uploaded_sick_report', (req, res) => {
   console.log("New request recived ")
 
