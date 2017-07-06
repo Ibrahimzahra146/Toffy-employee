@@ -151,7 +151,7 @@ function getMembersList(Id, msg) {
           sendRequestToApiAi(emailValue, msg, 0, "");
           break;
         }
-  
+
 
         i++;
       }
@@ -164,7 +164,7 @@ function getMembersList(Id, msg) {
  */
 var app = env.slapp.attachToExpress(env.express())
 env.slapp.message('(.*)', ['direct_message'], (msg, text, match1) => {
-  console.log("Recieved ")
+  console.log("Recieved " + JSON.stringify(msg))
   env.generalMsg = msg
   if (msg.body.event.user == "U5TJH6BJ9") {
 
