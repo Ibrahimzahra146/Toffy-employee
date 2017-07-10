@@ -260,6 +260,7 @@ module.exports.getWorkingDays = function getWorkingDays(vacationBody, callback) 
         body: vacationBody
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("getWorkingDays" + JSON.stringify(body))
         callback(error, response, body)
     })
 
