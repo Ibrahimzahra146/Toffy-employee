@@ -43,7 +43,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
 
-                                getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
+                                getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, body.workingPeriodInHours, function (messagetext) {
                                     var addCommentButton = ""
                                     if (containsHolidays == true) {
                                         holidaysNotice = env.stringFile.holiday_notice
@@ -160,7 +160,8 @@ function getWorkingDays(startDate, endDate, email, typeNum, callback) {
 
 
 }
-function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, overlappedVacations, callback) {
+function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midday, ToDate, email, type, timeOffcase, workingDays, overlappedVacations, workingPeriodInHours, callback) {
+    var hours_days_msg = workingDays + " working days. "
     var typeText = "Okay, you asked for a time off"
     if (type == "sick") {
         typeText = " you asked for a sick" + " time off :persevere:,"
@@ -175,12 +176,19 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     else if (type == "Wedding")
         typeText = env.stringFile.wedding_message
     var messageText = ""
+    if (workingPeriodInHours != 0) {
+        if (workingPeriodInHours <= 1) {
+            hours_days_msg = workingPeriodInHours + " hour "
+
+        } else
+            hours_days_msg = workingPeriodInHours + " hours "
+    }
     generateOverllapedVacationsMessae(overlappedVacations, function (overlppedMsg) {
 
 
 
 
-        messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
+        messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + hours_days_msg + overlppedMsg + ". Should I go ahead ?"
 
 
         if (timeOffcase == 8) {
@@ -189,7 +197,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
                 messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
 
             } else
-                messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working days. " + overlppedMsg + ". Should I go ahead ?"
+                messageText = typeText + " from  " + fromDate + " to " + ToDate + " and that would be " + hours_days_msg + overlppedMsg + ". Should I go ahead ?"
 
 
         } else if (timeOffcase == 9) {
@@ -197,7 +205,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
                 messageText = ""
                 messageText = typeText + " from  " + fromDate + " to " + ToDate + ". Should I go ahead ?"
             } else
-                messageText = typeText + " on " + fromDate + " to " + ToDate + " and that would be " + workingDays + " working day. " + overlppedMsg + " Should I go ahead ? "
+                messageText = typeText + " on " + fromDate + " to " + ToDate + " and that would be " + hours_days_msg + overlppedMsg + " Should I go ahead ? "
 
 
         } else if (timeOffcase == 11) {
