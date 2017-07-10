@@ -29,7 +29,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
 
                     var workingDays = parseFloat(workingPeriod).toFixed(2);
                     if (workingDays != 0.0 || containsHolidays == true) {
-                        console.log("overlappedVacations" + overlappedVacations == null)
+                        console.log("overlappedVacations " + overlappedVacations == null)
                         if (isValid == true || (isValid == false && type == "sick") || (isValid == false && type == "Wedding") || (isValid == false && type == "Paternity")) {
 
                             var fromDateServer = new Date(body.timeSlotFrom.date)
@@ -39,7 +39,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             var toDateWordServer = new Date(body.toTimeSlot.date)
                             toDateWordServer.setHours(body.toTimeSlot.hour)
                             toDateWordServer.setMinutes(body.toTimeSlot.minute)
-                            console.log("workingPeriodInHours" + body.workingPeriodInHours)
+                            console.log("workingPeriodInHours: " + body.workingPeriodInHours)
                             env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
 
