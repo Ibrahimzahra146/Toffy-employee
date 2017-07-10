@@ -39,10 +39,10 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
                             var toDateWordServer = new Date(body.toTimeSlot.date)
                             toDateWordServer.setHours(body.toTimeSlot.hour)
                             toDateWordServer.setMinutes(body.toTimeSlot.minute)
-
+                            console.log("workingPeriodInHours" + body.workingPeriodInHours)
                             env.dateHelper.converDateToWords(fromDateServer, toDateWordServer, 0, function (wordFromDate, wordTodate) {
 
-                        
+
                                 getmessage(formattedFromTime, middayFrom, wordFromDate, formattedTime, midday, wordTodate, email, type, timeOffcase, workingDays, overlappedVacations, function (messagetext) {
                                     var addCommentButton = ""
                                     if (containsHolidays == true) {
