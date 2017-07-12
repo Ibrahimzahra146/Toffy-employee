@@ -586,7 +586,7 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
                         "text": "Cancel Request",
                         "style": "danger",
                         "type": "button",
-                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDateWord + ";" + toDateWord + ";" + type
+                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDateWord + ";" + toDateWord + ";" + type1
 
                     }
                 ]
