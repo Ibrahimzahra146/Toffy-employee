@@ -2,7 +2,7 @@
  * 
  */
 const stringFile = require('./strings.js')
-const env=require('./Public/configrations.js')
+const env = require('./Public/configrations.js')
 /**Deactivated message */
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
 exports.deactivatedMsg = deactivatedMsg
@@ -560,10 +560,10 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
     var type1 = env.vacationType.getVacationType(type)
 
     var message = {
-        "text": type1,
+        "text": "*'" + type1 + "'*",
         "attachments": [
             {
-                "text": type1,
+                "text": "",
                 "callback_id": 'cancel_request',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
