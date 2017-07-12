@@ -553,6 +553,9 @@ module.exports.oneDayLeftSickJsonMessage = function oneDayLeftSickJsonMessage(me
 }
 //Pending vacation message
 module.exports.pendingVacationMessage = function pendingVacationMessage(email, vacationId, managerApproval, fromDate, toDate, type, fromDateWord, toDateWord) {
+    console.log(type)
+    console.log(fromDateWord)
+    console.log(toDateWord)
     var message = {
         "text": "",
         "attachments": [
@@ -563,12 +566,12 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
                 "attachment_type": "default",
                 "fields": [
                     {
-                        "title": "From",
+                        "title": "From date",
                         "value": fromDateWord,
                         "short": true
                     },
                     {
-                        "title": "To",
+                        "title": "To date",
                         "value": toDateWord,
                         "short": true
 
