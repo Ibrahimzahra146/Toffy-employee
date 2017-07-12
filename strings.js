@@ -2,6 +2,7 @@
  * 
  */
 const stringFile = require('./strings.js')
+const env=require('./Public/configrations.js')
 /**Deactivated message */
 const deactivatedMsg = "Your account has been deactivated. You are not allowed to use the system.";
 exports.deactivatedMsg = deactivatedMsg
