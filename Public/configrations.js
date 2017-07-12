@@ -31,7 +31,7 @@ const async = require('async');
 exports.async = async
 
 const apiai = require('apiai');
-exports.apiai=apiai
+exports.apiai = apiai
 
 var toffyHelper = require('.././toffyHelper')
 exports.toffyHelper = toffyHelper
@@ -48,6 +48,9 @@ exports.stringFile = stringFile
 
 var Constants = require('.././toffy.Utils/Constants.js');
 exports.Constants = Constants
+
+var vacationType = require('.././toffy.Utils/vacationType.js');
+exports.vacationType = vacationType
 
 const vacationWithLeave = require('.././toffy.service/TimeOffService.js')
 exports.vacationWithLeave = vacationWithLeave
