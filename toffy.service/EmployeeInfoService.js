@@ -294,8 +294,8 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
                     //build message Json result to send it to slack
                     while (body[i]) {
 
-                        console.log("body[i].id" + body[i].id)
-                        console.log("body[i].email" + body[i].email)
+                        console.log("body[i].id" + (JSON.parse(body)[i]).id)
+                        console.log("body[i].email" + (JSON.parse(body)[i]).email)
                         //var message=env.stringFile.pendingVacationMessage(email, body[i].id)
                         i++
                     }
