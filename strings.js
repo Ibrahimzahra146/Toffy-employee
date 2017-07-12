@@ -569,7 +569,9 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
                     },
                     {
                         "title": "To",
-                        "value": toDateWord
+                        "value": toDateWord,
+                        "short": false
+
                     }
                 ],
                 "actions": [
