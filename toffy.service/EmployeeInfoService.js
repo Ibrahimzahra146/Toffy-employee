@@ -296,8 +296,13 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
 
                         console.log("body[i].id" + (JSON.parse(body))[i].id)
                         console.log("body[i].email" + (JSON.parse(body))[i].employee.email)
-                        //var message=env.stringFile.pendingVacationMessage(email, body[i].id)
-                        i++
+                        env.dateHelper.converDateToWords(JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, 0, function (fromDateWord, toDateWord) {
+
+
+                            var message = env.stringFile.pendingVacationMessage(email, JSON.parse(body)[i].id, JSON.parse(body)[i].managerApproval, JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, fromDateWord, toDateWord)
+                            i++
+                            msg.say(message)
+                        })
                     }
                 }
             }
