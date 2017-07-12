@@ -1,8 +1,8 @@
 module.exports.getVacationType = function getVacationType(type) {
     if (type == 0) {
-        return "Personal time off"
+        return "Personal"
     } else if (type == 4) {
-        return "Sick time off"
+        return "Sick"
     } else if (type == 7) {
         return "WFH"
     }

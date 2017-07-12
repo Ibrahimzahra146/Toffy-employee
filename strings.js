@@ -560,7 +560,7 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
     var type1 = env.vacationType.getVacationType(type)
 
     var message = {
-        "text": "*'" + type1 + "'*",
+        "text": "*" + type1 + "*",
         "attachments": [
             {
                 "text": "",
