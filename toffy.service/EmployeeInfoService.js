@@ -292,7 +292,7 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
                 }
                 else {
                     //build message Json result to send it to slack
-                    while (body[i]) {
+                    while ((JSON.parse(body)[i])) {
 
                         console.log("body[i].id" + (JSON.parse(body))[i].id)
                         console.log("body[i].email" + (JSON.parse(body))[i].employee.email)
