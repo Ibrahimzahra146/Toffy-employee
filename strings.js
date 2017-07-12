@@ -556,11 +556,13 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
     console.log(type)
     console.log(fromDateWord)
     console.log(toDateWord)
+    var type1 = env.vacationType.getVacationType(type)
+
     var message = {
-        "text": "",
+        "text": type1,
         "attachments": [
             {
-                "text": type,
+                "text": type1,
                 "callback_id": 'cancel_request',
                 "color": "#3AA3E3",
                 "attachment_type": "default",
@@ -583,7 +585,7 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
                         "text": "Cancel Request",
                         "style": "danger",
                         "type": "button",
-                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate + ";" + type
+                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDateWord + ";" + toDateWord + ";" + type
 
                     }
                 ]

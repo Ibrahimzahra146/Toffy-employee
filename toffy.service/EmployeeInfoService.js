@@ -298,8 +298,8 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
                         console.log("body[i].email" + (JSON.parse(body))[i].employee.email)
                         env.dateHelper.converDateToWords(JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, 0, function (fromDateWord, toDateWord) {
 
-                            var type = env.vacationType.getVacationType(JSON.parse(body).type)
-                            var message = env.stringFile.pendingVacationMessage(email, JSON.parse(body)[i].id, JSON.parse(body)[i].managerApproval, JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, type, fromDateWord, toDateWord)
+
+                            var message = env.stringFile.pendingVacationMessage(email, JSON.parse(body)[i].id, JSON.parse(body)[i].managerApproval, JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, JSON.parse(body)[i].type, fromDateWord, toDateWord)
                             i++
                             msg.say(message)
                         })
