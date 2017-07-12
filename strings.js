@@ -551,6 +551,42 @@ module.exports.oneDayLeftSickJsonMessage = function oneDayLeftSickJsonMessage(me
     }
     return message
 }
+//Pending vacation message
+module.exports.pendingVacationMessage = function pendingVacationMessage(email, vacationId, managerApproval, fromDate, toDate, type, fromDateWord, toDateWord) {
+    var message = {
+        "text": "",
+        "attachments": [
+            {
+                "text": type,
+                "callback_id": 'cancel_request',
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "fields": [
+                    {
+                        "title": "From",
+                        "value": fromDateWord,
+                        "short": true
+                    },
+                    {
+                        "title": "To",
+                        "value": toDateWord
+                    }
+                ],
+                "actions": [
+                    {
+                        "name": 'cancel',
+                        "text": "Cancel Request",
+                        "style": "danger",
+                        "type": "button",
+                        "value": email + ";" + vacationId + ";" + JSON.stringify(managerApproval) + ";" + fromDate + ";" + toDate + ";" + type
+
+                    }
+                ]
+            }
+        ]
+    }
+    return message;
+}
 //One dat left info message 
 module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWord, toDateWord) {
     var message = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."

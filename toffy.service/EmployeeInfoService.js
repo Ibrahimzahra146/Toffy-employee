@@ -285,6 +285,20 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
     env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
 
         env.mRequests.getPendingVacation(email, Id, function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                if (!(body)[i]) {
+                    msg.say("There are no rules.");
+                }
+                else {
+                    //build message Json result to send it to slack
+                    while (body[i]) {
+
+                        console.log("body[i].id" + body[i].id)
+                        console.log("body[i].email" + body[i].email)
+
+                    }
+                }
+            }
 
         })
     })
