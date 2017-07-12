@@ -279,6 +279,14 @@ module.exports.ShowRules = function showEmployeeStats(email, msg) {
 
 }
 /**
+ * Show all pending request for employee 
+ */
+module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(email, msg) {
+    env.mRequests.getPendingVacation(email, function (error, response, body) {
+
+    })
+}
+/**
  * Send help menu for employee
  */
 

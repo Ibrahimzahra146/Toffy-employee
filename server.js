@@ -79,6 +79,9 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
         else if ((responseText) == "showProfile") {
           env.employee.showEmployeeProfile(emailValue, msg);
         }
+        else if ((response.result.action) == "show.pending") {
+          env.employee.showEmployeePendingRequest(emailValue, msg);
+        }
         else if ((responseText) == "showHolidays") {
           var date;
           var date1;
