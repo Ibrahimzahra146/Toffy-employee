@@ -565,7 +565,7 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
                     {
                         "title": "From",
                         "value": fromDateWord,
-                        "short": true
+                        "short": false
                     },
                     {
                         "title": "To",
