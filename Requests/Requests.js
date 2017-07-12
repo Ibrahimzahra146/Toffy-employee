@@ -224,20 +224,19 @@ module.exports.addSlackRecord = function addSlackRecord(email, user_id, userChan
  * 
  * Get all pending request for an employee
  */
-module.exports.getPendingVacation = function getPendingVacation(email, callback) {
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        env.request({
-            url: 'http://' + env.IP + '/api/v1/employee/pending-vacations',
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
-            },
-        }, function (error, response, body) {
-            console.log("getPendingVacation" + JSON.stringify(body))
-            callback(error, response, body)
-        })
+module.exports.getPendingVacation = function getPendingVacation(email, Id, callback) {
+    env.request({
+        url: 'http://' + env.IP + '/api/v1/employee/pending-vacations?empId=' + Id,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+    }, function (error, response, body) {
+        console.log("getPendingVacation" + JSON.stringify(body))
+        callback(error, response, body)
     })
+
 
 }
 /**
