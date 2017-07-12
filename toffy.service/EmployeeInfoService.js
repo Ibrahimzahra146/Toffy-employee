@@ -295,6 +295,7 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
 
                         console.log("body[i].id" + body[i].id)
                         console.log("body[i].email" + body[i].email)
+                        //var message=env.stringFile.pendingVacationMessage(email, body[i].id)
 
                     }
                 }

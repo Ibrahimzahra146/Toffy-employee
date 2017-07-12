@@ -243,7 +243,7 @@ module.exports.getPendingVacation = function getPendingVacation(email, Id, callb
  * 
  * Get holidays
  */
-module.exports.getHolidays = function getHolidays(email, date, date1) {
+module.exports.getHolidays = function getHolidays(email, date, date1, callback) {
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
         env.request({
             url: 'http://' + env.IP + '/api/v1/holidays/range?from=' + date + '&to=' + date1,
