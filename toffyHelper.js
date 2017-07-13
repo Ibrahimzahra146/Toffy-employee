@@ -486,7 +486,10 @@ module.exports.isActivated = function isActivated(email, callback) {
                 body: email
                 //Set the body as a stringcc
             }, function (error, response, body) {
+                console.log("isActivated:" + JSON.stringify(body))
+
                 if (JSON.parse(body).activated == false) {
+                    console.log(JSON.stringify(body))
                     callback(false);
                 } else
                     callback(true)
