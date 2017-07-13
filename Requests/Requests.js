@@ -240,6 +240,24 @@ module.exports.getPendingVacation = function getPendingVacation(email, Id, callb
 
 }
 /**
+ * get all sick vacation for employee that need report
+ */
+module.exports.getSickVacationNeedReport = function getSickVacationNeedReport(email, Id, callback) {
+    env.request({
+        url: 'http://' + env.IP + '/api/v1/employee/' + Id + '/vacation-report',
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+    }, function (error, response, body) {
+        console.log("getPendingVacation" + JSON.stringify(body))
+        callback(error, response, body)
+    })
+
+
+}
+/**
  * 
  * Get holidays
  */
