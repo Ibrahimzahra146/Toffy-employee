@@ -1,10 +1,11 @@
 const env = require('.././Public/configrations.js')
 var vacation_type1 = ""
 module.exports.vacationWithLeave = function vacationWithLeave(msg, response, emailValue) {
-
+    PrepareApiAiResponse(response)
     var other_vacation_types = ""
     var messageText = ""
     env.dateHelper.getTodayDate(function (today) {
+
 
         var time = "8:00:00";
         var time1 = "17:00:00";
@@ -32,7 +33,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
         else if (response.result.parameters.working_from_home) {
             vacation_type1 = "WFH"
         }
-        if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        if (response.result.parameters.time_off_types && !(response.result.parameters.time && response.result.parameters.time == "") && !(response.result.parameters.time1 && response.result.parameters.time1 == "") && !(response.result.parameters.date && response.result.parameters.date == "") && !(response.result.parameters.date1)) {
 
             msg.say("Please specify the date and/or time ")
 
@@ -157,7 +158,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 }
                 timeOffCase = 4
 
-            } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "" ) {
+            } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "") {
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
                 timeOffCase = 5
@@ -285,5 +286,17 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
         }
     })
+
+}
+/**
+ * Prepare api ai response since sometimes the api ai return the null parameter as "" 
+ * So we should make sure that the response as we expected
+ * 
+ */
+
+function PrepareApiAiResponse(response) {
+    console.log("response before Preparation" + JSON.stringify(response))
+    response.result.parameters.date = "Ibrahim"
+    console.log("response after Preparation" + JSON.stringify(response))
 
 }
