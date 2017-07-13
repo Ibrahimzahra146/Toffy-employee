@@ -345,8 +345,9 @@ module.exports.getNewSessionwithCookie = function getNewSessionwithCookie(email,
         body: email
         //Set the body as a stringcc
     }, function (error, response, body) {
+        console.log("response.statusCode " + response.statusCode)
         if (response.statusCode == 451 || response.statusCode == 500) {
-            callback(1000, 1000)
+            callback(2000, 2000)
         } else {
             console.log("response.headers)" + response.headers["set-cookie"])
             if (response.headers["set-cookie"] == undefined) {
@@ -471,8 +472,8 @@ module.exports.isActivated = function isActivated(email, callback) {
     printLogs("Getting roles ")
     var flag = true;
     env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        if (remember_me_cookie == 1000) {
-            callback(false)
+        if (remember_me_cookie == 2000) {
+            callback(2000)
         } else {
 
             env.request({
