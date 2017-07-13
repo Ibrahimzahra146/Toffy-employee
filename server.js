@@ -37,7 +37,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
       msg.say(env.stringFile.deactivatedMsg)
 
     } else if (isActivated == 2000) {
-      msg.say("Error in the system please try later else ")
+      msg.say("Error in the system please try later ")
 
     }
 
