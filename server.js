@@ -31,7 +31,7 @@ function sendRequestToApiAi(emailValue, msg, flag, text) {
   console.log("Message from :" + emailValue)
   console.log("The message is :" + text)
   env.toffyHelper.isActivated(emailValue, function (isActivated) {
-    env.toffyHelper.isActivated(emailValue, function (isActivated) {
+
       console.log("isActivated" + isActivated)
       if (isActivated == false) {
         msg.say(env.stringFile.deactivatedMsg)
