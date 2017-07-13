@@ -40,32 +40,26 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
             console.log("sick_synonyms1")
 
         }
-        else if (response.result.parameters.sick_synonyms && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        else if (response.result.parameters.sick_synonyms && (response.result.parameters.time == undefined) && (response.result.parameters.time1 == undefined) && (response.result.parameters.date == undefined) && (response.result.parameters.date1 == undefined)) {
             msg.say("Please specify the date and/or time ")
 
             console.log("sick_synonyms2")
             vacation_type1 = "sick"
 
         }
-        else if (response.result.parameters.working_from_home && !(response.result.parameters.time) && !(response.result.parameters.time1) && !(response.result.parameters.date) && !(response.result.parameters.date1)) {
+        else if (response.result.parameters.working_from_home && (response.result.parameters.time == undefined) && (response.result.parameters.time1 == undefined) && (response.result.parameters.date == undefined) && (response.result.parameters.date1 == undefined)) {
             msg.say("Please specify the date and/or time ")
 
             console.log("sick_synonyms3")
             vacation_type1 = "WFH"
 
         }
-        else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && (response.result.parameters.date == "") && !(response.result.parameters.date1)) {
-            msg.say("Please specify the date and/or time ")
-            console.log("sick_synonyms4")
-        }
-        else if (response.result.parameters.time_off_types && !(response.result.parameters.time) && !(response.result.parameters.time1) && (response.result.parameters.date == "") && (response.result.parameters.date1 == "")) {
-            msg.say("Please specify the date and/or time ")
-            console.log("sick_synonyms4")
-        } else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "" && !(response.result.parameters.time)) {
-            msg.say("Please specify the date and/or time ")
-            vacation_type1 = "sick"
-            console.log("sick_synonyms5")
-        }
+
+        /* else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "" && !(response.result.parameters.time)) {
+             msg.say("Please specify the date and/or time ")
+             vacation_type1 = "sick"
+             console.log("sick_synonyms5")
+         }*/
 
         else {
             console.log("vacation_type1" + vacation_type1)
@@ -110,7 +104,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
                 timeOffCase = 5
             }
-            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date1 != "" && response.result.parameters.time1 != "") {
+            else if (response.result.parameters.time != undefined && response.result.parameters.time1 != undefined && response.result.parameters.date != undefined && response.result.parameters.date1 != undefined) {
 
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
@@ -122,7 +116,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 1
 
             }
-            else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "" && response.result.parameters.date1 && response.result.parameters.date1 != "") {
+            else if (response.result.parameters.time != undefined && response.result.parameters.time1 != undefined && response.result.parameters.date1 != undefined) {
 
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
@@ -135,7 +129,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
                 timeOffCase = 2
 
-            } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "" && response.result.parameters.date) {
+            } else if (response.result.parameters.time != undefined && response.result.parameters.time1 != undefined && response.result.parameters.date != undefined) {
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
                 date = response.result.parameters.date
@@ -148,7 +142,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
             }
 
-            else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date != "" && response.result.parameters.date1 != "") {
+            else if (response.result.parameters.time != undefined && response.result.parameters.date != undefined && response.result.parameters.date1 != undefined) {
                 time = response.result.parameters.time
 
                 date = response.result.parameters.date
@@ -158,12 +152,12 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 }
                 timeOffCase = 4
 
-            } else if (response.result.parameters.time && response.result.parameters.time1 && response.result.parameters.time1 != "") {
+            } else if (response.result.parameters.time != undefined && response.result.parameters.time1 != undefined) {
                 time = response.result.parameters.time
                 time1 = response.result.parameters.time1
                 timeOffCase = 5
 
-            } else if (response.result.parameters.time && response.result.parameters.date && response.result.parameters.date != "") {
+            } else if (response.result.parameters.time != undefined && response.result.parameters.date != undefined) {
                 time = response.result.parameters.time
                 date = response.result.parameters.date
                 date1 = response.result.parameters.date
@@ -174,7 +168,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 6
 
             }
-            else if (response.result.parameters.time && response.result.parameters.date1 && response.result.parameters.date1 != "") {
+            else if (response.result.parameters.time != undefined && response.result.parameters.date1 != undefined) {
                 time = response.result.parameters.time
                 date1 = response.result.parameters.date1
                 if (response.result.parameters.date1 == "") {
@@ -183,14 +177,14 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 timeOffCase = 7
 
             }
-            else if (response.result.parameters.date && response.result.parameters.date1 && response.result.parameters.date1 != "" && response.result.parameters.date != "") {
+            else if (response.result.parameters.date != undefined && response.result.parameters.date1 != undefined) {
 
                 date = response.result.parameters.date
                 date1 = response.result.parameters.date1
                 timeOffCase = 8
 
             }
-            else if (response.result.parameters.date && response.result.parameters.date != "") {
+            else if (response.result.parameters.date != undefined) {
 
                 timeOffCase = 9
 
@@ -235,7 +229,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
                 }
 
             }
-            else if (response.result.parameters.time) {
+            else if (response.result.parameters.time != undefined) {
                 time = response.result.parameters.time
                 timeOffCase = 10
 
