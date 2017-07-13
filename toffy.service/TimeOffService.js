@@ -1,7 +1,7 @@
 const env = require('.././Public/configrations.js')
 var vacation_type1 = ""
 module.exports.vacationWithLeave = function vacationWithLeave(msg, response, emailValue) {
-    PrepareApiAiResponse(response)
+    response = PrepareApiAiResponse(response)
     var other_vacation_types = ""
     var messageText = ""
     env.dateHelper.getTodayDate(function (today) {
@@ -33,7 +33,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
         else if (response.result.parameters.working_from_home) {
             vacation_type1 = "WFH"
         }
-        if (response.result.parameters.time_off_types && !(response.result.parameters.time && response.result.parameters.time == "") && !(response.result.parameters.time1 && response.result.parameters.time1 == "") && !(response.result.parameters.date && response.result.parameters.date == "") && !(response.result.parameters.date1)) {
+        if (response.result.parameters.time_off_types && (response.result.parameters.time == undefined) && (response.result.parameters.time1 == undefined) && (response.result.parameters.date == undefined) && (response.result.parameters.date1 == undefined)) {
 
             msg.say("Please specify the date and/or time ")
 
@@ -296,7 +296,17 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
 
 function PrepareApiAiResponse(response) {
     console.log("response before Preparation" + JSON.stringify(response))
-    response.result.parameters.date = "Ibrahim"
+    if (response.result.parameters.date == "" || !response.result.parameters.date)
+        response.result.parameters.date = undefined
+    if (response.result.parameters.date1 == "" || !response.result.parameters.date1)
+        response.result.parameters.date1 = undefined
+    if (response.result.parameters.time == "" || !response.result.parameters.time)
+        response.result.parameters.time = undefined
+    if (response.result.parameters.time1 == "" || !response.result.parameters.time1)
+        response.result.parameters.time1 = undefined
     console.log("response after Preparation" + JSON.stringify(response))
+
+    return response
+
 
 }
