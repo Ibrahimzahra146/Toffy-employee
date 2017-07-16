@@ -597,7 +597,6 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
 }
 //Upload sick vacation message 
 module.exports.sickNeedReportMessage = function sickNeedReportMessage(email, vacationId, fromDate, toDate, fromDateWord, toDateWord) {
-    console.log(type)
     console.log(fromDateWord)
     console.log(toDateWord)
     var type1 = env.vacationType.getVacationType(type)
