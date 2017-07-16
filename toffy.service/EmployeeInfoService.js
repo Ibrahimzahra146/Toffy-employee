@@ -288,7 +288,7 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
         env.mRequests.getSickVacationNeedReport(email, Id, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 if (!(body)[i]) {
-                    msg.say("There are no rules.");
+                    msg.say("There are no pending vacations.");
                 }
                 else {
                     //build message Json result to send it to slack
