@@ -595,6 +595,48 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
     }
     return message;
 }
+//Upload sick vacation message 
+module.exports.sickNeedReportMessage = function sickNeedReportMessage(email, vacationId, fromDate, toDate, fromDateWord, toDateWord) {
+    console.log(type)
+    console.log(fromDateWord)
+    console.log(toDateWord)
+    var type1 = env.vacationType.getVacationType(type)
+    var messageFB = "Sick vacation from " + fromDate + " to " + toDate
+
+    var message = {
+        "text": "",
+        "attachments": [
+            {
+                "text": "",
+                "callback_id": 'cancel_request',
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "fields": [
+                    {
+                        "title": "From date",
+                        "value": fromDateWord,
+                        "short": true
+                    },
+                    {
+                        "title": "To date",
+                        "value": toDateWord,
+                        "short": true
+
+                    }
+                ],
+                "actions": [
+                    {
+                        "name": "upload_sick_report",
+                        "text": "Upload sick report ",
+                        "type": "button",
+                        "value": email + ";" + vacationId + ";" + fromDate + ";" + toDate + ";" + messageFB
+                    }
+                ]
+            }
+        ]
+    }
+    return message;
+}
 //One dat left info message 
 module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWord, toDateWord) {
     var message = "[Reminder] You have one day left to submit a sick report for your vacation from ( " + fromDateWord + " to " + toDateWord + " ). Otherwise it will be considered as personal vacation."
