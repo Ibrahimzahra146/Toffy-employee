@@ -599,8 +599,8 @@ module.exports.pendingVacationMessage = function pendingVacationMessage(email, v
 module.exports.sickNeedReportMessage = function sickNeedReportMessage(email, vacationId, fromDate, toDate, fromDateWord, toDateWord) {
     console.log(fromDateWord)
     console.log(toDateWord)
-  //  var type1 = env.vacationType.getVacationType(type)
-    var messageFB = "Sick vacation from " + fromDate + " to " + toDate
+    //  var type1 = env.vacationType.getVacationType(type)
+    var messageFB = "Sick vacation from " + fromDateWord + " to " + toDateWord
 
     var message = {
         "text": "",
