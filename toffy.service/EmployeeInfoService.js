@@ -285,7 +285,7 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
     var i = 0
     env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
 
-        env.mRequests.getPendingVacation(email, Id, function (error, response, body) {
+        env.mRequests.getSickVacationNeedReport(email, Id, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 if (!(body)[i]) {
                     msg.say("There are no rules.");
