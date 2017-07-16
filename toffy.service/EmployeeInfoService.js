@@ -331,7 +331,7 @@ module.exports.showSickVacationNeedReport = function showSickVacationNeedReport(
                         env.dateHelper.converDateToWords(JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, 0, function (fromDateWord, toDateWord) {
 
 
-                            var message = env.stringFile.sickNeedReportMessage(email, JSON.parse(body)[i].id, JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, JSON.parse(body)[i].type, fromDateWord, toDateWord)
+                            var message = env.stringFile.sickNeedReportMessage(email, JSON.parse(body)[i].id, JSON.parse(body)[i].fromDate, JSON.parse(body)[i].toDate, fromDateWord, toDateWord)
                             i++
                             msg.say(message)
                         })
