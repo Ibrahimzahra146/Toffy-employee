@@ -29,7 +29,7 @@ module.exports.generateManagerApprovelsSection = function generateManagerApprove
             if (managerApproval[i].managerEmail != managerEmail && managerApproval[i].type != "HR" || managerApproval[i].managerEmail != managerEmail && managerApproval[i].type == "HR" && sickReportFlag == true) {
 
 
-                messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver ( " + arr[0] + " )\"" + ",\"value\":" + "\"" + managerApproval[i].state + ":thinking_face:" + "\"" + ",\"short\":" + flag
+                messageBody = messageBody + "{" + "\"title\":" + "\"" + "Approver ( " + arr[0] + " )\"" + ",\"value\":" + "\"" + managerApproval[i].state + "" + "\"" + ",\"short\":" + flag
                 messageBody = messageBody + ","
             }
 
