@@ -647,3 +647,77 @@ module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWo
 var noApproversMessage = "You dont have any approver right now "
 exports.noApproversMessage = noApproversMessage
 
+/**
+ * 
+ * 
+ * history message
+ */
+module.exports.historyMessage = function historyMessage(userEmail, startDate,
+    workingDays, endDate, type,
+     managerApprovalMessage, vacationState) {
+
+
+
+
+    var messageBody = {
+        "text": "",
+        "attachments": [
+            {
+                "attachment_type": "default",
+                "callback_id": "manager_confirm_reject",
+                "text": userEmail,
+                "fallback": "ReferenceError",
+                "fields": [
+                    {
+                        "title": "From",
+                        "value": startDate,
+                        "short": true
+                    },
+                    {
+                        "title": "Days/Time ",
+                        "value": workingDays + " day",
+                        "short": true
+                    },
+                    {
+                        "title": "to",
+                        "value": endDate,
+                        "short": true
+                    },
+                    {
+                        "title": "Type",
+                        "value": type,
+                        "short": true
+                    },
+                    managerApprovalMessage,
+
+
+
+                    {
+                        "title": "Final state",
+                        "value": vacationState,
+                        "short": false
+                    }
+                ],
+
+            }
+        ]
+    }
+    var stringfy = JSON.stringify(messageBody)
+    console.log("stringfy11" + stringfy)
+    stringfy = stringfy.replace(/\\/, "")
+
+    stringfy = stringfy.replace(/}\"/g, "}")
+    stringfy = stringfy.replace(/\"\{/g, "{")
+    stringfy = stringfy.replace(/\\/g, "")
+    stringfy = stringfy.replace(/\",\"\"/g, "")
+    stringfy = stringfy.replace(/,,/, ",")
+    stringfy = stringfy.replace(/,\",/g, ",")
+    stringfy = stringfy.replace(/\"\"\",/g, "")
+    stringfy = stringfy.replace(/\"\{/g, "{")
+    console.log("stringfy1122" + stringfy)
+    // stringfy = stringfy.replace(/\\/, "")
+    // stringfy = JSON.parse(stringfy)
+
+
+    return JSON.parse(stringfy);
+}

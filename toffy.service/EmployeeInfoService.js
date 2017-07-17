@@ -27,45 +27,49 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         var stringMessage = "["
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
                         env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 0, function (fromDateWord, toDateWord) {
-
-                            var fromDate = fromDateWord
-                            var toDate = toDateWord
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
-                            stringMessage = stringMessage + ","
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
-                            stringMessage = stringMessage + ","
-                            stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
-                            var typeOfVacation = ""
-                            if ((JSON.parse(body))[i].type == 0)
-                                typeOfVacation = "Time off"
-                            else if ((JSON.parse(body))[i].type == 4)
-                                typeOfVacation = "Sick time off"
-                            else if ((JSON.parse(body))[i].type == 7)
-                                typeOfVacation = "Work from home"
-                            stringMessage = stringMessage + "]"
-                            var messageBody = {
-                                "text": "*" + typeOfVacation + "*",
-                                "attachments": [
-                                    {
-                                        "attachment_type": "default",
-                                        "text": " ",
-                                        "fallback": "ReferenceError",
-                                        "fields": stringMessage,
-                                        "color": "#F35A00"
-                                    }
-                                ]
-                            }
-                            printLogs("messageBody" + messageBody)
-                            var stringfy = JSON.stringify(messageBody);
-
-                            printLogs("stringfy " + stringfy)
-                            stringfy = stringfy.replace(/\\/g, "")
-                            stringfy = stringfy.replace(/]\"/, "]")
-                            stringfy = stringfy.replace(/\"\[/, "[")
-                            stringfy = JSON.parse(stringfy)
-
-                            msg.say(stringfy)
-                            i++;
+                            env.messageGenerator.generateManagerApprovelsSection((JSON.parse(body))[i].managerApproval, email, "HR", 0, function (managerApprovalSection) {
+                                var message = env.stringFile.historyMessage(email, fromDateWord, (JSON.parse(body))[i].period, toDateWord, (JSON.parse(body))[i].type, managerApprovalSection,
+                                    (JSON.parse(body))[i].vacationState)
+                                msg.say(message)
+                                i++;
+                            })
+                            /* var fromDate = fromDateWord
+                             var toDate = toDateWord
+                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "From date" + "\"" + ",\"value\":" + "\"" + fromDate + "\"" + ",\"short\":true}"
+                             stringMessage = stringMessage + ","
+                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "To date" + "\"" + ",\"value\":" + "\"" + toDate + "\"" + ",\"short\":true}"
+                             stringMessage = stringMessage + ","
+                             stringMessage = stringMessage + "{" + "\"title\":" + "\"" + "Vacation state" + "\"" + ",\"value\":" + "\"" + (JSON.parse(body))[i].vacationState + "\"" + ",\"short\":true}"
+                             var typeOfVacation = ""
+                             if ((JSON.parse(body))[i].type == 0)
+                                 typeOfVacation = "Time off"
+                             else if ((JSON.parse(body))[i].type == 4)
+                                 typeOfVacation = "Sick time off"
+                             else if ((JSON.parse(body))[i].type == 7)
+                                 typeOfVacation = "Work from home"
+                             stringMessage = stringMessage + "]"
+                             var messageBody = {
+                                 "text": "*" + typeOfVacation + "*",
+                                 "attachments": [
+                                     {
+                                         "attachment_type": "default",
+                                         "text": " ",
+                                         "fallback": "ReferenceError",
+                                         "fields": stringMessage,
+                                         "color": "#F35A00"
+                                     }
+                                 ]
+                             }
+                             printLogs("messageBody" + messageBody)
+                             var stringfy = JSON.stringify(messageBody);
+ 
+                             printLogs("stringfy " + stringfy)
+                             stringfy = stringfy.replace(/\\/g, "")
+                             stringfy = stringfy.replace(/]\"/, "]")
+                             stringfy = stringfy.replace(/\"\[/, "[")
+                             stringfy = JSON.parse(stringfy)
+ */
+                           
                         })
                     }
 
