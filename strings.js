@@ -655,7 +655,12 @@ exports.noApproversMessage = noApproversMessage
 module.exports.historyMessage = function historyMessage(userEmail, startDate,
     workingDays, endDate, type,
     managerApprovalMessage, vacationState) {
-
+    var color = "#439FE0"
+    if (vacationState == "Rejected") {
+        color = "danger"
+    } else if (vacationState == "Approved") {
+        color = "good"
+    }
 
     //"#3AA3E3"//blue
 
@@ -666,7 +671,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                 "attachment_type": "default",
                 "callback_id": "manager_confirm_reject",
                 "text": "",
-                "color": "good",
+                "color": color,
                 "fallback": "ReferenceError",
                 "fields": [
                     {
