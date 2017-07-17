@@ -661,6 +661,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
     } else if (vacationState == "Approved") {
         color = "good"
     }
+    var type1 = env.vacationType.getVacationType(type)
 
     //"#3AA3E3"//blue
 
@@ -681,7 +682,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                     },
                     {
                         "title": "Days/Time ",
-                        "value": workingDays + " day",
+                        "value": parseFloat(workingDays).toFixed(2) + " day",
                         "short": true
                     },
                     {
@@ -691,7 +692,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                     },
                     {
                         "title": "Type",
-                        "value": type,
+                        "value": type1,
                         "short": true
                     },
                     managerApprovalMessage,
