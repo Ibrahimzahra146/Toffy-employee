@@ -666,6 +666,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                 "attachment_type": "default",
                 "callback_id": "manager_confirm_reject",
                 "text": userEmail,
+                "color": "#3AA3E3",
                 "fallback": "ReferenceError",
                 "fields": [
                     {
