@@ -417,18 +417,22 @@ function getHolidayMessage(body, holidayRequestType, response, callback) {
             if (i > 0) {
                 stringMessage = stringMessage + ","
             }
-            env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
+            if ((JSON.parse(body))[i].isExcluded == true) {
+
+
+                env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 1, function (fromDateWord, toDateWord) {
 
 
 
-                if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
-                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
+                    if ((JSON.parse(body))[i].fromDate == (JSON.parse(body))[i].toDate) {
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + "\"" + ",\"short\":true}"
 
-                } else {
-                    stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " to " + toDateWord + "" + "\"" + ",\"short\":true}"
+                    } else {
+                        stringMessage = stringMessage + "{" + "\"title\":" + "\"" + (JSON.parse(body))[i].name + "\"" + ",\"value\":" + "\"" + fromDateWord + " to " + toDateWord + "" + "\"" + ",\"short\":true}"
 
-                }
-            })
+                    }
+                })
+            }
             i++;
 
 
