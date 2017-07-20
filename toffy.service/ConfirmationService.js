@@ -176,7 +176,7 @@ function getmessage(formattedFromTime, middayFrom, fromDate, formattedTime, midd
     else if (type == "Wedding")
         typeText = env.stringFile.wedding_message
     var messageText = ""
-    if (workingPeriodInHours != 0) {
+    if (workingDays < 1) {
         if (workingPeriodInHours <= 1) {
             hours_days_msg = workingPeriodInHours + " hour "
 
