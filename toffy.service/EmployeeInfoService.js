@@ -69,7 +69,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                              stringfy = stringfy.replace(/\"\[/, "[")
                              stringfy = JSON.parse(stringfy)
  */
-                           
+
                         })
                     }
 
@@ -385,6 +385,11 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     msg.say(obj1)
     //
     messageBody = env.stringFile.helpMessageBody("", env.stringFile.fromDateToDate, "")
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.employeeCommands, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)

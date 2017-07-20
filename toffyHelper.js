@@ -158,29 +158,29 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
                                     currentBot = env.bot
                                 else currentBot = env.hRbot;
 
-                                currentBot.startConversation(message12, function (err, convo) {
-                                    if (!err) {
+                                    currentBot.startConversation(message12, function (err, convo) {
+                                        if (!err) {
 
-                                        var stringfy = JSON.stringify(messageBody);
-                                        var obj1 = JSON.parse(stringfy);
+                                            var stringfy = JSON.stringify(messageBody);
+                                            var obj1 = JSON.parse(stringfy);
 
-                                        currentBot.reply(message12, obj1, function (err, response) {
-
-
+                                            currentBot.reply(message12, obj1, function (err, response) {
 
 
 
 
 
-                                        });
-
-                                    } else {
 
 
+                                            });
 
-                                    }
+                                        } else {
 
-                                });
+
+
+                                        }
+
+                                    });
 
 
 

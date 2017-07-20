@@ -174,6 +174,30 @@ exports.staticHelpFields = staticHelpFields;
 /**
  * stats profile history actions
  */
+var employeeCommands = [
+    {
+        "name": 'helpMenu',
+        "text": "Upload sick report",
+        // "style": "primary",
+        "type": "button",
+        "value": "Upload"
+    },
+    {
+        "name": 'helpMenu',
+        "text": "Cancel vacation",
+        //"style": "primary",
+        "type": "button",
+        "value": "Cancel vacation"
+    }
+]
+exports.employeeCommands = employeeCommands
+/**
+ * Time off help menu
+ */
+exports.staticHelpFields = staticHelpFields;
+/**
+ * stats profile history actions
+ */
 var statsProfileHistoryActions = [
     {
         "name": 'helpMenu',
@@ -194,12 +218,16 @@ var statsProfileHistoryActions = [
         //"style": "primary",
         "type": "button",
         "value": "Show history"
-    }
+    },
+    {
+        "name": 'helpMenu',
+        "text": "show pending",
+        // "style": "primary",
+        "type": "button",
+        "value": "Show pending"
+    },
 ]
 exports.statsProfileHistoryActions = statsProfileHistoryActions
-/**
- * Time off help menu
- */
 var timeOffPredefinedActions = [
     {
         "name": 'helpMenu',
