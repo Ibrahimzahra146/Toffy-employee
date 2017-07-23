@@ -724,7 +724,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                     },
                     {
                         "title": "Type",
-                        "value": type1 + +" " + sickConvertedToPersonalMsg,
+                        "value": type1 +" " + sickConvertedToPersonalMsg,
                         "short": true
                     },
                     managerApprovalMessage,
