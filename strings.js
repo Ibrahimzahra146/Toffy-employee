@@ -689,7 +689,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
     if (sickConvertedToPersonal == true) {
         sickConvertedToPersonalEmoji = ":small_blue_diamond: "
 
-        sickConvertedToPersonalMsg = "(Converted from sick time off)."
+        sickConvertedToPersonalMsg = "(Converted from sick )."
     }
     var color = "#439FE0"
     if (vacationState == "Rejected") {
