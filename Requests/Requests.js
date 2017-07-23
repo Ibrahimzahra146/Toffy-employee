@@ -141,6 +141,7 @@ module.exports.getEmployeeHistory = function getEmployeeHistory(Id, callback) {
             'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
         },
     }, function (error, response, body) {
+        console.log("hsitory obeject:" + JSON.stringify(body))
         callback(error, response, body)
     })
 }
@@ -299,3 +300,6 @@ module.exports.getWorkingDays = function getWorkingDays(vacationBody, callback) 
 /**
  * Get pendingrequest 
  */
+module.exports.setSendFlagForManage = function setSendFlagForManage() {
+
+}
