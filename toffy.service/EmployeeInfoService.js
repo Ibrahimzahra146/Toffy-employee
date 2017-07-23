@@ -291,7 +291,7 @@ module.exports.showEmployeePendingRequest = function showEmployeePendingRequest(
 
         env.mRequests.getPendingVacation(email, Id, function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                if (!(body)[i]) {
+                if (!(JSON.parse(body)[i])) {
                     msg.say("There are no pending vacations.");
                 }
                 else {
