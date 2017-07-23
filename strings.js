@@ -682,7 +682,11 @@ exports.noApproversMessage = noApproversMessage
  */
 module.exports.historyMessage = function historyMessage(userEmail, startDate,
     workingDays, endDate, type,
-    managerApprovalMessage, vacationState) {
+    managerApprovalMessage, vacationState, sickConvertedToPersonal) {
+    var sickConvertedToPersonalMsg = ""
+    if (sickConvertedToPersonal == true) {
+        sickConvertedToPersonalMsg = "(Converted from sick time off)."
+    }
     var color = "#439FE0"
     if (vacationState == "Rejected") {
         color = "danger"
@@ -720,7 +724,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                     },
                     {
                         "title": "Type",
-                        "value": type1,
+                        "value": type1 + +" " + sickConvertedToPersonalMsg,
                         "short": true
                     },
                     managerApprovalMessage,
