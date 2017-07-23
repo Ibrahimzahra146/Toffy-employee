@@ -683,7 +683,7 @@ exports.noApproversMessage = noApproversMessage
 module.exports.historyMessage = function historyMessage(userEmail, startDate,
     workingDays, endDate, type,
     managerApprovalMessage, vacationState, sickConvertedToPersonal) {
-    var sickConvertedToPersonalMsg = ""
+    var sickConvertedToPersonalEmoji = ""
     var sickConvertedToPersonalMsg = ""
 
     if (sickConvertedToPersonal == true) {
