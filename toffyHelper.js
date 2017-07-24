@@ -167,8 +167,10 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                             currentBot.reply(message12, obj1, function (err, response) {
 
+                                                //set that this time off requests has been sent to this approvalId
+                                                env.mRequests.setSendFlagForManager(approvalId, function (error, response, body) {
 
-
+                                                })
 
 
 
