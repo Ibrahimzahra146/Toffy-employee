@@ -300,17 +300,17 @@ module.exports.getWorkingDays = function getWorkingDays(vacationBody, callback) 
 /**
  * Get pendingrequest 
  */
-module.exports.setSendFlagForManager = function setSendFlagForManager(approverId,callback) {
-    env.toffyHelper.getNewSessionwithCookie(email, function (remember_me_cookie, session_Id) {
-        env.request({
-            url: 'http://' + env.IP + '/api/v1/vacation/send-manager-approval/' + approverId,
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': remember_me_cookie + ";" + session_Id
-            },
-        }, function (error, response, body) {
-            callback(error, response, body)
-        })
+module.exports.setSendFlagForManager = function setSendFlagForManager(approverId, callback) {
+
+    env.request({
+        url: 'http://' + env.IP + '/api/v1/vacation/send-manager-approval/' + approverId,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': env.toffyHelper.general_remember_me + ";" + env.toffyHelper.general_session_id
+        },
+    }, function (error, response, body) {
+        callback(error, response, body)
     })
+
 }
