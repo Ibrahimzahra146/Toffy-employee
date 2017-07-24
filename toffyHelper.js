@@ -101,116 +101,116 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
     var previousI = 0;
     var ImageUrl = employee.profilePicture
     var incrementFlag = true
-    // env.async.whilst(
-    //     function () { return managerApproval[i]; },
-    //     function (callback) {
-    if (managerApproval[0]) {
+    env.async.whilst(
+        function () { return managerApproval[i]; },
+        function (callback) {
+            if (managerApproval[0]) {
 
-        if (incrementFlag == true && i > j) {
-            managerApproval.sort(function (a, b) {
-                return a.id - b.id;
-            });
-            console.log(" Ranked managerApproval:" + JSON.stringify(managerApproval))
-
-
-
-
-            approvalId = managerApproval[i].id
-            approvarType = managerApproval[i].type
-            managerEmail = managerApproval[i].managerEmail
-            incrementFlag = false
-            j = i
-            console.log("Manager #:" + i + ":" + approvarType + ":" + managerApproval[i].managerEmail)
-            env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
-
-                env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, type, false, function (managerApprovalMessage) {
-                    env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
-                        if (body != 1000) {
+                if (incrementFlag == true && i > j) {
+                    managerApproval.sort(function (a, b) {
+                        return a.id - b.id;
+                    });
+                    console.log(" Ranked managerApproval:" + JSON.stringify(managerApproval))
 
 
 
-                            var messageBody = ""
 
-                            var jsonResponse = JSON.parse(body);
-                            console.log("approvarType::" + approvarType)
-                            if (approvarType == "Manager") {
-                                //change 2
-                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
+                    approvalId = managerApproval[i].id
+                    approvarType = managerApproval[i].type
+                    managerEmail = managerApproval[i].managerEmail
+                    incrementFlag = false
+                    j = i
+                    console.log("Manager #:" + i + ":" + approvarType + ":" + managerApproval[i].managerEmail)
+                    env.mRequests.getSlackRecord(managerEmail, function (error, response, body) {
 
-
-                            } else if (approvarType == "HR") {
-
-                                message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
-                                messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
-
-
-                            }
-                            if (type != "WFH") {//change 3
-
-                                dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
-                            }
+                        env.messageGenerator.generateManagerApprovelsSection(managerApproval, managerEmail, type, false, function (managerApprovalMessage) {
+                            env.messageGenerator.generateYourActionSection(managerApproval, managerEmail, function (YourActionMessage) {
+                                if (body != 1000) {
 
 
 
-                            // needs import (StringFile)
-                            //change 4
-                            if (approvarType == "Manager")
-                                currentBot = env.bot
-                            else currentBot = env.hRbot;
+                                    var messageBody = ""
 
-                            currentBot.startConversation(message12, function (err, convo) {
-                                if (!err) {
+                                    var jsonResponse = JSON.parse(body);
+                                    console.log("approvarType::" + approvarType)
+                                    if (approvarType == "Manager") {
+                                        //change 2
+                                        message12 = env.stringFile.Slack_Channel_Function(jsonResponse.managerChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                        messageBody = env.stringFile.sendVacationToManagerFunction(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail, managerApprovalMessage, YourActionMessage);
 
-                                    var stringfy = JSON.stringify(messageBody);
-                                    var obj1 = JSON.parse(stringfy);
 
-                                    currentBot.reply(message12, obj1, function (err, response) {
-                                        
+                                    } else if (approvarType == "HR") {
 
+                                        message12 = env.stringFile.Slack_Channel_Function(jsonResponse.hrChannelId, jsonResponse.slackUserId, jsonResponse.teamId);
+                                        messageBody = env.stringFile.sendNotificationToHrOnSick(comment, ImageUrl, userEmail, startDate, workingDays, endDate, type, approver2State, vacationId, approvalId, managerEmail);
+
+
+                                    }
+                                    if (type != "WFH") {//change 3
+
+                                        dont_detuct_button = env.stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+                                    }
+
+
+
+                                    // needs import (StringFile)
+                                    //change 4
+                                    if (approvarType == "Manager")
+                                        currentBot = env.bot
+                                    else currentBot = env.hRbot;
+
+                                    currentBot.startConversation(message12, function (err, convo) {
+                                        if (!err) {
+
+                                            var stringfy = JSON.stringify(messageBody);
+                                            var obj1 = JSON.parse(stringfy);
+
+                                            currentBot.reply(message12, obj1, function (err, response) {
 
 
 
 
 
+
+
+
+                                            });
+
+                                        } else {
+
+
+
+                                        }
 
                                     });
+
+
+
+                                    flagForWhileCallbacks = 1
+
+
 
                                 } else {
 
 
-
                                 }
+                            })
 
-                            });
+                        })
+                    });
 
+                } else {
+                }
 
+            } else {
+                msg.say("Your vacation has been posted but there are nor approvers for you.")
+            }
 
-                            flagForWhileCallbacks = 1
+            i++;
+            incrementFlag = true
+            setTimeout(callback, 5000);
 
-
-
-                        } else {
-
-
-                        }
-                    })
-
-                })
-            });
-
-        } else {
-        }
-        //     i++;
-        //     incrementFlag = true
-        //     setTimeout(callback, 5000);
-
-        // })
-    } else {
-        msg.say("Your vacation has been posted but there are nor approvers for you.")
-    }
-
-
+        })
 
 
 },
