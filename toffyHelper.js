@@ -169,6 +169,7 @@ module.exports.sendVacationToManager = function sendVacationToManager(startDate,
 
                                                 //set that this time off requests has been sent to this approvalId
                                                 env.mRequests.setSendFlagForManager(approvalId, function (error, response, body) {
+                                                    console.log("Set flag=" + response.statusCode)
 
                                                 })
 
