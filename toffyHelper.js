@@ -296,8 +296,9 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
             "comments": comment
 
         }
-        console.log("sendVacationPostRequest: " + vacationBody)
         vacationBody = JSON.stringify(vacationBody)
+        console.log("sendVacationPostRequest: " + vacationBody)
+
         var uri = 'http://' + env.IP + '/api/v1/vacation'
         env.request({
             url: uri, //URL to hitDs
