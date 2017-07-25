@@ -27,7 +27,7 @@ module.exports.getVacationTypeNum = function (type) {
     }
     else if (type == "Paternity") {
         return 3;
-    } else if (type == "Sick") {
+    } else if (type == "sick") {
         return 4;
     } else if (type == "Wedding") {
         return 8;

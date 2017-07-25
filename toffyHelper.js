@@ -287,7 +287,6 @@ module.exports.sendVacationPostRequest = function sendVacationPostRequest(from, 
     env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         console.log("::::" + "::" + email + "::" + Id)
         var vacationType = env.vacationType.getVacationTypeNum(type)
-
         var vacationBody = {
             "employee_id": Id,
             "from": from,
