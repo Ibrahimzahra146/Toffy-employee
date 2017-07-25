@@ -6,21 +6,7 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     var fWord = ""
     var tWord = ""
     var typeNum = ""
-    if (type == "sick") {
-        typeNum = 4
-    } else if (type == "Maternity")
-        typeNum = 2
-    else if (type == "Paternity")
-        typeNum = 3
-    else if (type == "Haj")
-        typeNum = 9
-    else if (type == "WFH")
-        typeNum = 7
-    else if (type == "death")
-        typeNum = 4
-    else if (type == "Wedding")
-        typeNum = 8
-    else typeNum = 0
+    typeNum = env.vacationType.getVacationTypeNum(type)
 
     env.dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
         env.dateHelper.convertTimeFormat(toTime, function (formattedTime, midday, TimeforMilliseconds1) {
