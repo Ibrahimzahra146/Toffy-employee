@@ -300,10 +300,11 @@ module.exports.getWorkingDays = function getWorkingDays(vacationBody, callback) 
 /**
  * Get pendingrequest 
  */
-module.exports.setSendFlagForManager = function setSendFlagForManager(approverId, callback) {
-
+module.exports.setSendFlagForManager = function setSendFlagForManager(approvalId, callback) {
+    var url = 'http://' + env.IP + '/api/v1/vacation/send-manager-approval/' + approvalId
+    console.log("setSendFlagForManager utl:" + url)
     env.request({
-        url: 'http://' + env.IP + '/api/v1/vacation/send-manager-approval/' + approverId,
+        url: url,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
