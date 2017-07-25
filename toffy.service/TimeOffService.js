@@ -1,5 +1,5 @@
 const env = require('.././Public/configrations.js')
-var vacation_type1 = ""
+var vacation_type1 = "Personal"
 module.exports.vacationWithLeave = function vacationWithLeave(msg, response, emailValue) {
     response = PrepareApiAiResponse(response)
     var other_vacation_types = ""
