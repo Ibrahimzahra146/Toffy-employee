@@ -6,6 +6,8 @@ module.exports.sendVacationWithLeaveConfirmation = function sendLeaveSpecTimeSpe
     var fWord = ""
     var tWord = ""
     var typeNum = ""
+    if (type == "")
+        type = "Personal"
     typeNum = env.vacationType.getVacationTypeNum(type)
 
     env.dateHelper.convertTimeFormat(fromTime, function (formattedFromTime, middayFrom, TimeforMilliseconds) {
