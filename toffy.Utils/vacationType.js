@@ -10,6 +10,9 @@ module.exports.getVacationType = function getVacationType(type) {
         return "Paternity"
     } else if (type == 4) {
         return "Sick"
+    }
+    else if (type == 7) {
+        return "WFH"
     } else if (type == 8) {
         return "Wedding"
     } else if (type == 9) {
@@ -29,6 +32,9 @@ module.exports.getVacationTypeNum = function (type) {
         return 3;
     } else if (type == "sick") {
         return 4;
+    }
+    else if (type == "WFH") {
+        return 7;
     } else if (type == "Wedding") {
         return 8;
     } else if (type == "Haj") {
