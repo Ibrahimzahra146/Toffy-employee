@@ -47,13 +47,7 @@ module.exports.vacationWithLeave = function vacationWithLeave(msg, response, ema
             vacation_type1 = "sick"
 
         }
-        else if (response.result.parameters.working_from_home && (response.result.parameters.time == undefined) && (response.result.parameters.time1 == undefined) && (response.result.parameters.date == undefined) && (response.result.parameters.date1 == undefined)) {
-            //msg.say("Please specify the date and/or time ")
-
-            console.log("sick_synonyms3")
-            vacation_type1 = "WFH"
-
-        }
+    
 
         /* else if (response.result.parameters.sick_synonyms && response.result.parameters.date == "" && !(response.result.parameters.time)) {
              msg.say("Please specify the date and/or time ")
