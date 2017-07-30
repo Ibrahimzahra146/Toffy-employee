@@ -463,7 +463,10 @@ app.post('/one_day_left_sRep', (req, res) => {
   })
   res.send(200)
 });
+app.post('/converted_sick_to_personal', (req, res) => {
+  res.send(200)
 
+});
 app.post('/newat', (req, res) => {
   var code = req.param('access_token');
 });
