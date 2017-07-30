@@ -440,7 +440,8 @@ app.post('/one_day_left_sRep', (req, res) => {
     console.log("email" + email)
 
     env.mRequests.getSlackRecord(email, function (body) {
-
+      console.log("getSlackRecord" + JSON.stringify(body))
+      console.log("getSlackRecord" + JSON.stringify(body.userChannelId))
 
       var responseBody = JSON.parse(body);
       var slackMsg = env.stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserId, responseBody.teamId);
