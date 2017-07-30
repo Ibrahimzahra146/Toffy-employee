@@ -427,6 +427,9 @@ env.slapp.action('preDefinedHelp', 'fromDateToDate', (msg, value) => {
 app.post('/one_day_left_sRep', (req, res) => {
   var parsedBody = JSON.parse(req.body)
   var vacationId = parsedBody.id
+  console.log(req.body)
+
+  console.log("email" + JSON.stringify(req.body))
 
   var fromDate = parsedBody.fromDate
 
@@ -434,12 +437,13 @@ app.post('/one_day_left_sRep', (req, res) => {
 
   var email = parsedBody.employee.email
   env.dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
+    console.log("email" + email)
 
     env.mRequests.getSlackRecord(email, function (body) {
 
 
       var responseBody = JSON.parse(body);
-      var slackMsg = env.stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserIdresponseBody.teamId);
+      var slackMsg = env.stringFile.Slack_Channel_Function(responseBody.userChannelId, responseBody.slackUserId, responseBody.teamId);
       var messageFB = env.stringFile.oneDayLeftInfoMessage(fromDateWord, toDateWord)
       var text12 = env.stringFile.oneDayLeftSickJsonMessage(messageFB, email, vacationId, fromDateWord, toDateWord)
       env.bot.startConversation(slackMsg, function (err, convo) {
