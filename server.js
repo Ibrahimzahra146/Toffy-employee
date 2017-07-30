@@ -439,7 +439,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   env.dateHelper.converDateToWords(fromDate, toDate, 0, function (fromDateWord, toDateWord) {
     console.log("email" + email)
 
-    env.mRequests.getSlackRecord(email, function (body) {
+    env.mRequests.getSlackRecord(email, function (error, response, body) {
       console.log("getSlackRecord" + JSON.stringify(body))
       console.log("getSlackRecord" + JSON.stringify(body.userChannelId))
 
