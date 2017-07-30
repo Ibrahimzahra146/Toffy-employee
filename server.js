@@ -464,6 +464,7 @@ app.post('/one_day_left_sRep', (req, res) => {
   res.send(200)
 });
 app.post('/converted_sick_to_personal', (req, res) => {
+  console.log("converted_sick_to_personal")
   res.send(200)
 
 });
