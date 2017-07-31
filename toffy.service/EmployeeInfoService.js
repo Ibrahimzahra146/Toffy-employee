@@ -32,7 +32,7 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                                     sick_attachments = 1
                                 var message = env.stringFile.historyMessage(email, fromDateWord, (JSON.parse(body))[i].period, toDateWord,
                                     (JSON.parse(body))[i].type, managerApprovalSection,
-                                    (JSON.parse(body))[i].vacationState, (JSON.parse(body))[i].sickCovertedToPersonal, sick_attachments)
+                                    (JSON.parse(body))[i].vacationState, (JSON.parse(body))[i].sickCovertedToPersonal, sick_attachments, (JSON.parse(body))[i].id)
                                 msg.say(message)
                                 i++;
                             })

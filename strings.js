@@ -672,6 +672,15 @@ module.exports.oneDayLeftInfoMessage = function oneDayLeftInfoMessage(fromDateWo
 /**
  * Np approvers message
  */
+/**
+ * 
+ * 
+ * 
+ */
+module.exports.sick_report_link = function sick_report_link(vacationId) {
+    var sick_report = "<http://46.43.71.50:19090/reports?vId=" + vacationId + "|sick report>"
+    return sick_report;
+}
 var noApproversMessage = "You dont have any approver right now "
 exports.noApproversMessage = noApproversMessage
 
@@ -682,7 +691,7 @@ exports.noApproversMessage = noApproversMessage
  */
 module.exports.historyMessage = function historyMessage(userEmail, startDate,
     workingDays, endDate, type,
-    managerApprovalMessage, vacationState, sickConvertedToPersonal, sickReport) {
+    managerApprovalMessage, vacationState, sickConvertedToPersonal, sickReport, vacationId) {
     var sick_report_field = ""
 
     console.log("sickReport" + sickReport)
