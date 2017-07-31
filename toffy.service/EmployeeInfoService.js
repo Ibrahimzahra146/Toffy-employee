@@ -12,7 +12,7 @@ Show employee vacation history
 ******/
 
 module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
-
+    var sick_attachments = 0
     env.mRequests.getUserIdByEmail(email, function (error, response, Id) {
         env.mRequests.getEmployeeHistory(Id, function (error, response, body) {
             var i = 0;
@@ -28,8 +28,11 @@ module.exports.showEmployeeHistory = function showEmployeeHistory(email, msg) {
                         var fromDate = new Date((JSON.parse(body))[i].fromDate);
                         env.dateHelper.converDateToWords((JSON.parse(body))[i].fromDate, (JSON.parse(body))[i].toDate, 0, function (fromDateWord, toDateWord) {
                             env.messageGenerator.generateManagerApprovelsSection((JSON.parse(body))[i].managerApproval, email, "HR", 0, function (managerApprovalSection) {
-                                var message = env.stringFile.historyMessage(email, fromDateWord, (JSON.parse(body))[i].period, toDateWord, (JSON.parse(body))[i].type, managerApprovalSection,
-                                    (JSON.parse(body))[i].vacationState, (JSON.parse(body))[i].sickCovertedToPersonal)
+                                if ((JSON.parse(body))[i].attachments != "")
+                                    sick_attachments = 1
+                                var message = env.stringFile.historyMessage(email, fromDateWord, (JSON.parse(body))[i].period, toDateWord,
+                                    (JSON.parse(body))[i].type, managerApprovalSection,
+                                    (JSON.parse(body))[i].vacationState, (JSON.parse(body))[i].sickCovertedToPersonal, sick_attachments)
                                 msg.say(message)
                                 i++;
                             })

@@ -682,7 +682,19 @@ exports.noApproversMessage = noApproversMessage
  */
 module.exports.historyMessage = function historyMessage(userEmail, startDate,
     workingDays, endDate, type,
-    managerApprovalMessage, vacationState, sickConvertedToPersonal) {
+    managerApprovalMessage, vacationState, sickConvertedToPersonal, sickReport) {
+    var sick_report_field = ""
+
+    console.log("sickReport" + sickReport)
+    if (sickReport == 1) {
+        sick_report_field =
+            {
+                "title": "Sick report ",
+                "value": env.stringFile.sick_report_link(vacationId),
+                "short": false
+
+            }
+    }
     var sickConvertedToPersonalEmoji = ""
     var sickConvertedToPersonalMsg = ""
 
@@ -732,6 +744,7 @@ module.exports.historyMessage = function historyMessage(userEmail, startDate,
                         "short": true
                     },
                     managerApprovalMessage,
+                    sick_report_field,
 
 
 
