@@ -402,54 +402,35 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
+    //
     messageBody = env.stringFile.helpMessageBody("", env.stringFile.WfhActions, env.stringFile.WFH_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
-    /*
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.FamilyDeathActions, "")
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.maternityActions, env.stringFile.maternity_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
-    //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.holidayAction, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.WfhActions, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
-  /*  messageBody = env.stringFile.helpMessageBody("", env.stringFile.employeeCommands, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.rulesAction, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.fromDateToDate, "")
-    stringfy = JSON.stringify(messageBody);
-    obj1 = JSON.parse(stringfy);
-    msg.say(obj1)
-    //
 
     //
-    messageBody = env.stringFile.helpMessageBody(env.stringFile.staticHelpFields, "", "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.paternityActions, env.stringFile.paternity_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
 
 
-*/
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.weddingyActions, env.stringFile.wedding_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
 
-
-
-
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.hajActions, env.stringFile.haj_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
 }
 
 

@@ -38,6 +38,15 @@ var holiday_pretext = "In case you want to see the official holidays"
 exports.holiday_pretext = holiday_pretext
 var WFH_pretext = "In case you want to work from home "
 exports.WFH_pretext = WFH_pretext
+var maternity_pretext = "If you want to take a maternity vacation "
+exports.maternity_pretext = maternity_pretext
+var wedding_pretext = "If you want to take a wedding vacation "
+exports.wedding_pretext = wedding_pretext
+var paternity_pretext = "If you want to take a paternity vacation "
+exports.paternity_pretext = paternity_pretext
+var haj_pretext = "If you want to take Haj vacation"
+exports.haj_pretext = haj_pretext
+
 
 
 
@@ -463,6 +472,43 @@ module.exports.fromDateToDate = fromDateToDate
  * 
  * 
  *****************/
+var maternityActions = [
+    {
+        "name": "Maternity vacation from/ to/",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Maternity vacation"
+    },
+    {
+        "name": "Maternity vacation from /",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Maternity vacation"
+    },
+
+]
+module.exports.maternityActions = maternityActions
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
+var weddingyActions = [
+    {
+        "name": "Wedding vacation on date",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Wedding vacation on date"
+    },
+
+]
+module.exports.weddingyActions = weddingyActions
 module.exports.commentFieldInManagerMessageFunction = function commentFieldInManagerMessageFunction(comment) {
     var commentFieldInManagerMessage = ""
     if (comment != "") {
@@ -474,7 +520,47 @@ module.exports.commentFieldInManagerMessageFunction = function commentFieldInMan
     }
     return commentFieldInManagerMessage;
 }
+/******************
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *****************/
+var paternityActions = [
+    {
+        "name": "Paternity vacation today",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Paternity vacation"
+    },
+    {
+        "name": "Paternity vacation on date ",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Paternity vacation"
+    },
 
+]
+module.exports.paternityActions = paternityActions
+/******************
+ * 
+ * */
+var hajActions = [
+    {
+        "name": "Haj vacation on date",
+        "text": "time off from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "haj vacation"
+    }
+
+]
+module.exports.hajActions = hajActions
+/******************
 /******************
  * 
  * 
