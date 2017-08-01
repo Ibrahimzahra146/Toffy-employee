@@ -475,14 +475,14 @@ module.exports.fromDateToDate = fromDateToDate
 var maternityActions = [
     {
         "name": "Maternity vacation from/ to/",
-        "text": "time off from/ to/",
+        "text": "Maternity vacation from/ to/",
         // "style": "primary",
         "type": "button",
-        "value": "Maternity vacation"
+        "value": "Maternity vacation from/ to/"
     },
     {
         "name": "Maternity vacation from /",
-        "text": "time off from/ to/",
+        "text": "Maternity vacation from /",
         // "style": "primary",
         "type": "button",
         "value": "Maternity vacation"
@@ -501,7 +501,7 @@ module.exports.maternityActions = maternityActions
 var weddingyActions = [
     {
         "name": "Wedding vacation on date",
-        "text": "time off from/ to/",
+        "text": "Wedding vacation on date",
         // "style": "primary",
         "type": "button",
         "value": "Wedding vacation on date"
@@ -531,14 +531,14 @@ module.exports.commentFieldInManagerMessageFunction = function commentFieldInMan
 var paternityActions = [
     {
         "name": "Paternity vacation today",
-        "text": "time off from/ to/",
+        "text": "Paternity vacation today",
         // "style": "primary",
         "type": "button",
         "value": "Paternity vacation"
     },
     {
         "name": "Paternity vacation on date ",
-        "text": "time off from/ to/",
+        "text": "Paternity vacation on date ",
         // "style": "primary",
         "type": "button",
         "value": "Paternity vacation"
@@ -552,7 +552,7 @@ module.exports.paternityActions = paternityActions
 var hajActions = [
     {
         "name": "Haj vacation on date",
-        "text": "time off from/ to/",
+        "text": "Haj vacation on date",
         // "style": "primary",
         "type": "button",
         "value": "haj vacation"
