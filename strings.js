@@ -256,13 +256,7 @@ var statsProfileHistoryActions = [
         "type": "button",
         "value": "Show history"
     },
-    {
-        "name": 'helpMenu',
-        "text": "show pending",
-        // "style": "primary",
-        "type": "button",
-        "value": "Show pending"
-    },
+
 ]
 exports.statsProfileHistoryActions = statsProfileHistoryActions
 
@@ -345,19 +339,21 @@ var WfhActions = [
 ]
 exports.WfhActions = WfhActions
 var CancelVacationActions = [
+
     {
-        "name": "helpMenu",
-        "text": "WFH today",
-        // "style": "primary",
-        "type": "button",
-        "value": "WFH today"
-    }, {
         "name": 'helpMenu',
-        "text": "WFH tomorrow",
+        "text": "Show pending",
         // "style": "primary",
         "type": "button",
-        "value": "WFH tomorrow"
-    }
+        "value": "Show pending"
+    },
+    {
+        "name": 'helpMenu',
+        "text": "Cancel vacation",
+        // "style": "primary",
+        "type": "button",
+        "value": "Show pending"
+    },
 
 ]
 exports.CancelVacationActions = CancelVacationActions

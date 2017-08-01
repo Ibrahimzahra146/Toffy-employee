@@ -362,7 +362,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.statsProfileHistoryActions, env.stringFile.statsProfileHistory_pretext)
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.timeOffPredefinedActions, env.stringFile.leave_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
@@ -399,6 +399,10 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     msg.say(obj1)
     //
     messageBody = env.stringFile.helpMessageBody("", env.stringFile.holidayAction, env.stringFile.holiday_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.WfhActions, env.stringFile.WFH_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
