@@ -354,6 +354,7 @@ module.exports.showSickVacationNeedReport = function showSickVacationNeedReport(
  */
 
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
+    msg.say("Hey! I am here to help you folks :-) Just start engaging with me by using the following expressions:")
 
     //stringFile.timeOffPredefinedActions
     var messageBody = env.stringFile.helpMessageBody("", env.stringFile.rulesAction, env.stringFile.submission_rules_pretext)
