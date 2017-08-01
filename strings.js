@@ -16,8 +16,33 @@ exports.message_after_cancelation_rejected_timeoff = message_after_cancelation_r
 const message_already_action_from_manager = "Sorry ,you can't cancel your time off request ,since your managers take an action.Please contact them"
 exports.message_already_action_from_manager = message_already_action_from_manager
 //
-var pretext = "You can use on of the following expressions to engage with me:"
+var pretext = "Hey! I am here to help you folks :-) Just start engaging with me by using the following expressions:"
 exports.pretext = pretext
+var submission_rules_pretext = "First of all, we recommend you to review the submission rules in order to understand how the system works.:"
+exports.submission_rules_pretext = submission_rules_pretext
+var leave_pretext = "If you want to take a time off or leave"
+exports.leave_pretext = leave_pretext
+var sick_pretext = "If you want to take a sick vacation or sick leave"
+exports.sick_pretext = sick_pretext
+var upload_report_pretxt = "In case you want to upload a sick report for any taken sick vacation"
+exports.upload_report_pretxt = upload_report_pretxt
+var sick_rules_pretext = "To review the sick submission rules and how it could be converted into personal vacation, please review the rules."
+exports.sick_rules_pretext = sick_rules_pretext
+var death_pretext = "In case you have a family death "
+exports.death_pretext = death_pretext
+var statsProfileHistory_pretext = "In case you want to check your profile or balance or history "
+exports.statsProfileHistory_pretext = statsProfileHistory_pretext
+var pending_pretext = "In case you want to check your pending time off requests or want to cancel a vacation "
+exports.pending_pretext = pending_pretext
+var holiday_pretext = "In case you want to see the official holidays"
+exports.holiday_pretext = holiday_pretext
+var WFH_pretext = "In case you want to work from home "
+exports.WFH_pretext = WFH_pretext
+
+
+
+
+
 //Holiday nodtice 
 var holiday_notice = "\n ( Note: Any official holiday will not be deducted from your time off request.)"
 exports.holiday_notice = holiday_notice
@@ -191,6 +216,18 @@ var employeeCommands = [
     }
 ]
 exports.employeeCommands = employeeCommands
+//
+var uploadReportActions = [
+    {
+        "name": 'helpMenu',
+        "text": "Upload sick report",
+        // "style": "primary",
+        "type": "button",
+        "value": "Upload"
+    }
+]
+//
+exports.uploadReportActions = uploadReportActions
 /**
  * Time off help menu
  */
@@ -228,6 +265,32 @@ var statsProfileHistoryActions = [
     },
 ]
 exports.statsProfileHistoryActions = statsProfileHistoryActions
+
+//sick buttons
+var sickActions = [
+    {
+        "name": 'helpMenu',
+        "text": "I am sick today",
+        // "style": "primary",
+        "type": "button",
+        "value": "I am sick today"
+    }, {
+        "name": 'helpMenu',
+        "text": "Sick vacation from/ to/",
+        // "style": "primary",
+        "type": "button",
+        "value": "Sick"
+    },
+    {
+        "name": 'helpMenu',
+        "text": "Sick leave today from/ to/",
+        //"style": "primary",
+        "type": "button",
+        "value": "sick"
+    },
+    ,
+]
+exports.sickActions = sickActions
 var timeOffPredefinedActions = [
     {
         "name": 'helpMenu',
@@ -237,17 +300,23 @@ var timeOffPredefinedActions = [
         "value": "Time off today"
     }, {
         "name": 'helpMenu',
-        "text": "Time off tomorrow",
+        "text": "Time off from/ to",
         // "style": "primary",
         "type": "button",
-        "value": "Time off tomorrow"
+        "value": "Time off "
     },
     {
         "name": 'helpMenu',
-        "text": "I am sick today",
+        "text": "leave today at /",
         //"style": "primary",
         "type": "button",
-        "value": "I am sick today"
+        "value": "leave"
+    }, {
+        "name": 'helpMenu',
+        "text": "Leave today from/ to/",
+        //"style": "primary",
+        "type": "button",
+        "value": "leave"
     }
 
 
@@ -275,6 +344,23 @@ var WfhActions = [
 
 ]
 exports.WfhActions = WfhActions
+var CancelVacationActions = [
+    {
+        "name": "helpMenu",
+        "text": "WFH today",
+        // "style": "primary",
+        "type": "button",
+        "value": "WFH today"
+    }, {
+        "name": 'helpMenu',
+        "text": "WFH tomorrow",
+        // "style": "primary",
+        "type": "button",
+        "value": "WFH tomorrow"
+    }
+
+]
+exports.CancelVacationActions = CancelVacationActions
 var FamilyDeathActions = [
     {
         "name": "helpMenu",
@@ -334,6 +420,23 @@ var rulesAction = [
     },
 
 ]
+module.exports.rulesAction = rulesAction
+
+/*
+
+
+*/
+var sickRulesActions = [
+    {
+        "name": "helpMenu",
+        "text": "Sick rules",
+        // "style": "primary",
+        "type": "button",
+        "value": "Sick rules"
+    },
+
+]
+module.exports.sickRulesActions = sickRulesActions
 
 /******************
  * 
@@ -343,7 +446,6 @@ var rulesAction = [
  * 
  * 
  *****************/
-module.exports.rulesAction = rulesAction
 var fromDateToDate = [
     {
         "name": "fromDateToDate",

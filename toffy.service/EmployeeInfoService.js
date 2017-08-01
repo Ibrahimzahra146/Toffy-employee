@@ -356,17 +356,52 @@ module.exports.showSickVacationNeedReport = function showSickVacationNeedReport(
 module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
 
     //stringFile.timeOffPredefinedActions
-    var messageBody = env.stringFile.helpMessageBody("", env.stringFile.timeOffPredefinedActions, env.stringFile.pretext)
+    var messageBody = env.stringFile.helpMessageBody("", env.stringFile.rulesAction, env.stringFile.submission_rules_pretext)
     var stringfy = JSON.stringify(messageBody);
     var obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.statsProfileHistoryActions, "")
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.statsProfileHistoryActions, env.stringFile.statsProfileHistory_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.sickActions, env.stringFile.sick_pretext)
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.uploadReportActions, env.stringFile.upload_report_pretxt)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.sickRulesActions, env.stringFile.sick_rules_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.FamilyDeathActions, env.stringFile.death_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.statsProfileHistoryActions, env.stringFile.statsProfileHistory_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.CancelVacationActions, env.stringFile.pending_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    //
+    messageBody = env.stringFile.helpMessageBody("", env.stringFile.holidayAction, env.stringFile.holiday_pretext)
+    stringfy = JSON.stringify(messageBody);
+    obj1 = JSON.parse(stringfy);
+    msg.say(obj1)
+    /*
     messageBody = env.stringFile.helpMessageBody("", env.stringFile.FamilyDeathActions, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
@@ -382,7 +417,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
     //
-    messageBody = env.stringFile.helpMessageBody("", env.stringFile.employeeCommands, "")
+  /*  messageBody = env.stringFile.helpMessageBody("", env.stringFile.employeeCommands, "")
     stringfy = JSON.stringify(messageBody);
     obj1 = JSON.parse(stringfy);
     msg.say(obj1)
@@ -405,7 +440,7 @@ module.exports.sendHelpOptions = function sendHelpOptions(msg, email) {
     msg.say(obj1)
 
 
-
+*/
 
 
 
