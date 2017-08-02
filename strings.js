@@ -297,10 +297,10 @@ exports.sickActions = sickActions
 var timeOffPredefinedActions = [
     {
         "name": 'helpMenu',
-        "text": "Time off today",
+        "text": "Time off tomorrow",
         // "style": "primary",
         "type": "button",
-        "value": "Time off today"
+        "value": "Time off tomorrow"
     }, {
         "name": 'helpMenu',
         "text": "Time off from/ to",
