@@ -327,7 +327,7 @@ module.exports.showSickVacationNeedReport = function showSickVacationNeedReport(
         env.mRequests.getSickVacationNeedReport(email, Id, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 if (!((JSON.parse(body)[0]))) {
-                    msg.say("There are no sick vacations.");
+                    msg.say("There are no sick vacations that require reports");
                 }
                 else {
                     //build message Json result to send it to slack
