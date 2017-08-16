@@ -623,7 +623,12 @@ module.exports.sendVacationToManagerFunction = function sendVacationToManagerFun
     //  managerApprovalMessage = JSON.parse(managerApprovalMessage)
 
     var dont_detuct_button = stringFile.dont_detuct_button_Function(userEmail, vacationId, approvalId, managerEmail, startDate, endDate, type, workingDays, ImageUrl);
+
     var actions_based_on_type = dont_detuct_button
+    if (type == "WFH") {
+        actions_based_on_type = ""
+        reject_with_comment_button = ""
+    }
     if (type == "sick") {
 
         reject_with_comment_button = ""
